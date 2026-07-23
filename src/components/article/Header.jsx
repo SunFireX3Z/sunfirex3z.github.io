@@ -194,7 +194,7 @@ function Header({ currentPath, posts }) {
                         {categories.map(cat => (
                             <NavLink
                                 key={cat}
-                                href={`/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                                href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`}
                                 onClick={closeMenu}
                                 currentPath={currentPath}
                                 className={({ isActive }) => `block px-5 py-2 text-base font-medium transition-colors capitalize ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'}`}
@@ -216,7 +216,7 @@ function Header({ currentPath, posts }) {
                             {categories.map(cat => (
                                 <NavLink
                                     key={cat}
-                                    href={`/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                                    href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`}
                                     currentPath={currentPath}
                                     className={({ isActive }) => `px-4 py-2 text-sm font-medium capitalize rounded-md ${isActive ? 'bg-orange-500 text-white shadow-md' : 'text-gray-600 bg-no-repeat bg-gradient-to-r from-amber-500 to-orange-500 bg-[length:0%_100%] hover:bg-[length:100%_100%] hover:text-white transition-[background-size,color] duration-300'}`}
                                 >
