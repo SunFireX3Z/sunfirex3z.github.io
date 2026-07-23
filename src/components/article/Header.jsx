@@ -81,9 +81,9 @@ function Header({ currentPath, posts }) {
                         <nav className="flex gap-8">
                             <NavLink href="/" currentPath={currentPath} className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/70 hover:text-white'}`}>Beranda</NavLink>
                             <NavLink href="/blog" currentPath={currentPath} className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/70 hover:text-white'}`}>Blog</NavLink>
-                            {/* <NavLink href="/project" currentPath={currentPath} className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/70 hover:text-white'}`}>Proyek</NavLink> */}
+                            <NavLink href="/proyek" currentPath={currentPath} className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/70 hover:text-white'}`}>Proyek</NavLink>
                             <NavLink href="/about" currentPath={currentPath} className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/70 hover:text-white'}`}>Tentang</NavLink>
-                            {/* <NavLink href="/contact" currentPath={currentPath} className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/70 hover:text-white'}`}>Kontak</NavLink> */}
+                            <NavLink href="/kontak" currentPath={currentPath} className={({ isActive }) => `font-medium transition-colors ${isActive ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/70 hover:text-white'}`}>Kontak</NavLink>
                         </nav>
 
                         <div className="relative ml-2" ref={searchContainerRef}>
@@ -184,9 +184,9 @@ function Header({ currentPath, posts }) {
                     </div>
                     <NavLink href="/" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Beranda</NavLink>
                     <NavLink href="/blog" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Blog</NavLink>
-                    {/* <NavLink href="/project" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Proyek</NavLink> */}
+                    <NavLink href="/proyek" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Proyek</NavLink>
                     <NavLink href="/about" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Tentang</NavLink>
-                    {/* <NavLink href="/contact" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Kontak</NavLink> */}
+                    <NavLink href="/kontak" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Kontak</NavLink>
                 </div>
                 <div className="pt-4 pb-3 border-t border-gray-200">
                     <h3 className="px-5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Kategori</h3>

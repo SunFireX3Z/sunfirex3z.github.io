@@ -1,11 +1,11 @@
 ---
-import Logo from '../../assets/images/Sunblog_Black.png';
+import Logo from '../../assets/images/Sunblog_Black.png'; // Menggunakan logo terang untuk background gelap
 import { posts } from '../../data/posts';
 
 // Ambil 5 kategori unik.
 const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
 ---
-<footer class="border-t border-slate-200 bg-white">
+<footer class="border-t border-slate-800 bg-slate-900">
     <div class="mx-auto max-w-[90rem] px-6">
         <div class="grid grid-cols-1 lg:grid-cols-2">
             {/* Kiri: Logo & Media Sosial */}
@@ -13,26 +13,31 @@ const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
                 <a href="/">
                     <img src={Logo.src} alt="Logo SunBlog" class="h-10 w-auto" />
                 </a>
-                <p class="mt-4 max-w-xs text-slate-600">
+                <p class="mt-4 max-w-xs text-slate-400">
                     Blog pribadi yang membahas teknologi, desain, dan pengembangan web melalui tulisan dan proyek.
                 </p>
                 <div class="mt-8 flex gap-5">
-                    <a href="https://github.com/SunFireX3Z" target="_blank" rel="noopener noreferrer" class="text-slate-500 transition-colors hover:text-slate-900" aria-label="GitHub">
+                    <a href="https://github.com/SunFireX3Z" target="_blank" rel="noopener noreferrer" class="text-slate-400 transition-colors hover:text-white" aria-label="GitHub">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     </a>
-                    {/* Tambahkan link sosial media lainnya di sini */}
+                    <a href="https://www.youtube.com/@SunFireX3Z" target="_blank" rel="noopener noreferrer" class="text-slate-400 transition-colors hover:text-white" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17Z"></path><path d="m10 15 5-3-5-3z"></path></svg>
+                    </a>
+                    <a href="https://www.instagram.com/sunfirex3z" target="_blank" rel="noopener noreferrer" class="text-slate-400 transition-colors hover:text-white" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                    </a>
                 </div>
             </div>
 
             {/* Kanan: Tautan Navigasi */}
-            <div class="py-16 text-slate-800">
+            <div class="py-16">
                 <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:pl-12">
                     <div class="sm:col-span-1">
-                        <h3 class="font-bold">Kategori</h3>
+                        <h3 class="font-bold text-slate-100">Kategori</h3>
                         <ul class="mt-4 space-y-3">
                             {categories.map(cat => (
                                 <li>
-                                    <a href={`/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`} class="text-slate-600 transition-colors hover:text-slate-900 capitalize">
+                                    <a href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`} class="text-slate-400 transition-colors hover:text-white capitalize">
                                         {cat}
                                     </a>
                                 </li>
@@ -40,16 +45,38 @@ const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
                         </ul>
                     </div>
                     <div class="sm:col-span-1">
-                        <h3 class="font-bold">Tautan</h3>
+                        <h3 class="font-bold text-slate-100">Tautan</h3>
                         <ul class="mt-4 space-y-3">
-                            <li><a href="/blog" class="text-slate-600 transition-colors hover:text-slate-900">Blog</a></li>
-                            <li><a href="/about" class="text-slate-600 transition-colors hover:text-slate-900">Tentang</a></li>
+                            <li>
+                                <a href="/blog" class="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4"></path><path d="M16 2v20"></path><path d="M8 7h4"></path><path d="M8 12h4"></path><path d="M8 17h4"></path></svg>
+                                    Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/proyek" class="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+                                    Proyek
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/about" class="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                                    Tentang
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/kontak" class="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                    Kontak
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="border-t border-slate-200 py-8 text-center text-sm text-slate-500">
+        <div class="border-t border-slate-800 py-8 text-center text-sm text-slate-400">
             &copy; {new Date().getFullYear()} SunBlog. All rights reserved.
         </div>
     </div>
