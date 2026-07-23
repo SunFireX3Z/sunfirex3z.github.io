@@ -20,7 +20,7 @@ const allCategories = ['Semua', ...new Set(posts.map(p => p.category))];
         {/* Filter Kategori */}
         <nav class="flex flex-wrap gap-3">
             {allCategories.map(cat => {
-                const path = cat === 'Semua' ? "/blog" : `/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`;
+                const path = cat === 'Semua' ? "/blog" : `/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`;
                 return <CategoryNavLink href={path} currentPath={currentPath} text={cat} />;
             })}
         </nav>

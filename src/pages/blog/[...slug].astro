@@ -96,11 +96,11 @@ const schemaData = {
                 <li><span class="select-none">/</span></li>
                 <li><a href="/blog" class="hover:text-orange-500">Blog</a></li>
                 <li><span class="select-none">/</span></li>
-                <li><a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`} class="hover:text-orange-500">{metadata.category}</a></li>
+                <li><a href={`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`} class="hover:text-orange-500">{metadata.category}</a></li>
                 {metadata.subcategory && (
                     <>
                         <li><span class="select-none">/</span></li>
-                        <li><a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`} class="hover:text-orange-500">{metadata.subcategory}</a></li>
+                        <li><a href={`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`} class="hover:text-orange-500">{metadata.subcategory}</a></li>
                     </>
                 )}
                 <li><span class="select-none">/</span></li>
@@ -119,11 +119,11 @@ const schemaData = {
 
                     <header class="mb-8 border-b border-gray-200 pb-8">
                         <div class="mb-4 flex flex-wrap items-center gap-2">
-                            <a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`} class="inline-block rounded-full bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-800 transition-colors hover:bg-orange-200 capitalize">{metadata.category}</a>
+                            <a href={`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`} class="inline-block rounded-full bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-800 transition-colors hover:bg-orange-200 capitalize">{metadata.category}</a>
                             {metadata.subcategory && (
                                 <>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-gray-400"><path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
-                                    <a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`} class="inline-block rounded-full bg-sky-100 px-3 py-1 text-sm font-semibold text-sky-800 transition-colors hover:bg-sky-200 capitalize">{metadata.subcategory}</a>
+                                    <a href={`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`} class="inline-block rounded-full bg-sky-100 px-3 py-1 text-sm font-semibold text-sky-800 transition-colors hover:bg-sky-200 capitalize">{metadata.subcategory}</a>
                                 </>
                             )}
                         </div>

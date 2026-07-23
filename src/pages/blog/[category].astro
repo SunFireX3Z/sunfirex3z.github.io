@@ -16,7 +16,9 @@ export function getStaticPaths() {
 
 const { category = "" } = Astro.params;
 
-const formattedCategory = category.replace(/-/g, " ");
+const formattedCategory = category
+  .replace(/-/g, " ")
+  .replace(/\b\w/g, char => char.toUpperCase());
 
 const filteredPosts = posts.filter(
   (post) =>
