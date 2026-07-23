@@ -1,0 +1,508 @@
+import thumbnailImage from './thumbnail.webp';
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.jsx';
+import Blockquote from '@/components/mdx/Blockquote.jsx';
+import ArcaneImage from './image/arcane.webp';
+import Type42SolemnPhalanx from '@/assets/images/arknights-endfield/weapon/type-42-solemn-phalanx.webp';
+import JunctionPoint from '@/assets/images/arknights-endfield/weapon/junction-point.webp';
+import HotWorkExoRig from '@/assets/images/arknights-endfield/gear/hot-work-exo-rig.webp';
+import HotWorkHandsPPE from '@/assets/images/arknights-endfield/gear/hot-work-hands-ppe.webp';
+import HotWorkInsulationSlab from '@/assets/images/arknights-endfield/gear/hot-work-insulation-slab.png';
+import LYNXSlab from '@/assets/images/arknights-endfield/gear/lynx-slab.webp';
+import EternalXiraniteWraps from '@/assets/images/arknights-endfield/gear/eternal-xiranite-wraps.webp';
+import EternalXiraniteLightArmorT1 from '@/assets/images/arknights-endfield/gear/eternal-xiranite-light-armor-t1.webp';
+import EternalXiraniteBracingSlab from '@/assets/images/arknights-endfield/gear/eternal-xiranite-bracing-slab.webp';
+import BasicAttackIcon from '@/assets/images/arknights-endfield/skill/arcane/basic-attack.webp';
+import ComboSkillIcon from '@/assets/images/arknights-endfield/skill/arcane/combo-skill.webp';
+import BattleSkillIcon from '@/assets/images/arknights-endfield/skill/arcane/battle-skill.webp';
+import UltimateIcon from '@/assets/images/arknights-endfield/skill/arcane/ultimate.webp';
+import CombatTalent1Icon from '@/assets/images/arknights-endfield/skill/arcane/combat-talent.png';
+import CombatTalent2Icon from '@/assets/images/arknights-endfield/skill/arcane/combat-talent-2.png';
+import BaseTalent1Icon from '@/assets/images/arknights-endfield/skill/arcane/base-talent.png';
+import BaseTalent2Icon from '@/assets/images/arknights-endfield/skill/arcane/base-talent-2.png';
+import Arcane from '@/assets/images/arknights-endfield/character/arcane.avif';
+import Tangtang from '@/assets/images/arknights-endfield/character/tangtang.webp';
+import Xaihi from '@/assets/images/arknights-endfield/character/xaihi.avif';
+import Perlica from '@/assets/images/arknights-endfield/character/perlica.avif';
+import Yvonne from '@/assets/images/arknights-endfield/character/yvonne.avif';
+import LastRite from '@/assets/images/arknights-endfield/character/last-rite.avif';
+import Potential1Icon from '@/assets/images/arknights-endfield/potential/potential_1.webp';
+import Potential2Icon from '@/assets/images/arknights-endfield/potential/potential_2.webp';
+import Potential3Icon from '@/assets/images/arknights-endfield/potential/potential_3.webp';
+import Potential4Icon from '@/assets/images/arknights-endfield/potential/potential_4.webp';
+import Potential5Icon from '@/assets/images/arknights-endfield/potential/potential_5.webp';
+
+export const metadata = {
+    title: "Build Arcane Terbaik di Arknights Endfield: Senjata, Gear, Tim, dan Tips",
+    description: "Pelajari build Arcane terbaik di Arknights Endfield, mulai dari rekomendasi senjata, gear, tim, hingga tips memainkan Arcane secara optimal.",
+    metaDescription: "Cari build Arcane terbaik di Arknights Endfield. Simak rekomendasi senjata, gear, komposisi tim, prioritas upgrade, serta tips bermain Arcane pada patch 1.4 Homecoming.",
+    publishDate: "22 Juli 2026",
+    author: "Randy",
+    category: "Gaming",
+    subcategory: "Panduan",
+    thumbnail: thumbnailImage,
+    imageCaption: "Gambar 1. Build Arcane di Arknights Endfield.",
+    readingTime: 6,
+    tags: [
+        "Arknights Endfield",
+        "Arcane",
+        "Build Arcane",
+        "Guide",
+        "Panduan",
+        "Senjata",
+        "Gear",
+        "Tim",
+        "Patch 1.4",
+        "Homecoming"
+    ],
+    featured: false,
+    lastUpdated: "22 Juli 2026",
+    sources: [
+        {
+            name: "Mobalytics - Arcane Build Guide",
+            url: "https://mobalytics.gg/arknights-endfield/characters/arcane-build-guide",
+        },
+        {
+            name: "Endfield Tools - Arcane",
+            url: "https://endfieldtools.dev/characters/arcane/",
+        },
+        {
+            name: "Gamebrott - Build Arcane Arknights Endfield Terbaik",
+            url: "https://gamebrott.com/build-arcane-arknights-endfield-terbaik/",
+        }
+    ]
+}
+
+export const recommendedWeapons = [
+  {
+    id: "we-02",
+    name: "Type 42: Solemn Phalanx",
+    rarity: 6,
+    image: Type42SolemnPhalanx,
+    description: "Pilihan terbaik untuk memaksimalkan damage skill dan efisiensi Ultimate."
+  },
+  {
+    id: "we-03",
+    name: "Junction Point",
+    rarity: 6,
+    image: JunctionPoint,
+    description: "Alternatif kuat yang memberikan bonus Nature DMG dan ATK tambahan."
+  }
+];
+
+export const recommendedGear = [
+  {
+    id: "gp-bone-armor",
+    name: "Hot-Work Exo-Rig",
+    slot: "Armor",
+    image: HotWorkExoRig,
+  },
+  {
+    id: "gp-bone-gloves",
+    name: "Hot-Work Hands PPE",
+    slot: "Gloves",
+    image: HotWorkHandsPPE,
+  },
+  {
+    id: "gp-bone-scope",
+    name: "Hot-Work Insulation Slab",
+    slot: "Kit",
+    image: HotWorkInsulationSlab,
+  },
+  {
+    id: "gp-polar-kit",
+    name: "Lynx Slab",
+    slot: "Kit",
+    image: LYNXSlab,
+  }
+];
+
+export const skills = [
+  { type: "Basic Attack", name: "Artillery Interdiction", icon: BasicAttackIcon, description: <>Sebuah serangan dengan hingga 5 rangkaian yang menghasilkan <strong>Nature DMG</strong>. Sebagai operator yang dikendalikan, <strong>Final Strike</strong> juga menghasilkan 17 <strong>Stagger</strong>.</> },
+  { type: "Combo Skill", name: "Yinglung Stance IV", icon: ComboSkillIcon, description: <>Cooldown: 18 detik. Arcane menerjang ke arah target dan memunculkan 4 <strong>Tactical Doubles</strong> yang memberikan <strong>Nature Susceptibility</strong> serta <strong>Cryo Susceptibility</strong> dan menghasilkan <strong>Nature DMG</strong> pada target dan musuh di sekitarnya, serta memberikan efek <strong>Imprisonment</strong>. Ketika efek <strong>Imprisonment</strong> berakhir, <strong>Tactical Doubles</strong> akan menyerang target untuk menghasilkan <strong>Explosion DMG</strong>. <strong>Array Arcana: INT Trigger</strong> dipicu ketika <strong>Nature Infliction</strong> atau setidaknya 2 <em>stack</em> non-<strong>Nature Arts Infliction</strong> diterapkan pada musuh. <strong>Array Arcana: WILL Trigger</strong> dipicu ketika suatu <strong>Arts Infliction</strong> diterapkan pada musuh.</> },
+  { type: "Battle Skill", name: "Jadecrushing Grid", icon: BattleSkillIcon, description: <>Biaya SP: 100. Menciptakan <strong>Jadecrushing Grid</strong> yang menghasilkan <strong>Nature DMG</strong> dan memberikan efek <strong>Nature Infliction</strong> kepada musuh di dalam area efek. <strong>Array Arcana: INT</strong> (Intellect ≥ Will) menghasilkan <em>DMG</em> yang lebih besar. <strong>Array Arcana: WILL</strong> (Will &gt; Intellect) ketika menghasilkan <em>DMG</em>, <em>array</em> tersebut juga akan menarik musuh di dalam area efek.</> },
+  { type: "Ultimate", name: "Gloompurge", icon: UltimateIcon, description: <>Biaya Energi: 100. Arcane menciptakan <strong>Gloompurger Array</strong> yang langsung menghasilkan <strong>Nature DMG</strong> kepada musuh di dalam area efek. Ketika mengenai musuh di dalam <em>array</em> dengan <strong>Finisher</strong> atau <strong>Final Strike</strong>, <em>array</em> tersebut akan melepaskan <strong>Cluster Strike</strong> yang menghasilkan <strong>Area DMG</strong> (hingga 2 kali). Setelah memicu <strong>Cluster Strike</strong> dua kali, <em>ultimate</em> akan beralih ke <strong>Gloompurge Arcana</strong>, yang menghasilkan <strong>Nature DMG</strong> kepada musuh dalam AOE yang besar. <strong>Array Arcana: INT</strong>: <em>array</em> juga secara paksa memberikan efek <strong>Corrosion</strong>. <strong>Array Arcana: WILL</strong>: <em>array</em> memberikan tumpukan (<em>stack</em>) <strong>Arts Infliction</strong> lain dengan elemen yang sama kepada musuh yang terkena efek.</> },
+];
+
+export const combatTalents = [
+  { type: "Combat Talent", name: "Tactical Planning", icon: CombatTalent1Icon, description: <>Ketika <strong>Intellect ≥ Will</strong> milik Arcane, ubah tipe <em>skill</em> menjadi <strong>Array Arcana: INT</strong>. Jika tidak, ubah ke <strong>Array Arcana: WILL</strong>. (Elite 2) <em>Ultimate</em> <strong>Gloompurge</strong> ditingkatkan: <strong>Array Arcana: INT</strong> memberikan Arcane 24% <strong>Arts Amp</strong> selama <em>ultimate</em>; <strong>Array Arcana: WILL</strong> menyebabkan <strong>Gloompurger Array</strong> dan <strong>Gloompurge Arcana</strong> juga menerapkan [Will × 0.02%] <strong>Nature Susceptibility</strong> dan <strong>Cryo Susceptibility</strong> (maks 12.8%) selama 10 detik (tidak dapat ditumpuk).</> },
+  { type: "Combat Talent", name: "Weapon Honing", icon: CombatTalent2Icon, description: <>(Elite 1) Efek <strong>Corrosion</strong> yang diterapkan oleh Arcane bertahan 5 detik lebih lama, dan <strong>Max Resistance Reduction</strong> ditingkatkan menjadi 1.05 kali dari nilai aslinya. (Elite 3) Efek <strong>Corrosion</strong> bertahan 10 detik lebih lama, dan <strong>Max Resistance Reduction</strong> ditingkatkan menjadi 1.1 kali dari nilai aslinya.</> }
+];
+
+export const baseTalents = [
+  { type: "Base Talent", name: "Pluck the Mountain, Boil the Sea", icon: BaseTalent1Icon, description: "Tugaskan ke Growth Chamber untuk memberikan peningkatan laju pertumbuhan mineral langka sebesar +20/30%." },
+  { type: "Base Talent", name: "Botanophile", icon: BaseTalent2Icon, description: "Tugaskan ke Growth Chamber untuk memberikan peningkatan laju pertumbuhan tanaman vitrifikasi sebesar +20/30%." }
+];
+
+export const mainDPSWeapons = [
+    {
+        id: "we-02",
+        name: "Type 42: Solemn Phalanx",
+        rarity: 6,
+        image: Type42SolemnPhalanx,
+        description: <>Senjata ini sangat cocok untuk <strong>Main DPS</strong> karena memberikan atribut ofensif yang masif, mulai dari status dasar <strong>Attack: 505</strong>, <strong>Intellect: +156</strong>, peningkatan pengisian <em>ultimate</em> sebesar <strong>+46.40%</strong>, hingga efek pasif bawaan <strong>ATK +25.6%</strong>. Kekuatan utamanya terletak pada fleksibilitas bonus <em>damage</em>; jika pengguna memiliki <strong>Intellect ≥ Will</strong>, mereka akan mendapatkan tambahan <strong>Arts DMG +32.0%</strong> dan <strong>ATK +32.0%</strong> secara berkala, sedangkan jika <strong>Will &gt; Intellect</strong>, senjata ini memberikan <em>debuff</em> yang memaksa musuh menerima <strong>Arts DMG Taken +9.6%</strong>, membuat seluruh serangan penghasil <em>damage</em> menjadi jauh lebih mematikan.</>
+    }
+];
+
+export const supporterWeapons = [
+    {
+        id: "we-03",
+        name: "Junction Point",
+        rarity: 6,
+        image: JunctionPoint,
+        description: <><strong>Junction Point</strong> sangat cocok untuk <strong>Arcane</strong> dalam mode <strong>INT</strong> atau sebagai <strong>Supporter</strong> karena memberikan tambahan <strong>Nature DMG Dealt +11.2%</strong> secara instan yang sangat memperkuat semua rangkaian serangan elemen alam milik <strong>Arcane</strong>, sembari menawarkan peningkatan status dasar berupa <strong>Attack: 490</strong>, <strong>Intellect: +156</strong>, dan <strong>Ultimate Gain Efficiency: +46.40%</strong>. Keunggulan utamanya sebagai pendukung tim terletak pada efek pasif yang aktif ketika pengguna menerapkan <strong>Arts Susceptibility</strong> atau <strong>Arts Infliction</strong> menggunakan <em>combo skill</em> (seperti <em>skill</em> <strong>Yinglung Stance IV</strong> milik <strong>Arcane</strong>), di mana senjata ini tidak hanya meningkatkan <strong>ATK</strong> pengguna sebesar <strong>+9.6%</strong> tetapi juga memberikan <em>buff</em> <strong>ATK +2.4%</strong> kepada seluruh operator lain di dalam tim selama 20 detik yang dapat ditumpuk hingga 2 kali.</>
+    }
+];
+
+export const supporterGear = [
+    {
+        id: "gp-eternal-xiranite-armor",
+        name: "Eternal Xiranite Light Armor T1",
+        slot: "Armor",
+        image: EternalXiraniteLightArmorT1,
+    },
+    {
+        id: "gp-eternal-xiranite-wraps",
+        name: "Eternal Xiranite Wraps",
+        slot: "Gloves",
+        image: EternalXiraniteWraps,
+    },
+    {
+        id: "gp-eternal-xiranite-bracing-slab",
+        name: "Eternal Xiranite Bracing Slab",
+        slot: "Kit",
+        image: EternalXiraniteBracingSlab,
+    },
+    {
+        id: "gp-eternal-xiranite-bracing-slab",
+        name: "Eternal Xiranite Bracing Slab",
+        slot: "Kit",
+        image: EternalXiraniteBracingSlab,
+    },
+];
+
+export const potentials = [
+  { level: 1, name: "Watcher of the Sea", icon: Potential1Icon, effects: [
+      { title: "Build Intellect", desc: <>Memberikan ekstra <em>damage</em> +30%. Sangat optimal karena <em>cooldown combo skill</em> pada spesialisasi ini jauh lebih pendek.</> },
+      { title: "Build Will", desc: <>Meningkatkan efek <em>susceptibility</em> pada <strong>Combo</strong> dari 12% menjadi 18% tanpa menaikkan batas minimum status <strong>Will</strong>.</> },
+      { title: "Efek Samping", desc: <>Pemulihan SP meningkat, namun akan mengubah hitungan batas target (<em>breakpoints</em>) <strong>UGE</strong> pada rotasi tim.</> }
+  ]},
+  { level: 2, name: "Heart of Ice Cold Ferrium", icon: Potential2Icon, description: <>Hanya memberikan peningkatan status dasar (<em>flat stats</em>) secara murni tanpa ada tambahan mekanik baru.</> },
+  { level: 3, name: "Wielder of Stone", icon: Potential3Icon, description: <>Memperpanjang durasi efek <strong>Corrosion</strong> pada tingkat potensi maksimalnya. Sangat krusial karena tipe <em>damage</em> <strong>Arcane</strong> bersifat <em>damage over time</em>, bukan <em>burst</em>.</> },
+  { level: 4, name: "Mind of Refined Steel", icon: Potential4Icon, description: <>Efek ini tidak memberikan pengaruh pada rotasi serangan sama sekali, kecuali jika Anda sengaja menggunakan <em>gear</em> dengan status <strong>Ultimate Gain Efficiency (UGE)</strong>.</> },
+  { level: 5, name: "Homeward Glance", icon: Potential5Icon, effects: [
+      { title: "Build Intellect", desc: <>Menaikkan <em>damage</em> <strong>Ultimate SEQ2</strong> sebesar +30% sekaligus memperkuat efek <strong>Arts Amp</strong> saat <strong>Ultimate</strong> aktif.</> },
+      { title: "Build Will", desc: <>Meningkatkan efek <strong>Susceptibility</strong> saat melepas <strong>Ultimate</strong>. Selain itu, <strong>Ultimate SEQ2</strong> akan memotong <em>cooldown</em> <strong>Combo Skill</strong> sebesar 30%.</> },
+      { title: "Tips Rotasi", desc: <>Selalu gunakan kemampuan <strong>Combo</strong> terlebih dahulu sebelum mengaktifkan <strong>Ultimate SEQ2</strong> untuk memaksimalkan efek pengurangan <em>cooldown</em> tersebut.</> }
+  ]}
+];
+
+Patch 1.4 **Homecoming** akhirnya resmi hadir di **Arknights Endfield**. Selain membawa berbagai konten baru seperti ekspansi pabrik AIC, kelanjutan cerita utama, dan area eksplorasi baru, *update* ini juga menghadirkan operator yang telah lama ditunggu oleh komunitas, yaitu **Arcane**. Kini, Arcane telah resmi menjadi karakter yang dapat dimainkan dan bisa diperoleh melalui *banner gacha* terbaru.
+
+Jika kamu berhasil mendapatkan **Arcane** atau berencana melakukan *pull* pada *banner* terbaru, artikel ini akan membahas *build* terbaik untuk **Arcane**, mulai dari rekomendasi senjata, *gear*, komposisi tim, hingga tips memaksimalkan potensinya di berbagai mode permainan.
+
+## Profil Arcane
+
+<Image src={ArcaneImage} alt="Gambar Arcane" caption="Gambar 2. Profil Arcane." />
+
+**Arcane** adalah operator Arts yang memiliki *kit* fleksibel dan mampu memberikan kontribusi besar bagi tim yang berfokus pada **Arts Damage**. Keunggulan utamanya terletak pada kemampuannya beradaptasi dengan kebutuhan tim melalui mekanik **Intellect** dan **Will**. Meningkatkan **Intellect** akan berfokus pada peningkatan *damage* yang dihasilkan, sedangkan **Will** memberikan utilitas tambahan yang dapat membantu tim dalam berbagai situasi.
+
+**Arcane** sangat cocok digunakan pada komposisi tim Arts, terutama jika dipadukan dengan operator bertipe **Cryo** atau **Nature**. Bahkan jika kamu belum memiliki **Gilberta**, **Arcane** tetap menjadi salah satu pilihan terbaik untuk memperkuat tim Arts.
+
+## Gambaran Umum Build Arcane
+
+Seperti operator lain pada umumnya, **Arcane** mesti dipakaikan senjata dan *gear* yang pas untuk pertarungan nanti. Dan karena mekanik **Intellect** dan **Will** ini, **Arcane** harus memiliki senjata dan set *gear* yang berbeda. Berikut gambaran umum senjata dan *gear* **Arcane**.
+
+### Senjata
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {recommendedWeapons.map(weapon => (
+    <div key={weapon.id} className="flex items-center gap-4 rounded-lg bg-slate-100 p-3">
+      <img src={weapon.image.src} alt={weapon.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-white object-contain p-1" />
+      <div className="flex-1">
+        <div className="flex items-center gap-2">
+          <p className="font-bold text-gray-900">{weapon.name}</p>
+          <div className="flex">
+            {Array.from({ length: weapon.rarity }).map((_, i) => (
+              <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-yellow-500">
+                <path fillRule="evenodd" d="M10.868 2.884c.321-.662 1.215-.662 1.536 0l1.881 3.861 4.256.62c.73.107 1.023.99.494 1.503l-3.08 2.99.727 4.238c.124.725-.635 1.28-1.288.943l-3.803-2-3.803 2c-.653.337-1.412-.218-1.288-.943l.727-4.238-3.08-2.99c-.529-.513-.236-1.396.494-1.503l4.256-.62 1.88-3.861Z" clipRule="evenodd" />
+              </svg>
+            ))}
+          </div>
+        </div>
+        <p className="text-sm text-gray-600">{weapon.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+### Gear
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {recommendedGear.map(piece => (
+    <div key={piece.id} className="flex items-center gap-4 rounded-lg bg-slate-100 p-3">
+      <img src={piece.image.src} alt={piece.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-white object-contain p-1" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold uppercase tracking-wider text-orange-600">{piece.slot}</p>
+        <p className="font-bold text-gray-900">{piece.name}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Gambaran Umum Skill Arcane
+
+Memahami setiap *skill* adalah kunci untuk memaksimalkan potensi **Arcane**. Berikut adalah rincian dari semua *skill* dan *talent* yang dimilikinya.
+
+### Skills
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {skills.map(skill => (
+    <div key={skill.name} className="flex items-start gap-4 rounded-lg bg-slate-100 p-4">
+      <img src={skill.icon.src} alt={skill.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-slate-800 object-contain p-1" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold uppercase tracking-wider text-orange-600">{skill.type}</p>
+        <p className="font-bold text-gray-900">{skill.name}</p>
+        <p className="mt-1 text-sm text-gray-600">{skill.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Combat Talents
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {combatTalents.map(talent => (
+    <div key={talent.name} className="flex items-start gap-4 rounded-lg bg-slate-100 p-4">
+      <img src={talent.icon.src} alt={talent.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-slate-800 object-contain p-1" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold uppercase tracking-wider text-orange-600">{talent.type}</p>
+        <p className="font-bold text-gray-900">{talent.name}</p>
+        <p className="mt-1 text-sm text-gray-600">{talent.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Base Talents
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {baseTalents.map(talent => (
+    <div key={talent.name} className="flex items-start gap-4 rounded-lg bg-slate-100 p-4">
+      <img src={talent.icon.src} alt={talent.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-slate-800 object-contain p-1" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold uppercase tracking-wider text-orange-600">{talent.type}</p>
+        <p className="font-bold text-gray-900">{talent.name}</p>
+        <p className="mt-1 text-sm text-gray-600">{talent.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Senjata dan Gear Terbaik
+
+**Arcane** merupakan operator yang unik karena dapat dimainkan dalam dua peran berbeda berkat mekanik **Array Arcana**. Ia dapat berfungsi sebagai **Main DPS** maupun **Support/Enabler**, tergantung pada distribusi atribut yang kamu pilih.
+
+Jika ingin menjadikan **Arcane** sebagai **Main DPS**, fokuslah meningkatkan **Intellect** hingga nilainya lebih tinggi daripada **Will**. Sebaliknya, jika ingin memainkannya sebagai **Support/Enabler**, tingkatkan **Will** agar melebihi **Intellect**.
+
+Oleh karena itu, pemilihan senjata dan *gear* juga harus disesuaikan dengan *role* yang ingin kamu gunakan. Berikut rekomendasi senjata terbaik untuk **Arcane**.
+
+### Senjata dan Gear Untuk Main DPS
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {mainDPSWeapons.map(weapon => (
+    <div key={weapon.id} className="flex items-center gap-4 rounded-lg bg-slate-100 p-3">
+      <img src={weapon.image.src} alt={weapon.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-white object-contain p-1" />
+      <div className="flex-1">
+        <div className="flex items-center gap-2">
+          <p className="font-bold text-gray-900">{weapon.name}</p>
+          <div className="flex">
+            {Array.from({ length: weapon.rarity }).map((_, i) => (
+              <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-yellow-500">
+                <path fillRule="evenodd" d="M10.868 2.884c.321-.662 1.215-.662 1.536 0l1.881 3.861 4.256.62c.73.107 1.023.99.494 1.503l-3.08 2.99.727 4.238c.124.725-.635 1.28-1.288.943l-3.803-2-3.803 2c-.653.337-1.412-.218-1.288-.943l.727-4.238-3.08-2.99c-.529-.513-.236-1.396.494-1.503l4.256-.62 1.88-3.861Z" clipRule="evenodd" />
+              </svg>
+            ))}
+          </div>
+        </div>
+        <p className="text-sm text-gray-600">{weapon.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {recommendedGear.map(piece => (
+    <div key={piece.id} className="flex items-center gap-4 rounded-lg bg-slate-100 p-3">
+      <img src={piece.image.src} alt={piece.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-white object-contain p-1" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold uppercase tracking-wider text-orange-600">{piece.slot}</p>
+        <p className="font-bold text-gray-900">{piece.name}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Senjata dan Gear Untuk Supporter/Enabler
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {supporterWeapons.map(weapon => (
+    <div key={weapon.id} className="flex items-center gap-4 rounded-lg bg-slate-100 p-3">
+      <img src={weapon.image.src} alt={weapon.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-white object-contain p-1" />
+      <div className="flex-1">
+        <div className="flex items-center gap-2">
+          <p className="font-bold text-gray-900">{weapon.name}</p>
+          <div className="flex">
+            {Array.from({ length: weapon.rarity }).map((_, i) => (
+              <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-yellow-500">
+                <path fillRule="evenodd" d="M10.868 2.884c.321-.662 1.215-.662 1.536 0l1.881 3.861 4.256.62c.73.107 1.023.99.494 1.503l-3.08 2.99.727 4.238c.124.725-.635 1.28-1.288.943l-3.803-2-3.803 2c-.653.337-1.412-.218-1.288-.943l.727-4.238-3.08-2.99c-.529-.513-.236-1.396.494-1.503l4.256-.62 1.88-3.861Z" clipRule="evenodd" />
+              </svg>
+            ))}
+          </div>
+        </div>
+        <p className="text-sm text-gray-600">{weapon.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {supporterGear.map(piece => (
+    <div key={piece.id} className="flex items-center gap-4 rounded-lg bg-slate-100 p-3">
+      <img src={piece.image.src} alt={piece.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-white object-contain p-1" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold uppercase tracking-wider text-orange-600">{piece.slot}</p>
+        <p className="font-bold text-gray-900">{piece.name}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Prioritas Skill
+
+<div className="not-prose my-6 rounded-lg border border-orange-400 bg-slate-100 py-3 text-center font-semibold text-slate-800">
+  Combo Skill → Battle Skill = Ultimate → Basic Attack
+</div>
+
+**Combo Skill** menjadi prioritas utama karena memperoleh pengurangan *cooldown* pada level maksimum. Selain itu, bagi *build* yang berfokus pada **Will**, peningkatan level **Combo Skill** juga meningkatkan potensi (*scaling*) **Arts Susceptibility** pada *build* **Will**, sehingga mampu memberikan utilitas yang lebih besar bagi tim.
+
+**Battle Skill** dan **Ultimate** memiliki prioritas yang sama. Kedua *skill* ini merupakan sumber *damage* utama untuk *build* yang berfokus pada **Intellect**, sehingga sebaiknya ditingkatkan setelah **Combo Skill** mencapai level yang memadai.
+
+Sementara itu, **Basic Attack** berada pada prioritas terakhir. Meskipun tetap memberikan kontribusi *damage* yang cukup baik, peningkatan level **Basic Attack** tidak memberikan peningkatan efektivitas sebesar *skill* lainnya, sehingga dapat di-*upgrade* belakangan.
+
+## Tim Terbaik
+
+Tim **Arcane** sangat bergantung pada peran yang ia ambil. Berikut adalah beberapa rekomendasi komposisi tim terbaik untuk memaksimalkan potensinya.
+
+<div className="not-prose my-8 rounded-xl border border-gray-200 bg-white shadow-md">
+  <div className="p-6">
+    <h4 className="text-xl font-bold text-gray-900">1. Tim Fokus Intellect (Main DPS)</h4>
+    <p className="mt-2 text-gray-600">Komposisi ini memaksimalkan potensi Arcane sebagai penghasil kerusakan utama, didukung oleh operator yang dapat meningkatkan Arts DMG dan memberikan debuff pada musuh.</p>
+  </div>
+  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-gray-200 bg-slate-50/50 p-6">
+    <div className="flex flex-col items-center text-center"><img src={Arcane.src} alt="Arcane" className="h-20 w-20 rounded-full object-cover border-4 border-orange-500" /><p className="mt-2 font-semibold text-gray-800">Arcane</p><p className="text-xs text-gray-500">Main DPS</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Tangtang.src} alt="Tangtang" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Tangtang</p><p className="text-xs text-gray-500">Sub-DPS / Debuffer</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Xaihi.src} alt="Xaihi" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Xaihi</p><p className="text-xs text-gray-500">Buffer / Amp</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Perlica.src} alt="Perlica" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Perlica</p><p className="text-xs text-gray-500">Support</p></div>
+  </div>
+  <div className="border-t border-gray-200 p-6">
+    <h5 className="font-bold text-gray-800">Sinergi Tim</h5>
+    <ul className="mt-2 list-disc pl-5 text-sm text-gray-600 space-y-1">
+      <li>**Arcane** menjadi sumber *damage* utama dengan efek **Nature/Cryo Susceptibility** dan **Corrosion**.</li>
+      <li>**Tangtang** mendapat keuntungan dari *debuff* **Arcane** dan memberikan **Arts DMG Taken%** tambahan.</li>
+      <li>**Xaihi** memberikan **Arts Amp** yang signifikan untuk **Arcane** dan **Tangtang**.</li>
+      <li>**Perlica** menjaga keberlangsungan tim dan dapat meningkatkan **ATK** melalui senjata **Stanza of Memorials**.</li>
+    </ul>
+  </div>
+</div>
+
+<div className="not-prose my-8 rounded-xl border border-gray-200 bg-white shadow-md">
+  <div className="p-6">
+    <h4 className="text-xl font-bold text-gray-900">2. Tim Fokus Will (Support/Enabler)</h4>
+    <p className="mt-2 text-gray-600">Dalam peran ini, Arcane menjadi enabler yang kuat untuk Main DPS lain. Kemampuannya untuk mengumpulkan musuh (*grouping*) dan memberikan *infliction* sangat berharga.</p>
+  </div>
+  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-gray-200 bg-slate-50/50 p-6">
+    <div className="flex flex-col items-center text-center"><img src={Yvonne.src} alt="Yvonne" className="h-20 w-20 rounded-full object-cover border-4 border-orange-500" /><p className="mt-2 font-semibold text-gray-800">Yvonne</p><p className="text-xs text-gray-500">Main DPS</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Arcane.src} alt="Arcane" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Arcane</p><p className="text-xs text-gray-500">Enabler / Crowd Control</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Xaihi.src} alt="Xaihi" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Xaihi</p><p className="text-xs text-gray-500">Buffer / Amp</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Perlica.src} alt="Perlica" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Perlica</p><p className="text-xs text-gray-500">Support</p></div>
+  </div>
+  <div className="border-t border-gray-200 p-6">
+    <h5 className="font-bold text-gray-800">Sinergi Tim</h5>
+    <ul className="mt-2 list-disc pl-5 text-sm text-gray-600 space-y-1">
+      <li>**Arcane** menutupi kelemahan **Yvonne** dengan menyediakan **AoE inflictions** dan *grouping* tanpa biaya SP.</li>
+      <li>**Xaihi** kembali menjadi pilihan utama karena kemampuan **Cryo Amp** dan **Arts buff**-nya.</li>
+      <li>**Perlica** memberikan *sustain* dan **ATK buff**, melengkapi komposisi tim.</li>
+    </ul>
+  </div>
+</div>
+
+<div className="not-prose my-8 rounded-xl border border-gray-200 bg-white shadow-md">
+  <div className="p-6">
+    <h4 className="text-xl font-bold text-gray-900">3. Tim Rotasi Cepat (Quick Swap)</h4>
+    <p className="mt-2 text-gray-600">Komposisi ini berfokus pada pertukaran operator secara cepat untuk melancarkan skill secara beruntun. Arcane berperan penting dalam mempercepat rotasi dan mengontrol medan perang.</p>
+  </div>
+  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-gray-200 bg-slate-50/50 p-6">
+    <div className="flex flex-col items-center text-center"><img src={LastRite.src} alt="Last Rite" className="h-20 w-20 rounded-full object-cover border-4 border-orange-500" /><p className="mt-2 font-semibold text-gray-800">Last Rite</p><p className="text-xs text-gray-500">Burst DPS</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Arcane.src} alt="Arcane" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Arcane</p><p className="text-xs text-gray-500">Enabler / Crowd Control</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Xaihi.src} alt="Xaihi" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Xaihi</p><p className="text-xs text-gray-500">Buffer / Amp</p></div>
+    <div className="flex flex-col items-center text-center"><img src={Tangtang.src} alt="Tangtang" className="h-20 w-20 rounded-full object-cover border-4 border-slate-300" /><p className="mt-2 font-semibold text-gray-800">Tangtang</p><p className="text-xs text-gray-500">Sub-DPS / Debuffer</p></div>
+  </div>
+  <div className="border-t border-gray-200 p-6">
+    <h5 className="font-bold text-gray-800">Sinergi Tim</h5>
+    <ul className="mt-2 list-disc pl-5 text-sm text-gray-600 space-y-1">
+      <li>**Arcane** mempercepat rotasi *skill* **Last Rite** berkat tambahan *infliction* pada **Combo** dan **Ultimate**-nya.</li>
+      <li>Keunggulan utama **Arcane** di sini adalah kemampuannya mengumpulkan musuh (*grouping*) tanpa harus menerapkan **Nature Infliction** terlebih dahulu, memberikan *setup* yang lebih cepat dan efisien.</li>
+    </ul>
+  </div>
+</div>
+
+## Potential Arcane
+
+<div className="not-prose my-6 flex flex-col gap-4">
+  {potentials.map(potential => (
+    <div key={potential.name} className="flex items-start gap-4 rounded-lg bg-slate-100 p-4">
+      <img src={potential.icon.src} alt={potential.name} className="h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 bg-slate-800 object-contain p-1" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold uppercase tracking-wider text-orange-600">Potential {potential.level}</p>
+        <p className="font-bold text-gray-900">{potential.name}</p>
+        {potential.description && (
+          <p className="mt-1 text-sm text-gray-600">{potential.description}</p>
+        )}
+        {potential.effects && (
+          <ul className="mt-2 list-disc pl-5 text-sm text-gray-600 space-y-1">
+            {potential.effects.map(effect => (
+              <li key={effect.title}>
+                <strong>{effect.title}:</strong> {effect.desc}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+
+## Cara Bermain Arcane
+
+* **Fleksibilitas Karakter:** Mekanik **Arcane** cukup kompleks karena memiliki "enam" *skill* berbeda. Efek *skill* dan pemicu **Combo** miliknya akan berubah total tergantung pada status tertinggi yang dipilih (**Intellect** atau **Will**).
+
+### 1. Build Intellect (Fokus Main DPS)
+* **Peran Utama:** Berfungsi penuh sebagai penghasil *damage* utama (**Main DPS**).
+* **Mekanik Rotasi:** Terapkan **Nature Infliction** (atau 2x *non-Nature Infliction*) untuk memicu **Combo**. Setelah itu, gunakan **Battle Skill** untuk mengonsumsi efek *combo* tersebut demi menghasilkan ekstra *damage* sekaligus memulihkan sejumlah SP.
+* **Sinergi Ultimate:** Kemampuan **Ultimate** memiliki sinergi luar biasa dengan efek **Corrosion**. Berkat **Combat Talent**, durasi **Corrosion** akan diperpanjang sehingga Anda bisa memaksimalkan potensinya saat melepas **Ultimate Finisher**. Anda bahkan dapat menimpa efeknya menjadi **Corrosion Lv.2** untuk mempertahankan pengurangan **RES** musuh.
+
+### 2. Build Will (Fokus Utilitas & Support)
+* **Peran Utama:** Menggeser fokus karakter dari penghasil *damage* menjadi penyedia utilitas (**utility/support**).
+* **Kemampuan Utama:** Berpusat pada pemanfaatan **Combo Skill**. **Arcane** dapat memberikan tumpukan efek negatif ekstra (*extra Infliction*) dari jenis **Arts** apa pun melalui **Combo** dan **Ultimate**-nya.
+* **Kontrol & Debuff:** **Battle Skill** dan **Combo** miliknya mampu mengumpulkan musuh menjadi satu titik (*grouping*). Selain itu, **Combo Skill** ini juga memberikan efek **Cryo** dan **Nature Susceptibility** yang kekuatannya berskala langsung dengan total status **Will** yang dimiliki.
+
+<Note title="Catatan">
+Build yang dibahas pada artikel ini merupakan rekomendasi berdasarkan performa Arcane pada patch saat ini. Build ini tidak menjamin Arcane akan menjadi jauh lebih kuat dalam setiap situasi, karena efektivitasnya tetap bergantung pada komposisi tim, gaya bermain, serta kondisi pertempuran. Kamu tetap dapat menyesuaikan senjata, gear, maupun anggota tim sesuai kebutuhan dan preferensi.
+</Note>

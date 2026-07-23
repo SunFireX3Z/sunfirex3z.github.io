@@ -1,17 +1,60 @@
 ---
-
+import Layout from '@/layouts/Layout.astro';
+import Card from '@/components/article/Card.astro';
+import FeaturedCard from '@/components/article/FeaturedCard.astro';
+import { latestPost, featuredPosts, recentPosts } from '@/data/posts';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout 
+	title="Beranda" 
+	description="Menjelajahi dunia teknologi, desain, dan pengembangan web melalui tulisan dan proyek."
+>
+    <div class="space-y-16">
+        {/* Judul Halaman */}
+        <section class="border-l-4 border-orange-500 pl-4">
+            <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">
+                SunBlog: Blog Pribadi & Portofolio
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg text-gray-600">
+                Menjelajahi dunia teknologi, desain, dan pengembangan web melalui tulisan dan proyek.
+            </p>
+        </section>
+
+        {/* Bagian Atas: Latest & Featured */}
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            {/* Latest Blog */}
+            <div class="lg:col-span-1 flex flex-col">
+                <h2 class="mb-4 inline-block border-b-4 border-orange-500 pb-1 text-3xl font-bold">
+                    Terbaru
+                </h2>
+
+                {latestPost && (
+                    <div class="flex-1">
+                        <Card {...latestPost.metadata} path={latestPost.path} isLarge />
+                    </div>
+                )}
+            </div>
+
+            {/* Featured Blog */}
+            <div class="lg:col-span-1 flex flex-col">
+                <h2 class="mb-4 inline-block border-b-4 border-orange-500 pb-1 text-3xl font-bold">
+                    Pilihan Editor
+                </h2>
+
+                <div class="flex flex-1 flex-col justify-between rounded-xl bg-white p-4 shadow-md">
+                    {featuredPosts.map(post => (
+                        <FeaturedCard {...post.metadata} path={post.path} />
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        {/* Bagian Bawah: Blog Terbaru */}
+        <section>
+            <h2 class="text-3xl font-bold mb-4 border-b-4 border-orange-500 inline-block pb-1">Postingan Lainnya</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {recentPosts.map(post => (<Card {...post.metadata} path={post.path} />))}
+            </div>
+        </section>
+    </div>
+</Layout>

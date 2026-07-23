@@ -1,0 +1,115 @@
+import thumbnailImage from './thumbnail.webp'; // Impor gambar thumbnail lokal
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Note from '@/components/mdx/Note.jsx';
+import TowerGrid from '@/components/gaming/TowerGrid.jsx';
+import TowerRecommendation from '@/components/gaming/TowerRecommendation.jsx';
+import { mergedTowers } from '@/data/tds/mergedTowers';
+
+export const metadata = {
+    title: "10 Tower Terbaik yang Wajib Dimiliki di Tower Defense Simulator (2026)",
+    pageTitle: "10 Tower TDS Terbaik 2026 | Wajib Punya untuk Menang",
+    description: "Memiliki tower yang tepat merupakan salah satu kunci untuk menyelesaikan berbagai mode permainan di Tower Defense Simulator. Artikel ini akan membahas 10 tower terbaik.",
+    metaDescription: "Cari tahu 10 tower terbaik di Tower Defense Simulator (TDS) untuk tahun 2026. Dari Farm hingga Commander, kuasai meta dan menangkan setiap mode dengan mudah.",
+    publishDate: "2026-07-15",
+    author: "Randy",
+    category: "Gaming",
+    thumbnail: thumbnailImage,
+    imageCaption: "Berbagai tower siap mempertahankan markas dari gempuran musuh. Sumber: BelowNatural.",
+    readingTime: 15,
+    tags: ["TDS", "Tower", "Meta", "Guide", "Top 10"],
+    featured: false,
+    lastUpdated: "2026-07-15",
+    sources: [
+        {
+            "name": "Tower Defense Simulator Wiki",
+            "url": "https://tds.fandom.com/wiki/Tower_Defense_Simulator_Wiki"
+        }
+    ]
+};
+
+export const towerRecommendations = [
+  {
+    towerName: "Accelerator",
+    tier: "S-Tier",
+    reason: "Raja DPS untuk late-game. Kemampuannya menembus pertahanan musuh dan damage yang luar biasa membuatnya menjadi investasi terbaik untuk meraih kemenangan.",
+    showStats: true
+  },
+  {
+    towerName: "Engineer",
+    tier: "S-Tier",
+    reason: "Tower serbaguna dengan damage area yang solid dan kemampuan unik untuk memperbaiki tower lain, sangat berharga dalam mode permainan panjang seperti Fallen atau Hardcore.",
+    showStats: false
+  },
+  {
+    towerName: "Farm",
+    tier: "A-Tier",
+    reason: "Uang adalah segalanya. Tanpa Farm, Anda akan kesulitan membangun pertahanan yang kuat. Ini adalah tower ekonomi paling efisien dan menjadi pondasi semua strategi.",
+    showStats: true
+  },
+  {
+    towerName: "Commander",
+    tier: "A-Tier",
+    reason: "Tower support terbaik yang wajib dimiliki. Kemampuan \"Call to Arms\" miliknya dapat melipatgandakan fire rate tower di sekitarnya secara drastis.",
+    showStats: false
+  },
+  {
+    towerName: "DJ Booth",
+    tier: "A-Tier",
+    reason: "Memberikan dua buff krusial: diskon biaya dan peningkatan jangkauan. Di meta saat ini, penempatan tower yang strategis sangat menentukan, dan DJ Booth adalah kuncinya."
+  },
+  {
+    towerName: "Ranger",
+    tier: "A-Tier",
+    reason: "Sebagai tower cliff, Ranger memiliki jangkauan sangat luas dan damage yang besar, menjadikannya pemburu bos dan musuh udara yang paling andal."
+  },
+  {
+    towerName: "Minigunner",
+    tier: "B-Tier",
+    reason: "Meskipun posisinya sedikit tergeser, Minigunner tetap menjadi pilihan DPS darat yang solid, lebih mudah didapat, dan sangat kompetitif di banyak skenario."
+  },
+  {
+    towerName: "Cowboy",
+    tier: "B-Tier",
+    reason: "Tower ekonomi-ofensif yang hebat untuk early hingga mid-game. Ia menghasilkan uang sambil memberikan damage yang lumayan untuk transisi ke tower yang lebih mahal.",
+    showStats: true
+  }
+];
+
+## Apa Itu Tower Defense Simulator?
+
+Tower Defense Simulator (TDS) merupakan permainan tower defense yang dikembangkan oleh Paradoxum Games. Game ini mulai dibuat pada 5 Juni 2019 dan resmi dirilis pada 14 Juni 2019 di platform roblox.
+
+Dalam permainan ini, pemain bekerja sama untuk mempertahankan markas dari gelombang musuh yang terus berdatangan. Setiap musuh yang dikalahkan akan memberikan uang (cash), yang dapat digunakan untuk membeli menara (tower) baru atau meningkatkan (upgrade) menara yang telah ditempatkan. Permainan berakhir ketika seluruh gelombang berhasil diselesaikan atau Health markas habis.
+
+Setelah menyelesaikan pertandingan, pemain akan memperoleh Experience (EXP) untuk meningkatkan level pemain, serta Coins atau Gems yang dapat digunakan untuk membuka tower, skin, maupun emote baru.
+
+## Apa Itu Tower di TDS?
+
+Tower merupakan unit pertahanan utama yang digunakan pemain untuk mengalahkan musuh. Setiap tower memiliki karakteristik yang berbeda, seperti harga, jangkauan (Range), kecepatan serangan (Fire Rate), serta Damage yang dihasilkan. Selain itu, beberapa tower juga memiliki kemampuan khusus yang membuatnya lebih efektif dalam situasi tertentu.
+
+Berdasarkan perannya, tower di Tower Defense Simulator dapat dibagi menjadi beberapa kategori, yaitu Early DPS, Economic, Spawner, Support, Main DPS, dan Sub-DPS. Setiap kategori memiliki fungsi yang berbeda dalam membantu tim bertahan dari gelombang musuh. Oleh karena itu, pemain perlu menyusun strategi yang tepat dalam memilih serta menempatkan tower agar dapat memaksimalkan efektivitas pertahanan.
+
+## Kriteria Penilaian
+
+Daftar pada artikel ini disusun berdasarkan pengalaman bermain saya di berbagai mode permainan Tower Defense Simulator. Penilaian tidak hanya melihat besarnya damage yang dihasilkan, tetapi juga mempertimbangkan seberapa bermanfaat tower tersebut dalam membantu pemain menyelesaikan permainan secara konsisten.
+
+- **Kemudahan Penggunaan** - Seberapa mudah tower digunakan oleh pemain, baik pemula maupun pemain berpengalaman.
+- **Kontribusi dalam Permainan** - Seberapa besar peran tower dalam membantu tim menyelesaikan berbagai mode permainan.
+- **Fleksibilitas** - Kemampuan tower untuk digunakan dalam berbagai strategi maupun kombinasi dengan tower lain.
+- **Konsistensi Performa** - Seberapa efektif tower digunakan dari awal hingga akhir permainan.
+- **Nilai Investasi** - Seberapa layak tower dimiliki berdasarkan manfaat yang diberikan selama bermain.
+
+<Note title="Poin Penting">
+  Perlu diingat bahwa daftar ini merupakan opini saya berdasarkan pengalaman bermain serta kondisi permainan pada saat artikel ini dibuat. Peringkat dapat berubah seiring adanya pembaruan (update), perubahan keseimbangan (balance changes), maupun penambahan tower baru.
+</Note>
+
+## Rekomendasi Tower Terbaik
+
+Berikut adalah 10 tower yang menurut saya paling layak dimiliki karena memiliki performa yang konsisten, mudah dipadukan dengan berbagai strategi, serta memberikan kontribusi besar dalam permainan.
+
+<TowerRecommendation recommendations={towerRecommendations.map(rec => ({
+  recommendation: rec,
+  tower: mergedTowers.find(t => t.id === rec.towerName)
+})).filter(item => item.tower)} />
+
+<CallToAction href="/blog" text="Lihat Artikel Lainnya" />

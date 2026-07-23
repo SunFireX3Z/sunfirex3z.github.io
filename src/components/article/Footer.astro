@@ -1,0 +1,56 @@
+---
+import Logo from '../../assets/images/Sunblog_Black.png';
+import { posts } from '../../data/posts';
+
+// Ambil 5 kategori unik.
+const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
+---
+<footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-[90rem] px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            {/* Kiri: Logo & Media Sosial */}
+            <div class="py-16">
+                <a href="/">
+                    <img src={Logo.src} alt="Logo SunBlog" class="h-10 w-auto" />
+                </a>
+                <p class="mt-4 max-w-xs text-slate-600">
+                    Blog pribadi yang membahas teknologi, desain, dan pengembangan web melalui tulisan dan proyek.
+                </p>
+                <div class="mt-8 flex gap-5">
+                    <a href="https://github.com/SunFireX3Z" target="_blank" rel="noopener noreferrer" class="text-slate-500 transition-colors hover:text-slate-900" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                    {/* Tambahkan link sosial media lainnya di sini */}
+                </div>
+            </div>
+
+            {/* Kanan: Tautan Navigasi */}
+            <div class="py-16 text-slate-800">
+                <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:pl-12">
+                    <div class="sm:col-span-1">
+                        <h3 class="font-bold">Kategori</h3>
+                        <ul class="mt-4 space-y-3">
+                            {categories.map(cat => (
+                                <li>
+                                    <a href={`/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`} class="text-slate-600 transition-colors hover:text-slate-900 capitalize">
+                                        {cat}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <h3 class="font-bold">Tautan</h3>
+                        <ul class="mt-4 space-y-3">
+                            <li><a href="/blog" class="text-slate-600 transition-colors hover:text-slate-900">Blog</a></li>
+                            <li><a href="/about" class="text-slate-600 transition-colors hover:text-slate-900">Tentang</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-slate-200 py-8 text-center text-sm text-slate-500">
+            &copy; {new Date().getFullYear()} SunBlog. All rights reserved.
+        </div>
+    </div>
+</footer>

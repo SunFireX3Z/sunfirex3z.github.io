@@ -1,0 +1,12 @@
+---
+import BlogPageLayout from '@/layouts/BlogPageLayout.astro';
+import { posts } from '@/data/posts';
+
+const pageTitle = 'Semua Postingan';
+const pageDescription = 'Jelajahi semua artikel, tutorial, dan pemikiran yang telah saya bagikan di sini.';
+---
+<BlogPageLayout
+    pageTitle={pageTitle}
+    pageDescription={pageDescription}
+    filteredPosts={posts}
+/>

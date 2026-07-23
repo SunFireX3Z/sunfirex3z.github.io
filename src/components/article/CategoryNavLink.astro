@@ -1,0 +1,13 @@
+---
+const { href, currentPath, text } = Astro.props;
+
+// Tentukan apakah link aktif.
+// Ini menangani kasus untuk halaman utama blog, kategori, dan tag.
+const isBlogHome = href === '/blog' && currentPath.startsWith('/blog/category') === false && currentPath.startsWith('/blog/tag') === false;
+const isCategoryMatch = href !== '/blog' && currentPath.startsWith(href);
+const isActive = isBlogHome || isCategoryMatch;
+
+const activeClass = 'bg-orange-500 text-white shadow-md';
+const inactiveClass = 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm';
+---
+<a href={href} class:list={[`px-4 py-2 rounded-full text-sm font-semibold transition-colors`, isActive ? activeClass : inactiveClass]}>{text}</a>

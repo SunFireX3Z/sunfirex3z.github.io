@@ -1,0 +1,203 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { posts } from '@/data/posts';
+import TableOfContents from '@/components/article/TableOfContents.jsx';
+import ShareButton from '@/components/article/ShareButton.jsx';
+import RelatedPostCard from '@/components/article/RelatedPostCard.astro';
+
+export async function getStaticPaths() {
+    const allPosts = posts.filter(p => p.lang === 'id');
+    return allPosts.map(post => ({
+        params: { slug: post.path.replace('/blog/', '') },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+
+if (!post) {
+    return Astro.redirect('/404');
+}
+
+const { metadata, Content } = post;
+const headings = await post.getHeadings();
+
+// Proses headings menjadi struktur bersarang untuk TOC
+const tocItems = [];
+let currentH2Group = null;
+
+headings.forEach((heading) => {
+    if (heading.depth === 2) {
+        currentH2Group = { text: heading.text, slug: heading.slug, level: 'h2', children: [] };
+        tocItems.push(currentH2Group);
+    } else if (heading.depth === 3 && currentH2Group) {
+        currentH2Group.children.push({ text: heading.text, slug: heading.slug, level: 'h3' });
+    }
+});
+
+// Cari artikel terkait
+const relatedPosts = posts
+    .filter(p => p.metadata.category === metadata.category && p.path !== post.path)
+    .slice(0, 2);
+
+// Data untuk SEO
+const canonicalUrl = new URL(post.path, Astro.site).href;
+const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
+
+const schemaData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: metadata.title,
+    description: metadata.metaDescription,
+    image: imageUrl,
+    author: {
+        '@type': 'Person',
+        name: metadata.author,
+    },
+    publisher: {
+        '@type': 'Organization',
+        name: 'SunBlog',
+        logo: {
+            '@type': 'ImageObject',
+            url: new URL('/favicon.svg', Astro.site).href,
+        },
+    },
+    datePublished: new Date(metadata.publishDate).toISOString(),
+    dateModified: new Date(metadata.lastUpdated || metadata.publishDate).toISOString(),
+    mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonicalUrl,
+    },
+};
+---
+
+<Layout title={metadata.title} description={metadata.metaDescription}>
+    <Fragment slot="head">
+        {/* SEO Meta Tags */}
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={metadata.title} />
+        <meta property="og:description" content={metadata.metaDescription} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="SunBlog" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metadata.title} />
+        <meta name="twitter:description" content={metadata.metaDescription} />
+        <meta name="twitter:image" content={imageUrl} />
+        <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+    </Fragment>
+
+    <div class="space-y-8">
+        {/* Breadcrumbs */}
+        <nav aria-label="Breadcrumb" class="text-sm text-gray-500 capitalize">
+            <ol class="flex flex-wrap items-center space-x-2">
+                <li><a href="/" class="hover:text-orange-500">Beranda</a></li>
+                <li><span class="select-none">/</span></li>
+                <li><a href="/blog" class="hover:text-orange-500">Blog</a></li>
+                <li><span class="select-none">/</span></li>
+                <li><a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`} class="hover:text-orange-500">{metadata.category}</a></li>
+                {metadata.subcategory && (
+                    <>
+                        <li><span class="select-none">/</span></li>
+                        <li><a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`} class="hover:text-orange-500">{metadata.subcategory}</a></li>
+                    </>
+                )}
+                <li><span class="select-none">/</span></li>
+                <li class="font-medium text-gray-800 line-clamp-1 normal-case">{metadata.title}</li>
+            </ol>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-12">
+            {/* Main Content */}
+            <div class="lg:col-span-2">
+                <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md">
+                    <figure class="mb-8">
+                        <img src={metadata.thumbnail.src} alt={`Thumbnail for ${metadata.title}`} class="w-full rounded-lg object-cover aspect-video" />
+                        {metadata.imageCaption && <figcaption class="mt-2 text-center text-sm text-gray-500 italic">{metadata.imageCaption}</figcaption>}
+                    </figure>
+
+                    <header class="mb-8 border-b border-gray-200 pb-8">
+                        <div class="mb-4 flex flex-wrap items-center gap-2">
+                            <a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`} class="inline-block rounded-full bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-800 transition-colors hover:bg-orange-200 capitalize">{metadata.category}</a>
+                            {metadata.subcategory && (
+                                <>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-gray-400"><path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+                                    <a href={`/blog/category/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`} class="inline-block rounded-full bg-sky-100 px-3 py-1 text-sm font-semibold text-sky-800 transition-colors hover:bg-sky-200 capitalize">{metadata.subcategory}</a>
+                                </>
+                            )}
+                        </div>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-4">{metadata.title}</h1>
+                        <div class="flex items-center gap-3">
+                            <img src={metadata.authorAvatar.src} alt={metadata.author} class="h-10 w-10 rounded-full" />
+                            <span class="font-semibold text-gray-800">{metadata.author}</span>
+                        </div>
+                    </header>
+
+                    {tocItems.length > 0 && <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden"><TableOfContents client:visible items={tocItems} /></div>}
+
+                    <article class="prose lg:prose-lg max-w-none"><Content /></article>
+                    
+                    {metadata.tags && metadata.tags.length > 0 && (
+                        <div class="not-prose mt-12 border-t border-gray-200 pt-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Tags:</h3>
+                            <div class="flex flex-wrap gap-2">{metadata.tags.map(tag => (<a href={`/blog/tag/${tag.toLowerCase()}`} class="rounded-full bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-800 transition-colors hover:bg-orange-200 hover:shadow-sm">#{tag}</a>))}</div>
+                        </div>
+                    )}
+
+                    {metadata.sources && metadata.sources.length > 0 && (
+                        <div class="not-prose mt-8 border-t border-gray-200 pt-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Sumber Referensi:</h3>
+                            <ul class="space-y-3">{metadata.sources.map(source => (<li><a href={source.url} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 transition-all duration-200 hover:border-orange-300 hover:bg-orange-50 hover:shadow-sm"><span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-white shadow-sm ring-1 ring-gray-200"><img src={`https://www.google.com/s2/favicons?domain=${new URL(source.url).hostname}&sz=32`} alt={`Favicon for ${new URL(source.url).hostname}`} class="h-6 w-6 object-contain" onError={(e) => { e.currentTarget.src = "/favicon.svg"; }} /></span><div class="flex-1"><p class="font-semibold text-gray-800 group-hover:text-orange-600">{source.name}</p><p class="text-xs text-gray-500 line-clamp-1">{source.url}</p></div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-gray-400 transition-transform group-hover:translate-x-1"><path fill-rule="evenodd" d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z" clip-rule="evenodd" /></svg></a></li>))}</ul>
+                        </div>
+                    )}
+                </div>
+
+                <div class="mt-12 space-y-8 lg:hidden">
+                    <div class="rounded-lg bg-white p-6 shadow-md ring-1 ring-gray-100">
+                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Artikel</h3>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5h10.5a.75.75 0 0 0 0-1.5H4.75a.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Terbit</span></div><span class="text-gray-800">{new Date(metadata.publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>
+                            {metadata.lastUpdated && <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 0 1-9.458 2.152l.209-.363a.75.75 0 0 0-1.3-.75l-.21.362a7 7 0 0 0 12.025-2.731.75.75 0 0 0-1.266-.67ZM4.688 8.576a5.5 5.5 0 0 1 9.458-2.152l-.209.363a.75.75 0 0 0 1.3.75l.21-.362a7 7 0 0 0-12.025 2.731.75.75 0 0 0 1.266.67Z" clip-rule="evenodd" /></svg><span class="font-semibold">Diperbarui</span></div><span class="text-gray-800">{new Date(metadata.lastUpdated).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>}
+                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Waktu Baca</span></div><span class="text-gray-800">{metadata.readingTime} menit</span></li>
+                        </ul>
+                    </div>
+                    <ShareButton client:visible />
+                    <div class="rounded-lg bg-white p-6 shadow-md ring-1 ring-gray-100">
+                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h3>
+                        <ul class="space-y-4">{posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (<li><a href={p.path} class="font-semibold text-gray-800 hover:text-orange-500 line-clamp-2">{p.metadata.title}</a><p class="text-xs text-gray-400">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></li>))}</ul>
+                    </div>
+                </div>
+
+                {relatedPosts.length > 0 && (
+                    <div class="mt-16">
+                        <h2 class="text-3xl font-bold mb-6 border-b-4 border-orange-500 inline-block pb-1">Artikel Terkait</h2>
+                        <div class="space-y-8">{relatedPosts.map(relatedPost => (<RelatedPostCard {...relatedPost.metadata} path={relatedPost.path} />))}</div>
+                    </div>
+                )}
+            </div>
+
+            {/* Sidebar */}
+            <aside class="hidden lg:block lg:col-span-1">
+                <div class="sticky top-40 flex flex-col gap-8">
+                    <ShareButton client:visible />
+                    {tocItems.length > 0 && <TableOfContents client:visible items={tocItems} />}
+                    
+                    <div class="rounded-lg bg-white p-6 shadow-md">
+                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Artikel</h3>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5h10.5a.75.75 0 0 0 0-1.5H4.75a.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Terbit</span></div><span class="text-gray-800">{new Date(metadata.publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>
+                            {metadata.lastUpdated && <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 0 1-9.458 2.152l.209-.363a.75.75 0 0 0-1.3-.75l-.21.362a7 7 0 0 0 12.025-2.731.75.75 0 0 0-1.266-.67ZM4.688 8.576a5.5 5.5 0 0 1 9.458-2.152l-.209.363a.75.75 0 0 0 1.3.75l.21-.362a7 7 0 0 0-12.025 2.731.75.75 0 0 0 1.266.67Z" clip-rule="evenodd" /></svg><span class="font-semibold">Diperbarui</span></div><span class="text-gray-800">{new Date(metadata.lastUpdated).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>}
+                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Waktu Baca</span></div><span class="text-gray-800">{metadata.readingTime} menit</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-lg bg-white p-6 shadow-md">
+                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h3>
+                        <ul class="space-y-4">{posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (<li><a href={p.path} class="font-semibold text-gray-800 hover:text-orange-500 line-clamp-2">{p.metadata.title}</a><p class="text-xs text-gray-400">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></li>))}</ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</Layout>

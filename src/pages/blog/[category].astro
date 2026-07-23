@@ -1,0 +1,34 @@
+---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
+import { posts } from "@/data/posts";
+
+export function getStaticPaths() {
+  const uniqueCategories = [
+    ...new Set(posts.map((post) => post.category)),
+  ];
+
+  return uniqueCategories.map((category) => ({
+    params: {
+      category: category.toLowerCase().replace(/\s+/g, "-"),
+    },
+  }));
+}
+
+const { category = "" } = Astro.params;
+
+const formattedCategory = category.replace(/-/g, " ");
+
+const filteredPosts = posts.filter(
+  (post) =>
+    post.category.toLowerCase().replace(/\s+/g, "-") === category
+);
+
+const pageTitle = `Kategori: ${formattedCategory}`;
+const pageDescription = `Menjelajahi semua artikel dalam kategori ${formattedCategory}.`;
+---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={filteredPosts}
+/>

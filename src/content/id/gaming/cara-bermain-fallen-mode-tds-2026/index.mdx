@@ -1,0 +1,168 @@
+import thumbnailImage from './thumbnail.webp'; // Impor gambar thumbnail lokal
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import { towers } from '@/data/tds/towers.js';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+
+export const metadata = {
+  title: "Panduan Lengkap Fallen Mode di Tower Defense Simulator (2026)",
+  pageTitle: "Panduan Fallen Mode TDS 2026 | Strategi & Susunan Tower",
+  description: "Untuk memenangkan Fallen Mode, pemain tidak hanya membutuhkan tower dengan damage tinggi, tetapi juga harus mampu mengatur ekonomi, menentukan waktu upgrade, dan memanfaatkan tower support secara efektif.",
+  metaDescription: "Kuasai Fallen Mode di Tower Defense Simulator (TDS) dengan panduan strategi lengkap 2026. Pelajari susunan tower terbaik, manajemen ekonomi, dan cara mengalahkan Fallen King.",
+  publishDate: "2026-06-20",
+  author: "Randy",
+  category: "Gaming",
+  thumbnail: thumbnailImage,
+  imageCaption: "Gambar 1. thumbnail TDS saat update Fallen Mode rework v1.27.0. Sumber: Tower Defense Simulator Wiki (Fandom).",
+  readingTime: 8,
+  tags: ["TDS", "Guide", "Fallen Mode", "Strategy"],
+  featured: true, 
+  lastUpdated: "2026-06-21",
+  sources: [
+    {
+      "name": "Tower Defense Simulator Wiki - Fallen Mode",
+      "url": "https://tds.fandom.com/wiki/Fallen_Mode"
+    },
+    {
+      "name": "TDS Community Guides",
+      "url": "https://tds.fandom.com/f/p/4400000000000291948"
+    }
+  ]
+};
+
+export const loadoutHeaders = [
+  "Tower",
+  "Peran",
+  "Status"
+];
+
+export const loadoutRows = [
+  [
+    {
+      name: towers.Cowboy.name,
+      image: towers.Cowboy.image.src
+    },
+    towers.Cowboy.role,
+    "Direkomendasikan"
+  ],
+  [
+    {
+      name: towers.Commander.name,
+      image: towers.Commander.image.src
+    },
+    towers.Commander.role,
+    "Wajib"
+  ],
+  [
+    {
+      name: towers["DJ Booth"].name,
+      image: towers["DJ Booth"].image.src
+    },
+    towers["DJ Booth"].role,
+    "Wajib"
+  ],
+  [
+    {
+      name: towers.Ranger.name,
+      image: towers.Ranger.image.src
+    },
+    towers.Ranger.role,
+    "Direkomendasikan"
+  ],
+  [
+    {
+      name: towers.Minigunner.name,
+      image: towers.Minigunner.image.src
+    },
+    towers.Minigunner.role,
+    "Direkomendasikan"
+  ]
+];
+
+## Apa Itu Fallen Mode?
+**Fallen Mode** merupakan salah satu mode permainan tersulit di Tower Defense Simulator yang dapat dimainkan setelah pemain mencapai level tertentu. Dibandingkan mode **Normal** maupun **Molten**, mode ini menghadirkan gelombang musuh yang jauh lebih kuat, memiliki jumlah yang lebih banyak, serta dipenuhi berbagai jenis musuh dengan kemampuan khusus yang mampu menguji strategi dan kerja sama tim.
+
+Untuk memenangkan **Fallen Mode**, pemain tidak hanya membutuhkan tower dengan damage tinggi, tetapi juga harus mampu mengatur ekonomi, menentukan waktu upgrade, memanfaatkan tower support secara efektif, serta berkoordinasi dengan anggota tim lainnya. Kesalahan kecil pada awal permainan dapat berdampak besar pada fase late game ketika musuh mulai memiliki HP dan pertahanan yang sangat tinggi.
+
+Pada artikel ini, kamu akan mempelajari strategi lengkap untuk meningkatkan peluang memenangkan **Fallen Mode**, mulai dari rekomendasi susunan tower, pembagian peran setiap pemain, pengelolaan ekonomi menggunakan **Farm**, hingga tips menghadapi gelombang terakhir dan boss **Fallen King** secara lebih efektif.
+
+## Hal yang Harus Dipersiapkan
+**Fallen Mode** bukanlah mode yang bisa diselesaikan dengan sembarang susunan tower. Pada mode ini, pemain akan menghadapi berbagai tantangan yang sering disebut oleh komunitas sebagai check. Istilah ini mengacu pada mekanisme permainan yang menguji apakah persiapan pemain sudah cukup, seperti memiliki tower dengan **DPS** yang tinggi, kemampuan mendeteksi *Hidden Enemies*, menangani *Flying Enemies*, hingga menghadapi musuh dengan pertahanan yang besar. Jika persiapan kurang matang, kemungkinan besar permainan akan berakhir sebelum mencapai gelombang terakhir.
+
+Sebelum dapat memainkan **Fallen Mode**, pemain juga harus mencapai **Level 30**. Oleh karena itu, apabila levelmu masih belum mencukupi, fokuslah terlebih dahulu untuk melakukan grinding EXP melalui mode yang lebih mudah hingga persyaratan tersebut terpenuhi.
+
+Setelah memenuhi syarat level, langkah berikutnya adalah menyiapkan susunan tower yang tepat. Beberapa tower yang sangat direkomendasikan untuk mode ini antara lain **Farm**, **Commander**, **DJ Booth**, **Cowboy**, **Minigunner**, **Ranger**, **Crook Boss**, **Turret**, **Mortar**, dan **Tesla**. Apabila kamu telah memiliki varian Golden Perk, seperti **Golden Cowboy** atau **Golden Minigunner**, performanya tentu akan jauh lebih baik dan dapat meningkatkan peluang kemenangan.
+
+Selain itu, apabila kamu telah memiliki tower berbasis **Gems**, seperti **Accelerator** atau **Engineer**, kamu juga dapat menggunakannya sebagai tower utama karena keduanya memiliki **DPS** yang sangat tinggi. Meskipun begitu, kedua tower tersebut bukanlah syarat wajib untuk menyelesaikan **Fallen Mode**. Dengan strategi yang tepat, pengelolaan ekonomi yang baik, serta kerja sama tim yang solid, mode ini tetap dapat diselesaikan menggunakan tower lain yang lebih mudah diperoleh.
+
+**Fallen Mode** dapat dimainkan secara solo maupun bersama pemain lain. Jika kamu sudah memahami mekanisme permainan dan memiliki susunan tower yang kuat, mode solo bisa menjadi tantangan yang menarik. Namun, bagi pemain yang masih baru mencoba **Fallen Mode**, disarankan bermain dalam mode **Duo** atau **Quad** agar pertahanan dapat dibagi bersama rekan satu tim. Meski demikian, kualitas matchmaking di Tower Defense Simulator terkadang masih kurang konsisten, sehingga mendapatkan rekan tim yang baik juga membutuhkan sedikit keberuntungan.
+
+## Rekomendasi Loadout
+Menentukan loadout yang tepat merupakan salah satu faktor terpenting untuk memenangkan **Fallen Mode**. Tidak semua tower mampu menghadapi seluruh jenis musuh yang muncul pada mode ini. Beberapa musuh, seperti *Hidden Enemies* dan *Flying Enemies*, hanya dapat diserang oleh tower yang memiliki kemampuan **Hidden Detection** atau **Flying Detection**. Oleh karena itu, pastikan susunan tower yang kamu bawa mampu mengatasi berbagai situasi yang akan dihadapi selama permainan berlangsung.
+
+Meskipun sebagian besar tower akan memperoleh **Hidden Detection** pada level tertentu, hal yang sama tidak berlaku untuk **Flying Detection**. Hanya beberapa tower yang mampu menyerang *Flying Enemies*, sehingga membawa setidaknya satu tower dengan kemampuan tersebut sangat disarankan agar pertahananmu tidak kewalahan ketika musuh udara mulai bermunculan.
+
+Berikut merupakan loadout yang paling sering saya gunakan untuk menyelesaikan **Fallen Mode**. Susunan ini memiliki keseimbangan antara ekonomi, support, dan damage, sehingga efektif digunakan baik saat bermain solo maupun bersama tim.
+
+<InfoTable headers={loadoutHeaders} rows={loadoutRows} />
+
+Loadout ini memiliki keseimbangan sempurna antara ekonomi, support, dan damage. **Cowboy** berfungsi sebagai early game economy berkat peran gandanya yang mencetak uang dari setiap serangan sekaligus mempertahankan base. **Commander** adalah core support; selain memberikan buff fire rate pasif, rotasi Call to Arms miliknya bisa melipatgandakan **DPS** tim secara drastis. **DJ Booth** kini makin esensial dengan sistem track-nya—tidak hanya memberikan discount dan perluasan range, tapi juga memberikan **Damage Buff** ekstra. Untuk eksekusi bos, **Minigunner** menawarkan **DPS** konsisten di lini depan, sementara **Ranger** di posisi cliff bertugas sebagai burst damage untuk *Flying Enemies* sekaligus kebal terhadap efek stun area darat.
+
+## Strategi Setiap Wave
+Di dalam **Fallen Mode**, kurva tingkat kesulitan (difficulty spike) pada setiap wave bisa berubah secara drastis. Kamu pasti tidak ingin tiba-tiba terkena jumpscare oleh musuh berdarah tebal sementara persiapan pertahananmu belum matang. Untuk menghindari hal tersebut, saya telah membagi panduan alur permainan ini ke dalam tiga fase utama agar transisimu dari awal hingga akhir permainan berjalan mulus.
+
+### Fase 1: Early Game (Wave 1 - 15)
+Fokus utama di fase ini adalah membangun fondasi ekonomi. Letakkan **Cowboy** (atau **Farm** jika bermain dalam tim) di posisi strategis. Namun, jangan terlalu serakah melakukan upgrade ekonomi; pastikan kamu juga berinvestasi pada pertahanan dengan menyiapkan setidaknya satu tower yang memiliki **Hidden Detection** sebelum wave belasan agar markas tidak kebobolan oleh *Hidden Enemies*.
+
+### Fase 2: Mid Game (Wave 16 - 30)
+Ini adalah fase transisi yang krusial. Mulailah menempatkan tower **DPS** utama seperti **Minigunner** untuk menahan musuh darat, dan letakkan **Ranger** di tebing (cliff) untuk bersiap mengantisipasi munculnya *Flying Enemies*. Di saat yang sama, perlahan bangun pilar support dengan meletakkan **Commander** dan **DJ Booth** di pusat formasi agar jangkauan buff-nya maksimal.
+
+### Fase 3: Late Game (Wave 31 - 40)
+Ini adalah fase penentuan melawan boss terakhir, **Fallen King**. Maksimalkan level semua tower **DPS** dan jalankan rotasi skill (chaining) **Commander** tanpa henti.
+
+<Tip title="Informasi Penting">
+  Segera jual tower **Farm** karena kamu tidak lagi membutuhkan pemasukan tambahan di wave terakhir. Jika menggunakan **Cowboy**, jual juga perlahan dan ganti posisinya dengan **Minigunner** atau tower **DPS** lain hingga kamu menyentuh batas penempatan (placement limit). Selain itu, ketika **Fallen King** sudah berjalan menjauh, segera lakukan teknik Micro-management—yaitu menjual tower yang sudah dilewati boss, lalu menempatkannya kembali dengan cepat di area jalur selanjutnya (mendekati markas)—agar output damage timmu tidak pernah terputus.
+</Tip>
+
+## Menghadapi Fallen King
+**Fallen King** adalah bos terakhir yang memimpin pertempuran pada Wave 40 di **Fallen Mode**. Berdasarkan catatan Logbook terbarunya, ia dulunya merupakan seorang raja bijaksana yang kerajaannya hancur setelah sang Ratu mengorbankan nyawanya demi merapal sihir kuno. Kini, ia memimpin pasukan kegelapan dengan membawa pedang batu hitam granit dan tamengnya yang memancarkan aura magis ungu pekat. Berbeda dengan versi jadul, **Fallen King** modern memiliki mekanik pertahanan dan variasi serangan area yang jauh lebih mematikan.
+
+Sebagai bos utama, ia dibekali dengan **Boss & Stun Immunities** (kebal efek beku, stun, knockback, racun, hingga efek defense dropping). Berikut adalah deretan ability terbarunya yang wajib kamu waspadai:
+
+* **Sword Swing:** Bos melakukan tebasan pedang sebanyak 3 kali, di mana tebasan terakhir akan membentuk area lingkaran penuh (full circle AoE) yang memberikan efek stun pada tower selama 6 detik.
+* **Fallen Comet:** Serangan global tanpa batasan jarak (no range limit). Bos akan menghempaskan pedangnya ke tanah untuk menjatuhkan duri-duri ungu dari langit, memberikan efek stun selama 5 detik ke tower yang terkena.
+* **Bone Armor (Pasif):** Mekanik pertahanan baru di mana bos akan mendapatkan tambahan +15% **Defense** secara berkala setiap kali HP-nya berkurang, akumulasinya bahkan bisa mencapai 60% **Defense**.
+* **Undead Charge & Summon:** Mengangkat pedangnya untuk memanggil pasukan pengalih seperti *Necrotic Skeletons*, *Possessed Armor*, hingga *Fallen Giant* untuk memecah fokus serangan timmu.
+
+Karena serangan Sword Swing dan Fallen Comet miliknya memberikan stun yang masif, kamu tidak bisa lagi hanya mengandalkan cliff tower untuk menghindar, sebab Fallen Comet menyerang secara global. Kunci utamanya adalah mengoptimalkan **DPS** konstan dari **Minigunner** dan memanfaatkan diskon serta **damage buff** dari **DJ Booth**. Selain itu, rotasi skill **Commander** wajib terus dinyalakan untuk menutupi kehilangan **DPS** (downtime) saat tower-towermu terkena efek stun dari serangan pedangnya.
+
+<Warning title="Kesalahan Umum Player (Blunder)">
+  Blunder terbesar yang sering dilakukan pemain saat ini adalah mengabaikan mekanik **Bone Armor** milik bos. Karena **Fallen King** menjadi semakin keras seiring berkurangnya darah, banyak pemain panik karena **DPS** mereka terasa melambat di akhir jalur dan berujung gagal melakukan Micro-management (jual-pasang tower). Selain itu, terlalu lambat membersihkan musuh-musuh kecil yang dipanggil dari ability Summon miliknya sering kali membuat bidikan tower utama teralihkan dari badan **Fallen King** itu sendiri.
+</Warning>
+
+## Contoh Video Gameplay
+Berikut adalah contoh video gameplay menggunakan loadout yang direkomendasikan dalam artikel ini untuk memberikan gambaran nyata di dalam permainan:
+<Youtube id="T0YpKx58urk" />
+
+<FAQ>
+  <FAQItem title="Apakah loadout ini bisa digunakan untuk solo?">
+    Ya, loadout ini sangat efektif untuk bermain solo karena **Cowboy** menyediakan ekonomi awal yang kuat, sementara **Minigunner** dan **Ranger** memberikan **DPS** yang cukup untuk menangani semua jenis musuh hingga akhir permainan.
+  </FAQItem>
+  <FAQItem title="Bagaimana jika saya tidak punya Cowboy?">
+    Jika Anda tidak memiliki **Cowboy**, Anda bisa menggantinya dengan **Farm**. Namun, Anda perlu bermain lebih hati-hati di awal permainan dan mungkin memerlukan bantuan dari rekan tim untuk menahan gelombang awal sambil Anda membangun ekonomi.
+  </FAQItem>
+  <FAQItem title="Apakah Accelerator wajib untuk menang?">
+    Tidak. Meskipun **Accelerator** adalah tower **DPS** terbaik, **Fallen Mode** tetap bisa dimenangkan dengan tower standar seperti **Minigunner** dan **Ranger**, asalkan Anda memaksimalkan buff dari **Commander** dan **DJ Booth** serta melakukan Micro-management dengan benar
+  </FAQItem>
+</FAQ>
+
+## Kesimpulan
+
+Menaklukkan **Fallen Mode** di Tower Defense Simulator memang membutuhkan pemahaman mekanik yang mendalam, bukan sekadar membawa tower dengan damage yang besar. Kunci utama dari kemenangan yang konsisten terletak pada keseimbangan eksekusi strategi: bagaimana kamu mengelola ekonomi di early game, menjaga ritme pertahanan dari ancaman musuh *Hidden* atau *Flying* di mid game, hingga ketangkasan melakukan teknik Micro-management saat menghadapi fase krusial melawan **Fallen King** di akhir laga.
+
+Meskipun **Fallen King** versi modern hadir dengan mekanik **Bone Armor** dan serangan area yang jauh lebih menantang, bukan berarti bos ini tidak bisa dikalahkan dengan susunan loadout standar. Selama kamu disiplin menjaga rotasi buff dari **Commander** dan **DJ Booth**, serta tidak panik untuk menjual dan menggeser posisi tower **DPS**-mu di detik-detik terakhir, kemenangan solo maupun tim akan berada di tanganmu.
+
+Sekarang, susun kembali strategi timmu, siapkan loadout terbaikmu, dan selamat mencoba menaklukkan **Fallen Mode**. Sampai jumpa di medan pertempuran!

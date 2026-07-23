@@ -1,0 +1,42 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Card from '@/components/article/Card.astro';
+import CategoryNavLink from '@/components/article/CategoryNavLink.astro';
+import { posts } from '@/data/posts';
+
+const { pageTitle, pageDescription, filteredPosts } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// Ambil semua kategori unik dari postingan untuk navigasi
+const allCategories = ['Semua', ...new Set(posts.map(p => p.category))];
+---
+<Layout title={pageTitle} description={pageDescription}>
+    <div class="space-y-12">
+        <section class="border-l-4 border-orange-500 pl-4">
+            <h1 class="text-4xl font-bold tracking-tight lg:text-5xl capitalize">{pageTitle}</h1>
+            <p class="mt-4 max-w-2xl text-lg text-gray-600">{pageDescription}</p>
+        </section>
+
+        {/* Filter Kategori */}
+        <nav class="flex flex-wrap gap-3">
+            {allCategories.map(cat => {
+                const path = cat === 'Semua' ? "/blog" : `/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`;
+                return <CategoryNavLink href={path} currentPath={currentPath} text={cat} />;
+            })}
+        </nav>
+
+        <section>
+            {filteredPosts.length > 0 ? (
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {filteredPosts.map((post) => (<Card {...post.metadata} path={post.path} />))}
+                </div>
+            ) : (
+                <div class="text-center py-16">
+                    <h2 class="text-2xl font-bold text-gray-700">Oops! Tidak Ada Postingan</h2>
+                    <p class="mt-2 text-gray-500">Sepertinya tidak ada artikel yang cocok dengan kriteria ini.</p>
+                    <a href="/blog" class="mt-6 inline-block rounded-lg bg-orange-500 px-6 py-3 font-bold text-white shadow-lg transition-all hover:bg-orange-600">Kembali ke Semua Postingan</a>
+                </div>
+            )}
+        </section>
+    </div>
+</Layout>

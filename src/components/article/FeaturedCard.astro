@@ -1,0 +1,23 @@
+---
+const { path, title, thumbnail, publishDate, description, author, authorAvatar } = Astro.props;
+---
+<a href={path} class="group flex flex-col sm:flex-row items-start gap-4 rounded-lg p-3 transition-colors hover:bg-gray-50">
+  <div class="relative w-full sm:w-60 flex-shrink-0">
+    <img class="w-full aspect-video rounded-lg object-cover" src={thumbnail.src} alt={`Thumbnail for ${title}`} />
+  </div>
+  <div class="flex flex-1 flex-col">
+    <div>
+      <h3 class="line-clamp-2 text-base font-bold text-gray-900 group-hover:text-orange-600">
+        {title}
+      </h3>
+      <p class="mt-1 text-sm text-gray-500 line-clamp-2">{description}</p>
+    </div>
+    <div class="mt-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img class="h-8 w-8 rounded-full object-cover" src={authorAvatar.src} alt={`Avatar of ${author}`} />
+        <p class="text-sm font-bold text-gray-900">{author}</p>
+      </div>
+      <p class="text-xs text-gray-500">{new Date(publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+    </div>
+  </div>
+</a>

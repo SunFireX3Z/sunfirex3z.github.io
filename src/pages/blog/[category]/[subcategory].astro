@@ -1,0 +1,48 @@
+---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
+import { posts } from "@/data/posts";
+
+export function getStaticPaths() {
+  return [
+    ...new Map(
+      posts
+        .filter((post) => post.metadata.subcategory)
+        .map((post) => [
+          `${post.category}/${post.metadata.subcategory}`,
+          {
+            params: {
+              category: post.category.toLowerCase().replace(/\s+/g, "-"),
+              subcategory: post.metadata.subcategory
+                .toLowerCase()
+                .replace(/\s+/g, "-"),
+            },
+          },
+        ])
+    ).values(),
+  ];
+}
+
+const {
+  category = "",
+  subcategory = "",
+} = Astro.params;
+
+const formattedCategory = category.replace(/-/g, " ");
+const formattedSubcategory = subcategory.replace(/-/g, " ");
+
+const filteredPosts = posts.filter(
+  (post) =>
+    post.category.toLowerCase().replace(/\s+/g, "-") === category &&
+    post.metadata.subcategory?.toLowerCase().replace(/\s+/g, "-") ===
+      subcategory
+);
+
+const pageTitle = `Subkategori: ${formattedSubcategory}`;
+const pageDescription = `Menjelajahi semua artikel dalam kategori ${formattedCategory} dan subkategori ${formattedSubcategory}.`;
+---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={filteredPosts}
+/>

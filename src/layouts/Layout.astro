@@ -1,0 +1,54 @@
+---
+import Header from "@/components/article/Header.jsx";
+import Footer from "@/components/article/Footer.astro";
+import SEO from "@/components/article/SEO.astro";
+import { posts } from "@/data/posts";
+
+import "../styles/global.css";
+
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    type?: "website" | "article";
+}
+
+const {
+    title,
+    description,
+    image,
+    type,
+} = Astro.props as Props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <SEO
+            title={title}
+            description={description}
+            image={image}
+            type={type}
+        />
+
+        <slot name="head" />
+    </head>
+
+    <body class="bg-slate-50 text-slate-800">
+        <Header
+            client:load
+            currentPath={currentPath}
+            posts={posts}
+        />
+
+        <main class="mx-auto max-w-[90rem] px-6 py-12">
+            <slot />
+        </main>
+
+        <Footer />
+    </body>
+</html>

@@ -1,0 +1,35 @@
+---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
+import { posts } from "@/data/posts";
+
+export function getStaticPaths() {
+  const allTags = new Set(
+    posts.flatMap((post) => post.metadata.tags ?? [])
+  );
+
+  return [...allTags].map((tag) => ({
+    params: {
+        tag: tag
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+        }
+  }));
+}
+
+const { tag = "" } = Astro.params;
+
+const filteredPosts = posts.filter(p =>
+  p.metadata.tags?.some(
+    t => t.toLowerCase().replace(/\s+/g, '-') === tag
+  )
+);
+
+const pageTitle = `Tag: #${tag}`;
+const pageDescription = `Menjelajahi semua artikel dengan tag #${tag}.`;
+---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={filteredPosts}
+/>

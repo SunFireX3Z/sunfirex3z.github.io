@@ -1,0 +1,222 @@
+import thumbnailImage from './thumbnail.webp';
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.jsx';
+import RelatedArticle from '@/components/mdx/RelatedArticle.astro';
+import FlexboxImage from './image/flexbox.png';
+
+export const metadata = {
+    translationId: "apa-itu-flexbox",
+    title: "Apa Itu Flexbox? Pengertian, Cara Kerja, dan Contohnya",
+    description: "Pelajari apa itu Flexbox, cara kerjanya, serta cara menggunakannya untuk membuat layout website yang rapi dan responsif menggunakan CSS.",
+    metaDescription: "Apa itu Flexbox? Pelajari pengertian, cara kerja, properti utama, serta contoh penggunaan Flexbox dalam CSS untuk membangun layout website yang modern dan responsif.",
+    publishDate: "21 Juli 2026",
+    author: "Airi",
+    category: "Pemrograman",
+    subcategory: "Web Frontend",
+    thumbnail: thumbnailImage,
+    imageCaption: "Gambar 1. Ilustrasi tata letak menggunakan CSS Flexbox.",
+    readingTime: 8,
+    tags: [
+        "Flexbox",
+        "CSS",
+        "HTML",
+        "Frontend",
+        "Layout",
+        "Responsive Design",
+        "Web Development",
+        "Display Flex",
+        "CSS Layout",
+        "Tutorial"
+    ],
+    featured: false,
+    lastUpdated: "21 Juli 2026",
+    sources: [
+        {
+            name: "MDN Web Docs - Basic concepts of flexbox",
+            url: "https://developer.mozilla.org/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
+        },
+        {
+            name: "MDN Web Docs - CSS Flexible Box Layout",
+            url: "https://developer.mozilla.org/docs/Web/CSS/CSS_flexible_box_layout",
+        },
+        {
+            name: "CSS-Tricks - A Complete Guide to Flexbox",
+            url: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+        },
+        {
+            name: "Tailwind CSS - Flex",
+            url: "https://tailwindcss.com/docs/flex",
+        },
+        {
+            name: "Tailwind CSS - Flex Direction",
+            url: "https://tailwindcss.com/docs/flex-direction",
+        }
+    ]
+};
+
+## Apa Itu Flexbox?
+
+Flexbox (Flexible Box Layout) adalah salah satu metode layout pada CSS yang digunakan untuk mengatur posisi dan susunan elemen di dalam sebuah container agar lebih rapi, fleksibel, dan mudah dikelola. Dengan Flexbox, kita dapat menyusun elemen secara horizontal maupun vertikal tanpa harus menggunakan teknik layout lama seperti float atau mengatur posisi elemen secara manual.
+
+Agar sebuah elemen dapat menggunakan Flexbox, kita hanya perlu memberikan properti display: flex pada elemen tersebut.
+
+```css
+display: flex;
+```
+
+Setelah sebuah elemen menjadi flex container, seluruh elemen di dalamnya akan berubah menjadi flex items. Mulai dari sini, kita dapat mengatur arah, posisi, jarak, hingga ukuran setiap item menggunakan berbagai properti yang disediakan oleh Flexbox.
+
+Saat ini, Flexbox telah menjadi salah satu teknik layout yang paling banyak digunakan dalam pengembangan website modern. Bahkan, banyak framework CSS seperti Tailwind CSS memanfaatkan konsep Flexbox melalui utility class seperti flex, justify-center, items-center, dan gap-*, sehingga memahami dasar Flexbox akan sangat membantu saat mempelajari framework tersebut.
+
+## Mengapa Menggunakan Flexbox?
+
+Sebelum Flexbox diperkenalkan, mengatur tata letak halaman web sering kali menjadi pekerjaan yang cukup rumit. Banyak pengembang menggunakan teknik seperti `float`, `inline-block`, atau bahkan tabel (table layout) hanya untuk menyusun elemen agar sejajar. Teknik-teknik tersebut memang dapat digunakan, tetapi kurang fleksibel dan sering kali membutuhkan kode tambahan.
+
+Flexbox hadir untuk menyederhanakan proses tersebut. Dengan hanya beberapa properti CSS, kita dapat mengatur posisi elemen secara horizontal maupun vertikal, memberikan jarak yang konsisten, hingga membuat layout lebih mudah menyesuaikan berbagai ukuran layar.
+
+Beberapa keunggulan Flexbox antara lain:
+
+- Menyusun elemen secara horizontal maupun vertikal dengan mudah.
+- Memusatkan elemen tanpa teknik yang rumit.
+- Mengatur jarak antar elemen secara konsisten menggunakan `gap`.
+- Membuat layout yang lebih fleksibel dan responsif.
+- Mengurangi jumlah kode CSS dibandingkan teknik layout lama.
+
+Karena kemudahan tersebut, Flexbox menjadi salah satu teknik layout yang paling sering digunakan dalam pengembangan website modern dan menjadi dasar bagi banyak framework CSS, termasuk Tailwind CSS.
+
+## Cara Kerja Flexbox
+
+Flexbox bekerja dengan konsep container dan item. Sebuah elemen akan berperan sebagai flex container, sedangkan seluruh elemen di dalamnya akan menjadi flex items. Ketika properti display: flex diterapkan pada container, browser akan mulai mengatur tata letak seluruh item menggunakan aturan Flexbox.
+
+```html
+<div class="container">
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+</div>`
+```
+
+Misalnya kita memiliki struktur HTML seperti berikut.
+
+```css
+.container {
+    display: flex;
+    background-color: #f3f4f6;
+    padding: 16px;
+}
+
+.item {
+    background-color: #3b82f6;
+    color: white;
+    padding: 12px 20px;
+}`
+```
+
+Secara bawaan, Flexbox akan menyusun seluruh item dalam satu baris dari kiri ke kanan. Posisi ini nantinya dapat diubah menggunakan berbagai properti seperti flex-direction, justify-content, dan align-items.
+
+Yang menarik, kita tidak perlu mengatur posisi setiap elemen satu per satu. Cukup mengatur flex container, maka seluruh flex items di dalamnya akan mengikuti aturan yang telah ditentukan. Inilah yang membuat Flexbox jauh lebih sederhana dan efisien dibandingkan teknik layout lama.
+
+<RelatedArticle to="/blog/pemrograman/web-frontend/cara-membuat-navbar-tailwind" />
+
+## Properti Flexbox yang Paling Sering Digunakan
+
+Flexbox menyediakan banyak properti untuk mengatur tata letak elemen. Namun, dalam praktiknya hanya beberapa properti yang paling sering digunakan. Dengan memahami properti-properti berikut, kamu sudah dapat membuat berbagai layout website, mulai dari navbar, card, hingga hero section.
+
+### `display: flex`
+
+Mengubah sebuah elemen menjadi **flex container**, sehingga seluruh elemen di dalamnya akan mengikuti aturan Flexbox.
+
+### `flex-direction`
+
+Menentukan arah penyusunan item, misalnya secara horizontal (`row`) atau vertikal (`column`).
+
+### `justify-content`
+
+Mengatur posisi item pada sumbu utama (*main axis*), seperti rata kiri, tengah, kanan, atau memberikan jarak yang merata antar item.
+
+### `align-items`
+
+Mengatur posisi item pada sumbu silang (*cross axis*), misalnya membuat seluruh item berada di tengah secara vertikal.
+
+### `gap`
+
+Memberikan jarak antar item tanpa perlu menggunakan `margin`, sehingga kode menjadi lebih bersih dan mudah dibaca.
+
+Contoh penggunaan beberapa properti Flexbox:
+
+```css
+.container { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 16px; 
+}
+```
+
+Pada contoh di atas, seluruh item akan disusun secara horizontal, memiliki jarak yang merata, berada di tengah secara vertikal, serta memiliki jarak antar elemen sebesar 16 piksel.
+
+## Contoh Sederhana Flexbox
+
+Setelah memahami konsep dasar dan beberapa properti yang sering digunakan, sekarang saatnya melihat contoh sederhana penggunaan Flexbox. Pada contoh berikut, tiga buah kotak akan disusun secara horizontal dengan jarak yang sama dan berada di tengah secara vertikal.
+
+```html
+<div class="container">
+    <div class="item">Item 1</div>
+    <div class="item">Item 2</div>
+    <div class="item">Item 3</div>
+</div>`
+```
+
+```css
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background-color: #f3f4f6;
+}
+
+.item {
+    padding: 12px 20px;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 8px;
+}`
+```
+
+Hasilnya, ketiga elemen akan tersusun dalam satu baris dengan jarak yang rapi. Berkat Flexbox, kita tidak perlu lagi menggunakan teknik seperti float atau menghitung posisi setiap elemen secara manual. Berikut hasilnya:
+
+<Image src={FlexboxImage} alt="Contoh Flexbox" caption="Gambar 2. Hasil implementasi Flexbox." />
+
+<FAQ>
+    <FAQItem title="Apakah Flexbox hanya bisa digunakan untuk membuat layout horizontal?">
+        Tidak. Secara bawaan, Flexbox memang menyusun elemen secara horizontal (`row`), tetapi arah penyusunannya dapat diubah menjadi vertikal menggunakan properti `flex-direction: column`.
+    </FAQItem>
+
+    <FAQItem title="Apa perbedaan Flexbox dan CSS Grid?">
+        Flexbox dirancang untuk mengatur layout dalam satu dimensi, yaitu baris atau kolom. Sementara itu, CSS Grid digunakan untuk membuat layout dua dimensi yang mengatur baris dan kolom secara bersamaan.
+    </FAQItem>
+
+    <FAQItem title="Apakah Flexbox masih relevan digunakan saat ini?">
+        Ya. Flexbox masih menjadi salah satu teknik layout yang paling banyak digunakan dalam pengembangan website modern. Bahkan, banyak framework CSS seperti Tailwind CSS memanfaatkan konsep Flexbox melalui utility class yang mereka sediakan.
+    </FAQItem>
+
+    <FAQItem title="Apakah saya harus menguasai Flexbox sebelum mempelajari Tailwind CSS?">
+        Sangat disarankan. Meskipun Tailwind CSS menyediakan utility class seperti `flex`, `justify-center`, dan `items-center`, semua class tersebut tetap menggunakan konsep dasar Flexbox. Dengan memahami Flexbox terlebih dahulu, kamu akan lebih mudah menggunakan Tailwind CSS.
+    </FAQItem>
+</FAQ>
+
+## Kesimpulan
+
+Flexbox adalah salah satu metode layout pada CSS yang memudahkan kita dalam mengatur posisi dan susunan elemen di dalam sebuah container. Dengan konsep yang sederhana namun fleksibel, Flexbox dapat digunakan untuk membuat berbagai jenis layout, mulai dari navbar, card, hero section, hingga berbagai komponen antarmuka lainnya.
+
+Pada artikel ini, kita telah mempelajari pengertian Flexbox, alasan mengapa Flexbox digunakan, cara kerjanya, beberapa properti yang paling sering digunakan, serta contoh sederhana penerapannya. Meskipun masih banyak properti lain yang tersedia, memahami dasar-dasar Flexbox sudah menjadi bekal yang sangat baik untuk mulai membangun layout website yang lebih rapi dan responsif.
+
+Jika kamu sudah memahami Flexbox, langkah berikutnya yang bisa dipelajari adalah CSS Grid untuk membuat layout yang lebih kompleks, atau mulai menerapkan Flexbox pada proyek nyata seperti membuat navbar, halaman landing, maupun dashboard.
