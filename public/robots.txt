@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: Sitemap: https://sunfirex3z.github.io/sitemap-index.xml

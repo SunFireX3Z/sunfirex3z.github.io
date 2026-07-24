@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function ShareButton() {
     const [isCopied, setIsCopied] = useState(false);

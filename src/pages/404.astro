@@ -1,0 +1,59 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Card from '@/components/article/Card.astro';
+import { posts } from '@/data/posts';
+
+// Ambil 3 postingan terbaru untuk ditampilkan sebagai saran
+const suggestedPosts = posts.slice(0, 3);
+---
+
+<Layout 
+    title="404: Halaman Tidak Ditemukan"
+    description="Maaf, kami tidak dapat menemukan halaman yang Anda cari."
+>
+    <div class="flex flex-col items-center justify-center text-center">
+        <!-- Main 404 Message -->
+        <div class="relative w-full max-w-lg">
+            <!-- Background Text -->
+            <div class="absolute -top-12 left-1/2 -translate-x-1/2 -z-10" aria-hidden="true">
+                <span class="text-[12rem] sm:text-[16rem] font-black text-amber-100 leading-none">404</span>
+            </div>
+            
+            <!-- Content -->
+            <div class="relative pt-16 sm:pt-24">
+                <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900">
+                    Halaman Hilang?
+                </h1>
+                <p class="mt-4 text-lg text-gray-600">
+                    Sepertinya Anda tersesat. Halaman yang Anda cari tidak dapat kami temukan.
+                </p>
+                <div class="mt-8 flex items-center justify-center gap-x-4">
+                    <a href="/" class="inline-flex items-center justify-center rounded-lg bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">
+                        Kembali ke Beranda
+                    </a>
+                    <a href="/blog" class="text-sm font-semibold text-gray-900 hover:text-orange-600 transition-colors">
+                        Lihat Semua Postingan <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggested Posts -->
+        <div class="mt-24 w-full">
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div class="w-full border-t border-gray-200"></div>
+                </div>
+                <div class="relative flex justify-center">
+                    <span class="bg-slate-50 px-4 text-lg font-medium text-gray-700">Mungkin Anda tertarik</span>
+                </div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-3">
+                {suggestedPosts.map(post => (
+                    <Card {...post.metadata} path={post.path} />
+                ))}
+            </div>
+        </div>
+    </div>
+</Layout>

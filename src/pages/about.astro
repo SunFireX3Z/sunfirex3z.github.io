@@ -1,0 +1,123 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import authorAvatar from '@/assets/images/avatar/randy.webp';
+import Gemini from '@/assets/icons/about/gemini.webp?url';
+import ChatGPT from '@/assets/icons/about/openai.webp?url';
+
+console.log(Gemini);
+console.log(ChatGPT);
+
+const skills = [
+    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
+    { name: 'JavaScript (ES6+)', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' },
+    { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
+    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg' },
+    { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg' },
+    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
+    { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg' },
+    { name: 'Gemini', icon: Gemini },
+    { name: 'ChatGPT', icon: ChatGPT },
+];
+---
+
+<Layout
+    title="Tentang Saya | SunBlog"
+    description="Pelajari lebih lanjut tentang Randy, penulis di balik SunBlog, dan misi blog ini untuk berbagi pengetahuan seputar teknologi, desain, dan pengembangan web."
+>
+    <div class="space-y-16">
+        <!-- Header -->
+        <section class="border-l-4 border-orange-500 pl-4">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                Tentang SunBlog
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg text-gray-600">
+                Sebuah perjalanan pribadi dalam menjelajahi dan berbagi pengetahuan di dunia digital.
+            </p>
+        </section>
+
+        <!-- Konten Utama -->
+        <section class="grid grid-cols-1 items-start gap-12 lg:grid-cols-3">
+            <!-- Kolom Kiri: Profil Penulis -->
+            <div class="space-y-6 lg:col-span-1">
+                <div class="rounded-xl bg-white p-6 text-center shadow-md">
+                    <img
+                        src={authorAvatar.src}
+                        alt="Randy, penulis SunBlog"
+                        class="mx-auto h-40 w-40 rounded-full object-cover shadow-lg"
+                    />
+                    <h2 class="mt-6 text-2xl font-bold text-gray-900">Randy</h2>
+                    <p class="mt-1 font-semibold text-orange-600">Web Developer & Content Creator</p>
+                    <div class="mt-6 flex justify-center gap-5">
+                        <a href="https://github.com/SunFireX3Z" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors hover:text-gray-900" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                        <a href="https://www.instagram.com/sunfirex_/" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors hover:text-pink-600" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@SunFireX" target="_blank" rel="noopener noreferrer" class="text-gray-400 transition-colors hover:text-red-600" aria-label="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17Z"></path><path d="m10 15 5-3-5-3z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan: Deskripsi Detail -->
+            <div class="space-y-8 lg:col-span-2">
+                <div class="prose prose-lg max-w-none">
+                    <h2 class="border-b-2 border-orange-200 pb-2">Selamat Datang di SunBlog!</h2>
+                    <p>
+                        Halo! Saya Randy, seorang pengembang web dan kreator di balik SunBlog. Blog ini lahir dari hasrat saya untuk terus belajar dan berbagi hal-hal menarik yang saya temukan di dunia teknologi, khususnya seputar pengembangan web, desain UI/UX, dan produktivitas.
+                    </p>
+                    <p>
+                        Misi utama SunBlog adalah menjadi platform untuk mendokumentasikan perjalanan belajar saya, sekaligus menyediakan konten yang bermanfaat, praktis, dan mudah dipahami bagi siapa saja yang tertarik dengan topik serupa. Saya percaya bahwa cara terbaik untuk menguasai sesuatu adalah dengan mencoba menjelaskannya kepada orang lain.
+                    </p>
+
+                    <h3 class="border-b-2 border-orange-200 pb-2">Apa yang Akan Anda Temukan di Sini?</h3>
+                    <ul>
+                        <li><strong>Tutorial Pemrograman:</strong> Panduan langkah demi langkah tentang teknologi web modern seperti React, Tailwind CSS, dan lainnya.</li>
+                        <li><strong>Ulasan Teknologi:</strong> Pemikiran dan analisis saya tentang tren, alat, dan framework terbaru di industri.</li>
+                        <li><strong>Konsep Desain:</strong> Pembahasan tentang prinsip-prinsip desain antarmuka (UI) dan pengalaman pengguna (UX) yang efektif.</li>
+                        <li><strong>Proyek Pribadi:</strong> Dokumentasi dari proyek-proyek yang sedang saya kerjakan, lengkap dengan tantangan dan solusinya.</li>
+                    </ul>
+                </div>
+
+                <!-- Bagian Keahlian -->
+                <div class="rounded-xl bg-white p-6 shadow-md">
+                    <h3 class="mb-4 text-xl font-bold text-gray-900">Teknologi & Keahlian</h3>
+                    <div class="flex flex-wrap gap-4">
+                        {skills.map(skill => (
+                            <div class="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2">
+                                <img src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" />
+                                <span class="text-sm font-semibold text-gray-700">{skill.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Mari Terhubung!</h2>
+            <p class="mx-auto mt-3 max-w-2xl text-lg text-gray-600">
+                Saya selalu terbuka untuk diskusi, kolaborasi, atau sekadar mengobrol. Jangan ragu untuk mengikuti saya di media sosial atau menjelajahi artikel-artikel di blog ini.
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <a
+                    href="/blog"
+                    class="inline-block rounded-lg bg-orange-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-300"
+                >
+                    Jelajahi Blog
+                </a>
+                <a
+                    href="https://github.com/SunFireX3Z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block rounded-lg bg-gray-800 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300"
+                >
+                    Lihat GitHub
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>

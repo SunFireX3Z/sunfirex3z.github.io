@@ -113,7 +113,15 @@ const schemaData = {
             <div class="lg:col-span-2">
                 <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md">
                     <figure class="mb-8">
-                        <img src={metadata.thumbnail.src} alt={`Thumbnail for ${metadata.title}`} class="w-full rounded-lg object-cover aspect-video" />
+                        <img 
+                            src={metadata.thumbnail.src}
+                            alt={`Thumbnail for ${metadata.title}`}
+                            width="800"
+                            height="450"
+                            loading="eager"
+                            fetchpriority="high"
+                            class="w-full rounded-lg object-cover aspect-video"
+                        />
                         {metadata.imageCaption && <figcaption class="mt-2 text-center text-sm text-gray-500 italic">{metadata.imageCaption}</figcaption>}
                     </figure>
 

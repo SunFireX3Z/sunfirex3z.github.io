@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 function RelatedPostCard({ path, title, thumbnail, publishDate, description, author, authorAvatar, category }) {
   return (
-    <Link to={path} className="group grid grid-cols-1 items-center gap-6 rounded-lg p-4 transition-all duration-300 hover:bg-white hover:shadow-md md:grid-cols-3">
+    <a href={path} className="group grid grid-cols-1 items-center gap-6 rounded-lg p-4 transition-all duration-300 hover:bg-white hover:shadow-md md:grid-cols-3">
       {/* Thumbnail */}
       <div className="relative col-span-1 overflow-hidden rounded-lg">
         <img
@@ -32,7 +32,7 @@ function RelatedPostCard({ path, title, thumbnail, publishDate, description, aut
           <p className="text-xs text-gray-500">{new Date(publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }
 

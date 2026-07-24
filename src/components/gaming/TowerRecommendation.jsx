@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import TowerStatTable from './TowerStatTable';
 
 /**

@@ -38,14 +38,14 @@ const currentPath = Astro.url.pathname;
         <slot name="head" />
     </head>
 
-    <body class="bg-slate-50 text-slate-800">
+    <body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col">
         <Header
             client:load
             currentPath={currentPath}
             posts={posts}
         />
 
-        <main class="mx-auto max-w-[90rem] px-6 py-12">
+        <main class="mx-auto flex-1 w-full max-w-[90rem] px-6 py-12">
             <slot />
         </main>
 

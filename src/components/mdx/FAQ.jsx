@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 /**
  * Komponen untuk satu item pertanyaan dan jawaban dalam FAQ.
