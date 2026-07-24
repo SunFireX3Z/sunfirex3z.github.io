@@ -5,4 +5,5 @@ export const siteConfig = {
     url: "https://sunfirex3z.github.io",
     author: "Sun-sama",
     locale: "id_ID",
+    version: "1.0.0",
 };

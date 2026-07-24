@@ -1,0 +1,87 @@
+---
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout
+    title="Kontak Saya"
+    description="Hubungi saya untuk pertanyaan, kolaborasi, atau sekadar menyapa. Saya selalu senang mendengar dari Anda."
+>
+    <div class="space-y-16">
+        <!-- Header -->
+        <section class="text-center">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+                Hubungi Saya
+            </h1>
+            <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+                Punya pertanyaan, ide untuk kolaborasi, atau hanya ingin menyapa? Jangan ragu untuk mengisi formulir di bawah atau menghubungi saya melalui email.
+            </p>
+        </section>
+
+        <!-- Main Content: Form & Info -->
+        <section class="mx-auto max-w-7xl rounded-xl bg-white p-8 shadow-md">
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+                <!-- Kolom Kiri: Info Kontak -->
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Informasi Kontak</h2>
+                        <p class="mt-2 text-gray-600">Anda juga bisa menemukan saya di sini:</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 rounded-lg bg-orange-100 p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 text-orange-600"><path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" /><path d="M19 8.839l-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Email</h3>
+                                <a href="mailto:randysaputra1203@gmail.com" class="text-orange-600 hover:underline">randysaputra1203@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 rounded-lg bg-orange-100 p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-orange-600"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">GitHub</h3>
+                                <a href="https://github.com/SunFireX3Z" target="_blank" rel="noopener noreferrer" class="text-orange-600 hover:underline">SunFireX3Z</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Formulir Kontak -->
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                        <div class="mt-1">
+                            <input type="text" name="name" id="name" autocomplete="name" required class="block w-full rounded-md border-gray-300 px-4 py-3 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
+                        <div class="mt-1">
+                            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-gray-300 px-4 py-3 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Pesan</label>
+                        <div class="mt-1">
+                            <textarea id="message" name="message" rows="4" required class="block w-full rounded-md border-gray-300 px-4 py-3 shadow-sm focus:border-orange-500 focus:ring-orange-500"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <button 
+                            type="submit" 
+                            disabled 
+                            class="flex w-full cursor-not-allowed justify-center rounded-md border border-transparent bg-gray-400 px-4 py-3 text-sm font-medium text-white shadow-sm"
+                        >
+                            Kirim Pesan
+                        </button>
+                        <p class="mt-4 text-center text-sm text-gray-500">
+                            Fitur formulir kontak sedang dalam pengembangan.<br> Silakan hubungi saya melalui email untuk sementara waktu.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</Layout>

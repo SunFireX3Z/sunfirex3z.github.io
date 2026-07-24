@@ -4,6 +4,8 @@ import { posts } from '@/data/posts';
 import TableOfContents from '@/components/article/TableOfContents.jsx';
 import ShareButton from '@/components/article/ShareButton.jsx';
 import RelatedPostCard from '@/components/article/RelatedPostCard.astro';
+import ArticleInfo from '@/components/article/ArticleInfo.astro';
+import PostNavigation from '@/components/article/PostNavigation.astro';
 
 export async function getStaticPaths() {
     const allPosts = posts.filter(p => p.lang === 'id');
@@ -40,6 +42,42 @@ const relatedPosts = posts
     .filter(p => p.metadata.category === metadata.category && p.path !== post.path)
     .slice(0, 2);
 
+
+// Cari post sebelumnya dan sesudahnya untuk navigasi yang lebih kontekstual
+// Sesuai panduan: prioritaskan subkategori, lalu kategori, lalu semua postingan.
+let navigationScope = posts; // Default: semua postingan
+
+if (metadata.subcategory) {
+    const subcategoryPosts = posts.filter(p => 
+        p.metadata.category === metadata.category && 
+        p.metadata.subcategory === metadata.subcategory
+    );
+    // Gunakan scope subkategori jika ada lebih dari satu artikel di dalamnya
+    if (subcategoryPosts.length > 1) {
+        navigationScope = subcategoryPosts;
+    } else {
+        // Jika tidak, coba fallback ke scope kategori
+        const categoryPosts = posts.filter(p => p.metadata.category === metadata.category);
+        if (categoryPosts.length > 1) {
+            navigationScope = categoryPosts;
+        }
+    }
+} else {
+    // Jika tidak ada subkategori, gunakan scope kategori
+    const categoryPosts = posts.filter(p => p.metadata.category === metadata.category);
+    if (categoryPosts.length > 1) {
+        navigationScope = categoryPosts;
+    }
+}
+
+// Cari index post saat ini di dalam scope navigasi yang sudah ditentukan
+const currentPostIndex = navigationScope.findIndex(p => p.path === post.path);
+
+// Dapatkan artikel "sebelumnya" (lebih baru) dan "selanjutnya" (lebih lama)
+// Array 'posts' diurutkan dari yang terbaru ke yang terlama.
+const prevPost = currentPostIndex > 0 ? navigationScope[currentPostIndex - 1] : null; // Artikel yang lebih baru
+const nextPost = currentPostIndex < navigationScope.length - 1 ? navigationScope[currentPostIndex + 1] : null; // Artikel yang lebih lama
+
 // Data untuk SEO
 const canonicalUrl = new URL(post.path, Astro.site).href;
 const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
@@ -71,20 +109,14 @@ const schemaData = {
 };
 ---
 
-<Layout title={metadata.title} description={metadata.metaDescription}>
+<Layout
+    title={metadata.title}
+    description={metadata.metaDescription || metadata.description}
+    image={imageUrl}
+    canonical={canonicalUrl}
+    type="article"
+>
     <Fragment slot="head">
-        {/* SEO Meta Tags */}
-        <link rel="canonical" href={canonicalUrl} />
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.metaDescription} />
-        <meta property="og:image" content={imageUrl} />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="SunBlog" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.title} />
-        <meta name="twitter:description" content={metadata.metaDescription} />
-        <meta name="twitter:image" content={imageUrl} />
         <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     </Fragment>
 
@@ -162,14 +194,7 @@ const schemaData = {
                 </div>
 
                 <div class="mt-12 space-y-8 lg:hidden">
-                    <div class="rounded-lg bg-white p-6 shadow-md ring-1 ring-gray-100">
-                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Artikel</h3>
-                        <ul class="space-y-4 text-sm">
-                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5h10.5a.75.75 0 0 0 0-1.5H4.75a.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Terbit</span></div><span class="text-gray-800">{new Date(metadata.publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>
-                            {metadata.lastUpdated && <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 0 1-9.458 2.152l.209-.363a.75.75 0 0 0-1.3-.75l-.21.362a7 7 0 0 0 12.025-2.731.75.75 0 0 0-1.266-.67ZM4.688 8.576a5.5 5.5 0 0 1 9.458-2.152l-.209.363a.75.75 0 0 0 1.3.75l.21-.362a7 7 0 0 0-12.025 2.731.75.75 0 0 0 1.266.67Z" clip-rule="evenodd" /></svg><span class="font-semibold">Diperbarui</span></div><span class="text-gray-800">{new Date(metadata.lastUpdated).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>}
-                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Waktu Baca</span></div><span class="text-gray-800">{metadata.readingTime} menit</span></li>
-                        </ul>
-                    </div>
+                    <ArticleInfo metadata={metadata} />
                     <ShareButton client:visible />
                     <div class="rounded-lg bg-white p-6 shadow-md ring-1 ring-gray-100">
                         <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h3>
@@ -183,6 +208,8 @@ const schemaData = {
                         <div class="space-y-8">{relatedPosts.map(relatedPost => (<RelatedPostCard {...relatedPost.metadata} path={relatedPost.path} />))}</div>
                     </div>
                 )}
+
+                <PostNavigation prevPost={prevPost} nextPost={nextPost} />
             </div>
 
             {/* Sidebar */}
@@ -190,15 +217,7 @@ const schemaData = {
                 <div class="sticky top-40 flex flex-col gap-8">
                     <ShareButton client:visible />
                     {tocItems.length > 0 && <TableOfContents client:visible items={tocItems} />}
-                    
-                    <div class="rounded-lg bg-white p-6 shadow-md">
-                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Artikel</h3>
-                        <ul class="space-y-4 text-sm">
-                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5h10.5a.75.75 0 0 0 0-1.5H4.75a.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Terbit</span></div><span class="text-gray-800">{new Date(metadata.publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>
-                            {metadata.lastUpdated && <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 0 1-9.458 2.152l.209-.363a.75.75 0 0 0-1.3-.75l-.21.362a7 7 0 0 0 12.025-2.731.75.75 0 0 0-1.266-.67ZM4.688 8.576a5.5 5.5 0 0 1 9.458-2.152l-.209.363a.75.75 0 0 0 1.3.75l.21-.362a7 7 0 0 0-12.025 2.731.75.75 0 0 0 1.266.67Z" clip-rule="evenodd" /></svg><span class="font-semibold">Diperbarui</span></div><span class="text-gray-800">{new Date(metadata.lastUpdated).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></li>}
-                            <li class="flex items-center justify-between"><div class="flex items-center text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" /></svg><span class="font-semibold">Waktu Baca</span></div><span class="text-gray-800">{metadata.readingTime} menit</span></li>
-                        </ul>
-                    </div>
+                    <ArticleInfo metadata={metadata} />
 
                     <div class="rounded-lg bg-white p-6 shadow-md">
                         <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h3>

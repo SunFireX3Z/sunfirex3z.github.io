@@ -1,5 +1,6 @@
 ---
 import Logo from '../../assets/images/Sunblog_Black.png'; // Menggunakan logo terang untuk background gelap
+import { siteConfig } from '../../config/site.js';
 import { posts } from '../../data/posts';
 
 // Ambil 5 kategori unik.
@@ -76,8 +77,9 @@ const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
                 </div>
             </div>
         </div>
-        <div class="border-t border-slate-800 py-8 text-center text-sm text-slate-400">
-            &copy; {new Date().getFullYear()} SunBlog. All rights reserved.
+        <div class="flex flex-col items-center justify-between gap-2 border-t border-slate-800 py-6 text-center text-sm text-slate-400 sm:flex-row">
+            <span>&copy; {new Date().getFullYear()} SunBlog. All rights reserved.</span>
+            <span>Versi {siteConfig.version}</span>
         </div>
     </div>
 </footer>

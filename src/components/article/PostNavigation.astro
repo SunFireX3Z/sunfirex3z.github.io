@@ -1,0 +1,21 @@
+---
+const { prevPost, nextPost } = Astro.props;
+---
+<nav class="not-prose mt-16 grid grid-cols-1 gap-8 border-t border-gray-200 pt-8 sm:grid-cols-2">
+    {prevPost ? (
+        <a href={prevPost.path} class="group block rounded-lg border border-gray-200 p-6 text-left transition-colors hover:border-orange-300 hover:bg-orange-50">
+            <p class="text-sm font-semibold text-gray-500 group-hover:text-orange-600">‹ Artikel Sebelumnya</p>
+            <p class="mt-2 font-bold text-gray-800 group-hover:text-orange-800 line-clamp-2">{prevPost.metadata.title}</p>
+        </a>
+    ) : (
+        <div></div>
+    )}
+    {nextPost ? (
+        <a href={nextPost.path} class="group block rounded-lg border border-gray-200 p-6 text-right transition-colors hover:border-orange-300 hover:bg-orange-50">
+            <p class="text-sm font-semibold text-gray-500 group-hover:text-orange-600">Artikel Selanjutnya ›</p>
+            <p class="mt-2 font-bold text-gray-800 group-hover:text-orange-800 line-clamp-2">{nextPost.metadata.title}</p>
+        </a>
+    ) : (
+        <div></div>
+    )}
+</nav>
