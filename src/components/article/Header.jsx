@@ -77,19 +77,14 @@ function Header({ currentPath, posts }) {
 
     return (
         <header className={`sticky top-0 z-10 bg-white transition-shadow duration-300 ${hasScrolled ? 'shadow-md border-b-4 border-amber-400' : ''}`}>
-            {/* Background image layer for desktop only */}
             <div
-                className="absolute inset-0 hidden lg:block" // Hidden on mobile, block on large screens
+                className="relative z-2"
                 style={{
                     backgroundImage: `url(${NavbarBackground.src})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    zIndex: 1, // Ensure it's behind the content but above header's default bg-white
                 }}
             >
-            </div>
-            {/* Main navigation content wrapper */}
-            <div className="relative z-20 bg-white lg:bg-transparent"> {/* Default white background for mobile, transparent for desktop */}
                 <div className="max-w-[90rem] mx-auto flex flex-row justify-between items-center py-3 px-6">
                     <div className="flex-shrink-0">
                         <a href="/">
@@ -99,7 +94,7 @@ function Header({ currentPath, posts }) {
 
                     {/* Navigasi Desktop & Pencarian */}
                     <div className="hidden lg:flex items-center gap-8">
-                        <nav className="flex items-center gap-8 text-base"> {/* Text colors already set to white/orange */}
+                        <nav className="flex items-center gap-8 text-base">
                             <NavLink href="/" currentPath={currentPath} className={({ isActive }) => `py-2 transition-colors duration-200 ${isActive ? 'font-semibold text-white' : 'font-medium text-white/70 hover:text-orange-500'}`}>Beranda</NavLink>
                             <NavLink href="/blog" currentPath={currentPath} className={({ isActive }) => `py-2 transition-colors duration-200 ${isActive ? 'font-semibold text-white' : 'font-medium text-white/70 hover:text-orange-500'}`}>Blog</NavLink>
                             <NavLink href="/proyek" currentPath={currentPath} className={({ isActive }) => `py-2 transition-colors duration-200 ${isActive ? 'font-semibold text-white' : 'font-medium text-white/70 hover:text-orange-500'}`}>Proyek</NavLink>
@@ -115,7 +110,7 @@ function Header({ currentPath, posts }) {
                     </div>
 
                     <div className="flex items-center gap-2 lg:hidden">
-                        <button onClick={openSearchbar} aria-label="Buka pencarian" className="rounded-full p-2 text-gray-700 transition-colors hover:bg-gray-100"> {/* Changed text-white to text-gray-700 for mobile */}
+                        <button onClick={openSearchbar} aria-label="Buka pencarian" className="rounded-full p-2 text-white transition-colors hover:bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
@@ -221,7 +216,6 @@ function Header({ currentPath, posts }) {
                     <div className="mr-8">
                         <h1 className="font-bold text-xl text-white">KATEGORI BLOG</h1>
                     </div>
-                    <div class="h-8 w-0.5 bg-amber-400"></div>
                     <div className="flex-1 min-w-0">
                         <nav className="flex flex-wrap gap-3">
                             {categories.map(cat => (
