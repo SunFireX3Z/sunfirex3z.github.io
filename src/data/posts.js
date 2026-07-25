@@ -10,7 +10,7 @@ export const posts = Object.entries(modules).reduce((acc, [filepath, module]) =>
         const { metadata, getHeadings, default: Content } = module;
 
         // Lewati file yang tidak memiliki metadata, tanggal publikasi, atau penulis untuk mencegah error
-        if (!metadata || !metadata.publishDate || !metadata.author) {
+        if (!metadata || !metadata.publishDate || !metadata.author || metadata.status !== 'Published') {
             return acc;
         }
 

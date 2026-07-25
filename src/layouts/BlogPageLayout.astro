@@ -8,7 +8,21 @@ const { pageTitle, pageDescription, filteredPosts } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 // Ambil semua kategori unik dari postingan untuk navigasi
-const allCategories = ['Semua', ...new Set(posts.map(p => p.category))];
+const totalPostCount = posts.length;
+const categoryCounts = posts.reduce((acc, post) => {
+    const category = post.category;
+    acc[category] = (acc[category] || 0) + 1;
+    return acc;
+}, {});
+
+const categoriesWithCounts = [
+    { name: 'Semua', count: totalPostCount, path: '/blog' },
+    ...Object.entries(categoryCounts).map(([name, count]) => ({
+        name,
+        count,
+        path: `/blog/${name.toLowerCase().replace(/\s+/g, '-')}`
+    }))
+];
 ---
 <Layout title={pageTitle} description={pageDescription}>
     <div class="space-y-12">
@@ -19,10 +33,9 @@ const allCategories = ['Semua', ...new Set(posts.map(p => p.category))];
 
         {/* Filter Kategori */}
         <nav class="flex flex-wrap gap-3">
-            {allCategories.map(cat => {
-                const path = cat === 'Semua' ? "/blog" : `/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`;
-                return <CategoryNavLink href={path} currentPath={currentPath} text={cat} />;
-            })}
+            {categoriesWithCounts.map(cat => (
+                <CategoryNavLink href={cat.path} currentPath={currentPath} text={cat.name} count={cat.count} />
+            ))}
         </nav>
 
         <section>

@@ -1,18 +1,22 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useRef } from 'react';
-import Logo from '@/assets/images/Sunblog_Black.png';
+import { useState, useEffect, useRef } from 'react';
+import Logo from '../../assets/images/Sunblog_Black.png';
 
 // Impor fungsi pencarian
 import { searchPosts } from '@/utils/searchPosts';
+
+console.log("Logo:", Logo);
 
 /**
  * Komponen helper untuk meniru fungsionalitas NavLink dari React Router,
  * tetapi menggunakan tag <a> standar untuk Astro.
  */
 function NavLink({ href, children, className, currentPath, onClick }) {
-    // Tentukan apakah link aktif. Kasus khusus untuk beranda.
+    console.log("NavLink href:", href, typeof href);
+
     const isActive = href === "/" ? currentPath === "/" : currentPath.startsWith(href);
     const finalClassName = typeof className === 'function' ? className({ isActive }) : className;
+
     return <a href={href} className={finalClassName} onClick={onClick}>{children}</a>;
 }
 
@@ -25,6 +29,7 @@ function Header({ currentPath, posts }) {
     const searchContainerRef = useRef(null);
 
     const categories = [...new Set(posts.map(p => p.category))];
+    console.log("categories:", categories);
     const closeMenu = () => setIsMenuOpen(false);
 
     // Efek untuk menangani klik di luar area pencarian untuk menutup hasil
@@ -42,7 +47,12 @@ function Header({ currentPath, posts }) {
     const handleSearchChange = (e) => {
         const query = e.target.value;
         setSearchQuery(query);
-        setSearchResults(searchPosts(query, posts));
+
+        const results = searchPosts(query, posts);
+
+        console.log("SEARCH RESULT:", results);
+
+        setSearchResults(results);
         setIsSearchActive(query.length > 0);
     };
 
@@ -69,8 +79,8 @@ function Header({ currentPath, posts }) {
     const calculatedRenderedWidth = (Logo.width / Logo.height) * desiredRenderedHeight;
 
     return (
-        <header className={`sticky top-0 z-10 bg-white transition-all duration-300 border-b-4 ${hasScrolled ? 'shadow-md border-amber-400' : 'border-transparent'}`}>
-            <div className="relative z-20 bg-slate-800">
+        <header className="sticky top-0 z-10">
+            <div className={`relative z-20 bg-slate-800 transition-all duration-300 border-b-4 ${hasScrolled ? 'shadow-md border-amber-400' : 'border-transparent'}`}>
                 <div className="max-w-[90rem] mx-auto flex flex-row justify-between items-center py-3 px-6">
                     <div className="flex-shrink-0">
                         <a href="/">
@@ -222,7 +232,7 @@ function Header({ currentPath, posts }) {
                 </div>
             </div>
 
-            <div className="hidden bg-slate-900 lg:block">
+            <div className={`hidden bg-slate-900 lg:block transition-all duration-300 ease-in-out ${hasScrolled ? '-translate-y-full opacity-0 invisible' : 'translate-y-0 opacity-100 visible'}`}>
                 <div className="max-w-[90rem] mx-auto flex flex-row items-center py-3 px-6">
                     <div className="mr-8">
                         <h1 className="font-bold text-xl text-white">KATEGORI BLOG</h1>

@@ -1,13 +1,18 @@
 ---
-const { href, currentPath, text } = Astro.props;
+const { href, currentPath, text, count } = Astro.props;
 
 // Tentukan apakah link aktif.
 // Ini menangani kasus untuk halaman utama blog, kategori, dan tag.
-const isBlogHome = href === '/blog' && currentPath.startsWith('/blog/category') === false && currentPath.startsWith('/blog/tag') === false;
-const isCategoryMatch = href !== '/blog' && currentPath.startsWith(href);
-const isActive = isBlogHome || isCategoryMatch;
+const isBlogHome = href === '/blog' && !currentPath.startsWith('/blog/category') && !currentPath.startsWith('/blog/tag');
+const isCategoryOrTagMatch = href !== '/blog' && currentPath.startsWith(href);
+const isActive = isBlogHome || isCategoryOrTagMatch;
 
 const activeClass = 'bg-orange-500 text-white shadow-md';
-const inactiveClass = 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm';
+const inactiveClass = 'bg-gray-100 text-gray-700 hover:bg-orange-100 hover:text-orange-700';
 ---
-<a href={href} class:list={[`px-4 py-2 rounded-full text-sm font-semibold transition-colors`, isActive ? activeClass : inactiveClass]}>{text}</a>
+<a href={href} class:list={[`flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200`, isActive ? activeClass : inactiveClass]}>
+    <span class="capitalize">{text}</span>
+    <span class:list={["flex h-5 w-5 items-center justify-center rounded-full text-xs", isActive ? "bg-white/20 text-white" : "bg-gray-200 text-gray-600"]}>
+        {count}
+    </span>
+</a>

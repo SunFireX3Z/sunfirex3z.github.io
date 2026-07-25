@@ -1,5 +1,7 @@
 ---
 import { siteConfig } from "@/config/site";
+import { generateArticleSchema } from "@/lib/structured-data/article";
+import { generateBreadcrumbSchema } from "@/lib/structured-data/breadcrumb";
 
 interface Props {
     title?: string;
@@ -9,6 +11,9 @@ interface Props {
     type?: "website" | "article";
     author?: string;
     robots?: string;
+    publishDate?: string;
+    lastUpdated?: string;
+    breadcrumbs?: { name: string; url: string }[];
 }
 
 const {
@@ -19,6 +24,9 @@ const {
     type = "website",
     author = siteConfig.author,
     robots = "index,follow",
+    publishDate,
+    lastUpdated,
+    breadcrumbs,
 } = Astro.props as Props;
 
 const siteName = siteConfig.title;
@@ -33,6 +41,23 @@ const imageUrl = image
     : new URL("/og-image.webp", siteUrl).href;
 
 const canonicalUrl = canonical ?? Astro.url.href;
+
+const articleSchemaData =
+    type === "article" && title && description && publishDate
+        ? generateArticleSchema({
+              title,
+              metaDescription: description,
+              imageUrl,
+              authorName: author,
+              publishDate,
+              lastUpdated,
+              canonicalUrl,
+              siteName,
+              siteLogoUrl: new URL("/favicon.svg", siteUrl).href,
+          })
+        : null;
+
+const breadcrumbSchemaData = breadcrumbs ? generateBreadcrumbSchema(breadcrumbs) : null;
 ---
 
 <title>{pageTitle}</title>
@@ -40,6 +65,13 @@ const canonicalUrl = canonical ?? Astro.url.href;
 <!-- Favicon -->
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+{articleSchemaData && (
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchemaData)} />
+)}
+{breadcrumbSchemaData && (
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchemaData)} />
+)}
 
 <meta name="description" content={description} />
 <meta name="author" content={author} />

@@ -11,17 +11,23 @@ import RelatedArticle from '@/components/mdx/RelatedArticle.astro';
 import FlexboxImage from './image/flexbox.png';
 
 export const metadata = {
-    translationId: "apa-itu-flexbox",
     title: "Apa Itu Flexbox? Pengertian, Cara Kerja, dan Contohnya",
     description: "Pelajari apa itu Flexbox, cara kerjanya, serta cara menggunakannya untuk membuat layout website yang rapi dan responsif menggunakan CSS.",
     metaDescription: "Apa itu Flexbox? Pelajari pengertian, cara kerja, properti utama, serta contoh penggunaan Flexbox dalam CSS untuk membangun layout website yang modern dan responsif.",
-    publishDate: "21 Juli 2026",
+    publishDate: "2026-07-21",
+    lastUpdated: "2026-07-21",
+    updatedReason: "",
+    series: "",
+    status: "Published",
     author: "Airi",
     category: "Pemrograman",
     subcategory: "Web Frontend",
     thumbnail: thumbnailImage,
     imageCaption: "Gambar 1. Ilustrasi tata letak menggunakan CSS Flexbox.",
     readingTime: 8,
+    difficulty: "Pemula",
+    platform: ["Web"],
+    contentType: "Tutorial",
     tags: [
         "Flexbox",
         "CSS",
@@ -35,27 +41,26 @@ export const metadata = {
         "Tutorial"
     ],
     featured: false,
-    lastUpdated: "21 Juli 2026",
     sources: [
         {
             name: "MDN Web Docs - Basic concepts of flexbox",
-            url: "https://developer.mozilla.org/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
+            url: "https://developer.mozilla.org/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox"
         },
         {
             name: "MDN Web Docs - CSS Flexible Box Layout",
-            url: "https://developer.mozilla.org/docs/Web/CSS/CSS_flexible_box_layout",
+            url: "https://developer.mozilla.org/docs/Web/CSS/CSS_flexible_box_layout"
         },
         {
             name: "CSS-Tricks - A Complete Guide to Flexbox",
-            url: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+            url: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
         },
         {
             name: "Tailwind CSS - Flex",
-            url: "https://tailwindcss.com/docs/flex",
+            url: "https://tailwindcss.com/docs/flex"
         },
         {
             name: "Tailwind CSS - Flex Direction",
-            url: "https://tailwindcss.com/docs/flex-direction",
+            url: "https://tailwindcss.com/docs/flex-direction"
         }
     ]
 };
@@ -195,7 +200,7 @@ Hasilnya, ketiga elemen akan tersusun dalam satu baris dengan jarak yang rapi. B
 
 <Image src={FlexboxImage} alt="Contoh Flexbox" caption="Gambar 2. Hasil implementasi Flexbox." />
 
-<FAQ>
+<FAQ client:visible>
     <FAQItem title="Apakah Flexbox hanya bisa digunakan untuk membuat layout horizontal?">
         Tidak. Secara bawaan, Flexbox memang menyusun elemen secara horizontal (`row`), tetapi arah penyusunannya dapat diubah menjadi vertikal menggunakan properti `flex-direction: column`.
     </FAQItem>

@@ -4,6 +4,7 @@ import { posts } from '@/data/posts';
 import TableOfContents from '@/components/article/TableOfContents.jsx';
 import ShareButton from '@/components/article/ShareButton.jsx';
 import RelatedPostCard from '@/components/article/RelatedPostCard.astro';
+import RelatedPostCardMobile from '@/components/article/RelatedPostCardMobile.astro';
 import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
 
@@ -82,31 +83,6 @@ const nextPost = currentPostIndex < navigationScope.length - 1 ? navigationScope
 const canonicalUrl = new URL(post.path, Astro.site).href;
 const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
 
-const schemaData = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: metadata.title,
-    description: metadata.metaDescription,
-    image: imageUrl,
-    author: {
-        '@type': 'Person',
-        name: metadata.author,
-    },
-    publisher: {
-        '@type': 'Organization',
-        name: 'SunBlog',
-        logo: {
-            '@type': 'ImageObject',
-            url: new URL('/favicon.svg', Astro.site).href,
-        },
-    },
-    datePublished: new Date(metadata.publishDate).toISOString(),
-    dateModified: new Date(metadata.lastUpdated || metadata.publishDate).toISOString(),
-    mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': canonicalUrl,
-    },
-};
 ---
 
 <Layout
@@ -115,10 +91,10 @@ const schemaData = {
     image={imageUrl}
     canonical={canonicalUrl}
     type="article"
+    author={metadata.author}
+    publishDate={metadata.publishDate}
+    lastUpdated={metadata.lastUpdated}
 >
-    <Fragment slot="head">
-        <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
-    </Fragment>
 
     <div class="space-y-8">
         {/* Breadcrumbs */}
@@ -166,6 +142,9 @@ const schemaData = {
                                     <a href={`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`} class="inline-block rounded-full bg-sky-100 px-3 py-1 text-sm font-semibold text-sky-800 transition-colors hover:bg-sky-200 capitalize">{metadata.subcategory}</a>
                                 </>
                             )}
+                            {metadata.contentType && (
+                                <span class="inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800 capitalize">{metadata.contentType}</span>
+                            )}
                         </div>
                         <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-4">{metadata.title}</h1>
                         <div class="flex items-center gap-3">
@@ -194,18 +173,27 @@ const schemaData = {
                 </div>
 
                 <div class="mt-12 space-y-8 lg:hidden">
-                    <ArticleInfo metadata={metadata} />
-                    <ShareButton client:visible />
                     <div class="rounded-lg bg-white p-6 shadow-md ring-1 ring-gray-100">
                         <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h3>
                         <ul class="space-y-4">{posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (<li><a href={p.path} class="font-semibold text-gray-800 hover:text-orange-500 line-clamp-2">{p.metadata.title}</a><p class="text-xs text-gray-400">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></li>))}</ul>
                     </div>
+                    <ArticleInfo metadata={metadata} />
+                    <ShareButton client:visible />
                 </div>
 
                 {relatedPosts.length > 0 && (
                     <div class="mt-16">
                         <h2 class="text-3xl font-bold mb-6 border-b-4 border-orange-500 inline-block pb-1">Artikel Terkait</h2>
-                        <div class="space-y-8">{relatedPosts.map(relatedPost => (<RelatedPostCard {...relatedPost.metadata} path={relatedPost.path} />))}</div>
+                        
+                        {/* Tampilan Desktop: Kartu horizontal */}
+                        <div class="hidden space-y-8 lg:block">
+                            {relatedPosts.map(relatedPost => (<RelatedPostCard {...relatedPost.metadata} path={relatedPost.path} />))}
+                        </div>
+
+                        {/* Tampilan Mobile: Kartu vertikal dalam grid */}
+                        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:hidden">
+                            {relatedPosts.map(relatedPost => (<RelatedPostCardMobile {...relatedPost.metadata} path={relatedPost.path} />))}
+                        </div>
                     </div>
                 )}
 

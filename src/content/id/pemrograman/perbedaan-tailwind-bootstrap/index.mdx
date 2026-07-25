@@ -7,38 +7,54 @@ import Warning from '@/components/mdx/Warning.jsx';
 import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
 
 export const metadata = {
-  translationId: "tailwind-vs-bootstrap",
-  title: "Perbedaan Antara Tailwind CSS dan Bootstrap",
-  description: "Pelajari perbedaan Tailwind CSS dan Bootstrap, mulai dari cara kerja, kelebihan, kekurangan, hingga kapan sebaiknya menggunakan masing-masing framework CSS.",
-  metaDescription: "Bingung memilih Tailwind CSS atau Bootstrap? Simak perbedaan keduanya dari segi komponen, fleksibilitas, performa, kemudahan penggunaan, serta rekomendasi penggunaannya untuk berbagai jenis proyek.",
-  publishDate: "17 Juli 2026",
-  author: "Airi",
-  category: "Pemrograman",
-  subcategory: "Frontend",
-  thumbnail: thumbnailImage,
-  imageCaption: "Gambar 1. Perbandingan Tailwind CSS dan Bootstrap sebagai framework CSS.",
-  readingTime: 6,
-  tags: ["Tailwind CSS","Bootstrap", "CSS", "Frontend", "Framework CSS", "Web Development", "Responsive Design", "UI", "Pemrograman", "Tutorial"],
-  featured: false, 
-  lastUpdated: "17 Juli 2026",
-  sources: [
-    {
-      "name": "CODEPOLITAN - Apa Itu Tailwind? Sejarah, Tools, Contoh Syntax",
-      "url": "https://www.codepolitan.com/blog/apa-itu-tailwind-sejarah-tools-contoh-syntax/",
-    },
-    {
-      "name": "Tailwind CSS Official",
-      "url": "https://tailwindcss.com/",
-    },
-    {
-      "name": "Bootstrap Official",
-      "url": "https://getbootstrap.com/",
-    },
-    {
-      "name": "Hostinger - Apa itu bootstrap? Pengertian, fungsi, dan kelebihannya",
-      "url": "https://www.hostinger.com/id/tutorial/apa-itu-bootstrap/",
-    }
-  ]
+    title: "Perbedaan Antara Tailwind CSS dan Bootstrap",
+    description: "Pelajari perbedaan Tailwind CSS dan Bootstrap, mulai dari cara kerja, kelebihan, kekurangan, hingga kapan sebaiknya menggunakan masing-masing framework CSS.",
+    metaDescription: "Bingung memilih Tailwind CSS atau Bootstrap? Simak perbedaan keduanya dari segi komponen, fleksibilitas, performa, kemudahan penggunaan, serta rekomendasi penggunaannya untuk berbagai jenis proyek.",
+    publishDate: "2026-07-17",
+    lastUpdated: "2026-07-17",
+    updatedReason: "",
+    series: "",
+    status: "Published",
+    author: "Airi",
+    category: "Pemrograman",
+    subcategory: "Web Frontend",
+    thumbnail: thumbnailImage,
+    imageCaption: "Gambar 1. Perbandingan Tailwind CSS dan Bootstrap sebagai framework CSS.",
+    readingTime: 6,
+    difficulty: "Menengah",
+    platform: ["Web"],
+    contentType: "Perbandingan",
+    tags: [
+        "Tailwind CSS",
+        "Bootstrap",
+        "CSS",
+        "Frontend",
+        "Framework CSS",
+        "Web Development",
+        "Responsive Design",
+        "UI",
+        "Pemrograman",
+        "Tutorial"
+    ],
+    featured: false,
+    sources: [
+        {
+            name: "CODEPOLITAN - Apa Itu Tailwind? Sejarah, Tools, Contoh Syntax",
+            url: "https://www.codepolitan.com/blog/apa-itu-tailwind-sejarah-tools-contoh-syntax/"
+        },
+        {
+            name: "Tailwind CSS Official",
+            url: "https://tailwindcss.com/"
+        },
+        {
+            name: "Bootstrap Official",
+            url: "https://getbootstrap.com/"
+        },
+        {
+            name: "Hostinger - Apa itu bootstrap? Pengertian, fungsi, dan kelebihannya",
+            url: "https://www.hostinger.com/id/tutorial/apa-itu-bootstrap/"
+        }
+    ]
 };
 
 export const comparisonHeaders = [
@@ -250,7 +266,7 @@ Kesalahan lainnya adalah menganggap bahwa salah satu framework selalu lebih baik
 
 Dengan memahami karakteristik kedua framework dan menghindari kesalahan-kesalahan tersebut, proses pengembangan website akan menjadi lebih efektif. Selain menghasilkan kode yang lebih mudah dipelihara, pengembang juga dapat memilih framework yang benar-benar sesuai dengan kebutuhan proyek yang sedang dikerjakan.
 
-<FAQ>
+<FAQ client:visible>
   <FAQItem title="Apakah Tailwind CSS lebih baik daripada Bootstrap?">
     Tidak selalu. Tailwind CSS lebih unggul dalam hal fleksibilitas dan kustomisasi, sedangkan Bootstrap lebih unggul dalam kecepatan pengembangan karena menyediakan banyak komponen siap pakai. Pilihan terbaik bergantung pada kebutuhan proyek yang sedang dikerjakan.
   </FAQItem>
