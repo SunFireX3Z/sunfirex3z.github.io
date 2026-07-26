@@ -39,5 +39,14 @@ const { metadata } = Astro.props;
                 <span class="text-gray-800">{metadata.difficulty}</span>
             </li>
         )}
+        {metadata.platform && metadata.platform.length > 0 && (
+            <li class="flex items-center justify-between">
+                <div class="flex items-center text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400"><path d="M2 5.25A3.25 3.25 0 0 1 5.25 2h9.5A3.25 3.25 0 0 1 18 5.25v8.5A3.25 3.25 0 0 1 14.75 17h-9.5A3.25 3.25 0 0 1 2 13.75v-8.5Zm1.5 0a1.75 1.75 0 0 1 1.75-1.75h9.5a1.75 1.75 0 0 1 1.75 1.75v8.5a1.75 1.75 0 0 1-1.75 1.75h-9.5a1.75 1.75 0 0 1-1.75-1.75v-8.5Z" /></svg>
+                    <span class="font-semibold">Platform</span>
+                </div>
+                <span class="text-gray-800">{metadata.platform.join(', ')}</span>
+            </li>
+        )}
     </ul>
 </div>

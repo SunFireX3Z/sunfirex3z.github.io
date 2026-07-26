@@ -1,7 +1,7 @@
 ---
 const { path, title, thumbnail, publishDate, description, author, authorAvatar } = Astro.props;
 ---
-<a href={path} class="group flex flex-col sm:flex-row items-start gap-4 rounded-lg p-3 transition-colors hover:bg-gray-50">
+<a href={path} class="group flex flex-col sm:flex-row items-start gap-4 rounded-lg transition-colors hover:bg-gray-50">
   <div class="relative w-full sm:w-60 flex-shrink-0">
     <img class="w-full aspect-video rounded-lg object-cover" src={thumbnail.src} alt={`Thumbnail for ${title}`} />
   </div>

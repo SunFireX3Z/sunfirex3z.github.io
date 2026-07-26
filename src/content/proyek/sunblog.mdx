@@ -1,0 +1,44 @@
+import thumbnailImage from '../../assets/images/placeholder/science.webp';
+import MDXIcon from '../../assets/icons/about/mdx.svg?url';
+import AstroIcon from '../../assets/icons/about/astro.svg?url';
+import ReactIcon from '../../assets/icons/about/react.svg?url';
+import TailwindIcon from '../../assets/icons/about/tailwind.svg?url';
+
+export const metadata = {
+    title: "SunBlog - Blog & Portofolio Pribadi",
+    description: "Sebuah blog pribadi dan portofolio yang dibangun menggunakan Astro, React, dan Tailwind CSS. Dirancang untuk menjadi platform berbagi pengetahuan yang cepat, modern, dan SEO-friendly.",
+    thumbnail: thumbnailImage,
+    visiblity: "Hidden", // "Public", "Private", "Hidden"
+    type: "Website", // "Website", "Aplikasi Desktop", "Library", dll.
+    status: "Selesai", // "Selesai", "Dalam Pengerjaan", "Diarsipkan"
+    stack: [
+        { name: 'Astro', icon: AstroIcon },
+        { name: 'React', icon: ReactIcon },
+        { name: 'Tailwind CSS', icon: TailwindIcon },
+        { name: 'MDX', icon: MDXIcon }
+    ],
+    repoUrl: null, // Bisa null
+    liveUrl: "https://sunfirex3z.github.io/", // Bisa null
+    startDate: "2026-07-01",
+    lastUpdated: "2026-07-26"
+};
+
+## Tentang Proyek
+
+SunBlog adalah proyek blog pribadi yang saya kembangkan untuk mendokumentasikan perjalanan belajar saya di dunia teknologi, khususnya pengembangan web. Proyek ini dibangun dari awal menggunakan [Astro](https://astro.build/) sebagai kerangka utama karena performanya yang luar biasa dalam menghasilkan situs statis yang cepat.
+
+## Fitur Utama
+
+- **Performa Cepat**: Dibangun dengan arsitektur Astro Islands, sebagian besar situs dikirim sebagai HTML statis, dengan JavaScript hanya dimuat untuk komponen interaktif.
+- **Styling dengan Tailwind CSS**: Desain yang responsif dan modern diimplementasikan menggunakan Tailwind CSS, memungkinkan kustomisasi yang cepat dan konsisten.
+- **Konten dengan MDX**: Artikel dan halaman ditulis dalam format MDX, memberikan fleksibilitas untuk menyisipkan komponen React langsung di dalam konten Markdown.
+- **SEO-Friendly**: Dilengkapi dengan metadata yang kaya, sitemap, dan skema data terstruktur untuk visibilitas maksimal di mesin pencari.
+- **Fitur Blog Lengkap**: Termasuk kategori, tag, daftar isi, artikel terkait, dan pencarian artikel.
+
+## Teknologi yang Digunakan
+
+- **Framework**: Astro
+- **UI Library**: React (untuk komponen interaktif)
+- **Styling**: Tailwind CSS
+- **Konten**: MDX (Markdown with JSX)
+- **Deployment**: GitHub Pages via GitHub Actions

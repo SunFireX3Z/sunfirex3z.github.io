@@ -3,8 +3,16 @@ import Logo from '../../assets/images/Sunblog_Black.png'; // Menggunakan logo te
 import { siteConfig } from '../../config/site.js';
 import { posts } from '../../data/posts';
 
-// Ambil 5 kategori unik.
-const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
+// Hitung jumlah postingan per kategori
+const categoryCounts = posts.reduce((acc, post) => {
+    acc[post.category] = (acc[post.category] || 0) + 1;
+    return acc;
+}, {});
+
+// Ambil 5 kategori paling populer
+const popularCategories = Object.keys(categoryCounts)
+    .sort((a, b) => categoryCounts[b] - categoryCounts[a])
+    .slice(0, 5);
 ---
 <footer class="border-t border-slate-800 bg-slate-900">
     <div class="mx-auto max-w-[90rem] px-6">
@@ -34,9 +42,9 @@ const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
             <div class="py-16">
                 <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:pl-12">
                     <div class="sm:col-span-1">
-                        <h3 class="font-bold text-slate-100">Kategori</h3>
+                        <h3 class="font-bold text-slate-100">Kategori Populer</h3>
                         <ul class="mt-4 space-y-3">
-                            {categories.map(cat => (
+                            {popularCategories.map(cat => (
                                 <li>
                                     <a href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`} class="text-slate-400 transition-colors hover:text-white capitalize">
                                         {cat}
@@ -80,12 +88,23 @@ const categories = [...new Set(posts.map(p => p.category))].slice(0, 5);
                             </li>
                         </ul>
                     </div>
+                    <div class="sm:col-span-1">
+                        <h3 class="font-bold text-slate-100">Informasi</h3>
+                        <ul class="mt-4 space-y-3">
+                            <li>
+                                <a href="/changelog" class="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><line x1="10" x2="8" y1="9" y2="9"></line></svg>
+                                    Riwayat Versi
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="flex flex-col items-center justify-between gap-2 border-t border-slate-800 py-6 text-center text-sm text-slate-400 sm:flex-row">
             <span>&copy; {new Date().getFullYear()} SunBlog. All rights reserved.</span>
-            <span>Versi {siteConfig.version}</span>
+            <a href="/changelog" class="hover:text-white">Versi {siteConfig.version}</a>
         </div>
     </div>
 </footer>

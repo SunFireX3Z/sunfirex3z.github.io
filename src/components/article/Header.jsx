@@ -218,18 +218,26 @@ function Header({ currentPath, posts }) {
                 </div>
                 <div className="pt-4 pb-3 border-t border-gray-200">
                     <h3 className="px-5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Kategori</h3>
-                    <div className="mt-2 space-y-1">
-                        {categories.map(cat => (
-                            <NavLink
-                                key={cat}
-                                href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`}
-                                onClick={closeMenu}
-                                currentPath={currentPath}
-                                className={({ isActive }) => `block px-5 py-2 text-base font-medium transition-colors capitalize ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'}`}
-                            >
-                                {cat}
-                            </NavLink>
-                        ))}
+                    <div className="relative mt-2">
+                        {/* 
+                            Daftar kategori ini bisa di-scroll jika isinya melebihi tinggi maksimum.
+                            Kelas custom-scrollbar digunakan untuk konsistensi gaya dengan komponen lain seperti Daftar Isi.
+                        */}
+                        <div className="space-y-1 max-h-64 overflow-y-auto custom-scrollbar pr-2">
+                            {categories.map(cat => (
+                                <NavLink
+                                    key={cat}
+                                    href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                                    onClick={closeMenu}
+                                    currentPath={currentPath}
+                                    className={({ isActive }) => `block px-5 py-2 text-base font-medium transition-colors capitalize ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'}`}
+                                >
+                                    {cat}
+                                </NavLink>
+                            ))}
+                        </div>
+                        {/* Menambahkan gradien di bagian bawah sebagai petunjuk visual bahwa area ini bisa di-scroll */}
+                        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,23 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Card from '@/components/article/Card.astro';
+import ProjectCard from '@/components/proyek/ProjectCard.astro';
 import FeaturedCard from '@/components/article/FeaturedCard.astro';
 import { latestPost, featuredPosts, recentPosts } from '@/data/posts';
+
+// Ambil data proyek
+const projectModules = await import.meta.glob('../content/proyek/**/*.mdx', { eager: true });
+const projects = Object.values(projectModules)
+    .filter(module => module.metadata.visibility !== 'hidden') // Sembunyikan proyek dengan visibility 'hidden'
+    .map(module => {
+        const { metadata } = module;
+        const slug = module.file.split('/').pop().replace('.mdx', '');
+        return { ...metadata, slug: slug, path: `/proyek/${slug}` };
+    })
+    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
+// Ambil 3 proyek terbaru
+const recentProjectsList = projects.slice(0, 3);
 ---
 
 <Layout 
@@ -56,5 +71,20 @@ import { latestPost, featuredPosts, recentPosts } from '@/data/posts';
                 {recentPosts.map(post => (<Card {...post.metadata} path={post.path} />))}
             </div>
         </section>
+
+        {/* Bagian Proyek Terbaru */}
+        {recentProjectsList.length > 0 && (
+            <section>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-3xl font-bold border-b-4 border-orange-500 inline-block pb-1">Proyek Terbaru</h2>
+                    <a href="/proyek" class="font-semibold text-orange-600 transition-colors hover:text-orange-700 hover:underline">Lihat Semua Proyek &rarr;</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {recentProjectsList.map(project => (
+                        <a href={project.path} class="block h-full"><ProjectCard {...project} /></a>
+                    ))}
+                </div>
+            </section>
+        )}
     </div>
 </Layout>

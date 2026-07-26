@@ -1,0 +1,136 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Content } from '@/content/CHANGELOG.mdx';
+
+const pageTitle = "Changelog";
+const pageDescription = "Lihat riwayat pembaruan dan perubahan terbaru pada situs SunBlog.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <div class="space-y-16">
+        <section class="border-l-4 border-orange-500 pl-4">
+            <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">{pageTitle}</h1>
+            <p class="mt-4 max-w-2xl text-lg text-gray-600">{pageDescription}</p>
+        </section>
+
+        <section>
+            {/* Konten asli dari MDX disembunyikan dan digunakan sebagai sumber data untuk skrip */}
+            <div id="changelog-source" class="hidden">
+                <Content />
+            </div>
+            {/* Skrip akan membangun accordion interaktif di dalam div target ini */}
+            <div id="changelog-accordion" class="space-y-4"></div>
+        </section>
+    </div>
+</Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const source = document.getElementById('changelog-source');
+        const target = document.getElementById('changelog-accordion');
+        if (!source || !target) return;
+
+        const nodes = Array.from(source.children);
+        const versions = [];
+        let currentVersion = null;
+
+        // Kelompokkan elemen HTML berdasarkan tag H2
+        nodes.forEach(node => {
+            if (node.tagName === 'H2') {
+                if (currentVersion) versions.push(currentVersion);
+                currentVersion = { header: node, content: [] };
+            } else if (currentVersion) {
+                currentVersion.content.push(node);
+            }
+        });
+        if (currentVersion) versions.push(currentVersion);
+
+        // Bangun UI accordion dari elemen yang sudah dikelompokkan
+        versions.forEach((version, index) => {
+            const isOpen = index === 0; // Buka item pertama secara default
+
+            const item = document.createElement('div');
+            item.className = 'overflow-hidden rounded-lg bg-white shadow-md';
+
+            const button = document.createElement('button');
+            button.className = 'flex w-full items-center justify-between p-6 text-left';
+            button.setAttribute('aria-expanded', isOpen.toString());
+
+            const textWrapper = document.createElement('div');
+            const titleWrapper = document.createElement('div');
+            titleWrapper.className = 'flex flex-wrap items-center gap-x-4 gap-y-2';
+
+            const title = document.createElement('h2');
+            title.className = 'text-2xl font-bold text-gray-800';
+            title.textContent = version.header.textContent;
+            titleWrapper.appendChild(title);
+
+            const statusNode = version.content.find(n => n.classList.contains('changelog-status'));
+            if (statusNode) {
+                const statusText = statusNode.textContent.trim();
+                const badge = document.createElement('span');
+                badge.textContent = statusText;
+                badge.className = 'text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full';
+
+                if (statusText.toLowerCase().includes('minor')) {
+                    badge.classList.add('bg-blue-100', 'text-blue-800');
+                } else if (statusText.toLowerCase().includes('patch')) {
+                    badge.classList.add('bg-green-100', 'text-green-800');
+                } else {
+                    badge.classList.add('bg-gray-100', 'text-gray-800');
+                }
+                titleWrapper.appendChild(badge);
+            }
+            textWrapper.appendChild(titleWrapper);
+
+            const dateNode = version.content.find(n => n.classList.contains('changelog-date'));
+            if (dateNode) {
+                const dateSpan = document.createElement('span');
+                dateSpan.className = 'mt-1 text-sm font-semibold text-gray-500';
+                dateSpan.textContent = dateNode.textContent;
+                textWrapper.appendChild(dateSpan);
+            }
+
+            const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            icon.setAttribute('fill', 'none');
+            icon.setAttribute('viewBox', '0 0 24 24');
+            icon.setAttribute('stroke-width', '2.5');
+            icon.setAttribute('stroke', 'currentColor');
+            icon.setAttribute('class', `h-6 w-6 flex-shrink-0 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`);
+            icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />`;
+
+            button.append(textWrapper, icon);
+
+            const panel = document.createElement('div');
+            panel.className = `grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`;
+            
+            const panelInner = document.createElement('div');
+            panelInner.className = 'overflow-hidden';
+
+            const article = document.createElement('article');
+            article.className = 'prose prose-lg max-w-none px-6 pb-6 pt-6 border-t border-gray-200';
+            
+            version.content.forEach(node => {
+                // Filter node yang sudah digunakan di header (tanggal, status) dan garis pemisah
+                const isHeaderInfo = node.classList.contains('changelog-date') || node.classList.contains('changelog-status');
+                const isSeparator = node.tagName === 'HR';
+
+                if (!isHeaderInfo && !isSeparator) {
+                    article.appendChild(node);
+                }
+            });
+
+            panelInner.appendChild(article);
+            panel.appendChild(panelInner);
+            item.append(button, panel);
+            target.appendChild(item);
+
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', !isExpanded);
+                icon.classList.toggle('rotate-180');
+                panel.style.gridTemplateRows = isExpanded ? '0fr' : '1fr';
+            });
+        });
+    });
+</script>

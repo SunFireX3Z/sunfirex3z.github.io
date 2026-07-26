@@ -7,6 +7,30 @@
 
 html {
   scroll-behavior: smooth;
+
+  /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-orange-500) var(--color-slate-200);
+}
+
+/* ======================================
+   Global Website Scrollbar
+====================================== */
+
+html::-webkit-scrollbar {
+  width: 30px;
+}
+
+html::-webkit-scrollbar-track {
+  @apply bg-slate-200 rounded-full;
+}
+
+html::-webkit-scrollbar-thumb {
+  @apply bg-orange-500 rounded-full border-2 border-slate-200;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  @apply bg-orange-600;
 }
 
 /* ======================================
@@ -58,15 +82,15 @@ pre::-webkit-scrollbar {
 }
 
 pre::-webkit-scrollbar-track {
-  background: transparent;
+  @apply bg-slate-800; /* Latar belakang gelap untuk scrollbar kode */
 }
 
 pre::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-gray-600;
+  @apply rounded-full bg-orange-500;
 }
 
 pre::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500;
+  @apply bg-orange-600;
 }
 
 /* ======================================
@@ -78,13 +102,13 @@ pre::-webkit-scrollbar-thumb:hover {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+  @apply bg-slate-200; /* Latar belakang terang untuk scrollbar di area putih */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-gray-300;
+  @apply rounded-full bg-orange-400;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400;
+  @apply bg-orange-500;
 }

@@ -1,0 +1,138 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    const projectModules = await import.meta.glob('../../content/proyek/**/*.mdx');
+    return Object.keys(projectModules).map(file => {
+        const slug = file.split('/').pop().replace('.mdx', '');
+        return { params: { slug } };
+    });
+}
+
+const { slug } = Astro.params;
+const postModule = await import(`../../content/proyek/${slug}.mdx`);
+const { Content, metadata } = postModule;
+
+const pageTitle = metadata.title;
+const pageDescription = metadata.description;
+const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
+const canonicalUrl = new URL(`/proyek/${slug}`, Astro.site).href;
+
+const statusStyles = {
+    "Selesai": "bg-green-100 text-green-800",
+    "Dalam Pengerjaan": "bg-yellow-100 text-yellow-800",
+    "Diarsipkan": "bg-gray-100 text-gray-800",
+};
+---
+
+<Layout
+    title={pageTitle}
+    description={pageDescription}
+    image={imageUrl}
+    canonical={canonicalUrl}
+    type="article"
+>
+    <div class="space-y-8">
+        <!-- Breadcrumbs -->
+        <nav aria-label="Breadcrumb" class="text-sm text-gray-500">
+            <ol class="flex flex-wrap items-center space-x-2">
+                <li><a href="/" class="hover:text-orange-500">Beranda</a></li>
+                <li><span class="select-none">/</span></li>
+                <li><a href="/proyek" class="hover:text-orange-500">Proyek</a></li>
+                <li><span class="select-none">/</span></li>
+                <li class="font-medium text-gray-800 line-clamp-1">{metadata.title}</li>
+            </ol>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-12">
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+                <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md">
+                    <figure class="mb-8">
+                        <img 
+                            src={metadata.thumbnail.src}
+                            alt={`Thumbnail for ${metadata.title}`}
+                            width="800"
+                            height="450"
+                            loading="eager"
+                            fetchpriority="high"
+                            class="w-full rounded-lg object-cover aspect-video"
+                        />
+                    </figure>
+
+                    <header class="mb-8 border-b border-gray-200 pb-8">
+                        <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-4">{metadata.title}</h1>
+                        <p class="text-lg text-gray-600">{metadata.description}</p>
+                    </header>
+
+                    <article class="prose lg:prose-lg max-w-none"><Content /></article>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="hidden lg:block lg:col-span-1">
+                <div class="sticky top-40 flex flex-col gap-8">
+                    <div class="rounded-lg bg-white p-6 shadow-md">
+                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Proyek</h3>
+                        <ul class="space-y-4 text-sm">
+                            {metadata.status && (
+                                <li class="flex items-center justify-between">
+                                    <span class="font-semibold text-gray-600">Status</span>
+                                    <span class:list={["rounded-full px-3 py-1 text-xs font-bold", statusStyles[metadata.status] || "bg-gray-100 text-gray-800"]}>
+                                        {metadata.status}
+                                    </span>
+                                </li>
+                            )}
+                            {metadata.type && (
+                                <li class="flex items-center justify-between">
+                                    <span class="font-semibold text-gray-600">Tipe Proyek</span>
+                                    <span class="text-gray-800">{metadata.type}</span>
+                                </li>
+                            )}
+                             {metadata.startDate && (
+                                <li class="flex items-center justify-between">
+                                    <span class="font-semibold text-gray-600">Mulai Dikerjakan</span>
+                                    <span class="text-gray-800">{new Date(metadata.startDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                                </li>
+                            )}
+                            {metadata.lastUpdated && (
+                                <li class="flex items-center justify-between">
+                                    <span class="font-semibold text-gray-600">Terakhir Diperbarui</span>
+                                    <span class="text-gray-800">{new Date(metadata.lastUpdated).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                                </li>
+                            )}
+                            {metadata.stack && metadata.stack.length > 0 && (
+                                <li>
+                                    <h4 class="font-semibold text-gray-600 mb-2">Teknologi</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        {metadata.stack.map(tech => (
+                                            <div class="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1">
+                                                <img src={tech.icon} alt={`${tech.name} icon`} class="h-4 w-4" />
+                                                <span class="text-sm font-semibold text-gray-700">{tech.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </li>
+                            )}
+                        </ul>
+                        <div class="mt-6 flex flex-col gap-3 border-t border-gray-200 pt-4">
+                            {/* Tampilkan tombol repo hanya jika URL ada dan visibilitas bukan 'private' */}
+                            {metadata.repoUrl && metadata.visibility !== 'private' && (
+                                <a href={metadata.repoUrl} target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-900">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                    Lihat Kode
+                                </a>
+                            )}
+                            {metadata.liveUrl && (
+                                <a href={metadata.liveUrl} target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+                                    Kunjungi Situs
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</Layout>

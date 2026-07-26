@@ -2,9 +2,10 @@
 import Layout from '@/layouts/Layout.astro';
 import Card from '@/components/article/Card.astro';
 import CategoryNavLink from '@/components/article/CategoryNavLink.astro';
+import Pagination from '@/components/article/Pagination.astro';
 import { posts } from '@/data/posts';
 
-const { pageTitle, pageDescription, filteredPosts } = Astro.props;
+const { pageTitle, pageDescription, filteredPosts, page } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 // Ambil semua kategori unik dari postingan untuk navigasi
@@ -50,6 +51,9 @@ const categoriesWithCounts = [
                     <a href="/blog" class="mt-6 inline-block rounded-lg bg-orange-500 px-6 py-3 font-bold text-white shadow-lg transition-all hover:bg-orange-600">Kembali ke Semua Postingan</a>
                 </div>
             )}
+
+            <!-- Tampilkan kontrol paginasi jika objek 'page' ada -->
+            {page && <Pagination page={page} />}
         </section>
     </div>
 </Layout>

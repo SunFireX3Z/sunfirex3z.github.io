@@ -1,0 +1,68 @@
+---
+const { title, description, thumbnail, stack, repoUrl, liveUrl, status, type, lastUpdated, visibility } = Astro.props;
+
+const statusStyles = {
+    "Selesai": "bg-green-100 text-green-800",
+    "Dalam Pengerjaan": "bg-yellow-100 text-yellow-800",
+    "Diarsipkan": "bg-gray-100 text-gray-800",
+};
+---
+<div class="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="relative flex-shrink-0 overflow-hidden">
+        <img class="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] aspect-video" src={thumbnail.src} alt={`Thumbnail for ${title}`} />
+        {type && (
+            <span class="absolute top-3 left-3 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-800">
+                {type}
+            </span>
+        )}
+        {status && (
+            <span class:list={["absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-bold", statusStyles[status] || "bg-gray-100 text-gray-800"]}>
+                {status}
+            </span>
+        )}
+    </div>
+    <div class="flex flex-1 flex-col justify-between p-5">
+        <div class="flex-1">
+            <h2 class="text-lg font-bold text-gray-900 group-hover:text-orange-600 line-clamp-2">
+                {title}
+            </h2>
+            <p class="mt-2 text-sm text-gray-500 line-clamp-3">
+                {description}
+            </p>
+            {stack && stack.length > 0 && (
+                <div class="mt-4 flex flex-wrap gap-2">
+                    {stack.map(tech => (
+                        <div class="flex items-center gap-1.5 rounded-full bg-gray-100 px-2.5 py-0.5">
+                            <img src={tech.icon} alt={`${tech.name} icon`} class="h-3.5 w-3.5" />
+                            <span class="text-xs font-semibold text-gray-700">{tech.name}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-gray-200 pt-4">
+            <div>
+                {lastUpdated && (
+                    <p class="text-xs text-gray-500">
+                        <span class="font-semibold">Diperbarui:</span> {new Date(lastUpdated).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </p>
+                )}
+            </div>
+            <div class="flex flex-shrink-0 items-center gap-3">
+                {/* Tampilkan tombol repo hanya jika URL ada dan visibilitas bukan 'private' */}
+                {repoUrl && visibility !== 'private' && (
+                    <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        Kode
+                    </a>
+                )}
+                {liveUrl && (
+                    <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+                        Live Demo
+                    </a>
+                )}
+            </div>
+        </div>
+    </div>
+</div>
