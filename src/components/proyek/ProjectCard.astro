@@ -1,11 +1,14 @@
 ---
-const { title, description, thumbnail, stack, repoUrl, liveUrl, status, type, lastUpdated, visibility } = Astro.props;
+const { title, description, thumbnail, stack, software, repoUrl, liveUrl, downloadUrl, status, type, lastUpdated, visibility } = Astro.props;
 
 const statusStyles = {
     "Selesai": "bg-green-100 text-green-800",
     "Dalam Pengerjaan": "bg-yellow-100 text-yellow-800",
     "Diarsipkan": "bg-gray-100 text-gray-800",
 };
+
+// Gabungkan stack dan software menjadi satu array 'tools'
+const tools = [...(stack || []), ...(software || [])];
 ---
 <div class="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
     <div class="relative flex-shrink-0 overflow-hidden">
@@ -29,9 +32,9 @@ const statusStyles = {
             <p class="mt-2 text-sm text-gray-500 line-clamp-3">
                 {description}
             </p>
-            {stack && stack.length > 0 && (
+            {tools.length > 0 && (
                 <div class="mt-4 flex flex-wrap gap-2">
-                    {stack.map(tech => (
+                    {tools.map(tech => (
                         <div class="flex items-center gap-1.5 rounded-full bg-gray-100 px-2.5 py-0.5">
                             <img src={tech.icon} alt={`${tech.name} icon`} class="h-3.5 w-3.5" />
                             <span class="text-xs font-semibold text-gray-700">{tech.name}</span>
@@ -60,6 +63,12 @@ const statusStyles = {
                     <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
                         Live Demo
+                    </a>
+                )}
+                {downloadUrl && (
+                    <a href={downloadUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        Download
                     </a>
                 )}
             </div>

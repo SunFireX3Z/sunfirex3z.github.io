@@ -3,6 +3,7 @@ import Header from "@/components/article/Header.jsx";
 import Footer from "@/components/article/Footer.astro";
 import SEO from "@/components/article/SEO.astro";
 import { posts } from "@/data/posts";
+import ImageZoom from '@/components/ImageZoom.astro';
 
 import "../styles/global.css";
 
@@ -50,5 +51,6 @@ const currentPath = Astro.url.pathname;
         </main>
 
         <Footer />
+        <ImageZoom />
     </body>
 </html>

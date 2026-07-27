@@ -1,24 +1,44 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import ProjectCard from '@/components/proyek/ProjectCard.astro';
+import CategoryNavLink from '@/components/article/CategoryNavLink.astro';
 
 const projectModules = await import.meta.glob('../../content/proyek/**/*.mdx', { eager: true });
 
-const projects = Object.values(projectModules)
-    .filter(module => module.metadata.visibility !== 'hidden') // Sembunyikan proyek dengan visibility 'hidden'
+const allProjects = Object.values(projectModules)
+    .filter(module => module && module.metadata && module.metadata.visibility !== 'hidden') // Sembunyikan proyek dengan visibility 'hidden'
     .map(module => {
-        const { metadata } = module;
-        const slug = module.file.split('/').pop().replace('.mdx', '');
+        const slug = module.file
+            .replace(/.*\/src\/content\/proyek\//, '')
+            .replace('.mdx', '');
         return {
-            ...metadata,
-            slug: slug,
-            path: `/proyek/${slug}`
+            ...module.metadata,
+            path: `/proyek/${slug}`,
         };
     })
     .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
+// Get unique categories and their counts
+const totalProjectCount = allProjects.length;
+const categoryCounts = allProjects.reduce((acc, project) => {
+    if (project.category) {
+        acc[project.category] = (acc[project.category] || 0) + 1;
+    }
+    return acc;
+}, {});
+
+const categoriesWithCounts = [
+    { name: 'Semua', count: totalProjectCount, path: '/proyek' },
+    ...Object.entries(categoryCounts).map(([name, count]) => ({
+        name,
+        count,
+        path: `/proyek/kategori/${name.toLowerCase().replace(/\s+/g, '-')}`
+    }))
+];
+
 const pageTitle = "Proyek Saya";
 const pageDescription = "Kumpulan proyek yang pernah saya kerjakan, mulai dari aplikasi web, situs statis, hingga eksperimen teknologi lainnya.";
+const currentPath = Astro.url.pathname;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -28,10 +48,17 @@ const pageDescription = "Kumpulan proyek yang pernah saya kerjakan, mulai dari a
             <p class="mt-4 max-w-2xl text-lg text-gray-600">{pageDescription}</p>
         </section>
 
+        <!-- Filter Kategori Proyek -->
+        <nav class="flex flex-wrap gap-3">
+            {categoriesWithCounts.map(cat => (
+                <CategoryNavLink href={cat.path} currentPath={currentPath} text={cat.name} count={cat.count} />
+            ))}
+        </nav>
+
         <section>
-            {projects.length > 0 ? (
+            {allProjects.length > 0 ? (
                 <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {projects.map(project => (
+                    {allProjects.map(project => (
                         <a href={project.path} class="block h-full">
                             <ProjectCard {...project} />
                         </a>

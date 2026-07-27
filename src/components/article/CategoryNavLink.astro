@@ -1,11 +1,18 @@
 ---
 const { href, currentPath, text, count } = Astro.props;
 
-// Tentukan apakah link aktif.
-// Ini menangani kasus untuk halaman utama blog, kategori, dan tag.
-const isBlogHome = href === '/blog' && !currentPath.startsWith('/blog/category') && !currentPath.startsWith('/blog/tag');
-const isCategoryOrTagMatch = href !== '/blog' && currentPath.startsWith(href);
-const isActive = isBlogHome || isCategoryOrTagMatch;
+// Default to checking if the current path starts with the link's href.
+// This works for nested categories like /blog/gaming and /blog/gaming/panduan.
+let isActive = currentPath.startsWith(href);
+
+// If the link is a root path (like /blog or /proyek), we need to be more specific
+// to avoid it being active when we are on a category page.
+const isRootPath = !href.includes('/kategori/') && !href.includes('/tag/');
+if (isRootPath) {
+    // The root path is active only if the current path starts with it,
+    // AND the current path is not a category/tag sub-path.
+    isActive = currentPath.startsWith(href) && !currentPath.includes('/kategori/') && !currentPath.includes('/tag/');
+}
 
 const activeClass = 'bg-orange-500 text-white shadow-md';
 const inactiveClass = 'bg-gray-100 text-gray-700 hover:bg-orange-100 hover:text-orange-700';

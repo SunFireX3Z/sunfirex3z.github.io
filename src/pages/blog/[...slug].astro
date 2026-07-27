@@ -121,16 +121,31 @@ const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
             <div class="lg:col-span-2">
                 <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md">
                     <figure class="mb-8">
-                        <img 
-                            src={metadata.thumbnail.src}
-                            alt={`Thumbnail for ${metadata.title}`}
-                            width="800"
-                            height="450"
-                            loading="eager"
-                            fetchpriority="high"
-                            class="w-full rounded-lg object-cover aspect-video"
-                        />
-                        {metadata.imageCaption && <figcaption class="mt-2 text-center text-sm text-gray-500 italic">{metadata.imageCaption}</figcaption>}
+                        <div class="group relative" data-zoomable-image>
+                            <img 
+                                src={metadata.thumbnail.src}
+                                alt={`Thumbnail for ${metadata.title}`}
+                                width="800"
+                                height="450"
+                                loading="eager"
+                                fetchpriority="high"
+                                class="w-full rounded-lg object-cover aspect-video"
+                            />
+
+                            <div class="absolute inset-0 flex cursor-zoom-in items-center justify-center rounded-lg bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                <div class="rounded-full bg-white/80 p-4 shadow-lg backdrop-blur-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-8 w-8 text-gray-800">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        {metadata.imageCaption && (
+                            <figcaption class="mt-2 text-center text-sm italic text-gray-500">
+                                {metadata.imageCaption}
+                            </figcaption>
+                        )}
                     </figure>
 
                     <header class="mb-8 border-b border-gray-200 pb-8">

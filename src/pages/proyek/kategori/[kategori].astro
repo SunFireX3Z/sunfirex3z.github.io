@@ -1,0 +1,93 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ProjectCard from '@/components/proyek/ProjectCard.astro';
+import CategoryNavLink from '@/components/article/CategoryNavLink.astro';
+
+// Helper to slugify category names
+const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-');
+
+export async function getStaticPaths() {
+    // Helper ini perlu didefinisikan di dalam getStaticPaths karena scope yang terisolasi.
+    const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-');
+
+    const projectModules = await import.meta.glob('../../../content/proyek/**/*.mdx', { eager: true });
+    const allProjects = Object.values(projectModules)
+        .filter(module => module && module.metadata && module.metadata.visibility !== 'hidden')
+        .map(module => {
+            const slug = module.file
+                .replace(/.*\/src\/content\/proyek\//, '')
+                .replace('.mdx', '');
+            return {
+                ...module.metadata,
+                path: `/proyek/${slug}`,
+            };
+        });
+
+    const categories = new Set();
+    allProjects.forEach(project => {
+        if (project.category) {
+            categories.add(project.category);
+        }
+    });
+
+    return Array.from(categories).map(category => ({
+        params: { kategori: slugify(category) },
+        props: { categoryName: category, allProjects },
+    }));
+}
+
+const { kategori } = Astro.params;
+const { categoryName, allProjects } = Astro.props;
+
+// Filter projects for the current category
+const filteredProjects = allProjects
+    .filter(project => project.category && slugify(project.category) === kategori)
+    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
+// Get unique categories and their counts for the nav
+const totalProjectCount = allProjects.length;
+const categoryCounts = allProjects.reduce((acc, project) => {
+    if (project.category) {
+        acc[project.category] = (acc[project.category] || 0) + 1;
+    }
+    return acc;
+}, {});
+
+const categoriesWithCounts = [
+    { name: 'Semua', count: totalProjectCount, path: '/proyek' },
+    ...Object.entries(categoryCounts).map(([name, count]) => ({
+        name,
+        count,
+        path: `/proyek/kategori/${slugify(name)}`
+    }))
+];
+
+const pageTitle = `Proyek: ${categoryName}`;
+const pageDescription = `Kumpulan proyek dalam kategori ${categoryName}.`;
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <div class="space-y-12">
+        <section class="border-l-4 border-orange-500 pl-4">
+            <h1 class="text-4xl font-bold tracking-tight lg:text-5xl capitalize">{pageTitle}</h1>
+            <p class="mt-4 max-w-2xl text-lg text-gray-600">{pageDescription}</p>
+        </section>
+
+        <nav class="flex flex-wrap gap-3">
+            {categoriesWithCounts.map(cat => (
+                <CategoryNavLink href={cat.path} currentPath={currentPath} text={cat.name} count={cat.count} />
+            ))}
+        </nav>
+
+        <section>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {filteredProjects.map(project => (
+                    <a href={project.path} class="block h-full">
+                        <ProjectCard {...project} />
+                    </a>
+                ))}
+            </div>
+        </section>
+    </div>
+</Layout>

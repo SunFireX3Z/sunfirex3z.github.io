@@ -8,11 +8,13 @@ import { latestPost, featuredPosts, recentPosts } from '@/data/posts';
 // Ambil data proyek
 const projectModules = await import.meta.glob('../content/proyek/**/*.mdx', { eager: true });
 const projects = Object.values(projectModules)
-    .filter(module => module.metadata.visibility !== 'hidden') // Sembunyikan proyek dengan visibility 'hidden'
+    .filter(module => module && module.metadata && module.metadata.visibility !== 'hidden') // Sembunyikan proyek dengan visibility 'hidden'
     .map(module => {
         const { metadata } = module;
-        const slug = module.file.split('/').pop().replace('.mdx', '');
-        return { ...metadata, slug: slug, path: `/proyek/${slug}` };
+        const slug = module.file
+            .replace(/.*\/src\/content\/proyek\//, '')
+            .replace('.mdx', '');
+        return { ...metadata, path: `/proyek/${slug}` };
     })
     .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
