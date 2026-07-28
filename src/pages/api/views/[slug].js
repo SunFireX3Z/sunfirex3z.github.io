@@ -1,5 +1,7 @@
 import { supabase } from '@/lib/db';
 
+export const prerender = false;
+
 // Handler untuk permintaan POST (menambah jumlah view)
 export async function POST({ params }) {
     const { slug } = params;

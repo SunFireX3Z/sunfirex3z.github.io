@@ -4,24 +4,29 @@ import expressiveCode from 'astro-expressive-code';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@tailwindcss/vite';
+import vercel from '@astrojs/vercel';
+
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
-// https://astro.build/config
 export default defineConfig({
-  // Atur URL situs final Anda
   site: 'https://sunblog.my.id',
-  
-  // Daftar integrasi
-  integrations: [react(), expressiveCode(), mdx(), sitemap()],
 
-  // Konfigurasi spesifik Vite
+  output: 'server',
+  adapter: vercel(),
+
+  integrations: [
+    react(),
+    expressiveCode(),
+    mdx(),
+    sitemap()
+  ],
+
   vite: {
     plugins: [tailwind()]
   },
 
-  // Konfigurasi Markdown dan MDX
   markdown: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

@@ -8,6 +8,8 @@ import RelatedPostCardMobile from '@/components/article/RelatedPostCardMobile.as
 import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
     const allPosts = posts.filter(p => p.lang === 'id');
     return allPosts.map(post => ({
