@@ -11,7 +11,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 // https://astro.build/config
 export default defineConfig({
   // Atur URL situs final Anda
-  site: 'https://sunfirex3z.github.io/',
+  site: 'https://sunblog.my.id',
   
   // Daftar integrasi
   integrations: [react(), expressiveCode(), mdx(), sitemap()],

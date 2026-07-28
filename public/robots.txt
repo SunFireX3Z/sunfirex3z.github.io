@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sunfirex3z.github.io/sitemap-index.xml
+Sitemap: https://sunblog.my.id/sitemap-index.xml
