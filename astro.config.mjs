@@ -4,7 +4,6 @@ import expressiveCode from 'astro-expressive-code';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel';
 
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
@@ -13,8 +12,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 export default defineConfig({
   site: 'https://sunblog.my.id',
 
-  output: 'server',
-  adapter: vercel(),
+  output: 'static',
 
   integrations: [
     react(),

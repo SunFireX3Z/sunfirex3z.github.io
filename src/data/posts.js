@@ -1,6 +1,5 @@
 import { authors } from './authors';
 import PlaceholderAvatar from "@/assets/images/avatar/placeholder.webp";
-import { supabase } from '@/lib/db'; // Import Supabase client
 
 // Menggunakan fitur Vite `import.meta.glob` untuk mengimpor semua file .mdx
 // Opsi `{ eager: true }` memuat modul-modul ini secara langsung.
@@ -59,39 +58,6 @@ let allPosts = Object.entries(modules).reduce((acc, [filepath, module]) => {
         return acc;
     }, [])
     .sort((a, b) => new Date(b.metadata.publishDate) - new Date(a.metadata.publishDate)); // Urutkan dari yang terbaru
-
-// --- NEW LOGIC TO FETCH VIEWS ---
-// Check if Supabase is configured before attempting to fetch views
-if (import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
-    const slugs = allPosts.map(post => post.slug);
-    const { data: postStats, error } = await supabase
-        .from('post_stats')
-        .select('slug, views')
-        .in('slug', slugs);
-
-    if (error) {
-        console.error('Error fetching post stats from Supabase:', error.message);
-        // Lanjutkan tanpa jumlah views jika ada error
-    } else {
-        const statsMap = new Map(postStats.map(stat => [stat.slug, stat.views]));
-        allPosts = allPosts.map(post => ({
-            ...post,
-            metadata: {
-                ...post.metadata,
-                views: statsMap.get(post.slug) || 0, // Tambahkan views, default 0 jika tidak ditemukan
-            },
-        }));
-    }
-} else {
-    console.warn("Supabase environment variables (PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_PUBLISHABLE_KEY) are not fully configured. View counts will default to 0.");
-    allPosts = allPosts.map(post => ({
-        ...post,
-        metadata: {
-            ...post.metadata,
-            views: 0, // Default 0 jika Supabase tidak terkonfigurasi
-        },
-    }));
-}
 
 export const posts = allPosts;
 export const latestPost = posts[0];
