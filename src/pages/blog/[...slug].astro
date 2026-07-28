@@ -17,6 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const { slug } = Astro.params;
 
 if (!post) {
     return Astro.redirect('/404');
@@ -192,7 +193,7 @@ const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
                         <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h3>
                         <ul class="space-y-4">{posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (<li><a href={p.path} class="font-semibold text-gray-800 hover:text-orange-500 line-clamp-2">{p.metadata.title}</a><p class="text-xs text-gray-400">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></li>))}</ul>
                     </div>
-                    <ArticleInfo metadata={metadata} />
+                    <ArticleInfo metadata={metadata} slug={slug} />
                     <ShareButton client:visible />
                 </div>
 
@@ -220,7 +221,7 @@ const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
                 <div class="sticky top-40 flex flex-col gap-8">
                     <ShareButton client:visible />
                     {tocItems.length > 0 && <TableOfContents client:visible items={tocItems} />}
-                    <ArticleInfo metadata={metadata} />
+                    <ArticleInfo metadata={metadata} slug={slug} />
 
                     <div class="rounded-lg bg-white p-6 shadow-md">
                         <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h3>

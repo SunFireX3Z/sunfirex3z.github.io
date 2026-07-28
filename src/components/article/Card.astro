@@ -1,5 +1,16 @@
 ---
-const { path, title, description, author, publishDate, thumbnail, authorAvatar, isLarge = false } = Astro.props;
+const { path, title, description, author, publishDate, thumbnail, authorAvatar, isLarge = false, views = 0 } = Astro.props;
+
+// Helper untuk format angka (misal: 1200 -> 1.2K)
+const formatViews = (num) => {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    }
+    if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    }
+    return num;
+};
 ---
 <a href={path} class="group flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
   <div class="relative flex-shrink-0 overflow-hidden">
@@ -23,7 +34,13 @@ const { path, title, description, author, publishDate, thumbnail, authorAvatar, 
           <p class="text-sm font-bold text-gray-900">{author}</p>
         </div>
       </div>
-      <p class="text-xs text-gray-500">{new Date(publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+      <div class="flex items-center gap-3">
+        <p class="text-xs text-gray-500">{new Date(publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+        <div class="flex items-center text-xs text-gray-500" title={`${views} views`}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1 text-gray-400"><path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" /><path fillRule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.18l.88-1.467a1.65 1.65 0 0 1 1.515-.882H4.84a1.65 1.65 0 0 1 1.515.882l.88 1.467a1.651 1.651 0 0 1 0 1.18l-.88 1.467a1.65 1.65 0 0 1-1.515.882H3.059a1.65 1.65 0 0 1-1.515-.882l-.88-1.467Z" clipRule="evenodd" /></svg>
+            <span>{formatViews(views)}</span>
+        </div>
+      </div>
     </div>
   </div>
 </a>

@@ -1,5 +1,7 @@
 ---
-const { metadata } = Astro.props;
+import ViewCounter from './ViewCounter.jsx';
+
+const { metadata, slug } = Astro.props;
 ---
 <div class="rounded-lg bg-white p-6 shadow-md">
     <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Artikel</h3>
@@ -46,6 +48,11 @@ const { metadata } = Astro.props;
                     <span class="font-semibold">Platform</span>
                 </div>
                 <span class="text-gray-800">{metadata.platform.join(', ')}</span>
+            </li>
+        )}
+        {slug && (
+            <li class="flex items-center justify-between">
+                <ViewCounter client:visible slug={slug} />
             </li>
         )}
     </ul>
