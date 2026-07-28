@@ -1,5 +1,12 @@
 import { supabase } from '@/lib/db';
 
+if (!supabase) {
+    return new Response(
+        JSON.stringify({ message: 'Database not configured' }),
+        { status: 503 }
+    );
+}
+
 export const prerender = false;
 
 // Handler untuk permintaan POST (menambah jumlah view)
