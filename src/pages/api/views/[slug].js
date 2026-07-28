@@ -1,16 +1,15 @@
 import { supabase } from '@/lib/db';
 
-if (!supabase) {
-    return new Response(
-        JSON.stringify({ message: 'Database not configured' }),
-        { status: 503 }
-    );
-}
-
 export const prerender = false;
 
 // Handler untuk permintaan POST (menambah jumlah view)
 export async function POST({ params }) {
+    if (!supabase) {
+        return new Response(
+            JSON.stringify({ message: 'Database not configured' }),
+            { status: 503 }
+        );
+    }
     const { slug } = params;
 
     if (!slug) {
@@ -65,6 +64,12 @@ export async function POST({ params }) {
 
 // Handler untuk permintaan GET (mengambil jumlah view)
 export async function GET({ params }) {
+    if (!supabase) {
+        return new Response(
+            JSON.stringify({ message: 'Database not configured' }),
+            { status: 503 }
+        );
+    }
     const { slug } = params;
 
     if (!slug) {
