@@ -7,6 +7,7 @@ import RelatedPostCard from '@/components/article/RelatedPostCard.astro';
 import RelatedPostCardMobile from '@/components/article/RelatedPostCardMobile.astro';
 import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
+import { generateBreadcrumbSchema } from '@/lib/structured-data/breadcrumb';
 
 export async function getStaticPaths() {
     const allPosts = posts.filter(p => p.lang === 'id');
@@ -83,6 +84,21 @@ const nextPost = currentPostIndex < navigationScope.length - 1 ? navigationScope
 const canonicalUrl = new URL(post.path, Astro.site).href;
 const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
 
+// Data untuk Breadcrumb Schema
+const breadcrumbs = [
+    { name: "Beranda", url: new URL('/', Astro.site).href },
+    { name: "Blog", url: new URL('/blog', Astro.site).href },
+    { name: "Kategori", url: new URL(`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`, Astro.site).href },
+];
+if (metadata.subcategory) {
+    breadcrumbs.push({
+        name: metadata.subcategory,
+        url: new URL(`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`, Astro.site).href
+    });
+}
+breadcrumbs.push({ name: metadata.title, url: canonicalUrl });
+const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
+
 ---
 
 <Layout
@@ -95,6 +111,9 @@ const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
     publishDate={metadata.publishDate}
     lastUpdated={metadata.lastUpdated}
 >
+    <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchemaData)} />
+
+
 
     <div class="space-y-8">
         {/* Breadcrumbs */}
