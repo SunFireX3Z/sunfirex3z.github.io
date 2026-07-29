@@ -1,9 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 const { path, title, description, author, publishDate, thumbnail, authorAvatar, isLarge = false } = Astro.props;
 ---
 <a href={path} class="group flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
   <div class="relative flex-shrink-0 overflow-hidden">
-    <img class="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] aspect-video" src={thumbnail.src} alt={`Thumbnail for ${title}`} />
+    <Image src={thumbnail} alt={`Thumbnail for ${title}`} class="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] aspect-video" format="webp" quality={80} />
   </div>
   <div class="flex flex-1 flex-col justify-between p-3 sm:p-5">
     <div class="flex-1">
@@ -17,13 +18,13 @@ const { path, title, description, author, publishDate, thumbnail, authorAvatar, 
     <div class="mt-4 flex items-center justify-between">
       <div class="flex items-center">
         <div class="flex-shrink-0">
-          <img class="h-6 w-6 rounded-full object-cover sm:h-8 sm:w-8" src={authorAvatar.src} alt={`Avatar of ${author}`} />
+          <Image src={authorAvatar} alt={`Avatar of ${author}`} class="h-6 w-6 rounded-full object-cover sm:h-8 sm:w-8" width={32} height={32} format="webp" quality={80} />
         </div>
         <div class="ml-2 hidden sm:ml-3 sm:block">
           <p class="text-sm font-bold text-gray-900">{author}</p>
         </div>
       </div>
-      <p class="text-xs text-gray-500">{new Date(publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+      <p class="text-xs text-gray-600">{new Date(publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
     </div>
   </div>
 </a>

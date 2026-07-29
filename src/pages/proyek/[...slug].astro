@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -66,13 +67,12 @@ const tools = [...(metadata.stack || []), ...(metadata.software || [])];
                 <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md">
                     <figure class="mb-8">
                         <div class="group relative" data-zoomable-image>
-                            <img 
-                                src={metadata.thumbnail.src}
+                            <Image
+                                src={metadata.thumbnail}
                                 alt={`Thumbnail for ${metadata.title}`}
                                 width="800"
                                 height="450"
-                                loading="eager"
-                                fetchpriority="high"
+                                format="webp"
                                 class="w-full rounded-lg object-cover aspect-video"
                             />
                             <div class="absolute inset-0 flex cursor-zoom-in items-center justify-center rounded-lg bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -98,7 +98,7 @@ const tools = [...(metadata.stack || []), ...(metadata.software || [])];
             <aside class="hidden lg:block lg:col-span-1">
                 <div class="sticky top-40 flex flex-col gap-8">
                     <div class="rounded-lg bg-white p-6 shadow-md">
-                        <h3 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Proyek</h3>
+                        <h2 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Info Proyek</h2>
                         <ul class="space-y-4 text-sm">
                             {metadata.status && (
                                 <li class="flex items-center justify-between">

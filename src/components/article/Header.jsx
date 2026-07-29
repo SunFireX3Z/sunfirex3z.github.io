@@ -5,14 +5,11 @@ import Logo from '../../assets/images/Sunblog_Black.png';
 // Impor fungsi pencarian
 import { searchPosts } from '@/utils/searchPosts';
 
-console.log("Logo:", Logo);
-
 /**
  * Komponen helper untuk meniru fungsionalitas NavLink dari React Router,
  * tetapi menggunakan tag <a> standar untuk Astro.
  */
 function NavLink({ href, children, className, currentPath, onClick }) {
-    console.log("NavLink href:", href, typeof href);
 
     const isActive = href === "/" ? currentPath === "/" : currentPath.startsWith(href);
     const finalClassName = typeof className === 'function' ? className({ isActive }) : className;
@@ -29,7 +26,6 @@ function Header({ currentPath, posts }) {
     const searchContainerRef = useRef(null);
 
     const categories = [...new Set(posts.map(p => p.category))];
-    console.log("categories:", categories);
     const closeMenu = () => setIsMenuOpen(false);
 
     // Efek untuk menangani klik di luar area pencarian untuk menutup hasil
@@ -49,8 +45,6 @@ function Header({ currentPath, posts }) {
         setSearchQuery(query);
 
         const results = searchPosts(query, posts);
-
-        console.log("SEARCH RESULT:", results);
 
         setSearchResults(results);
         setIsSearchActive(query.length > 0);
@@ -128,7 +122,7 @@ function Header({ currentPath, posts }) {
                                                             onClick={handleResultClick}
                                                             className="flex items-start gap-4 border-b border-gray-100 p-3 transition-colors last:border-b-0 hover:bg-gray-50"
                                                         >
-                                                            <img src={post.metadata.thumbnail.src} alt={`Thumbnail for ${post.metadata.title}`} className="aspect-video w-20 flex-shrink-0 rounded-md object-cover" />
+                                                            <img src={post.optimizedThumbnailSrc || post.metadata.thumbnail.src} alt={`Thumbnail for ${post.metadata.title}`} className="aspect-video w-20 flex-shrink-0 rounded-md object-cover" />
                                                             <div>
                                                                 <p className="line-clamp-2 text-sm font-semibold leading-tight text-gray-800">{post.metadata.title}</p>
                                                                 <p className="mt-1 line-clamp-1 text-xs text-gray-500">{post.metadata.description}</p>
@@ -192,7 +186,7 @@ function Header({ currentPath, posts }) {
                                                             onClick={handleResultClick}
                                                             className="flex items-start gap-3 border-b border-gray-100 p-3 transition-colors last:border-b-0 hover:bg-gray-50"
                                                         >
-                                                            <img src={post.metadata.thumbnail.src} alt={`Thumbnail for ${post.metadata.title}`} className="aspect-video w-16 flex-shrink-0 rounded object-cover" />
+                                                            <img src={post.optimizedThumbnailSrc || post.metadata.thumbnail.src} alt={`Thumbnail for ${post.metadata.title}`} className="aspect-video w-16 flex-shrink-0 rounded object-cover" />
                                                             <div>
                                                                 <p className="line-clamp-2 text-sm font-semibold leading-tight text-gray-800">{post.metadata.title}</p>
                                                                 <p className="mt-1 line-clamp-2 text-xs text-gray-500">{post.metadata.description}</p>
@@ -217,7 +211,7 @@ function Header({ currentPath, posts }) {
                     <NavLink href="/kontak" onClick={closeMenu} currentPath={currentPath} className={({ isActive }) => `block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive ? 'text-orange-500 bg-orange-50' : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'}`}>Kontak</NavLink>
                 </div>
                 <div className="pt-4 pb-3 border-t border-gray-200">
-                    <h3 className="px-5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Kategori</h3>
+                    <h2 className="px-5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Kategori</h2>
                     <div className="relative mt-2">
                         {/* 
                             Daftar kategori ini bisa di-scroll jika isinya melebihi tinggi maksimum.

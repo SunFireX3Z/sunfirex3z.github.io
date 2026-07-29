@@ -1,8 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 import authorAvatar from '@/assets/images/avatar/randy.webp';
-import Gemini from '@/assets/icons/about/gemini.webp?url';
-import ChatGPT from '@/assets/icons/about/openai.webp?url';
+import Gemini from '@/assets/icons/about/gemini.webp';
+import ChatGPT from '@/assets/icons/about/openai.webp';
 import { authors } from '@/data/authors.js';
 import PlaceholderAvatar from '@/assets/images/avatar/placeholder.webp';
 
@@ -42,9 +43,11 @@ const skills = [
             <!-- Kolom Kiri: Profil Penulis -->
             <div class="space-y-6 lg:col-span-1">
                 <div class="rounded-xl bg-white p-6 text-center shadow-md">
-                    <img
-                        src={authorAvatar.src}
+                    <Image
+                        src={authorAvatar}
                         alt="Randy, penulis SunBlog"
+                        width={160}
+                        height={160}
                         class="mx-auto h-40 w-40 rounded-full object-cover shadow-lg"
                     />
                     <h2 class="mt-6 text-2xl font-bold text-gray-900">Randy</h2>
@@ -89,7 +92,11 @@ const skills = [
                     <div class="flex flex-wrap gap-4">
                         {skills.map(skill => (
                             <div class="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2">
-                                <img src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" />
+                                {typeof skill.icon === 'string' ? (
+                                    <img src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" width="20" height="20" />
+                                ) : (
+                                    <Image src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" width={20} height={20} />
+                                )}
                                 <span class="text-sm font-semibold text-gray-700">{skill.name}</span>
                             </div>
                         ))}
@@ -112,8 +119,10 @@ const skills = [
             <div class="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
                 {Object.values(authors).map(author => (
                     <div class="flex items-start gap-6 rounded-xl bg-white p-6 text-left shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                        <img
-                            src={author.avatar ? author.avatar.src : PlaceholderAvatar.src}
+                        <Image
+                            src={author.avatar ?? PlaceholderAvatar}
+                            width={80}
+                            height={80}
                             alt={`Avatar untuk ${author.fullName}`}
                             class="h-20 w-20 flex-shrink-0 rounded-full object-cover shadow-lg"
                         />
@@ -136,7 +145,7 @@ const skills = [
             <div class="mt-8 flex justify-center gap-4">
                 <a
                     href="/blog"
-                    class="inline-block rounded-lg bg-orange-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-300"
+                    class="inline-block rounded-lg bg-orange-600 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-300"
                 >
                     Jelajahi Blog
                 </a>

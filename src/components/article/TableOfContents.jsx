@@ -62,7 +62,7 @@ function TableOfContents({ items }) {
     return (
         <div className="rounded-lg bg-white p-6 shadow-md">
             <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-xl font-bold">Daftar Isi</h3>
+                <h2 className="text-xl font-bold">Daftar Isi</h2>
 
                 <button
                     onClick={() => setIsTocCollapsed(!isTocCollapsed)}
@@ -153,6 +153,11 @@ function TableOfContents({ items }) {
                                                     )
                                                 }
                                                 className="ml-2 rounded-full p-1 text-gray-400 hover:bg-gray-100"
+                                                aria-label={
+                                                    isGroupExpanded
+                                                        ? `Tutup sub-bagian ${h2Item.text}`
+                                                        : `Buka sub-bagian ${h2Item.text}`
+                                                }
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

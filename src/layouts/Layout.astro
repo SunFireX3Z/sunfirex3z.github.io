@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import Header from "@/components/article/Header.jsx";
 import Footer from "@/components/article/Footer.astro";
 import SEO from "@/components/article/SEO.astro";
@@ -23,6 +24,20 @@ const {
 } = Astro.props as Props;
 
 const currentPath = Astro.url.pathname;
+
+// Optimalkan gambar thumbnail untuk komponen Header (pencarian)
+const postsForHeader = await Promise.all(
+    posts.map(async (post) => {
+        if (!post.metadata.thumbnail) return post;
+        const { src } = await getImage({
+            src: post.metadata.thumbnail,
+            width: 80, // Lebar thumbnail di hasil pencarian
+            format: 'webp',
+            quality: 75,
+        });
+        return { ...post, optimizedThumbnailSrc: src };
+    })
+);
 ---
 
 <html lang="id">
@@ -47,7 +62,7 @@ const currentPath = Astro.url.pathname;
         <Header
             client:load
             currentPath={currentPath}
-            posts={posts}
+            posts={postsForHeader}
         />
 
         <main class="mx-auto flex-1 w-full max-w-[90rem] px-6 py-12">
