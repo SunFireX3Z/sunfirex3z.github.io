@@ -1,5 +1,5 @@
 ---
-const { href, currentPath, text, count } = Astro.props;
+const { href, currentPath, text, count, class: className } = Astro.props;
 
 // Default to checking if the current path starts with the link's href.
 // This works for nested categories like /blog/gaming and /blog/gaming/panduan.
@@ -17,7 +17,7 @@ if (isRootPath) {
 const activeClass = 'bg-orange-500 text-white shadow-md';
 const inactiveClass = 'bg-gray-100 text-gray-700 hover:bg-orange-100 hover:text-orange-700';
 ---
-<a href={href} class:list={[`flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200`, isActive ? activeClass : inactiveClass]}>
+<a href={href} class:list={[`flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200`, isActive ? activeClass : inactiveClass, className]}>
     <span class="capitalize">{text}</span>
     <span class:list={["flex h-5 w-5 items-center justify-center rounded-full text-xs", isActive ? "bg-white/20 text-white" : "bg-gray-200 text-gray-600"]}>
         {count}

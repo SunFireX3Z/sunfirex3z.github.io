@@ -124,3 +124,25 @@ pre::-webkit-scrollbar-thumb:hover {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   @apply bg-orange-500;
 }
+
+/* ======================================
+   Horizontal Scrollbar
+====================================== */
+
+.horizontal-scrollbar {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #fb923c #f1f5f9; /* orange-400 and slate-100 */
+}
+
+.horizontal-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-track {
+  @apply rounded-full bg-slate-100;
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-orange-400;
+}

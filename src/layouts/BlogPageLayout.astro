@@ -33,9 +33,9 @@ const categoriesWithCounts = [
         </section>
 
         {/* Filter Kategori */}
-        <nav class="flex flex-wrap gap-3">
+        <nav class="flex gap-3 overflow-x-auto pb-4 horizontal-scrollbar">
             {categoriesWithCounts.map(cat => (
-                <CategoryNavLink href={cat.path} currentPath={currentPath} text={cat.name} count={cat.count} />
+                <CategoryNavLink href={cat.path} currentPath={currentPath} text={cat.name} count={cat.count} class="flex-shrink-0" />
             ))}
         </nav>
 
