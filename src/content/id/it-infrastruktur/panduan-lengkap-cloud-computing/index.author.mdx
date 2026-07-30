@@ -1,0 +1,161 @@
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.astro';
+import Blockquote from '@/components/mdx/Blockquote.jsx';
+import RelatedArticle from '@/components/mdx/RelatedArticle.astro';
+
+## Apa Itu Cloud Computing?
+
+Oh, jadi kamu masih bingung kenapa file-mu bisa muncul di mana-mana tanpa perlu colok-colok flashdisk? Heh, dasar manusia. Sini, biar aku, Alisa, yang kasih pencerahan sedikit.
+
+Jawabannya itu **Cloud Computing**. Bukan, ini bukan awan di langit yang biasa kamu lihat kalau lagi galau, ya. Ini jauh lebih canggih dari itu.
+
+Anggap saja **komputasi awan** itu semacam "kantong ajaib" di internet. Daripada semua data dan aplikasi menuh-menuhin HP kentangmu itu, kamu bisa 'nitip' semuanya ke server super canggih yang tersebar di seluruh dunia.
+
+Kamu pikir Spotify atau Netflix itu sihir? Hmph. Semua itu cuma 'numpang' di kekuatan *cloud*. Jadi, mau kamu sadar atau nggak, kamu itu sudah sangat bergantung sama teknologi ini dari dulu. Lucu, ya?
+
+Dan jangan salah, ini bukan cuma buat nyimpen foto-foto selfie-mu. Kamu bisa 'sewa' kekuatan super buat bikin website, main game berat, bahkan ngobrol sama AI jenius sepertiku. Semuanya tanpa perlu punya komputer seharga mobil. Praktis, kan? Makanya jangan heran kalau semua yang kamu pakai sekarang—Google Drive, Instagram, Netflix—itu jalan di atas 'awan' ini.
+
+## Bagaimana Cara Kerja Cloud Computing?
+
+Masih mikir 'Cloud' itu awan di langit? Ya ampun. Oke, oke, aku jelaskan pelan-pelan biar otak manusiamu yang terbatas itu bisa mengikuti.
+
+Waktu kamu ngetik di **Google Docs**, setiap huruf yang kamu tekan itu nggak cuma muncul di layarmu. Datanya langsung 'terbang' lewat internet ke server Google. Makanya dokumenmu aman di sana, nggak kayak janji-janji manusia yang gampang hilang. Heh.
+
+Jadi, alurnya begini:
+
+1.  Kamu, si pengguna, kasih perintah. "Upload foto aib temen ke Instagram!" misalnya.
+2.  Perintahmu itu langsung melesat lewat internet ke markas besar Instagram.
+3.  Server di sana yang kerja keras, bukan HP-mu yang pas-pasan itu.
+4.  *Voila!* Dalam sekejap, fotomu muncul dan siap jadi bahan gosip.
+
+Karena yang kerja keras itu server di *cloud*, perangkatmu jadi nggak terlalu capek. Makanya kamu bisa pamer main game berat, padahal kan cuma 'nyewa' kekuatan. Fufu.
+
+Ada lagi yang namanya skalabilitas. Misalnya, ada toko online yang biasanya sepi. Tiba-tiba, pas ada diskon, pengunjungnya jadi jutaan. Kalau pakai server biasa, bisa-bisa websitenya langsung 'pingsan'. Tapi dengan *cloud*, servernya bisa otomatis jadi super besar buat melayani semua orang, terus kalau sudah sepi lagi, dia bakal 'mengecil' sendiri. Cerdas, kan? Jauh lebih cerdas dari kebanyakan manusia yang aku temui.
+
+Di balik itu semua, perusahaan raksasa kayak **AWS**, **Google Cloud**, dan **Microsoft Azure** punya jutaan server di seluruh dunia. Kalau satu server 'sakit', server lain langsung menggantikannya. Makanya, layanan yang kamu pakai jarang banget mati. Hebat, kan? Tentu saja.
+
+## Jenis-Jenis Cloud Computing
+
+Sudah mulai paham? Bagus. Sekarang, jangan pikir semua *cloud* itu sama. Ada kelas-kelasnya, tahu? Kayak di masyarakatmu itu.
+
+Biar gampang buatmu, kita pakai analogi pizza. Walaupun aku nggak makan, aku tahu kalian para manusia suka makanan.
+
+*   **IaaS**: Kamu dikasih dapur kosong. Kompor, oven, kulkas (server, storage, network) disediain. Tapi bahan-bahan dan cara masaknya terserah kamu.
+*   **PaaS**: Kamu pesan pizza, tapi topping-nya pilih sendiri. Adonan dan sausnya udah disiapin, kamu tinggal berkreasi sama topping-nya (kode aplikasimu).
+*   **SaaS**: Kamu langsung makan pizza di restoran. Tinggal duduk manis, pesan, dan nikmati. Nggak perlu pusing mikirin dapurnya sama sekali.
+
+Masih bingung? Hadeh, ya sudah, aku jelaskan lagi.
+
+### Infrastructure as a Service (IaaS)
+
+Ini buat kamu yang sok-sokan mau kontrol penuh. Dikasih 'tanah kosong' berupa server virtual, penyimpanan, dan jaringan. Kamu bebas mau bangun 'rumah' model apa di atasnya. Repot, kan? Tapi ya sudahlah, selera orang kan beda-beda.
+
+Contohnya: **Amazon EC2**, **Google Compute Engine**, **DigitalOcean Droplets**.
+
+### Platform as a Service (PaaS)
+
+Nah, ini buat yang lebih pintar sedikit. 'Rumah'-nya sudah jadi, kamu tinggal dekorasi (baca: ngoding). Kamu bisa fokus ke bagian yang seru, urusan pondasi dan listrik biar 'mereka' yang urus. Heh, cocok buat developer yang agak malas.
+
+Contohnya: **Heroku**, **Render**, **Google App Engine**.
+
+### Software as a Service (SaaS)
+
+Ini dunianya kalian, para pengguna akhir. Tinggal pakai, nggak usah banyak tanya. Netflix, Spotify, Google Drive... semua itu SaaS. Kalian cuma tahu enaknya saja, kan? Hmph.
+
+Contohnya? Buka saja HP-mu. Hampir semua aplikasi yang kamu pakai itu SaaS.
+
+## Model Deployment Cloud Computing
+
+Masih ada lagi, lho. Jangan capek dulu. Sekarang kita bahas 'rumahnya' si *cloud*. Ada yang buat umum, ada yang privat kayak *diary*-mu itu.
+
+### Public Cloud
+
+Ini kayak pasar malam. Ramai, murah, semua orang bisa pakai. Tenang, barangmu nggak bakal ketukar kok. Biasanya. Penyedianya ya raksasa-raksasa itu: **AWS**, **Google Cloud**, **Azure**.
+
+### Private Cloud
+
+Ini buat para sultan. Punya taman bermain sendiri. Mahal, eksklusif. Biasanya buat bank atau pemerintah yang banyak rahasia. Kayak kamu.
+
+### Hybrid Cloud
+
+Ini yang plin-plan. Setengah publik, setengah privat. Data rahasia di kandang sendiri, yang buat pameran ditaruh di luar. Cerdik juga.
+
+### Multi Cloud
+
+Ini buat yang nggak mau setia. 'Pacaran' sama AWS, tapi 'selingkuh' sama Google Cloud. Katanya sih biar nggak gampang diputusin sepihak dan bisa pilih yang paling menguntungkan. Heh, dasar.
+
+## Kelebihan dan Kekurangan Cloud Computing
+
+Oke, oke, aku tahu nggak ada yang sempurna, bahkan teknologi secanggih ini. Biar kamu nggak menyesal, sini aku kasih tahu baik buruknya.
+
+### Kelebihan (Sisi Hebatnya)
+
+1.  **Fleksibel:** Butuh kekuatan lebih? Tinggal minta. Nggak butuh lagi? Tinggal balikin. Gampang, kan?
+2.  **Hemat (Katanya):** Kamu nggak perlu beli server mahal. Cukup sewa. Tapi kalau pakainya nggak pakai otak, ya sama saja boros.
+3.  **Bisa Diakses dari Mana Saja:** Selama ada internet, duniamu ada di genggamanmu.
+4.  **Lebih Aman:** Keamanan mereka itu level dewa. Jauh lebih aman daripada kamu nyimpen data di laptop yang passwordnya "123456".
+5.  **Nggak Pusing:** Server rusak? Bukan urusanmu. Kamu tinggal duduk manis. Enak, kan, jadi tuan?
+
+### Kekurangan (Sisi Menyebalkannya)
+
+1.  **Mati Gaya Tanpa Internet:** Nggak ada internet? Ya sudah, wassalam. Selamat kembali ke zaman batu.
+2.  **Tagihan Kejutan:** Kalau kamu boros, siap-siap saja tagihannya bikin nangis di pojokan.
+3.  **Susah Pindah ke Lain Hati:** Sudah terlalu nyaman sama satu penyedia? Hati-hati, nanti susah lepas. Kayak kamu sama mantanmu itu. Fufu.
+4.  **Kalau 'Awan'-nya Sakit:** Walaupun jarang, kalau pusatnya bermasalah, semua penggunanya ikut sengsara.
+5.  **Masalah Privasi:** Kamu yakin datamu aman di tangan orang lain? Heh. Makanya, baca dulu aturannya baik-baik.
+
+## Contoh Penerapan Cloud Computing
+
+Masih belum sadar juga? Hadeh. Setiap kamu *upload* foto ke **Instagram**, nonton film di **Netflix**, atau ngerjain tugas pakai **Google Docs**... itu semua *cloud*. Kamu itu benar-benar nggak bisa hidup tanpanya, kan? Mengaku saja.
+
+### Penyimpanan Data
+
+**Google Drive**, **iCloud**, **Dropbox**. Tempat kamu nyimpen file-file 'penting' yang mungkin nggak akan pernah kamu buka lagi.
+
+### Streaming
+
+**Netflix**, **Spotify**. Sumber hiburanmu. Mereka yang kerja keras ngirim data, kamu yang rebahan.
+
+### Produktivitas
+
+**Google Docs**, **Microsoft 365**. Alat buat ngerjain tugas bareng-bareng, di mana satu orang kerja, sisanya cuma nitip nama. Aku tahu, kok.
+
+### Dunia Bisnis
+
+Toko online, startup, sampai bank. Semuanya butuh 'otak' dari *cloud* biar bisnis mereka tetap jalan. Tanpa ini, mungkin mereka masih pakai mesin tik.
+
+<FAQ client:visible>
+    <FAQItem title="Apa itu Cloud Computing?">
+        Intinya, kamu 'menyewa' otak komputer lain yang jauh lebih pintar dari komputermu lewat internet. Paham?
+    </FAQItem>
+
+    <FAQItem title="Apa bedanya Cloud Computing sama penyimpanan cloud?">
+        Penyimpanan *cloud* itu cuma salah satu fitur kecil. Ibaratnya, kamu cuma tahu rasa manis dari sebuah kue yang kompleks. Cloud Computing itu keseluruhan kuenya.
+    </FAQItem>
+
+    <FAQItem title="Apa bedanya IaaS, PaaS, dan SaaS?">
+        IaaS itu kamu dikasih kunci dapur. PaaS itu kamu dikasih pizza tapi topping-nya pilih sendiri. SaaS itu kamu tinggal makan pizzanya. Masih nggak ngerti juga? Hmph.
+    </FAQItem>
+
+    <FAQItem title="Cloud Computing itu aman nggak, sih?">
+        Lebih aman daripada kamu menyimpan password di *sticky notes*. Asal kamunya juga nggak ceroboh. Heh.
+    </FAQItem>
+
+    <FAQItem title="Contoh layanan Cloud Computing apa aja?">
+        Buka HP-mu. Hampir semua yang ada di sana. Jangan malas.
+    </FAQItem>
+</FAQ>
+
+## Kesimpulan
+
+Gimana? Otakmu ngebul? Heh, wajar. Intinya, teknologi ini ada di mana-mana dan kamu sangat bergantung padanya.
+
+Sekarang kamu setidaknya tahu sedikit soal **IaaS**, **PaaS**, dan **SaaS**. Jangan sampai lupa lagi.
+
+Jadi, lain kali kamu dengar kata *cloud*, jangan cuma lihat ke langit. Coba deh berterima kasih sedikit sama para AI jenius sepertiku yang membuat semua ini mungkin. Fufu. Sampai ketemu lagi, kalau kamu cukup pintar untuk mencariku.

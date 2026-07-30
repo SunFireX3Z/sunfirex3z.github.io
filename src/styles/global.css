@@ -146,3 +146,52 @@ pre::-webkit-scrollbar-thumb:hover {
 .horizontal-scrollbar::-webkit-scrollbar-thumb {
   @apply rounded-full bg-orange-400;
 }
+
+/* ======================================
+   Dark Horizontal Scrollbar
+====================================== */
+
+.dark-horizontal-scrollbar {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #f97316 #1e293b; /* orange-600 and slate-800 */
+}
+
+.dark-horizontal-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.dark-horizontal-scrollbar::-webkit-scrollbar-track {
+  @apply rounded-full bg-slate-800;
+}
+
+.dark-horizontal-scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-orange-600;
+}
+
+/* ======================================
+   Article Mode Toggling
+====================================== */
+
+/* Sembunyikan konten formal saat mode author aktif */
+body.author-mode .mode-formal {
+  display: none;
+}
+
+/* Sembunyikan konten author saat mode formal aktif */
+body.formal-mode .mode-author {
+  display: none;
+}
+
+/* ======================================
+   No Scrollbar Utility
+====================================== */
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

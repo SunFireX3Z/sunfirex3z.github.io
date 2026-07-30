@@ -5,6 +5,7 @@ import { posts } from '@/data/posts';
 import TableOfContents from '@/components/article/TableOfContents.jsx';
 import ShareButton from '@/components/article/ShareButton.jsx';
 import RelatedPostCard from '@/components/article/RelatedPostCard.astro';
+import ArticleModeSwitcher from '@/components/article/ArticleModeSwitcher.jsx';
 import RelatedPostCardMobile from '@/components/article/RelatedPostCardMobile.astro';
 import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
@@ -19,26 +20,36 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-
 if (!post) {
     return Astro.redirect('/404');
 }
 
-const { metadata, Content } = post;
-const headings = await post.getHeadings();
+const { metadata, Content, AuthorContent } = post;
 
-// Proses headings menjadi struktur bersarang untuk TOC
-const tocItems = [];
-let currentH2Group = null;
+// Helper function untuk memproses headings menjadi struktur bersarang untuk TOC
+const processHeadingsToToc = (headings) => {
+    const tocItems = [];
+    let currentH2Group = null;
+    headings.forEach((heading) => {
+        if (heading.depth === 2) {
+            currentH2Group = { text: heading.text, slug: heading.slug, level: 'h2', children: [] };
+            tocItems.push(currentH2Group);
+        } else if (heading.depth === 3 && currentH2Group) {
+            currentH2Group.children.push({ text: heading.text, slug: heading.slug, level: 'h3' });
+        }
+    });
+    return tocItems;
+};
 
-headings.forEach((heading) => {
-    if (heading.depth === 2) {
-        currentH2Group = { text: heading.text, slug: heading.slug, level: 'h2', children: [] };
-        tocItems.push(currentH2Group);
-    } else if (heading.depth === 3 && currentH2Group) {
-        currentH2Group.children.push({ text: heading.text, slug: heading.slug, level: 'h3' });
-    }
-});
+// Ambil dan proses headings untuk kedua mode
+const standardHeadings = await post.getHeadings();
+const standardTocItems = processHeadingsToToc(standardHeadings);
+
+let authorTocItems = [];
+if (post.getAuthorHeadings) {
+    const authorHeadings = await post.getAuthorHeadings();
+    authorTocItems = processHeadingsToToc(authorHeadings);
+}
 
 // Cari artikel terkait
 const relatedPosts = posts
@@ -181,15 +192,48 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                             )}
                         </div>
                         <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-4">{metadata.title}</h1>
-                        <div class="flex items-center gap-3">
-                            <Image src={metadata.authorAvatar} alt={metadata.author} class="h-10 w-10 rounded-full" width={40} height={40} format="webp" />
-                            <span class="font-semibold text-gray-800">{metadata.author}</span>
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <Image src={metadata.authorAvatar} alt={metadata.author} class="h-10 w-10 rounded-full" width={40} height={40} format="webp" />
+                                <span class="font-semibold text-gray-800">{metadata.author}</span>
+                            </div>
+                            {/* Tampilkan switcher hanya jika ada konten Author's Style */}
+                            {AuthorContent && (
+                                <div class="not-prose">
+                                    <ArticleModeSwitcher client:visible authorName={metadata.author} />
+                                </div>
+                            )}
                         </div>
                     </header>
 
-                    {tocItems.length > 0 && <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden"><TableOfContents client:visible items={tocItems} /></div>}
+                    {/* Mobile Table of Contents */}
+                    {AuthorContent ? (
+                        <>
+                            {standardTocItems.length > 0 && (
+                                <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden mode-formal">
+                                    <TableOfContents client:visible items={standardTocItems} contentId="content-standard" />
+                                </div>
+                            )}
+                            {authorTocItems.length > 0 && (
+                                <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden mode-author">
+                                    <TableOfContents client:visible items={authorTocItems} contentId="content-author" />
+                                </div>
+                            )}
+                        </>
+                    ) : (standardTocItems.length > 0 && <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden"><TableOfContents client:visible items={standardTocItems} /></div>)
+                    }
 
-                    <article class="prose lg:prose-lg max-w-none"><Content /></article>
+                    <article class="prose lg:prose-lg max-w-none">
+                        {/* Jika ada AuthorContent, tampilkan kedua mode dan biarkan CSS yang mengatur visibilitasnya */}
+                        {AuthorContent ? (
+                            <>
+                                <div id="content-standard" class="mode-formal"><Content /></div>
+                                <div id="content-author" class="mode-author"><AuthorContent /></div>
+                            </>
+                        ) : (
+                            <Content /> // Jika tidak ada AuthorContent, tampilkan Content (Standard) secara langsung
+                        )}
+                    </article>
                     
                     {metadata.tags && metadata.tags.length > 0 && (
                         <div class="not-prose mt-12 border-t border-gray-200 pt-6">
@@ -238,7 +282,19 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
             <aside class="hidden lg:block lg:col-span-1">
                 <div class="sticky top-40 flex flex-col gap-8">
                     <ShareButton client:visible />
-                    {tocItems.length > 0 && <TableOfContents client:visible items={tocItems} />}
+                    {/* Desktop Table of Contents */}
+                    {AuthorContent ? (
+                        <>
+                            <div class="mode-formal">
+                                {standardTocItems.length > 0 && <TableOfContents client:visible items={standardTocItems} contentId="content-standard" />}
+                            </div>
+                            <div class="mode-author">
+                                {authorTocItems.length > 0 && <TableOfContents client:visible items={authorTocItems} contentId="content-author" />}
+                            </div>
+                        </>
+                    ) : (
+                        standardTocItems.length > 0 && <TableOfContents client:visible items={standardTocItems} />
+                    )}
                     <ArticleInfo metadata={metadata} />
 
                     <div class="rounded-lg bg-white p-6 shadow-md">

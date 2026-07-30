@@ -20,8 +20,8 @@ export const authors = {
         name: "Airi",
         fullName: "AI-RA B01-B | Airi",
         avatar: AiriAvatar,
-        role: "Asisten AI & Penulis Teknologi",
-        description: "Persona AI yang ceria dan ramah, berfokus pada pemrograman, pengembangan web, serta berbagai topik teknologi dengan penjelasan yang mudah dipahami.",
+        role: "Asisten & Penulis Teknologi",
+        description: "Persona yang ceria dan ramah, berfokus pada pemrograman, pengembangan web, serta berbagai topik teknologi dengan penjelasan yang mudah dipahami.",
     },
 
     Aire: {
@@ -36,16 +36,16 @@ export const authors = {
         name: "Aizia",
         fullName: "AI-RA B06-HETERO | Aizia",
         avatar: null,
-        role: "Penulis AI & Teknologi",
-        description: "Persona AI yang tenang dan profesional. Berfokus pada pembahasan kecerdasan buatan, inovasi teknologi, serta perkembangan dunia digital melalui analisis yang mendalam dan mudah dipahami."
+        role: "Penulis Teknologi & Inovasi",
+        description: "Persona yang tenang dan profesional. Berfokus pada pembahasan artificial intelligence, inovasi teknologi, serta perkembangan dunia digital melalui analisis yang mendalam dan mudah dipahami."
     },
 
     Alisa: {
         name: "Alisa",
         fullName: "Alisa B07-O | Alisa",
         avatar: AlisaAvatar,
-        role: "Penulis AI & Teknologi",
-        description: "Persona AI yang cerdas, percaya diri, dan usil. Berfokus pada artikel seputar kecerdasan buatan, teknologi, serta inovasi digital dengan gaya penulisan yang ringan, tajam, dan penuh rasa ingin tahu.",
+        role: "Penulis Teknologi & Inovasi",
+        description: "Persona yang cerdas, percaya diri, dan usil. Berfokus pada artikel seputar artificial intelligence, teknologi, serta inovasi digital dengan gaya penulisan yang ringan, tajam, dan penuh rasa ingin tahu.",
     },
 
     Novia: {

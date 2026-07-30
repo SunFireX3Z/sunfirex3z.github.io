@@ -25,6 +25,10 @@ function Header({ currentPath, posts }) {
     const [isSearchActive, setIsSearchActive] = useState(false);
     const searchContainerRef = useRef(null);
 
+    const navScrollRef = useRef(null);
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(false);
+
     const categories = [...new Set(posts.map(p => p.category))];
     const closeMenu = () => setIsMenuOpen(false);
 
@@ -66,6 +70,45 @@ function Header({ currentPath, posts }) {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Fungsi untuk memeriksa status scroll pada navigasi kategori
+    const checkScroll = () => {
+        const el = navScrollRef.current;
+        if (el) {
+            // Sedikit toleransi agar panah tidak langsung hilang
+            const tolerance = 5;
+            const hasOverflow = el.scrollWidth > el.clientWidth;
+            setShowLeftArrow(hasOverflow && el.scrollLeft > tolerance);
+            setShowRightArrow(hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - tolerance);
+        }
+    };
+
+    // Efek untuk menambahkan event listener pada navigasi kategori
+    useEffect(() => {
+        const navElement = navScrollRef.current;
+        // Cek setelah sedikit delay untuk memastikan layout sudah stabil
+        const timer = setTimeout(() => checkScroll(), 100);
+        
+        if (navElement) {
+            navElement.addEventListener('scroll', checkScroll, { passive: true });
+            window.addEventListener('resize', checkScroll);
+        }
+
+        return () => {
+            clearTimeout(timer);
+            navElement?.removeEventListener('scroll', checkScroll);
+            window.removeEventListener('resize', checkScroll);
+        };
+    }, [categories]); // Dijalankan ulang jika kategori berubah
+
+    // Fungsi untuk menggeser navigasi
+    const scrollNav = (direction) => {
+        const el = navScrollRef.current;
+        if (el) {
+            const scrollAmount = el.clientWidth * 0.8; // Scroll 80% dari lebar yang terlihat
+            el.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+        }
+    };
 
     // Hitung lebar yang akan dirender berdasarkan tinggi CSS (h-14 = 56px) dan rasio aspek asli gambar
     // Ini untuk mencegah Cumulative Layout Shift (CLS)
@@ -241,19 +284,43 @@ function Header({ currentPath, posts }) {
                     <div className="mr-8">
                         <h1 className="font-bold text-xl text-white">KATEGORI BLOG</h1>
                     </div>
-                    <div className="flex-1 min-w-0">
-                        <nav className="flex flex-wrap gap-3">
-                            {categories.map(cat => (
-                                <NavLink
-                                    key={cat}
-                                    href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`}
-                                    currentPath={currentPath}
-                                    className={({ isActive }) => `px-4 py-2 text-sm font-medium capitalize rounded-md ${isActive ? 'bg-orange-500 text-white shadow-md' : 'text-slate-300 bg-no-repeat bg-gradient-to-r from-amber-500 to-orange-500 bg-[length:0%_100%] hover:bg-[length:100%_100%] hover:text-white transition-[background-size,color] duration-300'}`}
-                                >
-                                    {cat}
-                                </NavLink>
-                            ))}
-                        </nav>
+                    <div className="flex-1 min-w-0 relative">
+                        {/* Left Arrow & Fade */}
+                        <div className={`absolute left-0 top-0 bottom-0 z-10 flex items-center bg-gradient-to-r from-slate-900 to-transparent pr-10 pointer-events-none transition-opacity duration-300 ${showLeftArrow ? 'opacity-100' : 'opacity-0'}`}>
+                            <button
+                                onClick={() => scrollNav('left')}
+                                className="p-1 rounded-full text-white bg-slate-700/50 hover:bg-slate-700/80 transition-colors pointer-events-auto -ml-2"
+                                aria-label="Scroll left"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+                            </button>
+                        </div>
+
+                        <div ref={navScrollRef} className="overflow-x-auto no-scrollbar">
+                            <nav className="flex flex-nowrap gap-3 px-4">
+                                {categories.map(cat => (
+                                    <NavLink
+                                        key={cat}
+                                        href={`/blog/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                                        currentPath={currentPath}
+                                        className={({ isActive }) => `px-4 py-2 text-sm font-medium capitalize rounded-md flex-shrink-0 ${isActive ? 'bg-orange-500 text-white shadow-md' : 'text-slate-300 bg-no-repeat bg-gradient-to-r from-amber-500 to-orange-500 bg-[length:0%_100%] hover:bg-[length:100%_100%] hover:text-white transition-[background-size,color] duration-300'}`}
+                                    >
+                                        {cat}
+                                    </NavLink>
+                                ))}
+                            </nav>
+                        </div>
+
+                        {/* Right Arrow & Fade */}
+                        <div className={`absolute right-0 top-0 bottom-0 z-10 flex items-center bg-gradient-to-l from-slate-900 to-transparent pl-10 pointer-events-none transition-opacity duration-300 ${showRightArrow ? 'opacity-100' : 'opacity-0'}`}>
+                            <button
+                                onClick={() => scrollNav('right')}
+                                className="p-1 rounded-full text-white bg-slate-700/50 hover:bg-slate-700/80 transition-colors pointer-events-auto -mr-2"
+                                aria-label="Scroll right"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,26 +1,40 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-function TableOfContents({ items }) {
+function TableOfContents({ items, contentId }) {
     const [activeTocSlug, setActiveTocSlug] = useState("");
     const [isTocCollapsed, setIsTocCollapsed] = useState(false);
     const [activeTocGroup, setActiveTocGroup] = useState(null);
+    const tocContainerRef = useRef(null);
 
     useEffect(() => {
         if (items.length === 0) return;
 
         const flatToc = items.flatMap((h2) => [h2, ...h2.children]);
+        const container = tocContainerRef.current;
 
         const handleScroll = () => {
+            // Jika komponen ToC itu sendiri tidak terlihat (misal: display: none),
+            // hentikan eksekusi untuk mencegah interferensi.
+            if (container && container.offsetParent === null) {
+                return;
+            }
+
             const fromTop = 200;
             let currentActiveSlug = "";
 
             for (const item of flatToc) {
-                const element = document.getElementById(item.slug);
+                // Gunakan querySelector yang di-scope ke kontainer konten jika contentId disediakan,
+                // atau fallback ke getElementById jika tidak (untuk artikel mode tunggal).
+                const element = contentId
+                    ? document.querySelector(`#${contentId} #${item.slug}`)
+                    : document.getElementById(item.slug);
 
+                // Jika elemen ditemukan, periksa posisinya.
                 if (element && element.getBoundingClientRect().top < fromTop) {
                     currentActiveSlug = item.slug;
-                } else {
+                } else if (element) {
+                    // Jika elemen ditemukan tapi sudah di bawah threshold, hentikan loop.
                     break;
                 }
             }
@@ -46,7 +60,40 @@ function TableOfContents({ items }) {
         handleScroll();
 
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [items]);
+    }, [items, contentId]);
+
+    // Efek untuk menangani klik pada link TOC secara manual
+    useEffect(() => {
+        const container = tocContainerRef.current;
+        if (!container) return;
+
+        const handleClick = (event) => {
+            const link = event.target.closest('a');
+            
+            // Hanya proses link internal TOC (yang dimulai dengan #)
+            if (link && link.getAttribute('href')?.startsWith('#')) {
+                event.preventDefault();
+                
+                const slug = link.getAttribute('href').substring(1);
+                
+                const element = contentId
+                    ? document.querySelector(`#${contentId} #${slug}`)
+                    : document.getElementById(slug);
+
+                if (element) {
+                    // Offset ini harus cocok dengan kelas `scroll-mt-40` (10rem = 160px) pada heading
+                    const headerOffset = 160; 
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+            }
+        };
+
+        container.addEventListener('click', handleClick);
+        return () => container.removeEventListener('click', handleClick);
+    }, [contentId]); // Jalankan ulang jika contentId berubah
 
     const handleToggleGroup = (groupSlug) => {
         setActiveTocGroup((prevGroup) =>
@@ -60,7 +107,7 @@ function TableOfContents({ items }) {
     );
 
     return (
-        <div className="rounded-lg bg-white p-6 shadow-md">
+        <div className="rounded-lg bg-white p-6 shadow-md" ref={tocContainerRef}>
             <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-bold">Daftar Isi</h2>
 
