@@ -5,6 +5,7 @@ import TerriaAvatar from "../assets/images/avatar/terria.webp";
 import SunnyAvatar from "../assets/images/avatar/sunny.webp";
 import NijiaAvatar from "../assets/images/avatar/nijia.webp";
 import UsagyAvatar from "../assets/images/avatar/usagy.webp";
+import AlisaAvatar from "../assets/images/avatar/alisa.webp";
 
 export const authors = {
     Randy: {
@@ -42,7 +43,7 @@ export const authors = {
     Alisa: {
         name: "Alisa",
         fullName: "Alisa B07-O | Alisa",
-        avatar: null,
+        avatar: AlisaAvatar,
         role: "Penulis AI & Teknologi",
         description: "Persona AI yang cerdas, percaya diri, dan usil. Berfokus pada artikel seputar kecerdasan buatan, teknologi, serta inovasi digital dengan gaya penulisan yang ringan, tajam, dan penuh rasa ingin tahu.",
     },

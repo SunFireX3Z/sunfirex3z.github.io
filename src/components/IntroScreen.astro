@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+---
+
+<div id="intro-screen" class="fixed inset-0 bg-slate-900 z-[9999] flex items-center justify-center transition-opacity duration-500 opacity-0 pointer-events-none">
+  <video
+    id="intro-video"
+    width="512"
+    height="512"
+    class="max-w-xs md:max-w-sm"
+    src="/videos/intro.webm"
+    muted
+    playsinline
+  >
+    Browser Anda tidak mendukung tag video.
+  </video>
+</div>
+
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+    const introScreen = document.getElementById('intro-screen');
+    const introVideo = document.getElementById('intro-video');
+
+    if (!introScreen || !introVideo) return;
+
+    const playIntroAndNavigate = (targetUrl) => {
+      introScreen.classList.remove('opacity-0', 'pointer-events-none');
+
+      introVideo.play().catch(error => {
+        console.error("Gagal memutar video, navigasi langsung:", error);
+        window.location.href = targetUrl;
+      });
+
+      introVideo.onended = () => {
+        introScreen.classList.add('opacity-0');
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 500); // Sesuaikan dengan durasi transisi opacity
+      };
+    };
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[data-nav-to="about"]');
+
+      if (!link || window.location.pathname === '/about') {
+        return;
+      }
+
+      e.preventDefault();
+      playIntroAndNavigate(link.href);
+    });
+  });
+</script>

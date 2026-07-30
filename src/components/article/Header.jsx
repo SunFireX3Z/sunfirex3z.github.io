@@ -14,7 +14,7 @@ function NavLink({ href, children, className, currentPath, onClick }) {
     const isActive = href === "/" ? currentPath === "/" : currentPath.startsWith(href);
     const finalClassName = typeof className === 'function' ? className({ isActive }) : className;
 
-    return <a href={href} className={finalClassName} onClick={onClick}>{children}</a>;
+    return <a href={href} className={finalClassName} onClick={onClick} data-nav-to={href === '/about' ? 'about' : null}>{children}</a>;
 }
 
 function Header({ currentPath, posts }) {

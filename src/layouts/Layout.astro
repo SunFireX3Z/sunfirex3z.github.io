@@ -6,6 +6,7 @@ import SEO from "@/components/article/SEO.astro";
 import { posts } from "@/data/posts";
 import ImageZoom from '@/components/ImageZoom.astro';
 import GoogleAnalytics from '@/components/article/GoogleAnalytics.astro';
+import IntroScreen from '@/components/IntroScreen.astro';
 
 import "../styles/global.css";
 
@@ -64,6 +65,9 @@ const postsForHeader = await Promise.all(
             currentPath={currentPath}
             posts={postsForHeader}
         />
+
+        {/* Intro Screen untuk Halaman "Tentang" */}
+        <IntroScreen />
 
         <main class="mx-auto flex-1 w-full max-w-[90rem] px-6 py-12">
             <slot />
