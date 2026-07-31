@@ -10,24 +10,30 @@ import PlaceholderAvatar from '@/assets/images/avatar/placeholder.webp';
 console.log(Gemini);
 console.log(ChatGPT);
 
-const skills = [
-    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
-    { name: 'JavaScript (ES6+)', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' },
-    { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
-    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg' },
-    { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg' },
-    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
-    { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg' },
-    { name: 'Gemini', icon: Gemini },
-    { name: 'ChatGPT', icon: ChatGPT },
-];
+const skillCategories = {
+    "Bahasa & Framework": [
+        { name: 'JavaScript (ES6+)', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' },
+        { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
+        { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg' },
+        { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg' },
+        { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
+    ],
+    "Tools & Platform": [
+        { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg' },
+        { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
+    ],
+    "Kecerdasan Buatan": [
+        { name: 'Gemini', icon: Gemini },
+        { name: 'ChatGPT', icon: ChatGPT },
+    ]
+};
 ---
 
 <Layout
     title="Tentang Saya"
     description="Pelajari lebih lanjut tentang Randy, penulis di balik SunBlog, dan misi blog ini untuk berbagi pengetahuan seputar teknologi, desain, dan pengembangan web."
 >
-    <div class="space-y-16">
+    <div class="mx-auto w-full max-w-[90rem] px-6 py-16 space-y-16">
         <!-- Header -->
         <section class="border-l-4 border-orange-500 pl-4">
             <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
@@ -89,15 +95,22 @@ const skills = [
                 <!-- Bagian Keahlian -->
                 <div class="rounded-xl bg-white p-6 shadow-md">
                     <h3 class="mb-4 text-xl font-bold text-gray-900">Teknologi & Keahlian</h3>
-                    <div class="flex flex-wrap gap-4">
-                        {skills.map(skill => (
-                            <div class="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2">
-                                {typeof skill.icon === 'string' ? (
-                                    <img src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" width="20" height="20" />
-                                ) : (
-                                    <Image src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" width={20} height={20} />
-                                )}
-                                <span class="text-sm font-semibold text-gray-700">{skill.name}</span>
+                    <div class="space-y-6">
+                        {Object.entries(skillCategories).map(([category, skills]) => (
+                            <div>
+                                <h4 class="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-500">{category}</h4>
+                                <div class="flex flex-wrap gap-4">
+                                    {skills.map(skill => (
+                                        <div class="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2">
+                                            {typeof skill.icon === 'string' ? (
+                                                <img src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" width="20" height="20" />
+                                            ) : (
+                                                <Image src={skill.icon} alt={`${skill.name} icon`} class="h-5 w-5" width={20} height={20} />
+                                            )}
+                                            <span class="text-sm font-semibold text-gray-700">{skill.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         ))}
                     </div>

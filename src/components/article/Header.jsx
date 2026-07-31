@@ -64,7 +64,7 @@ function Header({ currentPath, posts }) {
 
     useEffect(() => {
         const handleScroll = () => {
-            setHasScrolled(window.scrollY > 10);
+            setHasScrolled(window.scrollY > 50); // Kategori blog akan menghilang setelah scroll 100px
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -116,7 +116,7 @@ function Header({ currentPath, posts }) {
     const calculatedRenderedWidth = (Logo.width / Logo.height) * desiredRenderedHeight;
 
     return (
-        <header className="sticky top-0 z-10">
+        <header className="sticky top-0 z-50"> {/* Meningkatkan z-index agar selalu di atas */}
             <div className={`relative z-20 bg-slate-800 transition-all duration-300 border-b-4 ${hasScrolled ? 'shadow-md border-amber-400' : 'border-transparent'}`}>
                 <div className="max-w-[90rem] mx-auto flex flex-row justify-between items-center py-3 px-6">
                     <div className="flex-shrink-0">

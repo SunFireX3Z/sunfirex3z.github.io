@@ -4,15 +4,15 @@ import React, { useState, useEffect } from 'react';
 const MODE_STORAGE_KEY = 'sunblog_article_mode';
 
 function ArticleModeSwitcher({ authorName }) {
-  // Default ke mode 'author'
-  const [mode, setMode] = useState('author');
+  // Default ke mode 'formal' (Standard)
+  const [mode, setMode] = useState('formal');
 
   const authorFirstName = authorName ? authorName.split(' ')[0] : 'Author';
 
   // Saat komponen pertama kali dimuat, periksa sessionStorage untuk preferensi yang tersimpan
   useEffect(() => {
     const savedMode = sessionStorage.getItem(MODE_STORAGE_KEY);
-    const initialMode = savedMode || 'author';
+    const initialMode = savedMode || 'formal'; // Default ke 'formal' jika tidak ada yang tersimpan
     setMode(initialMode);
     
     // Terapkan class ke body

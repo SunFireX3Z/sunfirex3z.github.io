@@ -6,6 +6,8 @@ import SunnyAvatar from "../assets/images/avatar/sunny.webp";
 import NijiaAvatar from "../assets/images/avatar/nijia.webp";
 import UsagyAvatar from "../assets/images/avatar/usagy.webp";
 import AlisaAvatar from "../assets/images/avatar/alisa.webp";
+import LunaAvatar from "../assets/images/avatar/luna.webp";
+import AiziaAvatar from "../assets/images/avatar/aizia.webp";
 
 export const authors = {
     Randy: {
@@ -35,7 +37,7 @@ export const authors = {
     Aizia: {
         name: "Aizia",
         fullName: "AI-RA B06-HETERO | Aizia",
-        avatar: null,
+        avatar: AiziaAvatar,
         role: "Penulis Teknologi & Inovasi",
         description: "Persona yang tenang dan profesional. Berfokus pada pembahasan artificial intelligence, inovasi teknologi, serta perkembangan dunia digital melalui analisis yang mendalam dan mudah dipahami."
     },
@@ -67,7 +69,7 @@ export const authors = {
     Luna: {
         name: "Luna",
         fullName: "Luna Celestia",
-        avatar: null,
+        avatar: LunaAvatar,
         role: "Penulis Tata Surya & Planet",
         description: "Persona yang pemalu dan pendiam, namun memiliki ketertarikan besar terhadap bulan, planet, dan berbagai misteri yang ada di tata surya.",
     },
