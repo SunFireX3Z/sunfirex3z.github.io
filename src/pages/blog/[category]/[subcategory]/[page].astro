@@ -1,0 +1,52 @@
+---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
+import { posts } from "@/data/posts";
+
+export async function getStaticPaths({ paginate }) {
+  const uniqueSubcategories = [
+    ...new Map(
+      posts
+        .filter((post) => post.metadata.subcategory)
+        .map((post) => [
+          `${post.category}/${post.metadata.subcategory}`,
+          {
+            category: post.category.toLowerCase().replace(/\s+/g, "-"),
+            subcategory: post.metadata.subcategory.toLowerCase().replace(/\s+/g, "-"),
+          },
+        ])
+    ).values(),
+  ];
+
+  const paths = [];
+
+  for (const { category, subcategory } of uniqueSubcategories) {
+    const filteredPosts = posts.filter(
+      (post) =>
+        post.category.toLowerCase().replace(/\s+/g, "-") === category &&
+        post.metadata.subcategory?.toLowerCase().replace(/\s+/g, "-") === subcategory
+    );
+
+    const paginatedResult = paginate(filteredPosts, {
+      params: { category, subcategory },
+      pageSize: 12,
+    });
+    paths.push(...paginatedResult);
+  }
+  return paths;
+}
+
+const { page } = Astro.props;
+const { subcategory = "" } = Astro.params;
+
+const formattedSubcategory = subcategory.replace(/-/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+
+const pageTitle = page.currentPage > 1 ? `Subkategori: ${formattedSubcategory} (Halaman ${page.currentPage})` : `Subkategori: ${formattedSubcategory}`;
+const pageDescription = `Menjelajahi semua artikel dalam subkategori ${formattedSubcategory}.`;
+---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={page.data}
+  page={page}
+/>

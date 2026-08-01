@@ -3,10 +3,14 @@ import Layout from '@/layouts/Layout.astro';
 import Card from '@/components/article/Card.astro';
 import CategoryNavLink from '@/components/article/CategoryNavLink.astro';
 import Pagination from '@/components/article/Pagination.astro';
+import CardSkeleton from '@/components/skeletons/CardSkeleton.astro';
 import { posts } from '@/data/posts';
 
 const { pageTitle, pageDescription, filteredPosts, page } = Astro.props;
 const currentPath = Astro.url.pathname;
+
+// Atur jumlah skeleton yang akan ditampilkan, sesuaikan dengan pageSize pada paginasi
+const SKELETON_PAGE_SIZE = 12;
 
 // Ambil semua kategori unik dari postingan untuk navigasi
 const totalPostCount = posts.length;
@@ -41,8 +45,15 @@ const categoriesWithCounts = [
 
         <section>
             {filteredPosts.length > 0 ? (
-                <div class="grid grid-cols-2 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-                    {filteredPosts.map((post) => (<Card {...post.metadata} path={post.path} />))}
+                <div>
+                    {/* Skeleton Placeholder */}
+                    <div id="blog-posts-skeleton" class="grid grid-cols-2 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+                        {Array.from({ length: SKELETON_PAGE_SIZE }).map(() => <CardSkeleton />)}
+                    </div>
+                    {/* Real Content (initially hidden) */}
+                    <div id="blog-posts-content" class="hidden grid grid-cols-2 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+                        {filteredPosts.map((post) => (<Card {...post.metadata} path={post.path} />))}
+                    </div>
                 </div>
             ) : (
                 <div class="text-center py-16">
@@ -56,4 +67,21 @@ const categoriesWithCounts = [
             {page && <Pagination page={page} />}
         </section>
     </div>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Atur penundaan di sini (dalam milidetik) untuk mensimulasikan waktu muat.
+            const loadingDelay = 1000; // Dibuat sedikit lebih cepat untuk halaman sekunder
+
+            setTimeout(() => {
+                const skeletonContainer = document.getElementById('blog-posts-skeleton');
+                const contentContainer = document.getElementById('blog-posts-content');
+
+                if (skeletonContainer && contentContainer) {
+                    skeletonContainer.classList.add('hidden');
+                    contentContainer.classList.remove('hidden');
+                }
+            }, loadingDelay);
+        });
+    </script>
 </Layout>

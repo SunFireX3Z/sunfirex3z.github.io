@@ -1,12 +1,6 @@
 ---
-import BlogPageLayout from '@/layouts/BlogPageLayout.astro';
-import { posts } from '@/data/posts';
-
-const pageTitle = 'Semua Postingan';
-const pageDescription = 'Jelajahi semua artikel, tutorial, dan pemikiran yang telah saya bagikan di sini.';
+// File ini sekarang berfungsi sebagai "pintu gerbang" ke halaman blog.
+// Ia akan secara otomatis mengarahkan pengguna dari /blog ke /blog/1,
+// di mana sistem paginasi dari [page].astro akan mengambil alih.
+return Astro.redirect('/blog/1');
 ---
-<BlogPageLayout
-    pageTitle={pageTitle}
-    pageDescription={pageDescription}
-    filteredPosts={posts}
-/>

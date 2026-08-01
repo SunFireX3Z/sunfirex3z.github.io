@@ -8,6 +8,7 @@ import UsagyAvatar from "../assets/images/avatar/usagy.webp";
 import AlisaAvatar from "../assets/images/avatar/alisa.webp";
 import LunaAvatar from "../assets/images/avatar/luna.webp";
 import AiziaAvatar from "../assets/images/avatar/aizia.webp";
+import IndaNesyaAvatar from "../assets/images/avatar/indanesya.webp";
 
 export const authors = {
     Randy: {
@@ -104,5 +105,13 @@ export const authors = {
         avatar: NijiaAvatar,
         role: "Penulis Musik & Seni",
         description: "Persona yang anggun, ceria, dan menawan dengan jiwa seorang putri. Membahas dunia musik dan seni melalui kisah sejarah, makna lagu, serta keindahan harmoni yang menghubungkan emosi, budaya, dan kehidupan manusia."
+    },
+
+    IndaNesya: {
+        name: "Inda",
+        fullName: "Inda Nesya",
+        avatar: IndaNesyaAvatar,
+        role: "Penulis Indonesia & Nusantara",
+        description: "Persona yang ramah, murah senyum, dan penuh semangat. Membahas artikel seputar Indonesia, mulai dari sejarah, budaya, geografi, kuliner, hingga berbagai keunikan Nusantara. Bangga memperkenalkan Indonesia kepada dunia, tetapi jangan coba-coba salah menyebut fakta tentang tanah air di hadapannya."
     }
 };

@@ -1,15 +1,15 @@
-import thumbnailImage from '@/assets/images/placeholder/national.webp';
+import thumbnailImage from './thumbnail.webp';
 
 export const metadata = {
     title: "Mengapa Burung Garuda Dipilih Sebagai Lambang Negara Indonesia? Sejarah dan Maknanya",
     description: "Pelajari mengapa Burung Garuda dipilih sebagai lambang negara Indonesia, mulai dari sejarah pembuatannya, makna setiap simbol, hingga filosofi di balik Garuda Pancasila.",
     metaDescription: "Mengapa Burung Garuda menjadi lambang negara Indonesia? Simak sejarah Garuda Pancasila, makna setiap simbol, jumlah bulu Garuda, serta filosofi yang terkandung di dalamnya.",
-    publishDate: "31 Juli 2026",
-    lastUpdated: "31 Juli 2026",
+    publishDate: "1 August 2026",
+    lastUpdated: "1 August 2026",
     updatedReason: "",
     series: "",
-    status: "Draft",
-    author: "Novia",
+    status: "Published",
+    author: "Inda Nesya",
     category: "Sejarah",
     subcategory: "Simbol Negara",
     thumbnail: thumbnailImage,

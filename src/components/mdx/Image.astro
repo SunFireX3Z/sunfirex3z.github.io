@@ -1,24 +1,20 @@
 ---
-import { Image } from 'astro:assets';
+import { Image as AstroImage } from 'astro:assets';
 
-const {
-  src,
-  alt,
-  caption,
-  class: className = "",
+const { 
+    src, 
+    alt, 
+    caption, 
+    className, // Ambil className dari props
+    ...rest // Ambil sisa props untuk diteruskan ke AstroImage
 } = Astro.props;
 ---
-<figure class="not-prose my-8 flex flex-col items-center">
-  <Image
-    src={src}
-    alt={alt}
-    class:list={[`w-full rounded-lg object-cover shadow-md`, className]}
-    format="webp"
-    quality={85}
-  />
-  {caption && (
-    <figcaption class="mt-3 text-center text-sm italic text-gray-500">
-      {caption}
-    </figcaption>
-  )}
+<figure class:list={["my-8 flex flex-col items-center", className]}>
+    <AstroImage 
+        src={src} 
+        alt={alt} 
+        class="w-full rounded-lg shadow-md"
+        {...rest}
+    />
+    {caption && <figcaption class="mt-2 text-center text-sm italic text-gray-500">{caption}</figcaption>}
 </figure>

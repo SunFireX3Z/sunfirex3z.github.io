@@ -1,17 +1,13 @@
 ---
 const { href, currentPath, text, count, class: className } = Astro.props;
 
-// Default to checking if the current path starts with the link's href.
-// This works for nested categories like /blog/gaming and /blog/gaming/panduan.
-let isActive = currentPath.startsWith(href);
+const isBlogRoot = href === '/blog';
 
-// If the link is a root path (like /blog or /proyek), we need to be more specific
-// to avoid it being active when we are on a category page.
-const isRootPath = !href.includes('/kategori/') && !href.includes('/tag/');
-if (isRootPath) {
-    // The root path is active only if the current path starts with it,
-    // AND the current path is not a category/tag sub-path.
-    isActive = currentPath.startsWith(href) && !currentPath.includes('/kategori/') && !currentPath.includes('/tag/');
+let isActive;
+if (isBlogRoot) {
+    isActive = /^\/blog(\/\d+)?\/?$/.test(currentPath);
+} else {
+    isActive = currentPath.startsWith(href);
 }
 
 const activeClass = 'bg-orange-600 text-white shadow-md';

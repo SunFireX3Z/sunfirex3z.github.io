@@ -5,5 +5,5 @@ export const siteConfig = {
     url: "https://sunblog.my.id",
     author: "Sun-sama",
     locale: "id_ID",
-    version: "1.8.0",
+    version: "1.9.0",
 };

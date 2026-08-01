@@ -1,0 +1,120 @@
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.astro';
+import Pancasila from './image/pancasila.png';
+import InfoList from '@/components/mdx/InfoList.jsx';
+import Sila1 from './image/sila1.webp';
+import Sila2 from './image/sila2.webp';
+import Sila3 from './image/sila3.webp';
+import Sila4 from './image/sila4.webp';
+import Sila5 from './image/sila5.webp';
+
+export const pancasilaSymbols = [
+  {
+    name: "Bintang",
+    description: "Melambangkan kepercayaan kita kepada Tuhan Yang Maha Esa.",
+    image: Sila1
+  },
+  {
+    name: "Rantai",
+    description: "Menggambarkan hubungan antarmanusia yang tidak terputus.",
+    image: Sila2
+  },
+  {
+    name: "Pohon Beringin",
+    description: "Simbol persatuan, tempat kita semua bernaung.",
+    image: Sila3
+  },
+  {
+    name: "Kepala Banteng",
+    description: "Mewakili semangat musyawarah dan demokrasi.",
+    image: Sila4
+  },
+  {
+    name: "Padi dan Kapas",
+    description: "Cita-cita kita semua untuk mencapai keadilan dan kemakmuran.",
+    image: Sila5
+  }
+];
+
+## Apa Itu Garuda Pancasila?
+Halo, teman-teman! Senang sekali bisa bertemu lagi dengan Inda. Kali ini, kita akan membahas sesuatu yang sangat membanggakan, sesuatu yang menjadi identitas kita sebagai bangsa Indonesia. Apa lagi kalau bukan **Garuda Pancasila**!
+
+<Image src={Pancasila} alt="Garuda Pancasila" caption="Garuda Pancasila, lambang negara kita yang gagah!" className="max-w-md mx-auto"/>
+
+Pasti sudah tidak asing lagi, kan? Lambang negara kita yang gagah perkasa ini ada di mana-mana, mulai dari ruang kelas, kantor pemerintahan, sampai di paspor kita. Tapi, Garuda Pancasila ini bukan sekadar gambar, lho! Ini adalah cerminan jiwa, semangat, dan cita-cita bangsa kita. Setiap detailnya punya makna yang dalam sekali.
+
+Nah, pernah kepikiran nggak, dari sekian banyak hewan hebat di Nusantara, kenapa justru burung Garuda yang dipilih? Jawabannya seru banget dan penuh dengan cerita sejarah. Yuk, kita kupas tuntas bersama!
+
+## Mengapa Burung Garuda Dipilih?
+Jadi begini, teman-teman, pemilihan Garuda itu bukan tanpa alasan! Sosok Garuda ini sudah menjadi bagian dari cerita dan budaya Nusantara sejak zaman kerajaan dulu. Keren, kan? Dalam berbagai kisah, Garuda dikenal sebagai lambang **kekuatan, keberanian, dan kesetiaan**. Nilai-nilai ini pas banget dengan semangat perjuangan bangsa Indonesia!
+
+Kalau kita jalan-jalan ke candi-candi kuno seperti Prambanan, kita bisa menemukan relief atau arca Garuda. Ini bukti kalau nenek moyang kita sudah sangat menghormati sosok ini.
+
+Nah, para pendiri bangsa kita itu cerdas sekali. Mereka memilih Garuda karena sosok ini sudah dikenal di seluruh Nusantara dan tidak terikat pada satu suku atau daerah saja. Jadi, Garuda bisa menjadi simbol pemersatu kita semua, dari Sabang sampai Merauke!
+
+Tapi, jangan salah ya! Garuda Pancasila kita ini bukan sekadar meniru Garuda dari mitologi. Desainnya sudah disempurnakan dan diberi sentuhan khas Indonesia, menjadikannya lambang yang benar-benar milik kita. Bangga, kan?
+
+## Sejarah Lahirnya Garuda Pancasila
+Proses lahirnya Garuda Pancasila ini juga seru banget, lho! Setelah kita merdeka, para pendiri bangsa merasa kita butuh sebuah lambang negara yang gagah. Akhirnya, diadakanlah sayembara, dan rancangan dari **Sultan Hamid II** dari Pontianak terpilih sebagai dasar.
+
+Eits, tapi tidak langsung jadi, ya! Rancangan itu kemudian disempurnakan bersama-sama, termasuk oleh **Presiden Soekarno**. Ada banyak diskusi untuk memastikan lambang ini benar-benar mewakili seluruh rakyat Indonesia.
+
+Di sinilah bagian paling kerennya: ditambahkanlah perisai yang berisi lima sila **Pancasila** di dada Garuda, dan pita **"Bhinneka Tunggal Ika"** yang dicengkeram erat oleh kakinya. Sempurna!
+
+Akhirnya, setelah melalui proses yang matang, Garuda Pancasila diresmikan pada **11 Februari 1950**. Sejak saat itulah, lambang yang agung ini menjadi identitas resmi bangsa kita.
+
+## Makna Setiap Bagian Garuda Pancasila
+Nah, sekarang kita bedah satu per satu makna di balik kegagahan Garuda Pancasila. Siap?
+
+### Lima Lambang Pancasila
+Perisai di dada Garuda itu adalah jantungnya Indonesia, yaitu Pancasila!
+
+<InfoList items={pancasilaSymbols} client:visible />
+
+Keren banget, kan, filosofinya?
+
+### Jumlah Bulu Garuda
+Ini bagian favorit Inda! Coba perhatikan baik-baik, jumlah bulu di Garuda Pancasila itu bukan sembarangan, lho. Ini adalah 'kode rahasia' tanggal kemerdekaan kita!
+
+- **17 helai** bulu di setiap sayap (tanggal 17)
+- **8 helai** bulu di ekor (bulan ke-8, Agustus)
+- **19 helai** bulu di pangkal ekor (dua angka pertama tahun 1945)
+- **45 helai** bulu di leher (dua angka terakhir tahun 1945)
+
+Jadi kalau digabung, jadilah **17-8-1945**! Luar biasa, kan? Para pendiri bangsa kita benar-benar memikirkan setiap detailnya dengan cermat.
+
+## Mengapa Garuda Pancasila Tetap Relevan?
+Mungkin ada yang bertanya, "Apakah Garuda Pancasila masih penting di zaman sekarang?" Jawabannya: **SANGAT PENTING!**
+
+Di tengah dunia yang terus berubah, nilai-nilai yang ada di dalam Garuda Pancasila—persatuan, keadilan, gotong royong—justru menjadi pegangan kita. Lambang ini selalu mengingatkan kita bahwa Indonesia itu hebat karena keberagamannya, yang disatukan oleh semangat **Bhinneka Tunggal Ika**.
+
+Jadi, teman-teman, yuk, kita pahami Garuda Pancasila bukan cuma sebagai hafalan di sekolah. Mari kita hayati maknanya dan tunjukkan semangatnya dalam kehidupan sehari-hari. Itulah cara kita menjadi bagian dari bangsa yang besar ini!
+
+<FAQ client:visible>
+    <FAQItem title="Apakah Garuda Pancasila itu burung asli?">
+        Bukan, teman-teman. Garuda Pancasila terinspirasi dari sosok Garuda dalam mitologi Nusantara yang melambangkan kekuatan dan keberanian. Jadi, ini bukan spesies burung yang ada di dunia nyata, ya!
+    </FAQItem>
+    <FAQItem title="Siapa sih yang mendesain Garuda Pancasila?">
+        Desain awalnya dibuat oleh **Sultan Hamid II** dari Pontianak. Kemudian, desain tersebut disempurnakan bersama para pendiri bangsa, termasuk Presiden Soekarno, hingga menjadi lambang yang kita kenal sekarang.
+    </FAQItem>
+    <FAQItem title="Kenapa jumlah bulu Garuda itu spesifik banget?">
+        Karena jumlah bulunya melambangkan tanggal Proklamasi Kemerdekaan kita: **17 Agustus 1945**. Ada 17 bulu di sayap, 8 di ekor, 19 di pangkal ekor, dan 45 di leher. Keren, kan?
+    </FAQItem>
+    <FAQItem title="Apa arti 'Bhinneka Tunggal Ika'?">
+        Artinya adalah **"Berbeda-beda tetapi tetap satu."** Ini semboyan bangsa kita yang menegaskan bahwa meskipun kita beragam suku, agama, dan budaya, kita semua adalah satu, yaitu Indonesia!
+    </FAQItem>
+    <FAQItem title="Di mana saja Garuda Pancasila harus dipasang?">
+        Sebagai lambang negara, Garuda Pancasila dipasang di tempat-tempat resmi seperti istana kepresidenan, gedung pemerintahan, kantor perwakilan di luar negeri, dan tentu saja, di ruang-ruang kelas kita!
+    </FAQItem>
+</FAQ>
+
+## Kesimpulan
+Jadi, teman-teman, Garuda Pancasila itu jauh lebih dari sekadar lambang. Ia adalah rangkuman dari sejarah, perjuangan, dan cita-cita luhur bangsa Indonesia. Dari pemilihan sosok Garuda yang legendaris, perisai Pancasila di dadanya, hingga jumlah bulu yang menyimpan tanggal kemerdekaan kita, semuanya dirancang dengan penuh makna.
+
+Semoga setelah ini, setiap kali kita melihat Garuda Pancasila, hati kita jadi makin bangga menjadi orang Indonesia. Mari kita jaga persatuan dan teruskan semangat yang diwakili oleh lambang negara kita yang hebat ini! Maju terus, Indonesia!

@@ -1,0 +1,17 @@
+---
+import { posts } from "@/data/posts";
+
+export function getStaticPaths() {
+  const allTags = [...new Set(posts.flatMap((post) => post.metadata.tags ?? []))];
+
+  return allTags.map((tag) => ({
+    params: {
+      tag: tag.toLowerCase().replace(/\s+/g, '-'),
+    },
+  }));
+}
+
+// Redirect /blog/tag/tag-slug ke /blog/tag/tag-slug/1
+const { tag } = Astro.params;
+return Astro.redirect(`/blog/tag/${tag}/1`);
+---

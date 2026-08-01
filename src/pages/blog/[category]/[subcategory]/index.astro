@@ -1,0 +1,28 @@
+---
+import { posts } from "@/data/posts";
+
+export function getStaticPaths() {
+  const uniqueSubcategories = [
+    ...new Map(
+      posts
+        .filter((post) => post.metadata.subcategory)
+        .map((post) => [
+          `${post.category}/${post.metadata.subcategory}`,
+          {
+            params: {
+              category: post.category.toLowerCase().replace(/\s+/g, "-"),
+              subcategory: post.metadata.subcategory
+                .toLowerCase()
+                .replace(/\s+/g, "-"),
+            },
+          },
+        ])
+    ).values(),
+  ];
+  return uniqueSubcategories;
+}
+
+// Redirect /blog/category/subcategory ke /blog/category/subcategory/1
+const { category, subcategory } = Astro.params;
+return Astro.redirect(`/blog/${category}/${subcategory}/1`);
+---

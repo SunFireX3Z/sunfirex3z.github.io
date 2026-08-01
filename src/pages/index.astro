@@ -3,6 +3,10 @@ import Layout from '@/layouts/Layout.astro';
 import Card from '@/components/article/Card.astro';
 import ProjectCard from '@/components/proyek/ProjectCard.astro';
 import FeaturedCard from '@/components/article/FeaturedCard.astro';
+import CardSkeleton from '@/components/skeletons/CardSkeleton.astro';
+import CardLargeSkeleton from '@/components/skeletons/CardLargeSkeleton.astro';
+import FeaturedCardSkeleton from '@/components/skeletons/FeaturedCardSkeleton.astro';
+import ProjectCardSkeleton from '@/components/skeletons/ProjectCardSkeleton.astro';
 import { Image } from 'astro:assets'; // Import Image component
 import heroBannerBg from '@/assets/images/hero-banner-bg.webp';
 import { posts, latestPost, featuredPosts, recentPosts } from '@/data/posts';
@@ -23,6 +27,9 @@ const projects = Object.values(projectModules)
 
 // Ambil 3 proyek terbaru
 const recentProjectsList = projects.slice(0, 3);
+
+// Atur jumlah skeleton yang akan ditampilkan
+const SKELETON_COUNT = 3;
 
 ---
 
@@ -96,8 +103,15 @@ const recentProjectsList = projects.slice(0, 3);
                 </h2>
 
                 {latestPost && (
-                    <div class="flex-1">
-                        <Card {...latestPost.metadata} path={latestPost.path} isLarge />
+                    <div class="flex-1 h-full">
+                        {/* Skeleton Placeholder */}
+                        <div id="latest-post-skeleton" class="h-full">
+                            <CardLargeSkeleton />
+                        </div>
+                        {/* Real Content (initially hidden) */}
+                        <div id="latest-post-content" class="hidden h-full">
+                            <Card {...latestPost.metadata} path={latestPost.path} isLarge />
+                        </div>
                     </div>
                 )}
             </div>
@@ -108,10 +122,19 @@ const recentProjectsList = projects.slice(0, 3);
                     Pilihan Editor
                 </h2>
 
-                <div class="flex flex-1 flex-col justify-between rounded-xl bg-white p-4 shadow-md">
-                    {featuredPosts.map(post => (
-                        <FeaturedCard {...post.metadata} path={post.path} />
-                    ))}
+                <div class="flex-1 rounded-xl bg-white p-4 shadow-md">
+                    <!-- Skeleton Placeholder -->
+                    <div id="featured-posts-skeleton" class="flex h-full flex-col justify-between">
+                        {Array.from({ length: SKELETON_COUNT }).map(() => (
+                            <FeaturedCardSkeleton />
+                        ))}
+                    </div>
+                    <!-- Real Content (initially hidden) -->
+                    <div id="featured-posts-content" class="hidden flex h-full flex-col justify-between">
+                        {featuredPosts.map(post => (
+                            <FeaturedCard {...post.metadata} path={post.path} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
@@ -119,7 +142,14 @@ const recentProjectsList = projects.slice(0, 3);
         {/* Bagian Bawah: Blog Terbaru */}
         <section class="mt-16">
             <h2 class="mb-4 inline-block border-b-4 border-orange-500 pb-1 text-2xl font-bold sm:text-3xl">Artikel Terbaru Lainnya</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Skeleton Placeholder -->
+            <div id="recent-posts-skeleton" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {Array.from({ length: SKELETON_COUNT }).map(() => (
+                    <CardSkeleton />
+                ))}
+            </div>
+            <!-- Real Content (initially hidden) -->
+            <div id="recent-posts-content" class="hidden grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {recentPosts.map(post => (<Card {...post.metadata} path={post.path} />))}
             </div>
         </section>
@@ -131,7 +161,14 @@ const recentProjectsList = projects.slice(0, 3);
                     <h2 class="mb-4 inline-block border-b-4 border-orange-500 pb-1 text-2xl font-bold sm:text-3xl">Proyek Terbaru</h2>
                     <a href="/proyek" class="font-semibold text-orange-600 transition-colors hover:text-orange-700 hover:underline">Lihat Semua Proyek &rarr;</a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skeleton Placeholder -->
+                <div id="recent-projects-skeleton" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {Array.from({ length: SKELETON_COUNT }).map(() => (
+                        <ProjectCardSkeleton />
+                    ))}
+                </div>
+                <!-- Real Content (initially hidden) -->
+                <div id="recent-projects-content" class="hidden grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {recentProjectsList.map(project => (
                         <a href={project.path} class="block h-full"><ProjectCard {...project} /></a>
                     ))}
@@ -139,6 +176,45 @@ const recentProjectsList = projects.slice(0, 3);
             </section>
         )}
     </div>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Atur penundaan di sini (dalam milidetik) untuk mensimulasikan waktu muat.
+            // Contoh: 1500ms = 1.5 detik.
+            const loadingDelay = 1500;
+
+            setTimeout(() => {
+                const skeletonContainer = document.getElementById('recent-posts-skeleton');
+                const contentContainer = document.getElementById('recent-posts-content');
+                const projectSkeletonContainer = document.getElementById('recent-projects-skeleton');
+                const projectContentContainer = document.getElementById('recent-projects-content');
+                const featuredSkeletonContainer = document.getElementById('featured-posts-skeleton');
+                const featuredContentContainer = document.getElementById('featured-posts-content');
+                const latestSkeletonContainer = document.getElementById('latest-post-skeleton');
+                const latestContentContainer = document.getElementById('latest-post-content');
+
+                if (skeletonContainer && contentContainer) {
+                    skeletonContainer.classList.add('hidden');
+                    contentContainer.classList.remove('hidden');
+                }
+
+                if (projectSkeletonContainer && projectContentContainer) {
+                    projectSkeletonContainer.classList.add('hidden');
+                    projectContentContainer.classList.remove('hidden');
+                }
+
+                if (featuredSkeletonContainer && featuredContentContainer) {
+                    featuredSkeletonContainer.classList.add('hidden');
+                    featuredContentContainer.classList.remove('hidden');
+                }
+
+                if (latestSkeletonContainer && latestContentContainer) {
+                    latestSkeletonContainer.classList.add('hidden');
+                    latestContentContainer.classList.remove('hidden');
+                }
+            }, loadingDelay);
+        });
+    </script>
 </Layout>
 
 <style>
