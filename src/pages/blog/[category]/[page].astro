@@ -2,7 +2,8 @@
 import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
 import { posts } from "@/data/posts";
 
-export async function getStaticPaths({ paginate }) {
+export function getStaticPaths() {
+  const PAGE_SIZE = 12;
   const uniqueCategories = [...new Set(posts.map((post) => post.category))];
   const paths = [];
 
@@ -11,25 +12,43 @@ export async function getStaticPaths({ paginate }) {
     const filteredPosts = posts.filter(
       (post) => post.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
     );
+    const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
 
-    const paginatedResult = paginate(filteredPosts, {
-      params: { category: categorySlug },
-      pageSize: 12,
-    });
-    paths.push(...paginatedResult);
+    // Hanya halaman 2 ke atas
+    for (let p = 2; p <= lastPage; p++) {
+      paths.push({ params: { category: categorySlug, page: String(p) } });
+    }
   }
   return paths;
 }
 
-const { page } = Astro.props;
-const { category = "" } = Astro.params;
+const PAGE_SIZE = 12;
+const { category = "", page: pageParam } = Astro.params;
+const currentPage = Number(pageParam);
+
+const filteredPosts = posts.filter(
+  (post) => post.category.toLowerCase().replace(/\s+/g, "-") === category
+);
+const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
+const pageData = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
 const formattedCategory = category
   .replace(/-/g, " ")
-  .replace(/\b\w/g, char => char.toUpperCase());
+  .replace(/\b\w/g, (char) => char.toUpperCase());
 
-const pageTitle = page.currentPage > 1 ? `Kategori: ${formattedCategory} (Halaman ${page.currentPage})` : `Kategori: ${formattedCategory}`;
+const pageTitle = `Kategori: ${formattedCategory} (Halaman ${currentPage})`;
 const pageDescription = `Menjelajahi semua artikel dalam kategori ${formattedCategory}.`;
+
+const page = {
+  data: pageData,
+  currentPage,
+  lastPage,
+  url: {
+    current: `/blog/${category}/${currentPage}`,
+    prev: currentPage === 2 ? `/blog/${category}` : `/blog/${category}/${currentPage - 1}`,
+    next: currentPage < lastPage ? `/blog/${category}/${currentPage + 1}` : undefined,
+  },
+};
 ---
 
 <BlogPageLayout

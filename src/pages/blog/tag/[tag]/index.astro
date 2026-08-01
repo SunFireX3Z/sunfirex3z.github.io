@@ -1,17 +1,47 @@
 ---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
 import { posts } from "@/data/posts";
 
 export function getStaticPaths() {
   const allTags = [...new Set(posts.flatMap((post) => post.metadata.tags ?? []))];
-
   return allTags.map((tag) => ({
-    params: {
-      tag: tag.toLowerCase().replace(/\s+/g, '-'),
-    },
+    params: { tag: tag.toLowerCase().replace(/\s+/g, "-") },
   }));
 }
 
-// Redirect /blog/tag/tag-slug ke /blog/tag/tag-slug/1
-const { tag } = Astro.params;
-return Astro.redirect(`/blog/tag/${tag}/1`);
+const PAGE_SIZE = 12;
+const { tag = "" } = Astro.params;
+
+const filteredPosts = posts.filter((post) =>
+  post.metadata.tags?.some(
+    (t) => t.toLowerCase().replace(/\s+/g, "-") === tag
+  )
+);
+
+const currentPage = 1;
+const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
+const pageData = filteredPosts.slice(0, PAGE_SIZE);
+
+const formattedTag = tag.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+
+const pageTitle = `Tag: #${formattedTag}`;
+const pageDescription = `Menjelajahi semua artikel dengan tag #${formattedTag}.`;
+
+const page = {
+  data: pageData,
+  currentPage,
+  lastPage,
+  url: {
+    current: `/blog/tag/${tag}`,
+    prev: undefined,
+    next: lastPage > 1 ? `/blog/tag/${tag}/2` : undefined,
+  },
+};
 ---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={page.data}
+  page={page}
+/>

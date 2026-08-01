@@ -1,4 +1,4 @@
 ---
-// File ini berfungsi sebagai pengarah dari /blog/tag ke /blog/1
-return Astro.redirect('/blog/1');
+// /blog/tag tidak punya halaman listing, redirect ke blog utama
+return Astro.redirect('/blog');
 ---

@@ -1,4 +1,5 @@
 ---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
 import { posts } from "@/data/posts";
 
 export function getStaticPaths() {
@@ -7,22 +8,55 @@ export function getStaticPaths() {
       posts
         .filter((post) => post.metadata.subcategory)
         .map((post) => [
-          `${post.category}/${post.metadata.subcategory}`,
+          `${post.category.toLowerCase().replace(/\s+/g, "-")}/${post.metadata.subcategory.toLowerCase().replace(/\s+/g, "-")}`,
           {
-            params: {
-              category: post.category.toLowerCase().replace(/\s+/g, "-"),
-              subcategory: post.metadata.subcategory
-                .toLowerCase()
-                .replace(/\s+/g, "-"),
-            },
+            category: post.category.toLowerCase().replace(/\s+/g, "-"),
+            subcategory: post.metadata.subcategory.toLowerCase().replace(/\s+/g, "-"),
           },
         ])
     ).values(),
   ];
-  return uniqueSubcategories;
+
+  return uniqueSubcategories.map(({ category, subcategory }) => ({
+    params: { category, subcategory },
+  }));
 }
 
-// Redirect /blog/category/subcategory ke /blog/category/subcategory/1
-const { category, subcategory } = Astro.params;
-return Astro.redirect(`/blog/${category}/${subcategory}/1`);
+const PAGE_SIZE = 12;
+const { category = "", subcategory = "" } = Astro.params;
+
+const filteredPosts = posts.filter(
+  (post) =>
+    post.category.toLowerCase().replace(/\s+/g, "-") === category &&
+    post.metadata.subcategory?.toLowerCase().replace(/\s+/g, "-") === subcategory
+);
+
+const currentPage = 1;
+const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
+const pageData = filteredPosts.slice(0, PAGE_SIZE);
+
+const formattedSubcategory = subcategory
+  .replace(/-/g, " ")
+  .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const pageTitle = `Subkategori: ${formattedSubcategory}`;
+const pageDescription = `Menjelajahi semua artikel dalam subkategori ${formattedSubcategory}.`;
+
+const page = {
+  data: pageData,
+  currentPage,
+  lastPage,
+  url: {
+    current: `/blog/${category}/${subcategory}`,
+    prev: undefined,
+    next: lastPage > 1 ? `/blog/${category}/${subcategory}/2` : undefined,
+  },
+};
 ---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={page.data}
+  page={page}
+/>

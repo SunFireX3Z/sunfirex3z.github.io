@@ -2,15 +2,35 @@
 import BlogPageLayout from '@/layouts/BlogPageLayout.astro';
 import { posts } from '@/data/posts';
 
-export async function getStaticPaths({ paginate }) {
-  // Mengatur 12 postingan per halaman
-  return paginate(posts, { pageSize: 12 });
+export function getStaticPaths() {
+    const PAGE_SIZE = 12;
+    const lastPage = Math.ceil(posts.length / PAGE_SIZE);
+    // Hanya halaman 2 ke atas (halaman 1 ditangani oleh index.astro)
+    return Array.from({ length: Math.max(0, lastPage - 1) }, (_, i) => {
+        const page = i + 2;
+        return { params: { page: String(page) } };
+    });
 }
 
-const { page } = Astro.props;
+const PAGE_SIZE = 12;
+const currentPage = Number(Astro.params.page);
+const lastPage = Math.ceil(posts.length / PAGE_SIZE);
+const pageData = posts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
-const pageTitle = page.currentPage > 1 ? `Semua Postingan (Halaman ${page.currentPage})` : 'Semua Postingan';
+const pageTitle = `Semua Postingan (Halaman ${currentPage})`;
 const pageDescription = 'Jelajahi semua artikel, tutorial, dan pemikiran yang telah saya bagikan di sini.';
+
+// Buat objek `page` secara manual agar kompatibel dengan Pagination component
+const page = {
+    data: pageData,
+    currentPage,
+    lastPage,
+    url: {
+        current: `/blog/${currentPage}`,
+        prev: currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`,
+        next: currentPage < lastPage ? `/blog/${currentPage + 1}` : undefined,
+    },
+};
 ---
 <BlogPageLayout
     pageTitle={pageTitle}

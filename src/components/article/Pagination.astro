@@ -33,17 +33,22 @@ const getPaginationNumbers = (currentPage, lastPage, delta = 1) => {
 
 const paginationNumbers = getPaginationNumbers(currentPage, lastPage);
 
-// Helper to get the base path for page URLs (e.g., /blog/pemrograman)
+// Derive base path from the current URL (strip page number if present)
+// e.g., /blog/2 -> /blog, /blog/it-infrastruktur/3 -> /blog/it-infrastruktur
 const getBasePath = (currentUrl) => {
-    const cleanUrl = currentUrl.replace(/\/+$/, '');
-    const parts = cleanUrl.split('/');
+    const clean = currentUrl.replace(/\/+$/, '');
+    const parts = clean.split('/');
     if (!isNaN(parseInt(parts[parts.length - 1], 10))) {
         parts.pop();
     }
     return parts.join('/');
 };
 
-const basePath = getBasePath(url.current);
+// Build href for a given page number
+const getPageHref = (pageNum) => {
+    if (pageNum === 1) return url.prev || getBasePath(url.current);
+    return `${getBasePath(url.current)}/${pageNum}`;
+};
 ---
 
 {lastPage > 1 && (
@@ -71,7 +76,7 @@ const basePath = getBasePath(url.current);
                     <span class="flex h-10 w-10 items-center justify-center text-sm font-semibold text-gray-500">...</span>
                 ) : (
                     <a
-                        href={`${basePath}/${pageNumber}`}
+                        href={getPageHref(pageNumber)}
                         class:list={[
                             "inline-flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-all duration-200",
                             pageNumber === currentPage

@@ -2,13 +2,14 @@
 import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
 import { posts } from "@/data/posts";
 
-export async function getStaticPaths({ paginate }) {
+export function getStaticPaths() {
+  const PAGE_SIZE = 12;
   const uniqueSubcategories = [
     ...new Map(
       posts
         .filter((post) => post.metadata.subcategory)
         .map((post) => [
-          `${post.category}/${post.metadata.subcategory}`,
+          `${post.category.toLowerCase().replace(/\s+/g, "-")}/${post.metadata.subcategory.toLowerCase().replace(/\s+/g, "-")}`,
           {
             category: post.category.toLowerCase().replace(/\s+/g, "-"),
             subcategory: post.metadata.subcategory.toLowerCase().replace(/\s+/g, "-"),
@@ -18,30 +19,53 @@ export async function getStaticPaths({ paginate }) {
   ];
 
   const paths = [];
-
   for (const { category, subcategory } of uniqueSubcategories) {
     const filteredPosts = posts.filter(
       (post) =>
         post.category.toLowerCase().replace(/\s+/g, "-") === category &&
         post.metadata.subcategory?.toLowerCase().replace(/\s+/g, "-") === subcategory
     );
+    const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
 
-    const paginatedResult = paginate(filteredPosts, {
-      params: { category, subcategory },
-      pageSize: 12,
-    });
-    paths.push(...paginatedResult);
+    // Hanya halaman 2 ke atas
+    for (let p = 2; p <= lastPage; p++) {
+      paths.push({ params: { category, subcategory, page: String(p) } });
+    }
   }
   return paths;
 }
 
-const { page } = Astro.props;
-const { subcategory = "" } = Astro.params;
+const PAGE_SIZE = 12;
+const { category = "", subcategory = "", page: pageParam } = Astro.params;
+const currentPage = Number(pageParam);
 
-const formattedSubcategory = subcategory.replace(/-/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+const filteredPosts = posts.filter(
+  (post) =>
+    post.category.toLowerCase().replace(/\s+/g, "-") === category &&
+    post.metadata.subcategory?.toLowerCase().replace(/\s+/g, "-") === subcategory
+);
+const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
+const pageData = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
-const pageTitle = page.currentPage > 1 ? `Subkategori: ${formattedSubcategory} (Halaman ${page.currentPage})` : `Subkategori: ${formattedSubcategory}`;
+const formattedSubcategory = subcategory
+  .replace(/-/g, " ")
+  .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const pageTitle = `Subkategori: ${formattedSubcategory} (Halaman ${currentPage})`;
 const pageDescription = `Menjelajahi semua artikel dalam subkategori ${formattedSubcategory}.`;
+
+const page = {
+  data: pageData,
+  currentPage,
+  lastPage,
+  url: {
+    current: `/blog/${category}/${subcategory}/${currentPage}`,
+    prev: currentPage === 2
+      ? `/blog/${category}/${subcategory}`
+      : `/blog/${category}/${subcategory}/${currentPage - 1}`,
+    next: currentPage < lastPage ? `/blog/${category}/${subcategory}/${currentPage + 1}` : undefined,
+  },
+};
 ---
 
 <BlogPageLayout
