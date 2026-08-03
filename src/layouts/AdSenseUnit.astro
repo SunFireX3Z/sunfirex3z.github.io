@@ -1,0 +1,33 @@
+---
+// src/components/ads/AdSenseUnit.astro
+// Komponen untuk menampilkan satu unit iklan Google AdSense.
+
+interface Props {
+    /** ID unik untuk slot iklan ini, didapatkan dari dashboard AdSense Anda. */
+    slot: string;
+    /** Format iklan, biasanya 'auto' untuk iklan display responsif. */
+    format?: string;
+    /** Kelas CSS tambahan untuk div pembungkus. */
+    className?: string;
+}
+
+const { slot, format = 'auto', className } = Astro.props;
+
+const client = 'ca-pub-2026124918721338'; // ID Publisher Anda
+---
+
+<div class:list={["text-center my-8 min-h-[100px] overflow-hidden", className]}>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client={client}
+         data-ad-slot={slot}
+         data-ad-format={format}
+         data-full-width-responsive="true"></ins>
+    <script is:inline>
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.error("AdSense error:", e);
+        }
+    </script>
+</div>
