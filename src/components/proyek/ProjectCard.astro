@@ -1,6 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-const { title, description, thumbnail, stack, software, repoUrl, liveUrl, downloadUrl, status, type, lastUpdated, visibility } = Astro.props;
+import { PROJECT_THUMBNAIL_DEFAULTS } from '@/config';
+
+const { title, description, thumbnail, stack, software, repoUrl, liveUrl, downloadUrl, status, type, lastUpdated, visibility } = Astro.props; // thumbnail can be ImageMetadata object or string path
 
 const statusStyles = {
     "Selesai": "bg-green-100 text-green-800",
@@ -8,12 +9,34 @@ const statusStyles = {
     "Diarsipkan": "bg-gray-100 text-gray-800",
 };
 
+let imgSrc, imgWidth, imgHeight;
+
+if (typeof thumbnail === 'object' && thumbnail !== null && 'src' in thumbnail) {
+    // Gambar yang diimpor dari `src` memiliki metadata lengkap
+    imgSrc = thumbnail.src;
+    imgWidth = thumbnail.width;
+    imgHeight = thumbnail.height;
+} else {
+    // Gambar dari `public` (string path) akan menggunakan nilai default dari config
+    imgSrc = thumbnail;
+    imgWidth = PROJECT_THUMBNAIL_DEFAULTS.width;
+    imgHeight = PROJECT_THUMBNAIL_DEFAULTS.height;
+}
+
 // Gabungkan stack dan software menjadi satu array 'tools'
 const tools = [...(stack || []), ...(software || [])];
 ---
 <div class="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
     <div class="relative flex-shrink-0 overflow-hidden">
-        <Image src={thumbnail} alt={`Thumbnail for ${title}`} class="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] aspect-video" format="webp" quality={80} />
+        <img
+            src={imgSrc}
+            alt={`Thumbnail for ${title}`}
+            width={imgWidth}
+            height={imgHeight}
+            class="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] aspect-video"
+            loading="lazy"
+            decoding="async"
+        />
         {type && (
             <span class="absolute top-3 left-3 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-800">
                 {type}

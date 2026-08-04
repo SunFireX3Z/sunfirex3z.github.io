@@ -1,10 +1,27 @@
 ---
+import { ARTICLE_THUMBNAIL_DEFAULTS } from '@/config';
 const { path, title, description, author, publishDate, thumbnail, authorAvatar, category } = Astro.props;
+
+let thumbSrc, thumbWidth, thumbHeight;
+if (typeof thumbnail === 'object' && thumbnail !== null && 'src' in thumbnail) {
+    thumbSrc = thumbnail.src;
+    thumbWidth = thumbnail.width;
+    thumbHeight = thumbnail.height;
+} else {
+    thumbSrc = thumbnail;
+    thumbWidth = ARTICLE_THUMBNAIL_DEFAULTS.width;
+    thumbHeight = ARTICLE_THUMBNAIL_DEFAULTS.height;
+}
+
+const avatarSrc = typeof authorAvatar === 'object' && authorAvatar !== null ? authorAvatar.src : authorAvatar;
 ---
 <a href={path} class="group grid grid-cols-1 items-center gap-6 rounded-lg p-4 transition-all duration-300 hover:bg-white hover:shadow-md md:grid-cols-3">
     {/* Thumbnail */}
     <div class="relative col-span-1 overflow-hidden rounded-lg">
-        <img class="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105" src={thumbnail.src} alt={`Thumbnail for ${title}`} />
+        <img class="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
+             src={thumbSrc} alt={`Thumbnail for ${title}`}
+             width={thumbWidth} height={thumbHeight}
+             loading="lazy" decoding="async" />
     </div>
     {/* Content */}
     <div class="col-span-2 flex flex-col">
@@ -19,7 +36,10 @@ const { path, title, description, author, publishDate, thumbnail, authorAvatar, 
         </div>
         <div class="mt-4 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <img class="h-8 w-8 rounded-full object-cover" src={authorAvatar.src} alt={`Avatar of ${author}`} />
+                <img class="h-8 w-8 rounded-full object-cover"
+                     src={avatarSrc} alt={`Avatar of ${author}`}
+                     width={32} height={32}
+                     loading="lazy" decoding="async" />
                 <p class="text-sm font-bold text-gray-900">{author}</p>
             </div>
             <p class="text-sm text-gray-500">{new Date(publishDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</p>

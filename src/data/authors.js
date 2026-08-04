@@ -9,6 +9,8 @@ import AlisaAvatar from "../assets/images/avatar/alisa.webp";
 import LunaAvatar from "../assets/images/avatar/luna.webp";
 import AiziaAvatar from "../assets/images/avatar/aizia.webp";
 import IndaNesyaAvatar from "../assets/images/avatar/indanesya.webp";
+import ZeriaAvatar from "../assets/images/avatar/zeria.webp";
+import AiruAvatar from "../assets/images/avatar/airu.webp";
 
 export const authors = {
     Randy: {
@@ -25,6 +27,14 @@ export const authors = {
         avatar: AiriAvatar,
         role: "Asisten & Penulis Teknologi",
         description: "Persona yang ceria dan ramah, berfokus pada pemrograman, pengembangan web, serta berbagai topik teknologi dengan penjelasan yang mudah dipahami.",
+    },
+
+    Airu: {
+        name: "Airu",
+        fullName: "AI-RA BO3-W | Airu",
+        avatar: AiruAvatar,
+        role: "Penulis Fisika, Matematika, & Sains",
+        description: "Persona yang tenang, lembut, dan penuh perhatian. Berfokus pada fisika, matematika, dan sains dengan gaya penulisan yang sistematis, jelas, serta membantu pembaca memahami setiap konsep langkah demi langkah."
     },
 
     Aire: {
@@ -86,7 +96,7 @@ export const authors = {
     Zeria: {
         name: "Zeria",
         fullName: "Zeria Fiery",
-        avatar: null,
+        avatar: ZeriaAvatar,
         role: "Penulis Teknologi & Inovasi",
         description: "Persona yang ramah, ceria, dan penuh rasa ingin tahu. Berfokus pada artikel seputar teknologi, inovasi digital, serta berbagai perkembangan terbaru dengan gaya penulisan yang jelas dan mudah dipahami.",
     },

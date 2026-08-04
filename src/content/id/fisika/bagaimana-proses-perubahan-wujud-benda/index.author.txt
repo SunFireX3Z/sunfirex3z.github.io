@@ -1,0 +1,217 @@
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.astro';
+
+export const comparisonHeaders = [
+  "Perubahan Wujud",
+  "Dari",
+  "Ke",
+  "Membutuhkan/Melepas Kalor",
+  "Contoh",
+];
+
+export const comparisonRows = [
+  ["Mencair", "Padat", "Cair", "Membutuhkan", "Es batu menjadi air"],
+  ["Membeku", "Cair", "Padat", "Melepas", "Air menjadi es batu"],
+  ["Menguap", "Cair", "Gas", "Membutuhkan", "Air mendidih menjadi uap"],
+  ["Mengembun", "Gas", "Cair", "Melepas", "Uap air menjadi embun"],
+  ["Menyublim", "Padat", "Gas", "Membutuhkan", "Kapur barus mengecil"],
+  ["Mengkristal", "Gas", "Padat", "Melepas", "Pembentukan salju"],
+];
+
+## Apa Itu Perubahan Wujud Benda?
+
+Pernah nggak, kalian melihat es batu yang perlahan berubah jadi air? Atau mungkin memperhatikan embun yang muncul di kaca saat pagi hari? Hal-hal seperti itu sebenarnya adalah contoh **perubahan wujud benda** yang sering kita temui dalam kehidupan sehari-hari.
+
+Hari ini, Kak Airu ingin mengajak kita mengenal proses tersebut pelan-pelan. Perubahan wujud benda adalah perubahan suatu zat dari satu bentuk fisik ke bentuk lainnya. Perubahan ini umumnya dipengaruhi oleh perubahan suhu atau tekanan di sekitarnya, sehingga partikel-partikel penyusun zat bergerak dengan cara yang berbeda.
+
+Di sekitar kita, zat biasanya berada dalam tiga wujud utama, yaitu **padat, cair, dan gas**. Perubahan dari satu wujud ke wujud lain merupakan hal yang sangat alami. Es bisa mencair menjadi air, air dapat berubah menjadi uap saat dipanaskan, dan uap air pun bisa kembali menjadi tetesan air ketika suhunya turun.
+
+Kalau diperhatikan, semua proses itu sebenarnya memiliki satu penyebab yang sama, yaitu karena zat **menyerap** atau **melepaskan energi panas (kalor)**. Setelah memahami bagian ini, kita akan lebih mudah mengenal berbagai jenis perubahan wujud benda satu per satu.
+
+## Mengapa Perubahan Wujud Benda Terjadi?
+
+Sekarang mungkin muncul pertanyaan, kenapa benda bisa berubah wujud?
+
+Jawabannya sebenarnya sederhana. Semua berhubungan dengan **kalor**, atau energi panas. Kalor inilah yang membuat partikel-partikel penyusun suatu zat bergerak lebih cepat atau justru lebih lambat.
+
+Coba kita bayangkan bersama.
+
+* **Saat suatu zat menyerap kalor**, partikel-partikelnya mendapat tambahan energi sehingga bergerak semakin aktif. Karena gerakannya makin cepat, ikatan antarpartikel menjadi lebih longgar. Itulah sebabnya benda padat bisa mencair, atau zat cair berubah menjadi gas.
+
+* **Sebaliknya, saat suatu zat melepaskan kalor**, energi yang dimiliki partikel-partikelnya berkurang. Gerakannya melambat, jaraknya semakin rapat, lalu ikatannya menjadi lebih kuat. Akibatnya, gas dapat berubah menjadi cair, atau cairan berubah menjadi padat.
+
+Kalau kita perhatikan, setiap wujud benda memiliki susunan partikel yang berbeda.
+
+* **Padat** memiliki partikel yang tersusun sangat rapat dan teratur. Partikelnya hanya bergetar di tempat.
+* **Cair** memiliki partikel yang masih saling berdekatan, tetapi sudah bisa bergerak dan saling bergeser.
+* **Gas** memiliki partikel yang berjauhan dan bergerak bebas ke berbagai arah.
+
+Jadi, perubahan wujud sebenarnya bukan terjadi begitu saja. Saat kalor bertambah atau berkurang, cara partikel-partikel itu bergerak ikut berubah. Perubahan kecil di tingkat partikel inilah yang akhirnya membuat kita melihat benda berubah dari satu wujud ke wujud yang lain.
+
+## Jenis dan Contoh Perubahan Wujud Benda
+
+Sekarang kita sudah tahu kalau perubahan wujud terjadi karena suatu zat menyerap atau melepaskan kalor. Nah, perubahan itu ternyata tidak hanya satu atau dua macam, tetapi ada **enam jenis** yang saling berpasangan.
+
+Supaya lebih mudah mengingatnya, kita bahas satu per satu, ya.
+
+### 1. Mencair (Meleleh)
+
+Kalau pernah memegang es batu terlalu lama, kalian pasti sudah melihat proses **mencair**.
+
+Mencair adalah perubahan wujud dari **padat menjadi cair**. Proses ini terjadi ketika benda padat menyerap kalor. Energi panas tersebut membuat ikatan antarpartikel menjadi lebih longgar sehingga partikelnya dapat bergerak lebih bebas. Suhu saat suatu zat mulai mencair disebut **titik leleh**.
+
+**Contoh di sekitar kita:**
+
+* Es batu yang perlahan berubah menjadi air saat dibiarkan di meja.
+* Mentega yang meleleh ketika dipanaskan di atas wajan.
+* Lilin yang mencair saat terkena nyala api.
+* Logam yang dilelehkan di pabrik sebelum dibentuk menjadi produk baru.
+
+### 2. Membeku (Mengeras)
+
+Kalau mencair terjadi karena menerima kalor, maka **membeku** justru kebalikannya.
+
+Membeku adalah perubahan wujud dari **cair menjadi padat**. Saat suatu zat melepaskan kalor, gerakan partikelnya semakin lambat hingga saling merapat dan membentuk susunan yang lebih teratur. Suhu ketika proses ini berlangsung disebut **titik beku**.
+
+**Contohnya:**
+
+* Air yang disimpan di dalam *freezer* berubah menjadi es.
+* Agar-agar yang masih cair perlahan mengeras setelah dingin.
+* Cokelat leleh yang kembali padat setelah dibiarkan beberapa saat.
+
+### 3. Menguap (Evaporasi/Vaporisasi)
+
+Pernah melihat pakaian yang dijemur akhirnya kering? Itu juga termasuk perubahan wujud.
+
+**Menguap** adalah perubahan dari **cair menjadi gas**. Saat zat cair menerima kalor, sebagian partikelnya memperoleh energi yang cukup untuk lepas ke udara.
+
+Proses ini bisa berlangsung perlahan pada suhu ruang (**evaporasi**) maupun sangat cepat ketika cairan mencapai titik didih (**vaporisasi**).
+
+**Contohnya:**
+
+* Air mendidih yang menghasilkan uap.
+* Pakaian basah yang mengering saat dijemur.
+* Cairan pembersih tangan yang cepat menguap setelah digunakan.
+
+### 4. Mengembun (Kondensasi)
+
+Sekarang coba ingat gelas berisi es yang bagian luarnya tiba-tiba basah. Banyak orang mengira gelasnya bocor, padahal bukan.
+
+Itulah contoh **mengembun**, yaitu perubahan dari **gas menjadi cair**.
+
+Saat uap air kehilangan kalor, gerakan partikelnya melambat dan kembali berkumpul menjadi tetesan air.
+
+**Contoh lainnya:**
+
+* Embun yang muncul di daun pada pagi hari.
+* Kaca mobil yang berembun ketika udara dingin.
+* Uap air di atmosfer yang membentuk awan sebelum turun sebagai hujan.
+
+### 5. Menyublim (Sublimasi)
+
+Perubahan yang satu ini sedikit berbeda karena tidak melewati wujud cair.
+
+**Menyublim** adalah perubahan dari **padat langsung menjadi gas**. Proses ini terjadi ketika benda padat menyerap kalor dalam jumlah tertentu hingga partikelnya langsung lepas ke udara.
+
+**Contohnya:**
+
+* Kapur barus yang lama-kelamaan habis meskipun tidak mencair.
+* *Dry ice* yang menghasilkan kabut dingin.
+* Pengharum ruangan padat yang ukurannya semakin kecil seiring waktu.
+
+### 6. Mengkristal (Deposisi/Kristalisasi)
+
+Kalau menyublim adalah padat menjadi gas, maka **mengkristal** merupakan kebalikannya.
+
+Pada proses ini, **gas berubah langsung menjadi padat** tanpa melalui wujud cair. Gas melepaskan kalor sehingga partikelnya langsung tersusun membentuk kristal padat.
+
+**Contohnya:**
+
+* Terbentuknya butiran salju di daerah bersuhu sangat rendah.
+* Jelaga halus yang menempel pada bagian dalam knalpot.
+* Lapisan bunga es yang muncul di dinding *freezer*.
+
+## Faktor-faktor yang Mempengaruhi Perubahan Wujud Benda
+
+Mungkin sekarang muncul pertanyaan, apakah semua benda akan berubah wujud dengan cara yang sama?
+
+Jawabannya tentu tidak. Ada beberapa hal yang menentukan kapan suatu zat mulai mencair, membeku, menguap, atau mengalami perubahan wujud lainnya.
+
+### 1. Suhu
+
+Faktor yang paling berpengaruh adalah **suhu**.
+
+Saat suhu meningkat, suatu zat akan menyerap kalor sehingga partikel-partikelnya bergerak lebih aktif. Sebaliknya, ketika suhu menurun, zat akan melepaskan kalor dan gerakan partikelnya menjadi lebih lambat. Perubahan gerakan inilah yang akhirnya membuat wujud benda ikut berubah.
+
+### 2. Tekanan
+
+Selain suhu, **tekanan** juga dapat memengaruhi perubahan wujud, terutama pada zat yang berwujud gas.
+
+Tekanan yang lebih tinggi membuat partikel-partikel gas saling mendekat sehingga lebih mudah berubah menjadi cair. Sebaliknya, tekanan yang lebih rendah membuat gas lebih mudah terbentuk.
+
+Karena itulah titik didih suatu zat bisa berbeda, tergantung tekanan di tempat tersebut.
+
+### 3. Jenis Zat
+
+Setiap zat memiliki sifat yang berbeda.
+
+Ada zat yang mudah mencair, ada juga yang membutuhkan suhu sangat tinggi. Begitu juga dengan titik didihnya. Sebagai contoh, air mendidih pada suhu sekitar **100°C** pada tekanan udara normal, sedangkan alkohol sudah mulai mendidih pada suhu yang lebih rendah.
+
+### 4. Keberadaan Zat Lain
+
+Campuran dengan zat lain juga bisa memengaruhi perubahan wujud.
+
+Salah satu contoh yang cukup mudah ditemukan adalah garam. Ketika garam dicampurkan ke dalam air, titik beku air akan menjadi lebih rendah. Itulah sebabnya garam sering digunakan untuk membantu mencairkan salju di beberapa negara.
+
+Kalau diperhatikan, keempat faktor ini sebenarnya saling berkaitan. Suhu, tekanan, jenis zat, dan keberadaan zat lain akan menentukan seberapa mudah suatu benda mengalami perubahan wujud.
+
+Yang juga penting untuk diingat, semua perubahan yang sudah kita bahas merupakan **perubahan fisik**. Artinya, hanya wujudnya yang berubah, sedangkan jenis zatnya tetap sama. Air yang membeku menjadi es, misalnya, tetaplah air. Ketika dipanaskan kembali, es itu bisa berubah menjadi air seperti semula.
+
+## Perbandingan Perubahan Wujud Benda
+
+Untuk memudahkan kita memahami, berikut adalah rangkuman singkat dari keenam perubahan wujud benda dalam tabel di bawah ini:
+
+<InfoTable
+    headers={comparisonHeaders}
+    rows={comparisonRows}
+/>
+
+<FAQ client:visible>
+    <FAQItem title="Apa saja enam jenis perubahan wujud benda?">
+        Enam jenis perubahan wujud benda yaitu mencair, membeku, menguap, mengembun, menyublim, dan mengkristal. Keenam proses ini terjadi karena suatu zat menyerap atau melepaskan kalor.
+    </FAQItem>
+
+    <FAQItem title="Apa perbedaan perubahan fisik dan perubahan kimia?">
+        Perubahan wujud benda termasuk perubahan fisik karena hanya mengubah bentuk atau wujudnya tanpa menghasilkan zat baru. Sebaliknya, perubahan kimia menghasilkan zat baru dengan sifat yang berbeda dari zat sebelumnya.
+    </FAQItem>
+
+    <FAQItem title="Mengapa es batu bisa mencair di suhu ruang?">
+        Karena suhu di sekitar es lebih tinggi daripada titik bekunya. Es menyerap kalor dari lingkungan sehingga partikel-partikelnya bergerak lebih bebas dan berubah menjadi air.
+    </FAQItem>
+
+    <FAQItem title="Mengapa bagian luar gelas berisi es menjadi basah?">
+        Air yang muncul bukan berasal dari dalam gelas. Uap air di udara kehilangan kalor ketika menyentuh permukaan gelas yang dingin, lalu mengembun menjadi tetesan air.
+    </FAQItem>
+
+    <FAQItem title="Apakah semua benda memiliki titik leleh dan titik didih yang sama?">
+        Tidak. Setiap zat memiliki titik leleh dan titik didih yang berbeda-beda sesuai dengan sifat serta susunan partikelnya.
+    </FAQItem>
+
+    <FAQItem title="Apa contoh perubahan wujud benda yang paling sering ditemui?">
+        Contohnya antara lain es yang mencair, air yang membeku menjadi es, pakaian basah yang mengering karena menguap, embun di pagi hari, serta kapur barus yang lama-kelamaan habis karena menyublim.
+    </FAQItem>
+</FAQ>
+
+## Kesimpulan
+
+Sekarang kita sudah tahu kalau perubahan wujud benda bukanlah sesuatu yang rumit. Semua prosesnya terjadi karena suatu zat **menyerap** atau **melepaskan kalor**, sehingga partikel-partikelnya bergerak dengan cara yang berbeda. Dari situlah muncul proses mencair, membeku, menguap, mengembun, menyublim, maupun mengkristal.
+
+Kalau nanti kalian melihat es yang mulai meleleh, embun di pagi hari, atau air yang mendidih saat memasak, coba ingat lagi pembahasan kita hari ini. Fenomena-fenomena sederhana itu ternyata menyimpan konsep fisika yang menarik untuk dipelajari.
+
+Semoga setelah membaca artikel ini, perubahan wujud benda terasa lebih mudah dipahami. Kalau nanti bertemu materi fisika yang mirip, semoga kalian jadi lebih percaya diri karena sudah memahami dasar-dasarnya bersama Kak Airu.

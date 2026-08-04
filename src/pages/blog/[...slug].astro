@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 import { posts } from '@/data/posts';
 import TableOfContents from '@/components/article/TableOfContents.jsx';
@@ -10,6 +9,7 @@ import RelatedPostCardMobile from '@/components/article/RelatedPostCardMobile.as
 import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
 import { generateBreadcrumbSchema } from '@/lib/structured-data/breadcrumb';
+import { ARTICLE_THUMBNAIL_DEFAULTS } from '@/config';
 
 export async function getStaticPaths() {
     const allPosts = posts.filter(p => p.lang === 'id');
@@ -93,8 +93,20 @@ const prevPost = currentPostIndex > 0 ? navigationScope[currentPostIndex - 1] : 
 const nextPost = currentPostIndex < navigationScope.length - 1 ? navigationScope[currentPostIndex + 1] : null; // Artikel yang lebih lama
 
 // Data untuk SEO
+const imageSrcForSeo = typeof metadata.thumbnail === 'object' && metadata.thumbnail !== null ? metadata.thumbnail.src : metadata.thumbnail;
 const canonicalUrl = new URL(post.path, Astro.site).href;
-const imageUrl = new URL(metadata.thumbnail.src, Astro.site).href;
+const imageUrl = new URL(imageSrcForSeo, Astro.site).href;
+
+let thumbWidth, thumbHeight;
+if (typeof metadata.thumbnail === 'object' && metadata.thumbnail !== null && 'width' in metadata.thumbnail) {
+    thumbWidth = metadata.thumbnail.width;
+    thumbHeight = metadata.thumbnail.height;
+} else {
+    thumbWidth = ARTICLE_THUMBNAIL_DEFAULTS.width;
+    thumbHeight = ARTICLE_THUMBNAIL_DEFAULTS.height;
+}
+
+const avatarSrc = typeof metadata.authorAvatar === 'object' && metadata.authorAvatar !== null ? metadata.authorAvatar.src : metadata.authorAvatar;
 
 // Data untuk Breadcrumb Schema
 const breadcrumbs = [
@@ -167,13 +179,14 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                 <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md">
                     <figure class="mb-8">
                         <div class="group relative" data-zoomable-image>
-                            <Image
-                                src={metadata.thumbnail}
+                            <img
+                                src={imageSrcForSeo}
                                 alt={`Thumbnail for ${metadata.title}`}
-                                width="800"
-                                height="450"
-                                format="webp"
+                                width={thumbWidth}
+                                height={thumbHeight}
                                 class="w-full rounded-lg object-cover aspect-video"
+                                loading="eager"
+                                decoding="async"
                             />
 
                             <div class="absolute inset-0 flex cursor-zoom-in items-center justify-center rounded-lg bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -208,7 +221,7 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                         <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-4">{metadata.title}</h1>
                         <div class="flex items-center justify-between gap-3">
                             <div class="flex items-center gap-3">
-                                <Image src={metadata.authorAvatar} alt={metadata.author} class="h-10 w-10 rounded-full" width={40} height={40} format="webp" />
+                                <img src={avatarSrc} alt={metadata.author} class="h-10 w-10 rounded-full" width={40} height={40} loading="lazy" decoding="async" />
                                 <span class="font-semibold text-gray-800">{metadata.author}</span>
                             </div>
                             {/* Tampilkan switcher hanya jika ada konten Author's Style */}
