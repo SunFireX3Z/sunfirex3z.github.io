@@ -22,7 +22,13 @@ export default defineConfig({
   ],
 
   vite: {
-    plugins: [tailwind()]
+    plugins: [tailwind()],
+    server: {
+      watch: {
+        usePolling: true,
+        interval: 100,
+      }
+    }
   },
 
   markdown: {

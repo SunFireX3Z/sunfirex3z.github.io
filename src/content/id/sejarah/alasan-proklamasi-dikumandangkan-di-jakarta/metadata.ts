@@ -17,7 +17,7 @@ export const metadata = {
     readingTime: 8,
     difficulty: "Pemula",
     platform: [],
-    contentType: "Sejarah",
+    contentType: "Penjelasan",
     tags: [
         "Proklamasi Kemerdekaan",
         "17 Agustus 1945",

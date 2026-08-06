@@ -9,7 +9,7 @@ import FeaturedCardSkeleton from '@/components/skeletons/FeaturedCardSkeleton.as
 import ProjectCardSkeleton from '@/components/skeletons/ProjectCardSkeleton.astro';
 import { Image } from 'astro:assets'; // Import Image component
 import heroBannerBg from '@/assets/images/hero-banner-bg.webp';
-import { posts, latestPost, featuredPosts, recentPosts } from '@/data/posts';
+import { latestPost, featuredPosts, recentPosts } from '@/data/posts';
 import { authors } from '@/data/authors';
 
 // Ambil data proyek
@@ -93,7 +93,7 @@ const SKELETON_COUNT = 3;
     </section>
 
     <!-- Konten sisa halaman dibungkus dalam container sendiri dengan margin atas -->
-    <div class="mx-auto w-full max-w-[90rem] px-6 py-16 space-y-16">
+    <div class="mx-auto w-full max-w-[90rem] px-6 space-y-16 py-16">
         {/* Bagian Atas: Latest & Featured */}
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             {/* Artikel Terbaru */}
