@@ -30,7 +30,7 @@ export const metadata = {
         "Persatuan Indonesia",
         "Indonesia"
     ],
-    featured: false,
+    featured: true,
     sources: [
         {
             name: "Wikipedia - Bhinneka Tunggal Ika",

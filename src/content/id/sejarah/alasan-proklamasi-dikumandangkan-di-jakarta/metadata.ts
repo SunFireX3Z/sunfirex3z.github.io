@@ -30,7 +30,7 @@ export const metadata = {
         "Proklamasi Indonesia",
         "Indonesia"
     ],
-    featured: false,
+    featured: true,
     sources: [
         {
             name: "Arsip Nasional Republik Indonesia (ANRI)",

@@ -231,6 +231,9 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                                 </div>
                             )}
                         </div>
+
+                        {/* Info Artikel dipindahkan ke sini */}
+                        <ArticleInfo metadata={metadata} />
                     </header>
 
                     {/* Mobile Table of Contents */}
@@ -262,6 +265,9 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                         )}
                     </article>
                     
+                    {/* Tombol Bagikan dipindahkan ke sini */}
+                    <ShareButton client:visible />
+
                     {metadata.tags && metadata.tags.length > 0 && (
                         <div class="not-prose mt-12 border-t border-gray-200 pt-6">
                             <h3 class="text-lg font-bold text-gray-800 mb-4">Tags:</h3>
@@ -285,13 +291,12 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                     )}
                 </div>
 
+                {/* Bagian ini hanya untuk mobile, sekarang tidak lagi menampilkan ArticleInfo dan ShareButton */}
                 <div class="mt-12 space-y-8 lg:hidden">
                     <div class="rounded-lg bg-white p-6 shadow-md ring-1 ring-gray-100">
                         <h2 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h2>
                         <ul class="space-y-4">{posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (<li><a href={p.path} class="font-semibold text-gray-800 hover:text-orange-500 line-clamp-2">{p.metadata.title}</a><p class="text-xs text-gray-600">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></li>))}</ul>
                     </div>
-                    <ArticleInfo metadata={metadata} />
-                    <ShareButton client:visible />
                 </div>
 
                 {relatedPosts.length > 0 && (
@@ -316,7 +321,6 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
             {/* Sidebar */}
             <aside class="hidden lg:block lg:col-span-1">
                 <div class="sticky top-40 flex flex-col gap-8">
-                    <ShareButton client:visible />
                     {/* Desktop Table of Contents */}
                     {AuthorContent ? (
                         <>
@@ -330,7 +334,6 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                     ) : (
                         standardTocItems.length > 0 && <TableOfContents client:visible items={standardTocItems} />
                     )}
-                    <ArticleInfo metadata={metadata} />
 
                     <div class="rounded-lg bg-white p-6 shadow-md">
                         <h2 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h2>

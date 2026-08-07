@@ -124,13 +124,13 @@ const SKELETON_COUNT = 3;
 
                 <div class="flex-1 rounded-xl bg-white p-4 shadow-md">
                     <!-- Skeleton Placeholder -->
-                    <div id="featured-posts-skeleton" class="flex h-full flex-col justify-between">
+                    <div id="featured-posts-skeleton" class="flex h-full flex-col space-y-4 lg:space-y-0 lg:justify-between">
                         {Array.from({ length: SKELETON_COUNT }).map(() => (
                             <FeaturedCardSkeleton />
                         ))}
                     </div>
                     <!-- Real Content (initially hidden) -->
-                    <div id="featured-posts-content" class="hidden flex h-full flex-col justify-between">
+                    <div id="featured-posts-content" class="hidden flex h-full flex-col space-y-4 lg:space-y-0 lg:justify-between">
                         {featuredPosts.map(post => (
                             <FeaturedCard {...post.metadata} path={post.path} />
                         ))}

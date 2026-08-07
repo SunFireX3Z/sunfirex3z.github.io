@@ -6,19 +6,21 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@tailwindcss/vite';
 
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
   site: 'https://sunblog.my.id',
-
   output: 'static',
 
   integrations: [
     react(),
     expressiveCode(),
     mdx(),
-    sitemap()
+    sitemap(),
   ],
 
   vite: {
@@ -27,12 +29,16 @@ export default defineConfig({
       watch: {
         usePolling: true,
         interval: 100,
-      }
-    }
+      },
+    },
   },
 
   markdown: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [
+      remarkGfm,
+      remarkMath,
+    ],
+
     rehypePlugins: [
       rehypeSlug,
       [
@@ -50,6 +56,7 @@ export default defineConfig({
           },
         },
       ],
+      rehypeKatex,
     ],
   },
 });

@@ -6,7 +6,7 @@ export const metadata = {
     metaDescription: "Mengapa Burung Garuda menjadi lambang negara Indonesia? Simak sejarah Garuda Pancasila, makna setiap simbol, jumlah bulu Garuda, serta filosofi yang terkandung di dalamnya.",
     publishDate: "1 August 2026",
     lastUpdated: "6 August 2026",
-    updatedReason: "Menambahkan Related Article ke artikel sejarah Bhinneka Tunggal Ika",
+    updatedReason: "",
     series: "",
     status: "Published",
     author: "Inda Nesya",
@@ -30,7 +30,7 @@ export const metadata = {
         "Simbol Negara",
         "Indonesia"
     ],
-    featured: false,
+    featured: true,
     sources: [
         {
             name: "Kementerian Sekretariat Negara Republik Indonesia - Lambang Negara",

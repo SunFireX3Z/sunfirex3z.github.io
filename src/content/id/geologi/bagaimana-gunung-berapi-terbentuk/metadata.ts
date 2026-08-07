@@ -30,7 +30,7 @@ export const metadata = {
         "Sains",
         "Edukasi"
     ],
-    featured: true,
+    featured: false,
     sources: [
         {
             name: "USGS - Volcano Hazards Program",
