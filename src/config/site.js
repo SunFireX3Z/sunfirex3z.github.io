@@ -1,9 +1,9 @@
 export const siteConfig = {
     title: "SunBlog",
     description:
-        "Blog tentang teknologi, pemrograman, gaming, dan berbagai tutorial menarik.",
+        "Blog informatif tentang sains, sejarah, teknologi, pemrograman, gaming, dan berbagai topik menarik lainnya.",
     url: "https://sunblog.my.id",
-    author: "Sun-sama",
+    author: "Randy Saputra",
     locale: "id_ID",
-    version: "1.12.0",
+    version: "1.13.0",
 };

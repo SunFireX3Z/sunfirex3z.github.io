@@ -5,7 +5,7 @@ function Hero() {
         <section className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-10">
             <div className="flex-1">
                 <h1 className="text-5xl font-bold leading-tight">Selamat Datang di SunBlog</h1>
-                <p className="mt-5 text-gray-600 text-lg">Tempat berbagi artikel tentang programming, teknologi, dan project yang sedang dibuat.</p>
+                <p className="mt-5 text-gray-600 text-lg">Blog informatif tentang sains, sejarah, teknologi, pemrograman, gaming, dan berbagai topik menarik lainnya.</p>
                 <button className="mt-8 rounded-lg bg-black px-6 py-3 text-white">
                     Baca Sekarang
                 </button>

@@ -8,6 +8,7 @@ import ArticleModeSwitcher from '@/components/article/ArticleModeSwitcher.jsx';
 import RelatedPostCardMobile from '@/components/article/RelatedPostCardMobile.astro';
 import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
+import CopyrightNotice from '@/components/article/CopyrightNotice.astro';
 import { generateBreadcrumbSchema } from '@/lib/structured-data/breadcrumb';
 import { ARTICLE_THUMBNAIL_DEFAULTS } from '@/config';
 
@@ -176,7 +177,7 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
         <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-12">
             {/* Main Content */}
             <div class="lg:col-span-2">
-                <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md">
+                <div class="rounded-lg bg-white p-4 sm:p-8 shadow-md border-t-4 border-orange-500">
                     <figure class="mb-8">
                         <div class="group relative" data-zoomable-image>
                             <img
@@ -289,13 +290,29 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                             </ul>
                         </div>
                     )}
+
+                    {/* Tambahkan komponen CopyrightNotice di sini */}
+                    <CopyrightNotice author={metadata.author} title={metadata.title} url={canonicalUrl} />
                 </div>
 
                 {/* Bagian ini hanya untuk mobile, sekarang tidak lagi menampilkan ArticleInfo dan ShareButton */}
                 <div class="mt-12 space-y-8 lg:hidden">
                     <div class="rounded-lg bg-white p-6 shadow-md ring-1 ring-gray-100">
                         <h2 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h2>
-                        <ul class="space-y-4">{posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (<li><a href={p.path} class="font-semibold text-gray-800 hover:text-orange-500 line-clamp-2">{p.metadata.title}</a><p class="text-xs text-gray-600">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></li>))}</ul>
+                        <ul class="space-y-4">
+                            {posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (
+                                <li>
+                                    <a href={p.path} class="group flex items-center gap-3">
+                                        <img
+                                            src={p.metadata.thumbnail.src}
+                                            alt={`Thumbnail for ${p.metadata.title}`}
+                                            width={80} height={45} // Ukuran diperbesar sedikit
+                                            class="w-20 h-11 flex-shrink-0 rounded object-cover" loading="lazy" decoding="async"/>
+                                        <div><p class="font-semibold text-gray-800 group-hover:text-orange-500 line-clamp-2">{p.metadata.title}</p><p class="text-xs text-gray-600">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></div>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
 
@@ -336,8 +353,32 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                     )}
 
                     <div class="rounded-lg bg-white p-6 shadow-md">
-                        <h2 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2">Postingan Lainnya</h2>
-                        <ul class="space-y-4">{posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (<li><a href={p.path} class="font-semibold text-gray-800 hover:text-orange-500 line-clamp-2">{p.metadata.title}</a><p class="text-xs text-gray-600">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p></li>))}</ul>
+                        <!-- Judul dengan Ikon -->
+                        <h2 class="text-xl font-bold mb-4 border-b border-gray-200 pb-2 flex items-center gap-2 text-gray-800">
+                            <!-- OPSI 1: Ikon Dokumen Koran (Rekomendasi untuk Artikel Lain) -->
+                            <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-orange-500 flex-shrink-0">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                            </svg>
+                            
+                            Postingan Lainnya
+                        </h2>
+                        <ul class="space-y-4">
+                            {posts.filter(p => p.path !== post.path).slice(0, 5).map(p => (
+                                <li>
+                                    <a href={p.path} class="group flex items-center gap-3">
+                                        <img
+                                            src={p.metadata.thumbnail.src}
+                                            alt={`Thumbnail for ${p.metadata.title}`}
+                                            width={80} height={45}
+                                            class="w-20 h-11 flex-shrink-0 rounded object-cover" loading="lazy" decoding="async"/>
+                                        <div>
+                                            <p class="font-semibold text-gray-800 group-hover:text-orange-500 line-clamp-2">{p.metadata.title}</p>
+                                            <p class="text-xs text-gray-600">{new Date(p.metadata.publishDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </aside>
