@@ -14,7 +14,7 @@ export const metadata = {
     subcategory: "Biografi",
     thumbnail: thumbnailImage,
     imageCaption: "Thumbnail SunBlog | Mengenal Sang Proklamator, Ir. Soekarno",
-    readingTime: 0,
+    readingTime: 5,
     difficulty: "Pemula",
     platform: [],
     contentType: "Profil",
