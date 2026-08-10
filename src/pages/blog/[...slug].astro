@@ -9,6 +9,7 @@ import RelatedPostCardMobile from '@/components/article/RelatedPostCardMobile.as
 import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
 import CopyrightNotice from '@/components/article/CopyrightNotice.astro';
+import CommentForm from '@/components/article/CommentForm.jsx';
 import { generateBreadcrumbSchema } from '@/lib/structured-data/breadcrumb';
 import { ARTICLE_THUMBNAIL_DEFAULTS } from '@/config';
 
@@ -293,6 +294,9 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
 
                     {/* Tambahkan komponen CopyrightNotice di sini */}
                     <CopyrightNotice author={metadata.author} title={metadata.title} url={canonicalUrl} />
+
+                    {/* Tambahkan komponen CommentForm di sini */}
+                    <CommentForm client:visible articleTitle={metadata.title} articleUrl={canonicalUrl} />
                 </div>
 
                 {/* Bagian ini hanya untuk mobile, sekarang tidak lagi menampilkan ArticleInfo dan ShareButton */}

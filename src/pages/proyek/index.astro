@@ -18,6 +18,17 @@ const allProjects = Object.values(projectModules)
     })
     .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
+// Group projects by category
+const groupedProjects = allProjects.reduce((acc, project) => {
+    // Gunakan 'Lainnya' untuk proyek tanpa kategori
+    const category = project.category || 'Lainnya';
+    if (!acc[category]) {
+        acc[category] = [];
+    }
+    acc[category].push(project);
+    return acc;
+}, {});
+
 // Get unique categories and their counts
 const totalProjectCount = allProjects.length;
 const categoryCounts = allProjects.reduce((acc, project) => {
@@ -58,11 +69,18 @@ const currentPath = Astro.url.pathname;
 
         <section>
             {allProjects.length > 0 ? (
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {allProjects.map(project => (
-                        <a href={project.path} class="block h-full">
-                            <ProjectCard {...project} />
-                        </a>
+                <div class="space-y-16">
+                    {Object.entries(groupedProjects).map(([category, projects]) => (
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6 border-b-4 border-orange-500 inline-block pb-1">{category}</h2>
+                            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                                {projects.map(project => (
+                                    <a href={project.path} class="block h-full">
+                                        <ProjectCard {...project} />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
                     ))}
                 </div>
             ) : (
