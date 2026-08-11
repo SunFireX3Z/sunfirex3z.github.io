@@ -1,0 +1,155 @@
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.astro';
+import Blockquote from '@/components/mdx/Blockquote.jsx';
+
+Selamat datang, para pencinta keindahan! Di bulan yang penuh berkah ini, izinkan Nijia mengajak kalian untuk memahami salah satu amalan penting dalam Islam, yaitu **zakat fitrah** dan **zakat mal**. Keduanya merupakan bentuk ibadah sekaligus kepedulian kepada sesama yang memiliki ketentuan masing-masing.
+
+## Apa Itu Zakat Fitrah?
+
+**Zakat fitrah** adalah zakat yang wajib ditunaikan oleh setiap Muslim yang memenuhi syarat pada bulan Ramadan. Zakat ini menjadi salah satu bentuk penyucian diri setelah menjalankan ibadah puasa sekaligus bentuk kepedulian kepada orang-orang yang membutuhkan.
+
+Dengan menunaikan zakat fitrah, umat Muslim turut membantu agar saudara-saudara yang kurang mampu dapat merasakan kebahagiaan pada hari Idulfitri.
+
+## Apa Itu Zakat Mal?
+
+**Zakat mal** adalah zakat yang dikenakan terhadap harta yang dimiliki setelah memenuhi ketentuan tertentu sesuai syariat Islam. Istilah *mal* berasal dari bahasa Arab yang berarti harta.
+
+Berbeda dengan zakat fitrah yang berkaitan dengan individu pada bulan Ramadan, zakat mal berkaitan dengan kepemilikan harta yang telah memenuhi ketentuan seperti **nisab**, **haul**, dan kadar zakat sesuai jenis hartanya.
+
+## Ketentuan Zakat Fitrah
+
+Zakat fitrah wajib ditunaikan oleh setiap Muslim yang memenuhi syarat, baik untuk dirinya sendiri maupun orang yang menjadi tanggungannya. Besaran zakat fitrah yang umum digunakan adalah **2,5 kg atau 3,5 liter makanan pokok per jiwa**. Di Indonesia, makanan pokok yang umum digunakan adalah beras.
+
+<Tip title="Kemudahan dalam Berzakat">
+Meskipun zakat fitrah pada dasarnya ditunaikan dalam bentuk makanan pokok, terdapat pendapat ulama yang memperbolehkan pembayaran dalam bentuk uang dengan nilai yang setara. Ketentuan pembayaran dengan uang dapat mengikuti panduan lembaga zakat atau otoritas keagamaan setempat.
+</Tip>
+
+Zakat fitrah ditunaikan pada bulan Ramadan dan sebaiknya sudah diberikan sebelum pelaksanaan salat Idulfitri.
+
+<Warning title="Pentingnya Ketepatan Waktu">
+Pastikan zakat fitrah telah ditunaikan sebelum salat Idulfitri dimulai. Pembayaran yang dilakukan setelah salat Idulfitri memiliki ketentuan yang berbeda dan tidak boleh disamakan begitu saja dengan zakat fitrah yang ditunaikan pada waktunya.
+</Warning>
+
+## Cara Menghitung Zakat Fitrah
+
+Menghitung zakat fitrah cukup sederhana. Kita hanya perlu mengetahui jumlah jiwa yang wajib ditunaikan zakatnya dan kadar zakat per jiwa.
+
+### Rumus Zakat Fitrah
+
+$$
+\text{Total Zakat Fitrah} = \text{Jumlah Jiwa} \times \text{Kadar Zakat per Jiwa}
+$$
+
+Jika menggunakan beras dengan kadar **2,5 kg per jiwa**, maka:
+
+$$
+\text{Total Zakat Fitrah} = \text{Jumlah Jiwa} \times 2{,}5\text{ kg}
+$$
+
+### Contoh Perhitungan Zakat Fitrah
+
+Misalnya sebuah keluarga memiliki **4 orang** yang wajib ditunaikan zakat fitrahnya. Jika kadar zakat yang digunakan adalah **2,5 kg beras per jiwa**, maka:
+
+$$
+4 \times 2{,}5\text{ kg} = 10\text{ kg}
+$$
+
+Jadi, jumlah zakat fitrah yang harus ditunaikan adalah **10 kg beras**.
+
+Jika zakat fitrah ditunaikan dalam bentuk uang dengan nilai **Rp50.000 per jiwa** sesuai ketetapan BAZNAS setempat, maka:
+
+$$
+4 \times \text{Rp50.000} = \text{Rp200.000}
+$$
+
+Jadi, total zakat fitrah yang harus ditunaikan adalah **Rp200.000**.
+
+<Note title="Perhatikan Ketentuan Daerah">
+Nilai zakat fitrah dalam bentuk uang dapat berbeda antara satu daerah dengan daerah lainnya. Karena itu, periksa ketetapan resmi BAZNAS atau lembaga zakat setempat untuk mengetahui nominal yang berlaku.
+</Note>
+
+## Ketentuan Zakat Mal
+
+Berbeda dengan zakat fitrah, zakat mal memiliki ketentuan yang lebih beragam karena jenis harta yang dikenakan zakat juga berbeda. Beberapa hal penting yang perlu diperhatikan adalah **nisab**, **haul**, dan **kadar zakat**.
+
+### Nisab dan Haul
+
+**Nisab** adalah batas minimum kepemilikan harta yang menyebabkan zakat menjadi wajib. Nisab zakat mal berbeda-beda tergantung pada jenis harta yang dimiliki.
+
+Untuk harta berupa emas, misalnya, nisabnya setara dengan **85 gram emas**. Sementara itu, harta berupa uang, tabungan, investasi, dan hasil perdagangan dapat menggunakan ketentuan nisab yang disetarakan dengan nilai 85 gram emas sesuai ketentuan yang berlaku.
+
+**Haul** adalah masa kepemilikan harta selama satu tahun Hijriah pada jenis harta yang mensyaratkan haul. Namun, tidak semua jenis harta memiliki ketentuan haul yang sama. Beberapa jenis zakat, seperti zakat pertanian, memiliki ketentuan yang berkaitan dengan waktu panen.
+
+### Jenis-Jenis Zakat Mal
+
+Zakat mal mencakup berbagai jenis harta yang memiliki ketentuan masing-masing. Berikut adalah beberapa jenis yang umum dibahas:
+
+<InfoTable
+headers={["Jenis Zakat Mal", "Nisab (Batas Minimum)", "Haul (Masa Kepemilikan)", "Kadar Zakat"]}
+rows={[
+["Emas & Perak", "85 gram emas / 595 gram perak", "1 Tahun", "2.5%"],
+["Uang & Tabungan", "Setara 85 gram emas", "1 Tahun", "2.5%"],
+["Harta Perdagangan", "Setara 85 gram emas (modal + keuntungan)", "1 Tahun", "2.5%"],
+["Penghasilan / Profesi", "Setara 653 kg gabah (atau ±520 kg beras)", "Bisa ditunaikan bulanan", "2.5%"],
+["Pertanian (Pengairan Berbayar)", "5 Wasq / 653 kg gabah", "Setiap Panen (Tanpa Haul)", "5%"],
+["Pertanian (Tadah Hujan/Alami)", "5 Wasq / 653 kg gabah", "Setiap Panen (Tanpa Haul)", "10%"]
+]}
+/>
+
+Setiap jenis zakat mal dapat memiliki ketentuan nisab, haul, dan kadar zakat yang berbeda. Karena itu, cara menghitung zakat perlu disesuaikan dengan jenis harta yang dimiliki.
+
+## Cara Menghitung Zakat Mal
+
+Cara menghitung zakat mal bergantung pada jenis harta yang akan dizakati. Untuk jenis harta yang menggunakan kadar zakat **2,5%**, seperti emas, uang, tabungan, dan harta perdagangan, perhitungan dilakukan setelah memenuhi ketentuan nisab dan haul yang berlaku.
+
+### Rumus Zakat Mal
+
+Untuk jenis harta dengan kadar zakat 2,5%, rumus sederhananya adalah:
+
+$$
+\text{Zakat Mal} = \text{Harta yang Wajib Dizakati} \times 2{,}5%
+$$
+
+### Contoh Perhitungan Zakat Mal
+
+Misalnya seseorang memiliki uang dan tabungan sebesar **Rp100.000.000** yang telah disimpan selama setahun penuh. Jika harga emas saat itu adalah Rp1.000.000 per gram, maka nilai nisab yang digunakan sebagai contoh adalah:
+
+$$
+85 \times \text{Rp1.000.000} = \text{Rp85.000.000}
+$$
+
+Karena jumlah tabungan sebesar Rp100.000.000 telah melampaui nilai nisab tersebut dan memenuhi ketentuan haul, maka zakatnya adalah:
+
+$$
+\text{Rp100.000.000} \times 2{,}5% = \text{Rp2.500.000}
+$$
+
+Jadi, zakat mal yang perlu ditunaikan adalah **Rp2.500.000**.
+
+<FAQ client:visible>
+  <FAQItem title="Apakah bayi yang baru lahir wajib ditunaikan zakat fitrahnya?">
+    Bayi yang lahir sebelum matahari terbenam pada hari terakhir Ramadan dapat termasuk dalam kewajiban zakat fitrah sesuai ketentuan yang berlaku. Zakat tersebut ditunaikan oleh orang tua atau walinya.
+  </FAQItem>
+
+  <FAQItem title="Bagaimana cara menentukan nisab zakat profesi atau penghasilan?">
+    Menurut panduan BAZNAS yang digunakan dalam artikel ini, nisab zakat penghasilan disetarakan dengan nilai 653 kg gabah atau sekitar 520 kg beras. Ketentuan dan mekanisme pembayarannya dapat mengikuti panduan BAZNAS atau lembaga zakat yang menjadi rujukan.
+  </FAQItem>
+
+  <FAQItem title="Apakah utang dapat memengaruhi perhitungan zakat?">
+    Utang tertentu yang harus segera dibayarkan dapat memengaruhi jumlah harta yang menjadi dasar perhitungan zakat. Ketentuannya dapat berbeda sesuai jenis harta dan metode perhitungan yang digunakan.
+  </FAQItem>
+</FAQ>
+
+## Kesimpulan
+
+Zakat fitrah dan zakat mal memiliki ketentuan yang berbeda. Zakat fitrah dihitung berdasarkan jumlah jiwa dan kadar zakat per jiwa, sedangkan zakat mal perlu disesuaikan dengan jenis harta, nisab, haul, dan kadar zakat yang berlaku.
+
+Untuk zakat fitrah, perhitungan dapat dilakukan dengan mengalikan jumlah jiwa dengan kadar zakat per jiwa. Sementara itu, beberapa jenis zakat mal menggunakan kadar **2,5%** setelah memenuhi ketentuan yang berlaku.
+
+Dengan memahami ketentuan, jenis harta, rumus, dan contoh perhitungannya, pembayaran zakat dapat dilakukan dengan lebih mudah dan sesuai dengan panduan yang berlaku.

@@ -113,8 +113,8 @@ export const authors = {
         name: "Nijia",
         fullName: "Nijia Featherstone",
         avatar: NijiaAvatar,
-        role: "Penulis Musik & Seni",
-        description: "Persona yang anggun, ceria, dan menawan dengan jiwa seorang putri. Membahas dunia musik dan seni melalui kisah sejarah, makna lagu, serta keindahan harmoni yang menghubungkan emosi, budaya, dan kehidupan manusia."
+        role: "Penulis Musik, Seni & Religi",
+        description: "Persona yang anggun, ceria, dan menawan dengan jiwa seorang putri. Membahas musik, seni, budaya, serta religi dengan gaya penulisan yang indah, lembut, dan mudah dipahami."
     },
 
     IndaNesya: {

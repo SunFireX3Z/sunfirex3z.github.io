@@ -10,6 +10,7 @@ import ArticleInfo from '@/components/article/ArticleInfo.astro';
 import PostNavigation from '@/components/article/PostNavigation.astro';
 import CopyrightNotice from '@/components/article/CopyrightNotice.astro';
 import CommentForm from '@/components/article/CommentForm.jsx';
+import Disclaimer from '@/components/mdx/Disclaimer.jsx'; // Import komponen Disclaimer
 import { generateBreadcrumbSchema } from '@/lib/structured-data/breadcrumb';
 import { ARTICLE_THUMBNAIL_DEFAULTS } from '@/config';
 
@@ -266,6 +267,9 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                             <Content /> // Jika tidak ada AuthorContent, tampilkan Content (Standard) secara langsung
                         )}
                     </article>
+
+                    {/* Tambahkan komponen Disclaimer di sini */}
+                    <Disclaimer />
                     
                     {/* Tombol Bagikan dipindahkan ke sini */}
                     <ShareButton client:visible />
