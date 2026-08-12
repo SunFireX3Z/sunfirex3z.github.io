@@ -1,0 +1,21 @@
+---
+import katex from 'katex';
+
+interface Props {
+    formula: string;
+    inline?: boolean;
+}
+
+const { formula, inline = false } = Astro.props;
+
+const renderedHtml = katex.renderToString(formula, {
+  throwOnError: false, // Tidak akan menghentikan build jika ada error KaTeX
+  displayMode: !inline, // `true` untuk mode blok, `false` untuk mode inline
+});
+---
+
+{inline ? (
+    <span set:html={renderedHtml} />
+) : (
+    <div class="katex-display" set:html={renderedHtml} />
+)}

@@ -1,0 +1,341 @@
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.astro';
+import Blockquote from '@/components/mdx/Blockquote.jsx';
+import Math from '@/components/mdx/Math.astro';
+
+## Apa Itu Bilangan?
+
+Bilangan adalah suatu konsep matematika yang digunakan untuk menyatakan jumlah, nilai, urutan, atau ukuran suatu objek. Bilangan menjadi salah satu konsep dasar dalam matematika karena digunakan dalam berbagai aktivitas, seperti menghitung jumlah benda, mengukur panjang, menentukan waktu, mencatat nilai, hingga melakukan berbagai operasi perhitungan.
+
+Bilangan direpresentasikan menggunakan lambang bilangan atau angka. Meskipun dalam penggunaan sehari-hari istilah bilangan dan angka sering dianggap sama, keduanya memiliki makna yang berbeda. Bilangan merupakan konsep atau nilai yang ingin dinyatakan, sedangkan angka merupakan simbol yang digunakan untuk menuliskan atau merepresentasikan bilangan tersebut. Dengan memahami konsep bilangan terlebih dahulu, kita dapat lebih mudah mempelajari berbagai jenis bilangan dan sifat-sifatnya dalam matematika.
+
+## Jenis-Jenis Bilangan
+
+Bilangan dalam matematika terbagi ke dalam berbagai jenis dengan karakteristik unik, mulai dari hitungan dasar hingga konsep abstrak. Mengenal ragam bilangan ini membantu kita memahami pola, perhitungan, dan hubungan antarangka secara lebih mendalam dan terstruktur.
+
+### Bilangan Asli
+
+**Bilangan asli** adalah bilangan yang digunakan untuk menyatakan jumlah benda atau melakukan proses pencacahan. Bilangan asli dimulai dari **1** dan terus bertambah satu secara berurutan tanpa batas. Dengan demikian, himpunan bilangan asli dapat dituliskan sebagai:
+
+$$
+\mathbb{N} = \{1, 2, 3, 4, 5, \ldots\}
+$$
+
+Bilangan asli selalu memiliki nilai **1 atau lebih**. Oleh karena itu, **0, -1, -2**, dan bilangan negatif lainnya tidak termasuk ke dalam bilangan asli. Bilangan asli dapat digunakan untuk menghitung banyaknya benda, seperti **1 buku, 2 pensil, 3 apel**, dan seterusnya.
+
+**Contoh penggunaannya** dapat ditemukan dalam kegiatan pencacahan sehari-hari. Misalnya, jika terdapat **5 buku** di atas meja, jumlah buku tersebut dapat dinyatakan dengan bilangan asli **5**. Contoh lainnya adalah ketika menyebutkan urutan peserta dalam suatu perlombaan, seperti peserta ke-1, ke-2, ke-3, dan seterusnya. Jadi, bilangan asli sangat dekat dengan aktivitas **menghitung dan menyatakan banyaknya suatu objek**.
+
+### Bilangan Cacah
+
+**Bilangan cacah** adalah bilangan yang digunakan untuk menyatakan jumlah suatu objek, termasuk ketika tidak ada objek sama sekali. Bilangan cacah dimulai dari **0** dan kemudian bertambah satu secara berurutan tanpa batas. Dengan demikian, himpunan bilangan cacah dapat dituliskan sebagai:
+
+$$
+\mathbb{W} = \{0, 1, 2, 3, 4, 5, \ldots\}
+$$
+
+Bilangan cacah selalu memiliki nilai **0 atau lebih**. Oleh karena itu, **0, 1, 2, 3**, dan seterusnya termasuk bilangan cacah, sedangkan **-1, -2**, dan bilangan negatif lainnya tidak termasuk. Perbedaan utama antara bilangan cacah dan bilangan asli adalah **bilangan cacah memiliki 0 sebagai anggotanya**, sedangkan bilangan asli dimulai dari 1.
+
+**Contoh penggunaannya** dapat ditemukan dalam kegiatan menghitung jumlah benda. Misalnya, jika sebuah kotak tidak memiliki pensil di dalamnya, jumlah pensil tersebut dapat dinyatakan dengan bilangan cacah **0**. Jika terdapat **3 pensil**, jumlahnya dapat dinyatakan dengan bilangan cacah **3**. Jadi, bilangan cacah dapat digunakan untuk menyatakan jumlah objek mulai dari **tidak ada objek hingga jumlah tertentu**.
+
+### Bilangan Prima
+
+**Bilangan prima** adalah bilangan asli yang memiliki tepat **dua faktor positif**, yaitu **1 dan bilangan itu sendiri**. Dengan kata lain, bilangan prima hanya dapat dibagi habis oleh 1 dan dirinya sendiri. Beberapa contoh bilangan prima adalah **2, 3, 5, 7, 11, 13, 17, 19**, dan seterusnya.
+
+Bilangan prima dapat dituliskan dalam bentuk himpunan sebagai:
+
+$$
+\mathbb{P} = \{2, 3, 5, 7, 11, 13, 17, 19, \ldots\}
+$$
+
+Bilangan **1 bukan bilangan prima** karena hanya memiliki satu faktor positif, yaitu 1. Sementara itu, bilangan seperti **4, 6, 8, dan 9** bukan bilangan prima karena memiliki lebih dari dua faktor. Misalnya, angka 5 hanya dapat dibagi habis oleh **1 dan 5**, sehingga 5 merupakan bilangan prima.
+
+**Contoh penggunaannya** dapat ditemukan dalam **faktorisasi prima**, yaitu proses menguraikan suatu bilangan menjadi perkalian bilangan-bilangan prima. Misalnya, bilangan 12 dapat diuraikan menjadi:
+
+$$
+12 = 2 \times 2 \times 3
+$$
+
+Karena 2 dan 3 merupakan bilangan prima, maka bentuk tersebut disebut sebagai faktorisasi prima dari 12. Faktorisasi prima banyak digunakan dalam berbagai perhitungan matematika, seperti menentukan **FPB dan KPK**.
+
+### Bilangan Komposit
+
+**Bilangan komposit** adalah bilangan asli yang memiliki **lebih dari dua faktor positif**. Artinya, bilangan komposit dapat dibagi habis oleh 1, bilangan itu sendiri, dan setidaknya satu bilangan lainnya. Beberapa contoh bilangan komposit adalah **4, 6, 8, 9, 10, 12**, dan seterusnya.
+
+Bilangan komposit dapat dituliskan dengan contoh himpunan sebagai:
+
+$$
+\{4, 6, 8, 9, 10, 12, 14, 15, \ldots\}
+$$
+
+Misalnya, bilangan **6** memiliki faktor **1, 2, 3, dan 6**. Karena memiliki lebih dari dua faktor, maka 6 termasuk bilangan komposit. Begitu juga dengan **9**, yang memiliki faktor **1, 3, dan 9**. Sebaliknya, **2, 3, 5, dan 7** bukan bilangan komposit karena masing-masing hanya memiliki dua faktor dan termasuk bilangan prima.
+
+**Bilangan 1 bukan bilangan komposit maupun bilangan prima** karena hanya memiliki satu faktor, yaitu 1. Dengan demikian, bilangan asli yang lebih besar dari 1 dapat dibedakan menjadi **bilangan prima atau bilangan komposit**.
+
+**Contoh penggunaannya** dapat ditemukan dalam faktorisasi bilangan. Misalnya, bilangan 12 merupakan bilangan komposit karena dapat diuraikan menjadi beberapa perkalian, seperti:
+
+$$
+12 = 3 \times 4
+$$
+
+Bilangan komposit juga dapat diuraikan lebih lanjut menjadi faktor-faktor prima:
+
+$$
+12 = 2 \times 2 \times 3
+$$
+
+Proses tersebut disebut **faktorisasi prima** dan dapat digunakan dalam berbagai perhitungan matematika, seperti menentukan **FPB dan KPK**.
+
+### Bilangan Genap dan Ganjil
+
+**Bilangan genap** adalah bilangan bulat yang dapat dibagi habis oleh **2**. Bilangan genap memiliki angka terakhir berupa **0, 2, 4, 6, atau 8**. Contoh bilangan genap adalah **..., -4, -2, 0, 2, 4, 6, 8, ...**.
+
+Sementara itu, **bilangan ganjil** adalah bilangan bulat yang tidak dapat dibagi habis oleh **2**. Jika dibagi dengan 2, bilangan ganjil akan menghasilkan **sisa 1**. Bilangan ganjil memiliki angka terakhir berupa **1, 3, 5, 7, atau 9**. Contohnya adalah **..., -3, -1, 1, 3, 5, 7, ...**.
+
+Secara sederhana, bilangan genap dan ganjil dapat dibedakan berdasarkan pembagian dengan 2. Bilangan genap dapat dibagi menjadi **dua kelompok dengan jumlah yang sama tanpa sisa**, sedangkan bilangan ganjil tidak dapat dibagi menjadi dua kelompok yang sama besar tanpa menyisakan satu.
+
+**Contoh penggunaannya** dapat ditemukan ketika membagi benda menjadi dua kelompok. Misalnya, terdapat **8 permen** yang akan dibagikan kepada dua orang. Karena 8 dapat dibagi menjadi dua kelompok yang masing-masing berisi 4 permen tanpa sisa, maka 8 merupakan bilangan genap.
+
+$$
+8 \div 2 = 4
+$$
+
+Sebaliknya, jika terdapat **7 permen**, pembagian kepada dua orang akan menghasilkan 3 permen untuk masing-masing orang dan menyisakan 1 permen. Oleh karena itu, 7 merupakan bilangan ganjil.
+
+$$
+7 \div 2 = 3 \text{ sisa } 1
+$$
+
+Dengan demikian, **bilangan genap selalu habis dibagi 2**, sedangkan **bilangan ganjil selalu menyisakan 1 ketika dibagi 2**.
+
+### Bilangan Bulat
+
+**Bilangan bulat** adalah bilangan yang terdiri dari **bilangan negatif, nol, dan bilangan positif**. Bilangan bulat tidak memiliki bagian pecahan atau desimal. Jika dituliskan secara berurutan, bilangan bulat dapat ditunjukkan sebagai:
+
+$$
+\mathbb{Z} = \{\ldots, -3, -2, -1, 0, 1, 2, 3, \ldots\}
+$$
+
+Bilangan bulat dapat dibagi menjadi tiga kelompok, yaitu **bilangan bulat negatif**, **nol**, dan **bilangan bulat positif**. Contoh bilangan bulat negatif adalah **-1, -2, -3**, dan seterusnya. Sementara itu, contoh bilangan bulat positif adalah **1, 2, 3**, dan seterusnya. **0** juga termasuk bilangan bulat, tetapi tidak termasuk bilangan positif maupun negatif.
+
+Bilangan bulat sering digunakan untuk menyatakan keadaan yang memiliki nilai **di bawah atau di atas suatu titik acuan**. Misalnya, suhu **-5°C** menunjukkan suhu lima derajat di bawah 0°C, sedangkan suhu **5°C** menunjukkan suhu lima derajat di atas 0°C.
+
+**Contoh penggunaannya** dapat ditemukan dalam kehidupan sehari-hari, seperti menyatakan suhu, ketinggian, keuntungan dan kerugian, atau posisi. Misalnya, seseorang memiliki keuntungan sebesar **Rp50.000** yang dapat dinyatakan sebagai **+50.000**, sedangkan kerugian sebesar **Rp20.000** dapat dinyatakan sebagai **-20.000**.
+
+Dengan demikian, bilangan bulat mencakup semua bilangan tanpa pecahan atau desimal, mulai dari bilangan negatif, **0**, hingga bilangan positif.
+
+### Bilangan Pecahan
+
+**Bilangan pecahan** adalah bilangan yang digunakan untuk menyatakan **bagian dari suatu keseluruhan**. Bilangan pecahan dituliskan menggunakan dua bilangan yang dipisahkan oleh garis, yaitu **pembilang** di bagian atas dan **penyebut** di bagian bawah.
+
+Bentuk umum bilangan pecahan dapat dituliskan sebagai:
+
+$$
+\frac{a}{b}
+$$
+
+Pada bentuk tersebut, **a** disebut sebagai **pembilang**, yaitu bilangan yang menunjukkan berapa banyak bagian yang diambil. Sementara itu, **b** disebut sebagai **penyebut**, yaitu bilangan yang menunjukkan menjadi berapa banyak bagian yang sama besar suatu keseluruhan dibagi. Penyebut tidak boleh bernilai **0**.
+
+Sebagai contoh, pecahan **$\frac{3}{4}$** berarti suatu keseluruhan dibagi menjadi **4 bagian yang sama besar**, kemudian **3 bagian** diambil atau digunakan.
+
+**Contoh penggunaannya** dapat ditemukan dalam kehidupan sehari-hari. Misalnya, sebuah kue dipotong menjadi **8 bagian yang sama besar** dan seseorang memakan **3 bagian**. Bagian kue yang telah dimakan dapat dinyatakan dengan pecahan:
+
+$$
+\frac{3}{8}
+$$
+
+Artinya, **3 dari 8 bagian yang sama besar** telah diambil. Dengan demikian, bilangan pecahan dapat digunakan untuk menyatakan bagian tertentu dari suatu keseluruhan.
+
+### Bilangan Rasional
+
+**Bilangan rasional** adalah bilangan yang dapat dinyatakan dalam bentuk **pecahan dari dua bilangan bulat**, dengan penyebut tidak boleh bernilai 0. Bilangan rasional dapat berupa bilangan bulat, pecahan biasa, pecahan campuran, maupun bilangan desimal yang **berhenti atau berulang**.
+
+Bentuk umum bilangan rasional dapat dituliskan sebagai:
+
+<Math formula="\mathbb{Q} = \left\{\frac{a}{b} \;\middle|\; a, b \in \mathbb{Z}, b \neq 0\right\}" />
+
+Pada bentuk tersebut, **a** dan **b** merupakan bilangan bulat, sedangkan **b** tidak boleh bernilai 0. Contoh bilangan rasional antara lain **$\frac{1}{2}$**, **$\frac{-3}{4}$**, **5**, dan **0,75**. Bilangan bulat juga termasuk bilangan rasional karena dapat ditulis dalam bentuk pecahan dengan penyebut 1. Misalnya:
+
+$$
+5 = \frac{5}{1}
+$$
+
+Bilangan desimal yang berhenti juga dapat diubah menjadi bentuk pecahan. Sebagai contoh:
+
+$$
+0,75 = \frac{75}{100} = \frac{3}{4}
+$$
+
+**Contoh penggunaannya** dapat ditemukan ketika menyatakan ukuran atau nilai yang tidak selalu berupa bilangan bulat. Misalnya, panjang sebuah tali adalah **2,5 meter**. Nilai tersebut dapat ditulis sebagai:
+
+$$
+2,5 = \frac{25}{10} = \frac{5}{2}
+$$
+
+Dengan demikian, **2,5 merupakan bilangan rasional** karena dapat dinyatakan sebagai perbandingan dua bilangan bulat dengan penyebut yang bukan 0.
+
+### Bilangan Irasional
+
+**Bilangan irasional** adalah bilangan yang **tidak dapat dinyatakan dalam bentuk pecahan $\frac{a}{b}$** dengan $a$ dan $b$ berupa bilangan bulat serta <Math formula="b \neq 0" inline />. Jika dituliskan dalam bentuk desimal, bilangan irasional memiliki digit di belakang koma yang **tidak pernah berhenti dan tidak berulang secara teratur**.
+
+Himpunan bilangan irasional biasa dilambangkan dengan $\mathbb{I}$ atau $\mathbb{R} \setminus \mathbb{Q}$. Beberapa contoh bilangan irasional meliputi:
+
+$$
+\sqrt{2} \approx 1{,}41421356\ldots
+$$
+
+$$
+\pi \approx 3{,}14159265\ldots
+$$
+
+$$
+e \approx 2{,}71828182\ldots
+$$
+
+Perbedaannya dengan bilangan rasional adalah pecahan seperti $\frac{1}{3} = 0{,}3333\ldots$ memiliki pola desimal berulang ($3$), sehingga tetap tergolong rasional. Sebaliknya, $\sqrt{2}$ tidak memiliki pola berulang dan desimalnya berlanjut tanpa batas.
+
+**Contoh penggunaannya** banyak ditemukan dalam perhitungan geometri dan rumus fisika. Misalnya, keliling lingkaran berdiameter $d$ dihitung dengan konstanta irasional $\pi$ ($K = \pi d$), atau perhitungan panjang sisi miring segitiga siku-siku dengan Teorema Pythagoras yang sering menghasilkan bentuk akar irasional.
+
+### Bilangan Real
+
+**Bilangan real** (bilangan nyata) adalah gabungan dari seluruh **bilangan rasional** dan **bilangan irasional**. Himpunan bilangan real mencakup semua nilai yang dapat direpresentasikan sebagai titik kontinu pada **garis bilangan**.
+
+Himpunan bilangan real dilambangkan dengan $\mathbb{R}$ dan dapat dirumuskan sebagai:
+
+$$
+\mathbb{R} = \mathbb{Q} \cup \mathbb{I}
+$$
+
+Seluruh bilangan asli, cacah, bulat, pecahan, desimal berulang, maupun nilai irasional seperti $\sqrt{3}$ berada di dalam himpunan bilangan real.
+
+**Contoh penggunaannya** adalah dalam hampir seluruh bidang pengukuran nyata seperti panjang, massa, suhu, waktu, dan sistem koordinat $x$-$y$.
+
+### Bilangan Imajiner
+
+**Bilangan imajiner** adalah bilangan yang didefinisikan dari hasil **akar kuadrat dari bilangan negatif**. Dalam himpunan bilangan real, perkalian dua bilangan identik selalu menghasilkan nilai non-negatif, sehingga $\sqrt{-1}$ tidak memiliki nilai di alam bilangan real.
+
+Untuk mengatasi limitasi tersebut, didefinisikan unit imajiner yang dilambangkan dengan **$i$**, di mana:
+
+$$
+i = \sqrt{-1} \quad \text{sehingga} \quad i^2 = -1
+$$
+
+Bentuk umum bilangan imajiner adalah $bi$, dengan $b \in \mathbb{R}$ dan $b \neq 0$. Contohnya:
+
+$$
+\sqrt{-9} = \sqrt{9 \times (-1)} = 3i
+$$
+
+$$
+\sqrt{-5} = \sqrt{5}i
+$$
+
+**Contoh penggunaannya** sangat penting dalam rekayasa teknik elektro, analisis gelombang, fisika kuantum, dan pemrosesan sinyal digital untuk memodelkan besaran seperti arus bolak-balik (AC) dan impedansi.
+
+### Bilangan Kompleks
+
+**Bilangan kompleks** adalah sistem bilangan yang menggabungkan **bagian real** dan **bagian imajiner**. Bentuk umum dari bilangan kompleks dituliskan sebagai:
+
+$$
+z = a + bi
+$$
+
+Pada bentuk tersebut:
+* **$a$** adalah bagian real, ditulis $\text{Re}(z) = a$.
+* **$b$** adalah bagian imajiner, ditulis $\text{Im}(z) = b$.
+* **$i$** adalah unit imajiner ($\sqrt{-1}$).
+
+Himpunan bilangan kompleks dilambangkan dengan **$\mathbb{C}$**. Jika $b = 0$, maka $z = a$ yang merupakan bilangan real murni. Jika $a = 0$ dan $b \neq 0$, maka $z = bi$ yang merupakan bilangan imajiner murni. Dengan demikian, **bilangan real dan imajiner merupakan himpunan bagian dari bilangan kompleks**.
+
+**Contoh penggunaannya** terdapat pada bidang teknik kendali, aerodinamika, pemrosesan citra/suara (seperti Transformasi Fourier), dan pemodelan fraktal.
+
+## Hubungan Antarjenis Bilangan
+
+Berbagai jenis bilangan dalam matematika tidak berdiri sendiri, melainkan membentuk hirarki himpunan bertingkat. Suatu jenis bilangan dapat menjadi bagian (himpunan bagian atau *subset*) dari jenis bilangan lainnya yang lebih luas.
+
+Hubungan inklusi antarhimpunan utama bilangan dapat digambarkan sebagai berikut:
+
+$$
+\mathbb{N} \subset \mathbb{W} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}
+$$
+
+Penjelasan hubungan hirarki tersebut:
+
+1. **Bilangan Asli ($\mathbb{N}$)** merupakan himpunan bagian dari **Bilangan Cacah ($\mathbb{W}$)** karena seluruh anggota bilangan asli ($1, 2, 3, \ldots$) ada di dalam bilangan cacah.
+2. **Bilangan Cacah ($\mathbb{W}$)** merupakan himpunan bagian dari **Bilangan Bulat ($\mathbb{Z}$)** yang menambahkan elemen bilangan negatif.
+3. **Bilangan Bulat ($\mathbb{Z}$)** merupakan himpunan bagian dari **Bilangan Rasional ($\mathbb{Q}$)** karena setiap bilangan bulat $n$ dapat dituliskan dalam bentuk pecahan $\frac{n}{1}$.
+4. **Bilangan Rasional ($\mathbb{Q}$)** dan **Bilangan Irasional ($\mathbb{I}$)** saling lepas (tidak saling beririsan), namun gabungan keduanya membentuk **Bilangan Real ($\mathbb{R}$)**:
+   $$
+   \mathbb{R} = \mathbb{Q} \cup \mathbb{I}
+   $$
+5. **Bilangan Real ($\mathbb{R}$)** merupakan himpunan bagian dari **Bilangan Kompleks ($\mathbb{C}$)**, di mana bagian imajinernya bernilai $0$ ($z = a + 0i$).
+
+<Note>
+**Ingat:** Setiap bilangan asli adalah bilangan bulat, tetapi tidak setiap bilangan bulat adalah bilangan asli (contohnya $-3$ atau $0$).
+</Note>
+
+## Contoh Soal
+
+Berikut adalah beberapa contoh soal beserta pembahasannya untuk menguji pemahaman mengenai konsep dan jenis-jenis bilangan.
+
+### Soal 1: Klasifikasi Jenis Bilangan
+Tentukan jenis himpunan bilangan terkecil (mulai dari $\mathbb{N}, \mathbb{W}, \mathbb{Z}, \mathbb{Q}, \mathbb{I}, \mathbb{R}$) yang memuat bilangan-bilangan berikut:
+* a. $-7$  
+* b. $0$  
+* c. $\sqrt{5}$  
+* d. $\frac{12}{4}$
+
+<Tip>
+**Petunjuk:** Sederhanakan bentuk pecahan atau operasi matematika terlebih dahulu sebelum menentukan jenis bilangannya.
+</Tip>
+
+**Pembahasan:**
+* **a. $-7$**: Merupakan bilangan bulat negatif, sehingga himpunan terkecilnya adalah **Bilangan Bulat ($\mathbb{Z}$)**.  
+* **b. $0$**: Tidak termasuk bilangan asli, tetapi merupakan anggota awal dari **Bilangan Cacah ($\mathbb{W}$)**.  
+* **c. $\sqrt{5}$**: Nilai akar yang tidak menghasilkan bilangan bulat ($\approx 2{,}2360679\ldots$) dan desimalnya tidak berulang, sehingga termasuk **Bilangan Irasional ($\mathbb{I}$)**.  
+* **d. $\frac{12}{4}$**: Sederhanakan terlebih dahulu:
+  $$
+  \frac{12}{4} = 3
+  $$
+  Karena hasilnya adalah $3$, maka himpunan terkecilnya adalah **Bilangan Asli ($\mathbb{N}$)**.
+
+---
+
+### Soal 2: Mengubah Desimal Berulang ke Pecahan Rasional
+Buktikan bahwa bilangan desimal berulang $x = 0{,}6666\ldots$ merupakan bilangan rasional dengan mengubahnya ke bentuk pecahan $\frac{a}{b}$.
+
+**Pembahasan:**
+Misalkan $x = 0{,}6666\ldots$
+
+Kalikan kedua ruas dengan $10$:
+$$
+10x = 6{,}6666\ldots
+$$
+
+Kurangkan persamaan $10x$ dengan $x$:
+$$
+\begin{aligned}
+10x &= 6{,}6666\ldots \\
+x &= 0{,}6666\ldots \\
+\hline
+9x &= 6
+\end{aligned}
+$$
+
+Selesaikan untuk nilai $x$:
+$$
+x = \frac{6}{9} = \frac{2}{3}
+$$
+
+Karena $0{,}6666\ldots$ dapat dinyatakan dalam bentuk pecahan $\frac{2}{3}$ di mana $2, 3 \in \mathbb{Z}$ dan <Math formula="3 \neq 0" inline />, maka terbukti bahwa $0{,}6666\ldots$ adalah **Bilangan Rasional ($\mathbb{Q}$)**.
+
+## Kesimpulan
+
+Konsep bilangan merupakan fondasi utama dalam matematika yang berkembang dari kebutuhan praktis hingga analisis abstrak. Dimulai dari **bilangan asli** dan **cacah** untuk menghitung benda konkret, matematika memperluas cakupannya ke **bilangan bulat** untuk menyatakan arah atau nilai berlawanan, serta **bilangan pecahan** dan **rasional** untuk mengukur bagian secara presisi.
+
+Keberadaan **bilangan irasional** dan **imajiner** melengkapi struktur matematika hingga terbentuk **bilangan real** dan **bilangan kompleks**, yang memungkinkan pemodelan fenomena alam, fisika kuantum, dan rekayasa teknologi modern. Memahami hirarki serta sifat tiap jenis bilangan memberikan kemudahan dalam menyelesaikan berbagai persoalan matematika secara terstruktur dan logis.

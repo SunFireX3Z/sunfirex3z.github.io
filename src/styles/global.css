@@ -225,3 +225,12 @@ body.formal-mode .mode-author {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Mencegah CSS reset Tailwind v4 merusak penumpukan karakter KaTeX */
+.katex .mrel {
+  letter-spacing: normal !important;
+}
+
+.katex .mrel .mord {
+  display: inline-block !important;
+}

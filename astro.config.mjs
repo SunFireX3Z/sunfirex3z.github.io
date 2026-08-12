@@ -56,7 +56,15 @@ export default defineConfig({
           },
         },
       ],
-      rehypeKatex,
+      [
+        rehypeKatex,
+        {
+          macros: {
+            "\\neq": "\\mathrel{\\unicode{x2260}}",
+            "\\ne": "\\mathrel{\\unicode{x2260}}",
+          },
+        },
+      ],
     ],
   },
 });
