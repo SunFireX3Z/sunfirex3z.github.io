@@ -10,7 +10,7 @@ export const metadata = {
     author: "",
     category: "",
     subcategory: "",
-    thumbnail: "",
+    thumbnail: null,
     imageCaption: "",
     readingTime: 0,
     difficulty: "",

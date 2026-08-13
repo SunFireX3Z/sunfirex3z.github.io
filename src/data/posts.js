@@ -7,6 +7,10 @@ const mdxModules = import.meta.glob('../content/**/index.mdx', { eager: true });
 const authorMdxModules = import.meta.glob('../content/**/index.author.mdx', { eager: true });
 const metadataModules = import.meta.glob('../content/**/metadata.ts', { eager: true });
 
+// Impor semua gambar placeholder secara dinamis
+const placeholderImageModules = import.meta.glob('/src/assets/images/placeholder/*.{jpeg,jpg,png,webp}', { eager: true });
+const placeholderPool = Object.values(placeholderImageModules).map(module => module.default);
+
 let allPosts = Object.entries(mdxModules).reduce((acc, [filepath, mdxModule]) => {
         // --- Validasi dan Pengambilan Metadata ---
         // Prioritaskan metadata dari file `metadata.ts` jika ada.
@@ -25,6 +29,12 @@ let allPosts = Object.entries(mdxModules).reduce((acc, [filepath, mdxModule]) =>
             // Jika tidak ada metadata sama sekali, lewati file ini.
             console.warn(`[Data Processing] Metadata tidak ditemukan untuk file: ${filepath}. Artikel ini akan dilewati.`);
             return acc;
+        }
+
+        // Otomatis pasang placeholder jika thumbnail tidak ada atau kosong
+        if (placeholderPool.length > 0 && (!metadata.thumbnail || metadata.thumbnail === '')) {
+            const randomIndex = Math.floor(Math.random() * placeholderPool.length);
+            metadata.thumbnail = placeholderPool[randomIndex];
         }
 
         // Ekstrak metadata dan konten dari setiap modul MDX
