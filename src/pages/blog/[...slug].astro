@@ -16,13 +16,29 @@ import { ARTICLE_THUMBNAIL_DEFAULTS } from '@/config';
 
 export async function getStaticPaths() {
     const allPosts = posts.filter(p => p.lang === 'id');
-    return allPosts.map(post => ({
-        params: { slug: post.path.replace('/blog/', '') },
-        props: { post },
-    }));
+    const paths = [];
+
+    for (const post of allPosts) {
+        const baseSlug = post.path.replace('/blog/', '');
+
+        // Path untuk mode formal (standard)
+        paths.push({
+            params: { slug: baseSlug },
+            props: { post, mode: 'formal' },
+        });
+
+        // Path untuk mode gaya penulis, jika AuthorContent ada
+        if (post.AuthorContent) {
+            paths.push({
+                params: { slug: `${baseSlug}/author` },
+                props: { post, mode: 'author' },
+            });
+        }
+    }
+    return paths;
 }
 
-const { post } = Astro.props;
+const { post, mode } = Astro.props; // Dapatkan 'mode' dari props
 if (!post) {
     return Astro.redirect('/404');
 }
@@ -97,7 +113,7 @@ const nextPost = currentPostIndex < navigationScope.length - 1 ? navigationScope
 
 // Data untuk SEO
 const imageSrcForSeo = typeof metadata.thumbnail === 'object' && metadata.thumbnail !== null ? metadata.thumbnail.src : metadata.thumbnail;
-const canonicalUrl = new URL(post.path, Astro.site).href;
+const canonicalUrl = new URL(post.path, Astro.site).href; // Canonical selalu menunjuk ke versi formal
 const imageUrl = new URL(imageSrcForSeo, Astro.site).href;
 
 let thumbWidth, thumbHeight;
@@ -120,7 +136,14 @@ const breadcrumbs = [
 if (metadata.subcategory) {
     breadcrumbs.push({
         name: metadata.subcategory,
-        url: new URL(`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`, Astro.site).href
+                url: new URL(`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`, Astro.site).href,
+            });
+        }
+        // Tambahkan breadcrumb untuk mode penulis jika sedang di mode tersebut
+        if (mode === 'author') {
+            breadcrumbs.push({
+                name: `${metadata.title} (Gaya Penulis)`,
+                url: new URL(`${post.path}/author`, Astro.site).href,
     });
 }
 breadcrumbs.push({ name: metadata.title, url: canonicalUrl });
@@ -139,22 +162,10 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
     lastUpdated={metadata.lastUpdated}
 >
     <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchemaData)} />
-    {/* Inline script untuk mencegah FOUC/flash of unstyled content pada dual reading mode */}
-    <script is:inline>
-      const MODE_STORAGE_KEY = 'sunblog_article_mode';
-      const savedMode = sessionStorage.getItem(MODE_STORAGE_KEY);
-      const initialMode = savedMode || 'formal'; // Default ke 'formal' jika tidak ada yang tersimpan
-
-      if (initialMode === 'formal') {
-        document.body.classList.add('formal-mode');
-        document.body.classList.remove('author-mode');
-      } else {
-        document.body.classList.add('author-mode');
-        document.body.classList.remove('formal-mode');
-      }
-    </script>
-
-
+    {/* Tambahkan noindex untuk mode penulis agar tidak diindeks oleh mesin pencari */}
+    {mode === 'author' && (
+        <meta slot="head" name="robots" content="noindex, nofollow" />
+    )}
 
     <div class="mx-auto w-full max-w-[90rem] px-6 py-16 space-y-8">
         {/* Breadcrumbs */}
@@ -228,11 +239,7 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                                 <span class="font-semibold text-gray-800">{metadata.author}</span>
                             </div>
                             {/* Tampilkan switcher hanya jika ada konten Author's Style */}
-                            {AuthorContent && (
-                                <div class="not-prose">
-                                    <ArticleModeSwitcher client:visible authorName={metadata.author} />
-                                </div>
-                            )}
+                            {AuthorContent && <ArticleModeSwitcher client:visible authorName={metadata.author} currentMode={mode} basePath={post.path} />}
                         </div>
 
                         {/* Info Artikel dipindahkan ke sini */}
@@ -240,32 +247,22 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                     </header>
 
                     {/* Mobile Table of Contents */}
-                    {AuthorContent ? (
-                        <>
-                            {standardTocItems.length > 0 && (
-                                <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden mode-formal">
-                                    <TableOfContents client:visible items={standardTocItems} contentId="content-standard" />
-                                </div>
-                            )}
-                            {authorTocItems.length > 0 && (
-                                <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden mode-author">
-                                    <TableOfContents client:visible items={authorTocItems} contentId="content-author" />
-                                </div>
-                            )}
-                        </>
-                    ) : (standardTocItems.length > 0 && <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden"><TableOfContents client:visible items={standardTocItems} /></div>)
-                    }
+                    {mode === 'formal' && standardTocItems.length > 0 && (
+                        <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden">
+                            <TableOfContents client:visible items={standardTocItems} />
+                        </div>
+                    )}
+                    {mode === 'author' && authorTocItems.length > 0 && (
+                        <div class="my-8 border-t border-b border-gray-200 py-6 lg:hidden">
+                            <TableOfContents client:visible items={authorTocItems} />
+                        </div>
+                    )}
 
                     <article class="prose lg:prose-lg max-w-none">
-                        {/* Jika ada AuthorContent, tampilkan kedua mode dan biarkan CSS yang mengatur visibilitasnya */}
-                        {AuthorContent ? (
-                            <>
-                                <div id="content-standard" class="mode-formal"><Content /></div>
-                                <div id="content-author" class="mode-author"><AuthorContent /></div>
-                            </>
-                        ) : (
-                            <Content /> // Jika tidak ada AuthorContent, tampilkan Content (Standard) secara langsung
-                        )}
+                        {/* Render konten berdasarkan mode yang aktif */}
+                        {mode === 'formal' && <Content />}
+                        {mode === 'author' && AuthorContent && <AuthorContent />}
+                        {mode === 'author' && !AuthorContent && <p class="text-center text-gray-500">Konten gaya penulis tidak tersedia untuk artikel ini.</p>}
                     </article>
 
                     {/* Tambahkan komponen Disclaimer di sini */}
@@ -346,19 +343,9 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
             {/* Sidebar */}
             <aside class="hidden lg:block lg:col-span-1">
                 <div class="sticky top-40 flex flex-col gap-8">
-                    {/* Desktop Table of Contents */}
-                    {AuthorContent ? (
-                        <>
-                            <div class="mode-formal">
-                                {standardTocItems.length > 0 && <TableOfContents client:visible items={standardTocItems} contentId="content-standard" />}
-                            </div>
-                            <div class="mode-author">
-                                {authorTocItems.length > 0 && <TableOfContents client:visible items={authorTocItems} contentId="content-author" />}
-                            </div>
-                        </>
-                    ) : (
-                        standardTocItems.length > 0 && <TableOfContents client:visible items={standardTocItems} />
-                    )}
+                    {/* Desktop Table of Contents (hanya tampilkan TOC yang relevan dengan mode) */}
+                    {mode === 'formal' && standardTocItems.length > 0 && <TableOfContents client:visible items={standardTocItems} />}
+                    {mode === 'author' && authorTocItems.length > 0 && <TableOfContents client:visible items={authorTocItems} />}
 
                     <div class="rounded-lg bg-white p-6 shadow-md">
                         <!-- Judul dengan Ikon -->

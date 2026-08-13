@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 
-function TableOfContents({ items, contentId }) {
+function TableOfContents({ items }) {
     const [activeTocSlug, setActiveTocSlug] = useState("");
     const [isTocCollapsed, setIsTocCollapsed] = useState(false);
     const [activeTocGroup, setActiveTocGroup] = useState(null);
@@ -13,23 +13,14 @@ function TableOfContents({ items, contentId }) {
         const flatToc = items.flatMap((h2) => [h2, ...h2.children]);
         const container = tocContainerRef.current;
 
-        const handleScroll = () => {
-            // Jika komponen ToC itu sendiri tidak terlihat (misal: display: none),
-            // hentikan eksekusi untuk mencegah interferensi.
-            if (container && container.offsetParent === null) {
-                return;
-            }
-
-            const fromTop = 200;
+        const handleScroll = () => {            
+            const fromTop = 160; // Sesuaikan dengan offset header
             let currentActiveSlug = "";
 
             for (const item of flatToc) {
                 // Gunakan querySelector yang di-scope ke kontainer konten jika contentId disediakan,
                 // atau fallback ke getElementById jika tidak (untuk artikel mode tunggal).
-                const element = contentId
-                    ? document.querySelector(`#${contentId} #${item.slug}`)
-                    : document.getElementById(item.slug);
-
+                const element = document.getElementById(item.slug);
                 // Jika elemen ditemukan, periksa posisinya.
                 if (element && element.getBoundingClientRect().top < fromTop) {
                     currentActiveSlug = item.slug;
@@ -58,9 +49,9 @@ function TableOfContents({ items, contentId }) {
 
         window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
-
+        
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [items, contentId]);
+    }, [items]);
 
     // Efek untuk menangani klik pada link TOC secara manual
     useEffect(() => {
@@ -68,6 +59,12 @@ function TableOfContents({ items, contentId }) {
         if (!container) return;
 
         const handleClick = (event) => {
+            // Jika target klik adalah tombol (seperti tombol expand/collapse),
+            // biarkan handler onClick React yang menanganinya dan jangan lakukan apa-apa di sini.
+            if (event.target.closest('button')) {
+                return;
+            }
+
             const link = event.target.closest('a');
             
             // Hanya proses link internal TOC (yang dimulai dengan #)
@@ -75,10 +72,7 @@ function TableOfContents({ items, contentId }) {
                 event.preventDefault();
                 
                 const slug = link.getAttribute('href').substring(1);
-                
-                const element = contentId
-                    ? document.querySelector(`#${contentId} #${slug}`)
-                    : document.getElementById(slug);
+                const element = document.getElementById(slug);
 
                 if (element) {
                     // Offset ini harus cocok dengan kelas `scroll-mt-40` (10rem = 160px) pada heading
@@ -93,7 +87,7 @@ function TableOfContents({ items, contentId }) {
 
         container.addEventListener('click', handleClick);
         return () => container.removeEventListener('click', handleClick);
-    }, [contentId]); // Jalankan ulang jika contentId berubah
+    }, []); // Tidak perlu bergantung pada contentId lagi
 
     const handleToggleGroup = (groupSlug) => {
         setActiveTocGroup((prevGroup) =>

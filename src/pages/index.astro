@@ -78,10 +78,10 @@ const SKELETON_COUNT = 3;
                         {Object.values(authors).map(author => (
                             <div class="flex items-center gap-4 mx-6 whitespace-nowrap">
                                 {author.avatar && (
-                                    <Image src={author.avatar} alt={`Avatar of ${author.name}`} class="h-10 w-10 rounded-full object-cover ring-2 ring-white/20" width={40} height={40} format="webp" quality={80} />
+                                    <Image src={author.avatar} alt={`Avatar of ${author.fullName}`} class="h-10 w-10 rounded-full object-cover ring-2 ring-white/20" width={40} height={40} format="webp" quality={80} />
                                 )}
                                 <div class="text-left">
-                                    <p class="font-bold text-base text-white">{author.name}</p>
+                                    <p class="font-bold text-base text-white">{author.fullName}</p>
                                     <p class="text-sm text-slate-400">{author.role}</p>
                                 </div>
                             </div>
@@ -104,14 +104,8 @@ const SKELETON_COUNT = 3;
 
                 {latestPost && (
                     <div class="flex-1 h-full">
-                        {/* Skeleton Placeholder */}
-                        <div id="latest-post-skeleton" class="h-full">
-                            <CardLargeSkeleton />
-                        </div>
-                        {/* Real Content (initially hidden) */}
-                        <div id="latest-post-content" class="hidden h-full">
-                            <Card {...latestPost.metadata} path={latestPost.path} isLarge />
-                        </div>
+                        {/* Konten dirender langsung */}
+                        <Card {...latestPost.metadata} path={latestPost.path} isLarge />
                     </div>
                 )}
             </div>
@@ -123,14 +117,7 @@ const SKELETON_COUNT = 3;
                 </h2>
 
                 <div class="flex-1 rounded-xl bg-white p-4 shadow-md">
-                    <!-- Skeleton Placeholder -->
-                    <div id="featured-posts-skeleton" class="flex h-full flex-col space-y-4 lg:space-y-0 lg:justify-between">
-                        {Array.from({ length: SKELETON_COUNT }).map(() => (
-                            <FeaturedCardSkeleton />
-                        ))}
-                    </div>
-                    <!-- Real Content (initially hidden) -->
-                    <div id="featured-posts-content" class="hidden flex h-full flex-col space-y-4 lg:space-y-0 lg:justify-between">
+                    <div class="flex h-full flex-col space-y-4 lg:space-y-0 lg:justify-between">
                         {featuredPosts.map(post => (
                             <FeaturedCard {...post.metadata} path={post.path} />
                         ))}
@@ -142,14 +129,8 @@ const SKELETON_COUNT = 3;
         {/* Bagian Bawah: Blog Terbaru */}
         <section class="mt-16">
             <h2 class="mb-4 inline-block border-b-4 border-orange-500 pb-1 text-2xl font-bold sm:text-3xl">Artikel Terbaru Lainnya</h2>
-            <!-- Skeleton Placeholder -->
-            <div id="recent-posts-skeleton" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {Array.from({ length: SKELETON_COUNT }).map(() => (
-                    <CardSkeleton />
-                ))}
-            </div>
-            <!-- Real Content (initially hidden) -->
-            <div id="recent-posts-content" class="hidden grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {recentPosts.map(post => (<Card {...post.metadata} path={post.path} />))}
             </div>
         </section>
@@ -161,14 +142,8 @@ const SKELETON_COUNT = 3;
                     <h2 class="mb-4 inline-block border-b-4 border-orange-500 pb-1 text-2xl font-bold sm:text-3xl">Proyek Terbaru</h2>
                     <a href="/proyek" class="font-semibold text-orange-600 transition-colors hover:text-orange-700 hover:underline">Lihat Semua Proyek &rarr;</a>
                 </div>
-                <!-- Skeleton Placeholder -->
-                <div id="recent-projects-skeleton" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {Array.from({ length: SKELETON_COUNT }).map(() => (
-                        <ProjectCardSkeleton />
-                    ))}
-                </div>
-                <!-- Real Content (initially hidden) -->
-                <div id="recent-projects-content" class="hidden grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {recentProjectsList.map(project => (
                         <a href={project.path} class="block h-full"><ProjectCard {...project} /></a>
                     ))}
@@ -176,45 +151,6 @@ const SKELETON_COUNT = 3;
             </section>
         )}
     </div>
-
-    <script is:inline>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Atur penundaan di sini (dalam milidetik) untuk mensimulasikan waktu muat.
-            // Contoh: 1500ms = 1.5 detik.
-            const loadingDelay = 1500;
-
-            setTimeout(() => {
-                const skeletonContainer = document.getElementById('recent-posts-skeleton');
-                const contentContainer = document.getElementById('recent-posts-content');
-                const projectSkeletonContainer = document.getElementById('recent-projects-skeleton');
-                const projectContentContainer = document.getElementById('recent-projects-content');
-                const featuredSkeletonContainer = document.getElementById('featured-posts-skeleton');
-                const featuredContentContainer = document.getElementById('featured-posts-content');
-                const latestSkeletonContainer = document.getElementById('latest-post-skeleton');
-                const latestContentContainer = document.getElementById('latest-post-content');
-
-                if (skeletonContainer && contentContainer) {
-                    skeletonContainer.classList.add('hidden');
-                    contentContainer.classList.remove('hidden');
-                }
-
-                if (projectSkeletonContainer && projectContentContainer) {
-                    projectSkeletonContainer.classList.add('hidden');
-                    projectContentContainer.classList.remove('hidden');
-                }
-
-                if (featuredSkeletonContainer && featuredContentContainer) {
-                    featuredSkeletonContainer.classList.add('hidden');
-                    featuredContentContainer.classList.remove('hidden');
-                }
-
-                if (latestSkeletonContainer && latestContentContainer) {
-                    latestSkeletonContainer.classList.add('hidden');
-                    latestContentContainer.classList.remove('hidden');
-                }
-            }, loadingDelay);
-        });
-    </script>
 </Layout>
 
 <style>
