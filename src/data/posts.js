@@ -9,6 +9,19 @@ const metadataModules = import.meta.glob('../content/**/metadata.ts', { eager: t
 
 // Impor semua gambar placeholder secara dinamis
 const placeholderImageModules = import.meta.glob('/src/assets/images/placeholder/*.{jpeg,jpg,png,webp}', { eager: true });
+
+// Buat pemetaan dari nama penulis (lowercase) ke gambar placeholder mereka
+const authorPlaceholderMap = Object.entries(placeholderImageModules).reduce((map, [path, module]) => {
+    // Ekstrak nama penulis dari path file, contoh: /src/assets/images/placeholder/placeholder-nijia.webp -> nijia
+    const match = path.match(/placeholder-([a-z0-9]+)\.webp/);
+    if (match && match[1]) {
+        const authorName = match[1];
+        map[authorName] = module.default;
+    }
+    return map;
+}, {});
+
+// Buat pool fallback jika placeholder penulis spesifik tidak ditemukan
 const placeholderPool = Object.values(placeholderImageModules).map(module => module.default);
 
 let allPosts = Object.entries(mdxModules).reduce((acc, [filepath, mdxModule]) => {
@@ -29,12 +42,6 @@ let allPosts = Object.entries(mdxModules).reduce((acc, [filepath, mdxModule]) =>
             // Jika tidak ada metadata sama sekali, lewati file ini.
             console.warn(`[Data Processing] Metadata tidak ditemukan untuk file: ${filepath}. Artikel ini akan dilewati.`);
             return acc;
-        }
-
-        // Otomatis pasang placeholder jika thumbnail tidak ada atau kosong
-        if (placeholderPool.length > 0 && (!metadata.thumbnail || metadata.thumbnail === '')) {
-            const randomIndex = Math.floor(Math.random() * placeholderPool.length);
-            metadata.thumbnail = placeholderPool[randomIndex];
         }
 
         // Ekstrak metadata dan konten dari setiap modul MDX
@@ -60,6 +67,21 @@ let allPosts = Object.entries(mdxModules).reduce((acc, [filepath, mdxModule]) =>
         if (!foundAuthorEntry) {
             console.warn(`[Data Processing] Penulis "${authorIdentifier}" tidak ditemukan di authors.js untuk artikel: ${filepath}`);
             return acc;
+        }
+
+        // Otomatis pasang placeholder JIKA thumbnail tidak ada atau kosong
+        if (!metadata.thumbnail || metadata.thumbnail === '') {
+            const authorKey = foundAuthorEntry[0].toLowerCase(); // e.g., "Nijia" -> "nijia"
+            const specificPlaceholder = authorPlaceholderMap[authorKey];
+    
+            if (specificPlaceholder) {
+                // Gunakan placeholder spesifik penulis jika ada
+                metadata.thumbnail = specificPlaceholder;
+            } else if (placeholderPool.length > 0) {
+                // Fallback: Gunakan placeholder acak jika tidak ada yang spesifik
+                const randomIndex = Math.floor(Math.random() * placeholderPool.length);
+                metadata.thumbnail = placeholderPool[randomIndex];
+            }
         }
 
         const pathParts = filepath.split('/');

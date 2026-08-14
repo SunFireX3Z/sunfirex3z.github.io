@@ -1,0 +1,237 @@
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.astro';
+import Blockquote from '@/components/mdx/Blockquote.jsx';
+import RelatedArticle from '@/components/mdx/RelatedArticle.astro';
+import Shopeeproduct from '@/components/mdx/ShopeeProduct.astro';
+
+export const rotationHeaders = [
+  "Planet",
+  "Periode Rotasi",
+  "Arah Rotasi",
+  "Karakteristik",
+];
+
+export const rotationRows = [
+  [
+    "Merkurius",
+    "±58,6 hari",
+    "*Prograde*",
+    "Memiliki periode rotasi yang relatif panjang dan mengalami resonansi rotasi-orbit 3:2.",
+  ],
+  [
+    "Venus",
+    "±243 hari",
+    "*Retrograde*",
+    "Berotasi sangat lambat dan berlawanan arah dengan sebagian besar planet.",
+  ],
+  [
+    "Bumi",
+    "±23 jam 56 menit",
+    "*Prograde*", // <--- Diubah menjadi miring
+    "Rotasi menyebabkan pergantian siang dan malam serta berpengaruh terhadap berbagai fenomena atmosfer.",
+  ],
+  [
+    "Mars",
+    "±24 jam 37 menit",
+    "*Prograde*", // <--- Diubah menjadi miring
+    "Memiliki periode rotasi yang mendekati Bumi.",
+  ],
+  [
+    "Jupiter",
+    "±9 jam 56 menit",
+    "*Prograde*", // <--- Diubah menjadi miring
+    "Merupakan planet dengan rotasi tercepat di Tata Surya.",
+  ],
+  [
+    "Saturnus",
+    "±10 jam 33 menit",
+    "*Prograde*", // <--- Diubah menjadi miring
+    "Memiliki periode rotasi yang sangat singkat dibandingkan dengan planet kebumian.",
+  ],
+  [
+    "Uranus",
+    "±17 jam 14 menit",
+    "*Retrograde*",
+    "Memiliki kemiringan sumbu rotasi yang sangat besar sehingga planet tampak berotasi dengan posisi hampir menyamping.",
+  ],
+  [
+    "Neptunus",
+    "±16 jam 6 menit",
+    "*Prograde*", // <--- Diubah menjadi miring
+    "Memiliki periode rotasi yang relatif singkat meskipun berada sangat jauh dari Matahari.",
+  ],
+];
+
+## Apa Itu Rotasi Planet?
+
+**Rotasi planet** adalah gerak perputaran planet pada sumbu rotasinya. Sumbu rotasi merupakan garis khayal yang membentang melalui pusat planet dan menghubungkan kutub utara dengan kutub selatan.
+
+Rotasi merupakan salah satu bentuk gerak yang dimiliki oleh planet. Setiap planet memiliki karakteristik rotasi yang berbeda, baik dalam hal arah maupun periode rotasi. **Periode rotasi** adalah waktu yang diperlukan oleh suatu planet untuk menyelesaikan satu kali putaran pada sumbunya.
+
+Rotasi berbeda dengan **revolusi**. Rotasi merupakan perputaran planet pada sumbunya, sedangkan revolusi merupakan pergerakan planet mengelilingi Matahari. Pada Bumi, rotasi berlangsung sekitar 24 jam dan menyebabkan terjadinya pergantian siang dan malam.
+
+## Mengapa Planet Berputar?
+
+Planet berputar karena mempertahankan **momentum sudut** yang diperolehnya sejak proses pembentukan Tata Surya. Tata Surya terbentuk dari awan gas dan debu yang berputar dan kemudian mengalami keruntuhan akibat gravitasi. Ketika materi tersebut berkumpul membentuk Matahari dan planet-planet, gerak rotasi dari materi penyusunnya turut dipertahankan.
+
+Prinsip **kekekalan momentum sudut** menyebabkan benda yang telah memiliki gerak berputar cenderung mempertahankan gerakan tersebut selama tidak terdapat pengaruh eksternal yang mengubahnya secara signifikan. Oleh karena itu, planet yang terbentuk dari materi yang memiliki momentum sudut tetap memiliki rotasi pada sumbunya.
+
+Rotasi setiap planet tidak memiliki karakteristik yang sama karena proses pembentukannya dipengaruhi oleh berbagai faktor. Tumbukan dengan benda langit lain, distribusi materi, serta interaksi gravitasi dapat memengaruhi arah dan kecepatan rotasi suatu planet.
+
+Dengan demikian, rotasi planet bukanlah gerakan yang muncul secara tiba-tiba setelah planet terbentuk. Gerakan tersebut merupakan bagian dari dinamika materi sejak tahap awal pembentukan Tata Surya dan dapat mengalami perubahan sepanjang perkembangan planet.
+
+## Proses Terbentuknya Rotasi Planet
+
+Rotasi planet berkaitan erat dengan proses pembentukan Tata Surya. Sekitar 4,6 miliar tahun yang lalu, Tata Surya terbentuk dari awan gas dan debu yang dikenal sebagai **nebula surya**. Awan tersebut mengalami keruntuhan akibat pengaruh gravitasi dan secara bertahap menjadi semakin padat.
+
+Ketika nebula surya mengalami keruntuhan, sebagian besar materi berkumpul di pusat dan membentuk Matahari. Materi yang tersisa membentuk piringan yang berputar di sekitar Matahari muda. Dari piringan tersebut, partikel-partikel debu dan batuan saling bertabrakan serta bergabung melalui proses *akresi* hingga membentuk benda-benda yang semakin besar.
+
+Benda-benda tersebut kemudian berkembang menjadi *planetesimal* dan *protoplanet*. Selama proses pertumbuhan tersebut, setiap benda menerima tambahan materi dan mengalami berbagai tumbukan. Interaksi tersebut turut menentukan jumlah dan arah momentum sudut yang dimiliki oleh benda yang kemudian berkembang menjadi planet.
+
+Setelah planet terbentuk, rotasinya terus dipengaruhi oleh berbagai interaksi dengan lingkungan di sekitarnya. Tumbukan dengan benda langit, gaya gravitasi, serta interaksi pasang surut dapat mengubah kecepatan atau arah rotasi. Oleh karena itu, karakteristik rotasi yang dimiliki planet saat ini merupakan hasil dari proses pembentukan dan perkembangan yang berlangsung dalam waktu yang sangat panjang.
+
+## Hukum Fisika di Balik Rotasi Planet
+
+Rotasi planet dapat dijelaskan melalui beberapa prinsip dasar dalam fisika, terutama **hukum kekekalan momentum sudut** dan konsep **torsi**. Kedua konsep tersebut membantu menjelaskan mengapa planet dapat mempertahankan gerak rotasinya serta bagaimana interaksi dengan benda langit lain dapat memengaruhi rotasi tersebut.
+
+### Kekekalan Momentum Sudut
+
+Momentum sudut merupakan besaran yang menggambarkan gerak rotasi suatu benda terhadap suatu sumbu. Pada sistem yang tidak menerima torsi eksternal yang signifikan, momentum sudut akan tetap terjaga.
+
+Prinsip tersebut dikenal sebagai hukum kekekalan momentum sudut. Dalam pembentukan planet, prinsip ini membantu menjelaskan mengapa sebagian gerakan berputar dari materi penyusun Tata Surya tetap terbawa ketika materi tersebut berkumpul membentuk planet.
+
+Perubahan ukuran dan distribusi massa suatu benda juga dapat memengaruhi kecepatan rotasinya. Ketika **momen inersia** suatu benda berubah, **kecepatan sudutnya** dapat berubah agar momentum sudut keseluruhan tetap terjaga.
+
+### Torsi dan Perubahan Rotasi
+
+**Torsi** merupakan ukuran kecenderungan suatu gaya untuk menyebabkan benda berputar atau mengubah gerak rotasinya. Jika sebuah planet mengalami torsi dari luar, kecepatan atau arah rotasinya dapat berubah.
+
+Torsi dapat berasal dari interaksi gravitasi dengan benda langit lain. Salah satu contohnya adalah **interaksi pasang surut** antara Bumi dan Bulan. Dalam jangka waktu yang sangat panjang, interaksi tersebut menyebabkan perubahan bertahap pada kecepatan rotasi Bumi.
+
+### Gravitasi dan Interaksi Antarplanet
+
+Gravitasi berperan penting dalam mempertahankan keteraturan sistem planet, tetapi gravitasi tidak secara langsung menjadi penyebab utama planet terus berputar pada sumbunya. Rotasi merupakan gerakan yang telah dimiliki oleh materi penyusun planet sejak proses pembentukannya.
+
+Interaksi gravitasi tetap dapat memengaruhi rotasi melalui torsi dan gaya pasang surut. Besarnya pengaruh tersebut bergantung pada massa benda yang berinteraksi, jaraknya, serta karakteristik internal planet.
+
+Dengan demikian, rotasi planet merupakan hasil dari gerak materi sejak pembentukan Tata Surya yang kemudian dipertahankan oleh hukum kekekalan momentum sudut. Interaksi gravitasi dan torsi dapat menyebabkan perubahan pada rotasi tersebut dalam jangka waktu yang sangat panjang.
+
+## Perbedaan Rotasi pada Setiap Planet
+
+Setiap planet di Tata Surya memiliki karakteristik rotasi yang berbeda. Perbedaan tersebut mencakup kecepatan rotasi, periode rotasi, arah rotasi, serta kemiringan sumbu rotasinya.
+
+Periode rotasi merupakan waktu yang diperlukan sebuah planet untuk menyelesaikan satu kali putaran pada sumbunya. Nilainya berbeda pada setiap planet. Jupiter memiliki periode rotasi paling singkat, yaitu kurang dari 10 jam, sedangkan Venus memiliki periode rotasi sekitar 243 hari. Perbedaan tersebut menunjukkan bahwa ukuran planet bukan satu-satunya faktor yang menentukan kecepatan rotasinya.
+
+Selain periode rotasi, arah rotasi dan kemiringan sumbu juga menjadi karakteristik penting. Sebagian besar planet berotasi dalam arah yang sama, sedangkan Venus dan Uranus memiliki karakteristik rotasi yang berbeda. Kemiringan sumbu Uranus yang sangat besar menyebabkan planet tersebut tampak berotasi dengan posisi hampir menyamping.
+
+<InfoTable headers={rotationHeaders} rows={rotationRows} />
+
+## Faktor yang Memengaruhi Kecepatan Rotasi
+
+Kecepatan rotasi planet tidak ditentukan oleh satu faktor saja. Karakteristik rotasi merupakan hasil dari kondisi fisik dan proses pembentukan planet yang berlangsung dalam jangka waktu yang sangat panjang. Beberapa faktor utama yang memengaruhi kecepatan rotasi meliputi distribusi massa, ukuran planet, momentum sudut, serta interaksi gravitasi dengan benda langit lainnya.
+
+### Distribusi Massa
+
+Distribusi massa di dalam sebuah planet memengaruhi **momen inersia**nya. Planet dengan distribusi massa yang berbeda dapat memiliki karakteristik rotasi yang berbeda meskipun memiliki massa atau ukuran yang relatif serupa.
+
+### Ukuran dan Bentuk Planet
+
+Ukuran dan bentuk planet turut memengaruhi bagaimana massa tersebar terhadap sumbu rotasinya. Perubahan distribusi tersebut dapat memengaruhi momen inersia dan, pada kondisi tertentu, memengaruhi kecepatan rotasi.
+
+### Momentum Sudut
+
+Momentum sudut merupakan salah satu besaran penting dalam menjelaskan rotasi benda langit. Dalam kondisi ketika tidak terdapat torsi eksternal yang signifikan, momentum sudut suatu sistem cenderung dipertahankan.
+
+Pada proses pembentukan planet, materi yang berputar dan kemudian berkumpul membentuk planet membawa momentum sudut. Sebagian karakteristik rotasi planet yang terbentuk kemudian berkaitan dengan momentum sudut tersebut.
+
+### Interaksi Gravitasi
+
+Gaya gravitasi dari Matahari dan benda langit lainnya dapat memberikan pengaruh terhadap rotasi planet. Interaksi tersebut dapat menghasilkan torsi yang secara perlahan mengubah kecepatan rotasi atau orientasi sumbu rotasi.
+
+Pengaruh gravitasi juga dapat menyebabkan perlambatan rotasi. Salah satu contohnya adalah interaksi pasang surut antara Bumi dan Bulan yang secara perlahan memperlambat rotasi Bumi.
+
+### Struktur Internal Planet
+
+Struktur internal juga dapat memengaruhi karakteristik rotasi. Pergerakan material di dalam planet, termasuk perpindahan massa dan dinamika inti serta mantel, dapat memengaruhi distribusi massa dan momentum sudut planet.
+
+Dengan demikian, kecepatan rotasi planet merupakan hasil interaksi berbagai faktor fisik. Kondisi tersebut juga dapat berubah sepanjang sejarah planet sehingga periode rotasi yang diamati saat ini tidak selalu sama dengan keadaan pada masa awal pembentukannya.
+
+## Perubahan dan Evolusi Rotasi Planet
+
+Rotasi planet tidak selalu berada dalam kondisi yang tetap sepanjang sejarahnya. Kecepatan dan orientasi rotasi dapat mengalami perubahan secara perlahan akibat interaksi gravitasi, gaya pasang surut, serta perubahan distribusi massa di dalam planet.
+
+Salah satu mekanisme yang berperan penting adalah interaksi pasang surut. Ketika sebuah planet berinteraksi secara gravitasi dengan benda langit lain, gaya pasang surut dapat memberikan torsi yang secara bertahap mengubah kecepatan rotasinya. Perubahan tersebut berlangsung dalam waktu yang sangat panjang sehingga tidak dapat diamati secara langsung dalam kehidupan sehari-hari.
+
+Bumi merupakan salah satu contoh planet yang mengalami perubahan rotasi akibat interaksi pasang surut dengan Bulan. Gaya pasang surut menyebabkan rotasi Bumi mengalami perlambatan secara bertahap. Perubahan tersebut juga berkaitan dengan perpindahan energi rotasi Bumi ke dalam sistem orbit Bulan.
+
+Evolusi rotasi juga dapat memengaruhi orientasi sumbu rotasi. Interaksi gravitasi dengan benda langit lain dapat menyebabkan perubahan pada arah atau kemiringan sumbu rotasi dalam jangka waktu yang panjang. Selain itu, perpindahan massa di dalam atau pada permukaan planet dapat memberikan pengaruh terhadap distribusi massa dan karakteristik rotasinya.
+
+Pada tahap awal pembentukannya, planet juga dapat mengalami perubahan rotasi akibat tumbukan dengan benda langit berukuran besar. Tumbukan tersebut dapat mengubah momentum sudut planet dan memengaruhi kecepatan maupun arah rotasinya.
+
+Oleh karena itu, rotasi planet merupakan kondisi dinamis yang dapat mengalami perubahan sepanjang waktu. Keadaan rotasi yang diamati saat ini merupakan hasil dari berbagai proses fisik dan interaksi gravitasi yang berlangsung selama sejarah pembentukan dan perkembangan planet.
+
+## Dampak Rotasi Planet terhadap Kehidupan di Bumi
+
+Rotasi Bumi memberikan berbagai pengaruh terhadap kondisi lingkungan dan kehidupan di permukaannya. Perputaran Bumi pada sumbunya menyebabkan terjadinya pergantian siang dan malam serta memengaruhi sejumlah proses fisik di atmosfer dan permukaan Bumi.
+
+### Pergantian Siang dan Malam
+
+**Rotasi Bumi** menyebabkan bagian permukaan Bumi secara bergantian menghadap dan membelakangi Matahari. Wilayah yang menghadap Matahari mengalami siang, sedangkan wilayah yang membelakanginya mengalami malam.
+
+Siklus tersebut berlangsung secara terus-menerus dan menjadi salah satu dasar terbentuknya pola aktivitas harian berbagai organisme. Banyak makhluk hidup menyesuaikan waktu mencari makanan, beristirahat, dan melakukan aktivitas lainnya berdasarkan perubahan terang dan gelap.
+
+### Perbedaan Waktu
+
+Rotasi Bumi juga menjadi dasar terbentuknya perbedaan waktu di berbagai wilayah. Karena Bumi terus berputar, Matahari tidak berada pada posisi yang sama di langit untuk seluruh wilayah Bumi pada waktu yang bersamaan.
+
+Untuk menyesuaikan kondisi tersebut, permukaan Bumi dibagi menjadi berbagai zona waktu. Pembagian ini membantu mengatur aktivitas manusia berdasarkan posisi Matahari di wilayah masing-masing.
+
+### Efek Coriolis
+
+Rotasi Bumi menyebabkan munculnya **efek Coriolis**, yaitu perubahan arah gerak relatif suatu objek ketika diamati dari permukaan Bumi yang sedang berotasi. Efek ini berpengaruh terhadap pergerakan massa udara dan arus laut dalam skala besar.
+
+Di belahan Bumi utara, gerakan tersebut cenderung mengalami pembelokan ke kanan, sedangkan di belahan Bumi selatan cenderung membelok ke kiri. Pengaruh ini menjadi salah satu faktor yang diperhitungkan dalam pembentukan pola angin dan sistem cuaca.
+
+### Pengaruh terhadap Bentuk Bumi
+
+Rotasi Bumi juga memengaruhi bentuknya. Gaya yang berkaitan dengan rotasi menyebabkan Bumi sedikit lebih mengembung di sekitar ekuator dan sedikit mendatar di daerah kutub. Oleh karena itu, Bumi tidak berbentuk bola sempurna, melainkan mendekati bentuk **sferoid pepat**.
+
+Berbagai pengaruh tersebut menunjukkan bahwa rotasi Bumi memiliki peran penting terhadap kondisi lingkungan dan kehidupan di permukaannya. Rotasi tidak hanya menghasilkan pergantian siang dan malam, tetapi juga berkontribusi terhadap berbagai fenomena fisik yang berlangsung di atmosfer, lautan, dan permukaan Bumi.
+
+<FAQ client:visible>
+    <FAQItem title="Apa yang dimaksud dengan rotasi planet?">
+        Rotasi planet adalah gerakan berputar sebuah planet pada sumbu rotasinya. Setiap planet memiliki periode dan karakteristik rotasi yang berbeda.
+    </FAQItem>
+
+    <FAQItem title="Mengapa planet dapat berputar pada sumbunya?">
+        Rotasi planet berkaitan dengan momentum sudut yang diperoleh dari materi penyusun planet selama proses pembentukannya. Momentum sudut tersebut menyebabkan planet mempertahankan gerak rotasinya selama tidak mengalami pengaruh eksternal yang signifikan.
+    </FAQItem>
+
+    <FAQItem title="Apakah semua planet berotasi dengan kecepatan yang sama?">
+        Tidak. Setiap planet memiliki periode rotasi yang berbeda. Jupiter memiliki rotasi paling cepat di antara planet-planet Tata Surya, sedangkan Venus memiliki rotasi yang jauh lebih lambat.
+    </FAQItem>
+
+    <FAQItem title="Planet mana yang memiliki rotasi paling cepat?">
+        Jupiter merupakan planet dengan rotasi tercepat di Tata Surya. Planet tersebut menyelesaikan satu kali rotasi dalam waktu kurang dari 10 jam.
+    </FAQItem>
+
+    <FAQItem title="Planet mana yang memiliki rotasi paling lambat?">
+        Venus memiliki periode rotasi paling panjang di antara planet-planet Tata Surya, yaitu sekitar 243 hari Bumi untuk menyelesaikan satu kali rotasi.
+    </FAQItem>
+</FAQ>
+
+## Kesimpulan
+
+**Rotasi planet** merupakan gerakan berputar pada sumbunya yang terbentuk dari proses pembentukan planet dan dipengaruhi oleh **momentum sudut**. Setiap planet memiliki karakteristik rotasi yang berbeda, baik dalam hal kecepatan, periode, arah, maupun kemiringan sumbu rotasinya.
+
+Kecepatan rotasi dapat dipengaruhi oleh berbagai faktor, termasuk distribusi massa, struktur internal, momentum sudut, serta interaksi gravitasi dengan benda langit lainnya. Karakteristik tersebut juga dapat mengalami perubahan secara perlahan sepanjang sejarah planet.
+
+Pada Bumi, rotasi memiliki peran penting terhadap kehidupan. Pergantian siang dan malam, pembagian zona waktu, efek Coriolis, serta bentuk Bumi yang sedikit mengembung di bagian ekuator merupakan beberapa fenomena yang berkaitan dengan rotasi.
+
+Dengan demikian, rotasi bukan sekadar gerakan planet pada sumbunya, tetapi merupakan salah satu proses fisik yang berperan dalam membentuk berbagai karakteristik dan kondisi lingkungan sebuah planet.
