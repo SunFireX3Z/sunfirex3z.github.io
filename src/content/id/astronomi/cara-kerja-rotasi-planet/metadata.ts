@@ -12,7 +12,7 @@ export const metadata = {
     author: "Novia",
     category: "Astronomi",
     subcategory: "Tata Surya",
-    thumbnail: null,
+    thumbnail: thumbnailImage,
     imageCaption: "Thumbnail SunBlog | Penjelasan Tentang Rotasi Planet",
     readingTime: 9,
     difficulty: "Pemula",
