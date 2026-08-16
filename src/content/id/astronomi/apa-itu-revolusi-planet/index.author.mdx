@@ -1,0 +1,83 @@
+import CallToAction from '@/components/mdx/CallToAction.astro';
+import Youtube from '@/components/mdx/Youtube.jsx';
+import InfoTable from '@/components/mdx/InfoTable.jsx';
+import Tip from '@/components/mdx/Tip.jsx';
+import Warning from '@/components/mdx/Warning.jsx';
+import FAQ, { FAQItem } from '@/components/mdx/FAQ.jsx';
+import Note from '@/components/mdx/Note.jsx';
+import Image from '@/components/mdx/Image.astro';
+import Blockquote from '@/components/mdx/Blockquote.jsx';
+import RelatedArticle from '@/components/mdx/RelatedArticle.astro';
+import Shopeeproduct from '@/components/mdx/ShopeeProduct.astro'; 
+import LinkPreview from '@/components/mdx/LinkPreview.astro'; // Menggunakan wrapper Astro
+import RevolutionImage from './image/revolution.jpg';
+
+export const revolutionsHeaders = [
+    "Planet",
+    "Jarak Rata-rata dari Matahari",
+    "Kala Revolusi (Waktu Orbit)",
+    "Kecepatan Orbit Rata-rata"
+];
+
+export const revolutionsRows = [
+    [ "Merkurius", "57,9 juta km (0,39 AU)", "88 hari", "47,4 km/s" ],
+    [ "Venus", "108,2 juta km (0,72 AU)", "224,7 hari", "35,0 km/s" ],
+    [ "Bumi", "149,6 juta km (1,00 AU)", "365,25 hari (1 tahun)", "29,8 km/s" ],
+    [ "Mars", "227,9 juta km (1,52 AU)", "687 hari (1,88 tahun)", "24,1 km/s" ],
+    [ "Jupiter", "778,6 juta km (5,20 AU)", "11,86 tahun Bumi", "13,1 km/s" ],
+    [ "Saturnus", "1,43 miliar km (9,58 AU)", "29,46 tahun Bumi", "9,7 km/s" ],
+    [ "Uranus", "2,87 miliar km (19,2 AU)", "84 tahun Bumi", "6,8 km/s" ],
+    [ "Neptunus", "4,50 miliar km (30,1 AU)", "164,8 tahun Bumi", "5,4 km/s" ]
+];
+
+## Apa Itu Revolusi Planet?
+
+<Image src={RevolutionImage} alt="Gambar Revolusi Tata Surya">
+    Ilustrasi model orbit Tata Surya | Sumber: <LinkPreview href="https://www.uniladtech.com/science/space/scientists-witness-birth-solar-system-using-revolutionary-tech-718634-20250718">UNILAD Tech</LinkPreview>
+</Image>
+
+Revolusi planet itu... gerakan sebuah planet saat mengelilingi Matahari sebagai pusat tata surya. Waktu yang dibutuhkan untuk satu putaran penuh... namanya kala revolusi, dan itu yang menentukan durasi satu tahun di planet itu. Setiap planet punya waktunya sendiri-sendiri... karena jaraknya ke Matahari berbeda. Bumi kita butuh sekitar 365,25 hari... tapi Neptunus yang jauh sekali... butuh waktu sampai 165 tahun Bumi. Lama sekali, ya...
+
+## Bagaimana Revolusi Planet Terjadi?
+
+Aku kadang bertanya-tanya... kenapa planet bisa terus bergerak seperti itu? Sepertinya... ada keseimbangan yang sempurna. Ada gaya gravitasi Matahari yang sangat kuat... yang terus menarik planet-planet ke arahnya. Tapi di sisi lain... planet juga punya kecepatan untuk terus bergerak maju lurus. Gabungan antara gaya tarik ke dalam dan dorongan maju ini... akhirnya membuat lintasan planet jadi melengkung, membentuk orbit elips. Karena itulah mereka bisa terus mengitari Matahari tanpa jatuh.
+
+## Apa yang Menyebabkan Planet Mengelilingi Matahari?
+
+Jadi... penyebab utamanya itu... keseimbangan antara gaya gravitasi Matahari dan gaya inersia planet. Matahari menarik planet ke arahnya... tapi planet juga punya kecepatan untuk bergerak maju lurus sejak awal terbentuk. Perpaduan ini... katanya menciptakan sesuatu yang disebut gaya sentripetal. Gaya inilah yang terus-menerus membelokkan arah gerak planet, sehingga lintasannya menjadi elips... dan mereka bisa terus mengorbit tanpa jatuh.
+
+## Perbedaan Revolusi pada Setiap Planet
+
+Setiap planet... punya cerita perjalanannya sendiri. Ada yang cepat, ada yang lambat sekali... Di bawah ini... ada perbandingan waktu revolusi mereka.
+
+<InfoTable headers={revolutionsHeaders} rows={revolutionsRows} />
+
+Katanya... ada hukum fisika yang menjelaskannya, namanya **Hukum Kepler III (Hukum Keharmonisan)**. Hukum itu bilang... semakin jauh sebuah planet dari Matahari, akan semakin panjang lintasannya, dan semakin lama juga waktu yang dibutuhkan untuk satu kali putaran. Masuk akal, kan...?
+
+Aku menemukan rumus ini... katanya ini yang menjelaskan hubungan itu.
+
+$$
+\frac{T^2}{r^3} = k
+$$
+
+*   **$T$** itu... periode orbit, atau waktu revolusi.
+*   **$r$** itu... jarak rata-rata planet dari Matahari.
+*   **$k$** itu... nilai yang selalu sama.
+
+## Dampak Revolusi Bumi
+
+Gerakan Bumi mengelilingi Matahari ini... ternyata punya banyak pengaruh untuk kita di sini. Apalagi... sumbu rotasi Bumi juga sedikit miring, sekitar **23,5°**.
+
+*   Karena revolusi... kita jadi punya **musim yang berbeda-beda**.
+*   **Panjang siang dan malam** juga bisa berubah... kadang siang lebih panjang, kadang malam yang lebih panjang.
+*   Posisi Matahari di langit juga seolah-olah **bergeser sepanjang tahun**.
+*   **Rasi bintang** yang kita lihat di malam hari... juga ikut berganti dari bulan ke bulan.
+*   Dan... **satu tahun di kalender Masehi** kita... dihitung dari satu kali revolusi Bumi ini.
+
+## Kesimpulan
+
+Jadi... revolusi planet itu... gerakan planet mengelilingi Matahari karena ada keseimbangan antara gaya gravitasi dan gerak majunya. Setiap planet punya waktunya sendiri... tergantung jaraknya dari Matahari, seperti yang dijelaskan **Hukum Kepler III**.
+
+Untuk Bumi... gerakan ini penting sekali, karena membuat adanya musim dan menjadi dasar kalender kita.
+
+Semoga... penjelasanku... mudah dimengerti.

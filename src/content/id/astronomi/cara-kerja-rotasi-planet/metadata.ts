@@ -9,7 +9,7 @@ export const metadata = {
     updatedReason: "",
     series: "Tata Surya",
     status: "Published",
-    author: "Novia",
+    author: "Luna",
     category: "Astronomi",
     subcategory: "Tata Surya",
     thumbnail: thumbnailImage,
@@ -24,7 +24,8 @@ export const metadata = {
         "Planet",
         "Tata Surya",
         "Astronomi",
-        "Ilmiah"
+        "Ilmiah",
+        "Gerak Planet"
     ],
     featured: false,
     sources: [

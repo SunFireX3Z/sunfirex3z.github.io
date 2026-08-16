@@ -1,0 +1,13 @@
+---
+import LinkPreviewComponent from './LinkPreview.jsx';
+
+interface Props {
+    href: string;
+    className?: string;
+}
+
+const { href, className } = Astro.props;
+---
+<LinkPreviewComponent href={href} className={className} client:visible>
+    <slot />
+</LinkPreviewComponent>

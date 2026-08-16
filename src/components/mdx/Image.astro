@@ -8,13 +8,23 @@ const {
     className, // Ambil className dari props
     ...rest // Ambil sisa props untuk diteruskan ke AstroImage
 } = Astro.props;
+
+// Render konten slot ke string untuk memeriksa apakah ada konten yang terlihat (bukan hanya spasi).
+const slotContent = await Astro.slots.render('default');
+const hasVisibleSlotContent = slotContent?.trim().length > 0;
 ---
-<figure class:list={["my-8 flex flex-col items-center", className]}>
+<figure class:list={["not-prose my-8 flex flex-col items-center", className]}>
     <AstroImage 
         src={src} 
         alt={alt} 
         class="w-full rounded-lg shadow-md"
         {...rest}
     />
-    {caption && <figcaption class="mt-2 text-center text-sm italic text-gray-500">{caption}</figcaption>}
+    {/* Tampilkan figcaption hanya jika ada prop 'caption' ATAU ada konten yang terlihat di dalam slot */}
+    {(caption || hasVisibleSlotContent) && (
+        <figcaption class="mt-1.5 text-center text-sm italic text-gray-500">
+            {/* Prioritaskan konten dari slot. Jika tidak ada, baru gunakan prop 'caption' */}
+            {hasVisibleSlotContent ? <Fragment set:html={slotContent} /> : caption}
+        </figcaption>
+    )}
 </figure>

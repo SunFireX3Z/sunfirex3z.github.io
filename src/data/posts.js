@@ -1,4 +1,4 @@
-import { authors } from './authors';
+import { authors } from '@/data/authors';
 import PlaceholderAvatar from "@/assets/images/avatar/placeholder.webp";
 
 // Menggunakan fitur Vite `import.meta.glob` untuk mengimpor semua file .mdx
