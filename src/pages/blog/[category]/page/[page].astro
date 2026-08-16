@@ -1,0 +1,59 @@
+---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
+import { posts } from "@/data/posts";
+
+export function getStaticPaths() {
+  const PAGE_SIZE = 12;
+  const uniqueCategories = [...new Set(posts.map((post) => post.category))];
+  const paths = [];
+
+  for (const category of uniqueCategories) {
+    const categorySlug = category.toLowerCase().replace(/\s+/g, "-");
+    const filteredPosts = posts.filter(
+      (post) => post.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
+    );
+    const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
+
+    // Hanya halaman 2 ke atas
+    for (let p = 2; p <= lastPage; p++) {
+      paths.push({ params: { category: categorySlug, page: String(p) } });
+    }
+  }
+  return paths;
+}
+
+const PAGE_SIZE = 12;
+const { category = "", page: pageParam } = Astro.params;
+const currentPage = Number(pageParam);
+
+const filteredPosts = posts.filter(
+  (post) => post.category.toLowerCase().replace(/\s+/g, "-") === category
+);
+const lastPage = Math.ceil(filteredPosts.length / PAGE_SIZE);
+const pageData = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+const formattedCategory = category
+  .replace(/-/g, " ")
+  .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const pageTitle = `Kategori: ${formattedCategory} (Halaman ${currentPage})`;
+const pageDescription = `Menjelajahi semua artikel dalam kategori ${formattedCategory}.`;
+
+const page = {
+  data: pageData,
+  currentPage,
+  lastPage,
+  url: {
+    current: `/blog/${category}/page/${currentPage}`,
+    prev: currentPage > 1 ? (currentPage === 2 ? `/blog/${category}` : `/blog/${category}/page/${currentPage - 1}`) : undefined,
+    next: currentPage < lastPage ? `/blog/${category}/page/${currentPage + 1}` : undefined,
+  },
+};
+---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={page.data}
+  page={page}
+/>

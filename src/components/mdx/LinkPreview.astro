@@ -1,13 +1,22 @@
 ---
 import LinkPreviewComponent from './LinkPreview.jsx';
+import type { ImageMetadata } from 'astro:assets';
 
 interface Props {
-    href: string;
     className?: string;
+    title?: string;
+    description?: string;
+    image?: ImageMetadata | string;
 }
 
-const { href, className } = Astro.props;
+const { className, title, description, image } = Astro.props;
 ---
-<LinkPreviewComponent href={href} className={className} client:visible>
+<LinkPreviewComponent
+    className={className}
+    title={title}
+    description={description}
+    image={image}
+    client:visible
+>
     <slot />
 </LinkPreviewComponent>
