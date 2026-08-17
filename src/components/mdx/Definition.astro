@@ -1,19 +1,17 @@
 ---
-import LinkPreviewComponent from './LinkPreview.jsx';
+import DefinitionComponent from './Definition.jsx';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
-    href: string;
     className?: string;
     title?: string;
     description?: string;
     image?: ImageMetadata | string;
 }
 
-const { href, className, title, description, image } = Astro.props;
+const { className, title, description, image } = Astro.props;
 ---
-<LinkPreviewComponent
-    href={href}
+<DefinitionComponent
     className={className}
     title={title}
     description={description}
@@ -21,4 +19,4 @@ const { href, className, title, description, image } = Astro.props;
     client:visible
 >
     <slot />
-</LinkPreviewComponent>
+</DefinitionComponent>
