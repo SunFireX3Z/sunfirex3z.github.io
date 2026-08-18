@@ -20,11 +20,7 @@ export default defineConfig({
     react(),
     expressiveCode(),
     mdx(),
-    sitemap({
-      site: 'https://sunblog.my.id',
-      // Memaksa Astro menggabungkan semua URL ke dalam sitemap.xml tunggal
-      entryLimit: 10000, 
-    }),
+    sitemap(),
   ],
 
   vite: {
