@@ -9,7 +9,24 @@ import { posts } from '@/data/posts';
 const { pageTitle, pageDescription, filteredPosts, page } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-// Atur jumlah skeleton yang akan ditampilkan, sesuaikan dengan pageSize pada paginasi
+// Helper function to get the base path for canonical URLs (strips page number)
+const getBasePathForCanonical = (currentUrl) => {
+    const clean = currentUrl.replace(/\/+$/, ''); // Remove trailing slash
+    const parts = clean.split('/');
+    // If the last part is a number, it's a page number, so remove it
+    if (!isNaN(parseInt(parts[parts.length - 1], 10))) {
+        parts.pop();
+    }
+    return parts.join('/');
+};
+
+// Calculate canonical URL for paginated pages
+let canonicalUrl = new URL(currentPath, Astro.site).href;
+if (page && page.currentPage > 1) {
+    canonicalUrl = new URL(getBasePathForCanonical(currentPath), Astro.site).href;
+}
+
+// Set the number of skeletons to display, matching the pagination pageSize
 const SKELETON_PAGE_SIZE = 12;
 
 // Ambil semua kategori unik dari postingan untuk navigasi
@@ -29,7 +46,7 @@ const categoriesWithCounts = [
     }))
 ];
 ---
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
 
     <div class="mx-auto w-full max-w-[90rem] px-6 space-y-12 py-16">
         <section class="border-l-4 border-orange-500 pl-4">

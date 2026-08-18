@@ -14,6 +14,7 @@ interface Props {
     title?: string;
     description?: string;
     image?: string;
+    canonical?: string;
     type?: "website" | "article";
 }
 
@@ -21,6 +22,7 @@ const {
     title,
     description,
     image,
+    canonical,
     type,
 } = Astro.props as Props;
 
@@ -50,6 +52,7 @@ const postsForHeader = await Promise.all(
             title={title}
             description={description}
             image={image}
+            canonical={canonical}
             type={type}
         />
 

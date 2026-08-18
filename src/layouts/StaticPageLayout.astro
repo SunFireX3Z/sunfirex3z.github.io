@@ -11,9 +11,11 @@ const { title, description, headings } = Astro.props;
 
 // Ambil semua heading level 2 (##) dari file MDX untuk dijadikan Daftar Isi
 const toc = (headings ?? []).filter(heading => heading.depth === 2);
+
+const canonicalUrl = Astro.url.href;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} canonical={canonicalUrl}>
     <div class="mx-auto w-full max-w-[90rem] px-6 py-16">
 
         <!-- Hero -->
