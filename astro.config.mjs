@@ -20,7 +20,10 @@ export default defineConfig({
     react(),
     expressiveCode(),
     mdx(),
-    sitemap(),
+    sitemap({
+      // Memaksa Astro menggabungkan semua URL ke dalam sitemap.xml tunggal
+      entryLimit: 10000, 
+    }),
   ],
 
   vite: {
