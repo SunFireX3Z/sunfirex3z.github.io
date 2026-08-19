@@ -1,0 +1,39 @@
+---
+import BlogPageLayout from "@/layouts/BlogPageLayout.astro";
+import { posts } from "@/data/posts";
+
+export function getStaticPaths({ paginate }) {
+  const allTags = [...new Set(posts.flatMap((post) => post.metadata.tags ?? []))];
+  const paths = [];
+
+  for (const tag of allTags) {
+    const tagSlug = tag.toLowerCase().replace(/\s+/g, "-");
+    const filteredPosts = posts.filter((post) =>
+      post.metadata.tags?.some((t) => t.toLowerCase().replace(/\s+/g, "-") === tagSlug)
+    );
+
+    // Gunakan fungsi paginate bawaan Astro.
+    // Ini akan secara otomatis membuat halaman untuk /nama-tag, /nama-tag/2, dst.
+    paths.push(...paginate(filteredPosts, {
+      params: { tag: tagSlug },
+      pageSize: 12,
+    }));
+  }
+  return paths;
+}
+
+const { page } = Astro.props;
+const { tag } = Astro.params;
+
+const formattedTag = tag.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+
+const pageTitle = page.currentPage > 1 ? `Tag: #${formattedTag} (Halaman ${page.currentPage})` : `Tag: #${formattedTag}`;
+const pageDescription = `Menjelajahi semua artikel dengan tag #${formattedTag}.`;
+---
+
+<BlogPageLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  filteredPosts={page.data}
+  page={page}
+/>

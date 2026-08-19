@@ -18,9 +18,11 @@ const projects = Object.values(projectModules)
     .filter(module => module && module.metadata && module.metadata.visibility !== 'hidden') // Sembunyikan proyek dengan visibility 'hidden'
     .map(module => {
         const { metadata } = module;
+        // Buat slug yang bersih: hapus path dasar, hapus .mdx, ubah spasi jadi strip, dan buat lowercase
         const slug = module.file
             .replace(/.*\/src\/content\/proyek\//, '')
-            .replace('.mdx', '');
+            .replace('.mdx', '')
+            .replace(/\s+/g, '-').toLowerCase();
         return { ...metadata, path: `/proyek/${slug}` };
     })
     .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
