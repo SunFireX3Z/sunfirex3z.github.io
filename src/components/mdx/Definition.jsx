@@ -110,33 +110,50 @@ function Definition({ children, className, title, description, image }) {
         setIsVisible(false);
     };
 
-    // Dapatkan src dari objek gambar Astro
+    // Dapatkan src dan dimensi dari objek gambar Astro
     const imageSrc = typeof image === 'object' && image !== null ? image.src : image;
+    const isPortrait = typeof image === 'object' && image !== null && image.height > image.width;
 
     // Konten kartu yang akan digunakan kembali di tooltip dan modal
     const CardContent = () => (
-        <>
-            {imageSrc && (
+        isPortrait && imageSrc ? (
+            // Layout Portrait: Gambar di kiri, teks di kanan
+            <div className="flex">
                 <img
                     src={imageSrc}
                     alt={`Ilustrasi untuk ${title || children}`}
-                    className="h-36 w-full object-cover bg-gray-100"
+                    className="w-24 flex-shrink-0 object-cover bg-gray-100"
                 />
-            )}
-            <div className="p-4 text-left">
-                <h4 className="relative line-clamp-2 text-base font-semibold text-gray-800 pb-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-orange-500">{title || children}</h4>
-                <p className="mt-1 text-sm text-gray-600">
-                    {description}
-                </p>
+                <div className="min-w-0 flex-1 p-4">
+                    <h4 className="relative line-clamp-2 text-base font-semibold text-gray-800 pb-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-orange-500">{title || children}</h4>
+                    <p className="mt-1 text-sm text-gray-600">
+                        {description}
+                    </p>
+                </div>
             </div>
-        </>
+        ) : (
+            // Layout Landscape (default) atau tanpa gambar
+            <>
+                {imageSrc && (
+                    <img
+                        src={imageSrc}
+                        alt={`Ilustrasi untuk ${title || children}`}
+                        className="h-36 w-full object-cover bg-gray-100"
+                    />
+                )}
+                <div className="p-4 text-left">
+                    <h4 className="relative line-clamp-2 text-base font-semibold text-gray-800 pb-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-orange-500">{title || children}</h4>
+                    <p className="mt-1 text-sm text-gray-600">{description}</p>
+                </div>
+            </>
+        )
     );
 
     return (
         <>
             <span
                 ref={triggerRef}
-                className={`cursor-help font-semibold text-orange-600 transition-colors hover:text-orange-700 ${className || ''}`}
+                className={`cursor-help !font-semibold !text-orange-600 transition-colors hover:!text-orange-700 ${className || ''}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleClick}
@@ -156,19 +173,19 @@ function Definition({ children, className, title, description, image }) {
                     >
                         {/* Modal Content */}
                         <div
-                            className={`relative m-4 w-full max-w-sm overflow-hidden rounded-xl bg-white shadow-2xl transition-all duration-300 ease-out ${isAnimating ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                            className={`relative m-4 w-full ${isPortrait ? 'max-w-md' : 'max-w-sm'} overflow-hidden rounded-xl bg-white shadow-2xl transition-all duration-300 ease-out ${isAnimating ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button onClick={closeModal} className="absolute top-2 right-2 z-10 rounded-full bg-gray-500/30 p-1 text-white hover:bg-gray-500/50" aria-label="Tutup">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
-                            <CardContent />
+                            <CardContent /> 
                         </div>
                     </div>
                 ) : (
                     // Tampilan Tooltip di Desktop
                     <div
-                        className={`not-prose absolute z-20 w-80 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-2xl transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+                        className={`not-prose absolute z-20 ${isPortrait ? 'w-96' : 'w-80'} overflow-hidden rounded-lg border border-gray-200 bg-white shadow-2xl transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
                         style={{
                             top: `${position.top}px`,
                             left: `${position.left}px`,
