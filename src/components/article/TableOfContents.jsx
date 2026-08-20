@@ -14,7 +14,7 @@ function TableOfContents({ items }) {
         const container = tocContainerRef.current;
 
         const handleScroll = () => {            
-            const fromTop = 160; // Sesuaikan dengan offset header
+            const fromTop = 200; // Sesuaikan dengan offset header
             let currentActiveSlug = "";
 
             for (const item of flatToc) {
@@ -76,7 +76,7 @@ function TableOfContents({ items }) {
 
                 if (element) {
                     // Offset ini harus cocok dengan kelas `scroll-mt-40` (10rem = 160px) pada heading
-                    const headerOffset = 160; 
+                    const headerOffset = 180    ; 
                     const elementPosition = element.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.scrollY - headerOffset;
 

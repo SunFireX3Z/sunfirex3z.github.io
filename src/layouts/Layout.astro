@@ -16,6 +16,7 @@ interface Props {
     image?: string;
     canonical?: string;
     type?: "website" | "article";
+    robots?: string;
 }
 
 const {
@@ -24,7 +25,9 @@ const {
     image,
     canonical,
     type,
+    robots,
 } = Astro.props as Props;
+
 
 const currentPath = Astro.url.pathname;
 
@@ -48,13 +51,15 @@ const postsForHeader = await Promise.all(
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <SEO
+                <SEO
             title={title}
             description={description}
             image={image}
             canonical={canonical}
             type={type}
+            robots={robots}
         />
+
 
         <!-- Google AdSense -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2026124918721338"

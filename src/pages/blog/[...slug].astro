@@ -133,21 +133,27 @@ const breadcrumbs = [
     { name: "Blog", url: new URL('/blog', Astro.site).href },
     { name: "Kategori", url: new URL(`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}`, Astro.site).href },
 ];
+
 if (metadata.subcategory) {
     breadcrumbs.push({
         name: metadata.subcategory,
-                url: new URL(`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`, Astro.site).href,
-            });
-        }
-        // Tambahkan breadcrumb untuk mode penulis jika sedang di mode tersebut
-        if (mode === 'author') {
-            breadcrumbs.push({
-                name: `${metadata.title} (Gaya Penulis)`,
-                url: new URL(`${post.path}/author`, Astro.site).href,
+        url: new URL(`/blog/${metadata.category.toLowerCase().replace(/\s+/g, '-')}/${metadata.subcategory.toLowerCase().replace(/\s+/g, '-')}`, Astro.site).href,
     });
 }
+
+// Tambahkan Judul Utama
 breadcrumbs.push({ name: metadata.title, url: canonicalUrl });
+
+// Jika di mode author, tambahkan sebagai level terakhir
+if (mode === 'author') {
+    breadcrumbs.push({
+        name: `Gaya Penulis`,
+        url: new URL(`${post.path}/author`, Astro.site).href,
+    });
+}
+
 const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
+
 
 ---
 
@@ -160,15 +166,13 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
     author={metadata.author}
     publishDate={metadata.publishDate}
     lastUpdated={metadata.lastUpdated}
+    robots={mode === 'author' ? "noindex, follow" : undefined}
 >
     <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchemaData)} />
-    {/* Tambahkan noindex untuk mode penulis agar tidak diindeks oleh mesin pencari */}
-    {mode === 'author' && (
-        <meta slot="head" name="robots" content="noindex, nofollow" />
-    )}
+
 
     <div class="mx-auto w-full max-w-[90rem] px-6 py-16 space-y-8">
-        {/* Breadcrumbs */}
+                {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" class="text-sm text-gray-500 capitalize">
             <ol class="flex flex-wrap items-center space-x-2">
                 <li><a href="/" class="hover:text-orange-500">Beranda</a></li>
@@ -183,9 +187,20 @@ const breadcrumbSchemaData = generateBreadcrumbSchema(breadcrumbs);
                     </>
                 )}
                 <li><span class="select-none">/</span></li>
-                <li class="font-medium text-gray-800 line-clamp-1 normal-case">{metadata.title}</li>
+                <li>
+                    <a href={post.path} class={`hover:text-orange-500 ${mode === 'formal' ? 'font-medium text-gray-800' : ''} line-clamp-1 normal-case`}>
+                        {metadata.title}
+                    </a>
+                </li>
+                {mode === 'author' && (
+                    <>
+                        <li><span class="select-none">/</span></li>
+                        <li class="font-medium text-gray-800 normal-case">Gaya Penulis</li>
+                    </>
+                )}
             </ol>
         </nav>
+
 
         <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-12">
             {/* Main Content */}
