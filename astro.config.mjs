@@ -15,6 +15,7 @@ import rehypeKatex from 'rehype-katex';
 export default defineConfig({
   site: 'https://sunblog.my.id',
   output: 'static',
+  trailingSlash: 'never', // URL bersih tanpa tanda garis miring di akhir
 
   integrations: [
     react(),
