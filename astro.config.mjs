@@ -4,6 +4,7 @@ import expressiveCode from 'astro-expressive-code';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@tailwindcss/vite';
+import vercel from '@astrojs/vercel';
 
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -15,6 +16,11 @@ import rehypeKatex from 'rehype-katex';
 export default defineConfig({
   site: 'https://sunblog.my.id',
   output: 'static',
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    }
+  }),
   trailingSlash: 'never', // URL bersih tanpa tanda garis miring di akhir
 
   integrations: [

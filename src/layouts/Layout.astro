@@ -9,7 +9,7 @@ import GoogleAnalytics from '@/components/article/GoogleAnalytics.astro';
 import IntroScreen from '@/components/IntroScreen.astro';
 import "katex/dist/katex.min.css";
 import "../styles/global.css";
-import { Analytics } from '@vercel/analytics/next';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
     title?: string;
@@ -52,7 +52,7 @@ const postsForHeader = await Promise.all(
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-                <SEO
+        <SEO
             title={title}
             description={description}
             image={image}
