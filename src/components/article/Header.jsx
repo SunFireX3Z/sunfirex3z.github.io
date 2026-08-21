@@ -282,7 +282,7 @@ function Header({ currentPath, posts }) {
             <div className={`hidden bg-slate-900 lg:block transition-all duration-300 ease-in-out ${hasScrolled ? '-translate-y-full opacity-0 invisible' : 'translate-y-0 opacity-100 visible'}`}>
                 <div className="max-w-[90rem] mx-auto flex flex-row items-center py-3 px-6">
                     <div className="mr-8">
-                        <h1 className="font-bold text-xl text-white">KATEGORI BLOG</h1>
+                        <span className="font-bold text-xl text-white">KATEGORI BLOG</span>
                     </div>
                     <div className="flex-1 min-w-0 relative">
                         {/* Left Arrow & Fade */}
