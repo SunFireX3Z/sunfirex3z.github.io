@@ -3,7 +3,6 @@ import react from '@astrojs/react';
 import expressiveCode from 'astro-expressive-code';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import indexNow from 'astro-indexnow';
 import tailwind from '@tailwindcss/vite';
 
 import remarkGfm from 'remark-gfm';
@@ -23,9 +22,6 @@ export default defineConfig({
     expressiveCode(),
     mdx(),
     sitemap(),
-    indexNow({
-      key: "7957fa39bfc644189182a1e000f1ea00",
-    }),
   ],
 
   vite: {
